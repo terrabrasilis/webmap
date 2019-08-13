@@ -1,0 +1,217 @@
+{
+    "app" : {
+        "title": "Terrabrasilis",
+        "label": "Cerrado",
+        "deforestation": "Desmatamento",
+        "alerts": "Alertas",
+        "text": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental"
+    },
+    "dialog": {
+        "text": "Informações Gerais"
+    },
+    "menu" : {
+        "analyses": {
+            "name": "Análises",
+            "option1" : "Desmatamento",
+            "option2" : "Alertas",
+            "option3" : "Uso e cobertura da terra",
+            "option4" : "Desmatamento Amazônia",
+            "option5" : "Alertas Amazônia"
+        },
+        "about": "Sobre",
+        "contact": "Contato",
+        "help": "Ajuda",
+        "login": "Acesso"
+    },
+    "layerControl" : {
+        "control1" : "Baselayers",
+        "5c40fe3a0e9b2a14264e03a7" : {
+            "name": " Cerrado",
+            "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",            
+            "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
+            "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",            
+            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "LANDSAT - 2000/2018",
+            "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Desmatamento Anual - 2000/2018"
+        },
+        "5c40fdce0e9b2a14264e03a6" : {
+            "name": " Amazônia Legal",
+            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta - 2016/2017",
+            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Desmatamento Anual - 2013/2018",
+            "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Máscara de Desmatamento - 1988/2012",
+            "5c49f61b1a21020001cd663a5c40fdce0e9b2a14264e03a6": "Hidrografia",
+            "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
+            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2017",
+            "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Amazonia Legal",
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "LANDSAT - 2000/2018"
+        },
+        "5c9bd04ae2e106099a3fd5ee" : {
+            "name": " Amazônia",
+            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta - 2016/2017",
+            "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Máscara de Desmatamento - 1988/2012",
+            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Desmatamento Anual - 2013/2018",
+            "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hidrografia",
+            "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
+            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2017",
+            "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Bioma Amazônia",
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "LANDSAT - 2000/2018"
+        },
+        "5cd46155aa127a00017de863" : {
+            "name": " Pampa",
+            "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
+            "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma"
+        },
+        "5cd460faaa127a00017de861" : {
+            "name": " Pantanal",
+            "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2016",
+            "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma"
+        },
+        "5c8107880cf423000144ebd8" : {
+            "name": " Cerrado",
+            "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "Estados",            
+            "5c49f7791a21020001cd66405c8107880cf423000144ebd8": "Limite do Bioma",
+            "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Municípios",
+            "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Alerta de Desmatamento no Cerrado"
+        },
+        "5c810c820cf423000144ebda" : {
+            "name": " Amazônia Legal",
+            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Alerta de Desmatamento na Amazonia Legal",
+            "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Amazonia Legal"
+        },
+        "control3" : "Outras Camadas",
+        "noLegend" : "Para ver legendas, você deve ativar camadas."
+    },
+    "tools" : {
+        "resetMap": "Restaurar Mapa",
+        "featureInfo": "Informações da camada",
+        "showCoordinates": "Coordenadas",
+        "fullscreen": "Tela ampliada",
+        "download": "Downloads",
+        "addLayer": "Adicionar Outras Camadas",
+        "undo": "Desfazer zoom",
+        "redo": "Refazer zoom",
+        "notice": "Não mostrar novamente",
+        "layerOptions": "Ferramentas da Camada",
+        "basicInfo": "Informação Básica",
+        "metadata": "Metadados",
+        "dashboard": "Gráficos",
+        "transparency": "Transparência",
+        "removeLayer": "Excluir Camada",
+        "legend": "Legenda",
+        "timeDimension": "Dimensão temporal"
+    },
+    "contact" : {
+        "title":"Envie sugestões ou perguntas para"
+    },
+    "about" : {
+        "description": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet. ",
+        "more": "Leia mais informações sobre o TerraBrasilis",
+        "coordinators": "EQUIPE DE COORDENADORES", 
+        "team.ti": "EQUIPE de T.I",
+        "occupation.male": "",
+        "occupation.female": "Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE",
+        "occupation.technologist.male": "Tecnologista Senior da Divisão de Processamento de Imagens (DIDPI) do INPE",
+        "ex.contributors": "Ex-Colaboradores",
+        "support": "Suporte",
+        "support.inpe": "Instituto Nacional de Pesquisas Espaciais (INPE)",
+        "support.funcate": "Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)",
+        "support.fundep": "Fundação de Desenvolvimento da Pesquisa (FUNDEP)",
+        "support.worldbank": "Grupo Banco Mundial",
+        "support.bndes": "Banco Nacional de Desenvolvimento (BNDES)",
+        "developer": "Desenvolvedor de Software",
+        "research.fellow": "Bolsista de Pesquisa",
+        "dba": "Adminstrador de Banco de Dados",
+        "webdesigner": "Web Designer",
+        "technology": "Tecnologias ",
+        "technology.languages": "JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java",
+        "technology.heterogeneous": "Docker Swarm (clusterização de contêineres), Redis MongoDB, PostgreSQL, Nginx HTTP Server (balanceamento de carga e proxy reverso). ",
+        "technology.services": "Servidor de compartilhamento de dados geoespaciais (Geoserver) e catálogo de busca de metadados (Geonetwork)."        
+    },
+    "dashboard": {
+        "class": {
+            "title": "Classe:",
+            "deforestation": "Desmatamento"
+        },
+        "download": {
+            "munBystate": "Municípios por Estado"
+        },
+        "graph": {
+            "absoluteData": "Dados Absolutos",
+            "aggregateSpatial": "Dados Espaciais Agregados",
+            "aggregateTemporal": "Dados Temporais Agregados",
+            "timeSeries": "Séries Temporais",
+            "tableLois": {
+                "title": "Área por Anos e Locais de Interesse",
+                "year": "Ano",
+                "regular": "Área Regular (km²)",
+                "less": "Área (km²) menor que 6.25ha",
+                "total": "Área total"
+            },
+            "label": {
+                "monitoring": "Período de monitoramento : {{minDate}} - {{maxDate}}",
+                "area": "Área de Incrementos de Desmatamento (km²/ano)",
+                "taxa": "Taxa de Desmatamento (km²/ano)",
+                "regularArea": "Área Regular",
+                "filteredArea": "Menor que 6ha"
+            }
+        },
+        "loi": {
+            "UF": "Estados",
+            "MUN": "Municípios",
+            "ConsUnit": "Unidades de Conservação",
+            "Indi": "Áreas Indígenas",
+            "Pathrow": "Órbita Ponto"
+        },
+        "openOptions": {
+            "tools": "Ferramentas",
+            "increProdes": "Gráficos - Incrementos do Desmatamento",
+            "increLegalAmazon": "Amazônia Legal",
+            "increAmazon": "Amazônia",
+            "increCerrado": "Cerrado",
+            "ratesProdes": "Gráficos - Taxas de Desmatamento",
+            "alertsDeter": "Gráficos - Alertas",
+            "dailyCerradoDeter": "Alertas Diários do Cerrado",
+            "monthlyCerradoDeter": "Alertas Mensais Agregados do Cerrado",
+            "ratesAmazon": "Amazônia Legal",
+            "relatedPage": "Páginas Relacionadas",
+            "deforestationMap": "Mapa de Desmatamento",
+            "alertsMap": "Mapa de Alertas",
+            "cerradoPage": "Home - Cerrado",
+            "amazonPage": "Home - Amazônia"
+        },        
+        "options": {
+            "removefilter": "Remover Filtro",
+            "restoreview": "Restaurar Visão",
+            "searchloi": "Procurar",
+            "legend": "Legenda"
+        },
+        "search": {
+            "searchTitle": "Procure por local de interesse",
+            "searchDescription": "Digite um termo para pesquisa",
+            "close": "Fechar",
+            "title": {
+                "UF": "Estados",
+                "MUN": "Municípios",
+                "ConsUnit": "Unidades de Conservação",
+                "Indi": "Áreas Indígenas",
+                "Pathrow": "Órbita/Ponto"
+            }
+        },
+        "on-demand": {
+            "download": "Download",
+            "close": "Fechar",
+            "title": {
+                "cerrado": "Escolha os estados do Cerrado",
+                "legal_amazon": "Escolha os estados da Amazônia Legal",
+                "amazon": "Escolha os estados da Amazônia"
+            }
+        },
+        "title": {
+            "analysis": "Análise - ",
+            "increments": "Desmatamento",
+            "rates": "Desmatamento",
+            "legal_amazon": "Amazônia Legal",
+            "amazon": "Amazônia",
+            "cerrado": "Cerrado"
+        }   
+    }
+}

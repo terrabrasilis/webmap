@@ -1,0 +1,58 @@
+#search_lois{
+    color: inherit;
+    text-decoration: none;
+}
+.counties-list{
+	width: 100%;
+	height: 500px;
+	overflow-y: scroll;
+}
+.loi-list{
+    text-align: initial;
+    padding: .15rem .25rem;
+    border: none;
+    color: darkslategray;
+    cursor: pointer;
+}
+.sub-title{
+    text-align: initial;
+    width: 100%;
+    font-size: 14px;
+    color: #215c49;
+}
+.search-pos{
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    color: dimgrey;
+}
+.active{
+    color: #FFFFFF;
+    background-color: #00796b;
+}
+/* Copy from terrabrasilis.css */
+.modal-body { margin-top: 0px; padding-top: 0px; min-width: 200px;}
+.modal-dialog {min-width:800px !important;}
+.modalinf {
+    background: #FFFFFF;
+    margin: 50px auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    box-sizing: border-box;
+    padding: 28px;
+}
+.fechar {border:0px !important; padding: 0px !important;}
+.boxtitletable { text-align: left !important; color: #00796b; font-size: 18px; text-decoration: none; border-bottom: 1px solid #eeeeee; margin:25px 0px 25px 0px; width: 100%;} 
+.boxtitletable a[aria-expanded="true"] {color: #00796b; background-color:transparent!important;}
+.btngreen { color: #fff; background-color: #108d6f; border-color: #108d6f;}
+.btngreen:hover,.btngreen:focus {background-color: #006950; border-color: #108d6f; box-shadow: none;outline: none;color: #fff !important;}
+
+@media (max-width: 768px) {
+   	.modal-dialog { max-width: 500px;}
+	.modal-dialog {min-width:300px;}
+	.box, .boxnote, .boxtitulo {   margin-left: -275px;}
+
+	.boxtitlepanel {  margin-left: -270px !important;}
+    .box-grafico {   margin-left: 0px;}
+   
+}

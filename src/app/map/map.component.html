@@ -1,0 +1,202 @@
+<!-- navbar -->
+<div id="content">
+    <nav class="navbar navbar-expand-lg materialnav navbar-header"> 
+        <i class="material-icons menuicon" id="sidebarCollapse" >menu</i>
+        <a class="navbar-brand" href="#"><span class="amarelo" >Terra</span><span class="verde">Brasilis</span></a>
+        <div class="navbar-nav collapse navbar-collapse justify-content-between"> 
+            <a class="nav-item nav-link" href="#">| {{ 'app.' + type | translate }}</a> 
+        </div>
+        <button class="navbar-toggler" id="menuanaliseid" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
+            <i class="material-icons menuicon">more_vert</i> 
+        </button>
+        <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+            <ul class="navbar-nav navbar-right analises">
+            <li class="nav-item dropdown"> 
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    <i class="material-icons iconmobile">assignment </i> {{ 'menu.analyses.name' | translate }} 
+                </a>
+                <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink"> 
+                    <a class="dropdown-item" target="_blank" routerLink="/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
+                    <a class="dropdown-item" target="_blank" href="http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/legal/amazon/daily"><i class="material-icons iconmenu">warning</i>{{ 'menu.analyses.option2' | translate }}</a> 
+                </div>
+            </li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="showAbout()"> <i class="material-icons iconmobile">info</i>{{ 'menu.about' | translate }} </a> </li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="showContact()"> <i class="material-icons iconmobile">email</i>{{ 'menu.contact' | translate }}</a> </li>
+            <li class="nav-item"> <a class="nav-link" target="_blank" style="cursor: pointer;" href="{{ imgPath }}assets/files/manual-terrabrasilis-v1.pdf"> <i class="material-icons iconmobile">help</i>{{ 'menu.help' | translate }}</a> </li>
+            <li class="dropdown-divider"></li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="changeLanguage('pt-br')"><img src="{{ imgPath }}assets/img/map/br.svg" class="bandeira" alt="portugues"></a> </li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="changeLanguage('en')"><img src="{{ imgPath }}assets/img/map/usa.svg" class="bandeira" alt="ingles"></a> </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- Sidebar Holder -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <!-- <div class="row">
+            <label class="search-box__label" for="search">
+                <i class="search-box__icon material-icons">search</i>
+            </label>
+            <input class="search-box__input" id="search" type="text" placeholder="cidade, uf">
+        </div> -->
+        
+        <div class="desctxt">
+                <h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
+                <div class="texto">{{ 'app.' + type | translate }}</div>
+        </div>
+    </div>
+    <!-- ferramentas gerais --> 
+    <div class="ferramentas">
+        <dfn attr.data-info="{{ 'tools.resetMap' | translate }}">
+        <button type="button" class="btn" (click)="resetMap()"><i class="material-icons md-light">open_with</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.featureInfo' | translate }}">
+            <button type="button" class="btn to-manipulate" (click)="getFeatureInfo($event)"><i class="material-icons md-light md-off to-manipulate">feedback</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.showCoordinates' | translate }}">
+            <button type="button" class="btn to-manipulate" (click)="showCoordinates($event)"><i class="material-icons md-light md-off to-manipulate">explore</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.fullscreen' | translate }}">
+            <button type="button" class="btn" (click)="fullScreen()"><i class="material-icons md-light">fullscreen</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.download' | translate }}">
+            <button type="button" class="btn" (click)="showDialogDownloadOptions()"><i class="material-icons md-light">cloud_download</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.addLayer' | translate }}">
+            <button type="button" class="btn" (click)="showDialogCapabilities()"><i class="material-icons md-light">add_box</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.undo' | translate }}">
+            <button type="button" class="btn" (click)="undo()"><i class="material-icons md-light">undo</i></button>
+        </dfn>
+        <dfn attr.data-info="{{ 'tools.redo' | translate }}">
+            <button type="button" class="btn" (click)="redo()"><i class="material-icons md-light">redo</i></button>
+        </dfn>
+    </div>
+    <!-- Overlayers -->
+    <div *ngFor="let project of overlayers">
+        
+        <div *ngIf="project.layers.length > 0" class="project-group-closed" id="{{ (project.id | cleanWhiteSpace) + '_group' }}">
+            <div *ngIf="project.hasTranslate; else templateTitle" class="group-title-closed" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
+                <span class="badge badge-light badge-pill">{{ project.layers.length }}</span>
+                {{ 'layerControl.' + project.id + '.name' | translate }}
+            </div>
+            <ng-template #templateTitle>
+                <div class="group-title-closed" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
+                    <span class="badge badge-light badge-pill">{{ project.layers.length }}</span>
+                    {{ project.name }}
+                </div>
+            </ng-template>
+            <div class="material-switch grp-prj pull-right">
+                <input id="{{(project.id | cleanWhiteSpace) + '_grp-crtl' }}" name="someSwitchOption002" type="checkbox" (change)="projectGroupOnOff($event.srcElement, project)" checked="{{ (project.enabled) ? 'checked' : null }}"/>
+                <label for="{{(project.id | cleanWhiteSpace)  + '_grp-crtl' }}" class="bg-white"></label>
+            </div>
+
+            <div class="grid-stack" id="{{ 'grid-stack-' + project.id }}">
+                <div *ngFor="let layer of project.layers" class="grid-stack-item" id="{{ (layer.id | cleanWhiteSpace) + '_gslayer' }}" data-gs-x="0" data-gs-y="{{ layer.uiOrder }}" data-gs-width="12" data-gs-height="1">
+                    <div class="grid-stack-item-content">
+
+                        <ul class="list-unstyled components list">
+                            <li>
+                                <a href="{{'#' + (layer.id | cleanWhiteSpace)}}" id="{{ (layer.id | cleanWhiteSpace) + '_gstoggle' }}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" (click)="changeHeightLayerItem(layer.id,project.id)">
+                                    <dfn attr.data-info="{{ 'tools.layerOptions' | translate }}">
+                                        <i class="material-icons configura">settings</i>
+                                    </dfn>
+                                    <div class="txtcamada">
+                                        <div *ngIf="layer.hasTranslate; else templateTitle" title="{{ 'layerControl.' + project.id + '.' + layer.id | translate }}">
+                                            {{ 'layerControl.' + project.id + '.' + layer.id | translate }}
+                                        </div>
+                                        <ng-template #templateTitle>
+                                            <div title="{{ layer.title }}">{{ layer.title | slice:0:21 }}{{ (layer.title.length>21)?('...'):('') }}</div>
+                                        </ng-template>
+                                    </div>
+                                    <div class="fontecamada">
+                                        <div *ngIf="layer.source; else templateSource">
+                                            {{layer.source}}
+                                        </div>
+                                        <ng-template #templateSource>
+                                            {{layer.workspace}}
+                                        </ng-template>
+                                    </div>
+                                </a>
+                                <div class="material-switch pull-right">
+                                    <input id="{{(layer.id | cleanWhiteSpace) + '_1' }}" name="someSwitchOption001" type="checkbox" (change)="layerOnOff($event.srcElement, layer, project)" checked="{{ (layer.active) ? 'checked' : null }}"/>
+                                    <label for="{{(layer.id | cleanWhiteSpace)  + '_1' }}" class="bg-white"></label>
+                                </div>
+                                <ul class="collapse list-unstyled dropdown" id="{{(layer.id | cleanWhiteSpace)}}">
+                                    <li style="width:100%;">
+                                        <div class="fe-camadas">  
+                                            <div *ngFor="let tool of layer.tools">
+                                                <div *dynamicComponent="tool.target; context: { layer: layer };"></div>
+                                            </div>
+                                            <dfn attr.data-info="{{ 'tools.removeLayer' | translate }}">
+                                                <button type="button" class="btn" *ngIf="layer.isRemovable" 
+                                                    (click)="removeLayer(layer, project)"><i class="material-icons md-dark">delete</i></button>
+                                            </dfn>  
+                                        </div>
+                                    </li>                   
+                                </ul>                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid-stack-placeholder"></div>
+            </div>
+        </div>
+    </div>
+    <!-- <ul class="list-unstyled CTAs">        
+        <li><a href="#"><br /></a></li>
+    </ul> -->
+</nav>
+
+ <!-- start customized base layer menu -->
+ <div class="btnbaselayer">
+    <div class="baselayer custom-radios">
+        <i class="material-icons md-light">layers</i>
+        <ul>
+            <li class="icon" *ngFor="let layer of baselayers">
+                <input type="radio" 
+                  id="{{layer.title}}" 
+                  name="color" 
+                  value="{{layer.active}}" 
+                  checked="{{ (layer.active) ? 'checked' : null }}"
+                  (change)="layerBaseLayerChange(layer)">
+                <label for="{{layer.title}}"><span></span></label> 				
+                <span class="text">{{layer.title}}<br *ngIf="layer.description" />
+                    <div *ngIf="layer.description" style="font-size: small;">{{layer.description}}</div>
+                </span>
+            </li>                                      
+        </ul>
+    </div>
+</div>
+
+<!-- map -->
+<div id="map" class="container-fluid mapa" style="background-color: #fff !important;"></div>
+
+<!-- Sidebar Legendas -->
+<div id="legend" class="toggled">
+    <div id="sidebar-legend">
+        <div *ngFor="let project of layersToLegend" style="margin-bottom: 1px;">
+            <div class="legend-title">{{ project.name }}</div>
+            <div *ngIf="project.isOpened" id="{{ (project.name | cleanWhiteSpace) + '_leg' }}" class="legend-body">
+                <div *ngIf="!project.enabled" class="card-legend">
+                    <h2>{{ 'layerControl.noLegend' | translate }}</h2>
+                </div>
+                <div *ngFor="let layer of project.layers">
+                    <div *ngIf="layer.active" class="card-legend">
+                       <div *ngIf="layer.hasTranslate; else templateTitle" title="{{ 'layerControl.' + project.id + '.' + layer.id | translate }}">
+                            <h2>{{ 'layerControl.' + project.id + '.' + layer.id | translate }}</h2>
+                        </div>
+                        <ng-template #templateTitle>
+                            <div title="{{ layer.title }}"><h2>{{ layer.title | slice:0:21 }}{{ (layer.title.length>21)?('...'):('') }}</h2></div>
+                        </ng-template>
+                        <img [src]="getLegend(layer, false)" alt="{{layer.title}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href class="btn btn-success btn-legend" data-toggle="sidebar">{{ 'tools.legend' | translate }}</a>
+</div>
+<!-- fim --> 
+    

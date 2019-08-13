@@ -1,0 +1,11 @@
+<!-- close button -->
+<!-- close button -->
+<div class="modal-header fechar">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+</div>
+<div></div>
+<!-- end -->
+<h2 mat-dialog-title>{{ 'dialog.text' | translate }}</h2>
+<mat-dialog-content >  
+  <div [innerHtml]="content"></div>
+</mat-dialog-content>

@@ -1,0 +1,44 @@
+<!-- <a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
+  <span aria-hidden="true" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
+</a> -->
+
+<a class="btn btnicones ripple" (click)="updateLoi()" id="search_lois" href="#modal-container-filtered" role="button" data-toggle="modal">
+  <i class="fa fa-search fa-2x"></i>
+  <small>{{ 'dashboard.options.searchloi' | translate }}</small>
+</a>
+
+<div class="modal fade" id="modal-container-filtered">
+  <div class="modal-dialog">
+      <div class="modal-content modalinf">
+          <div class="modal-header fechar">
+              <h5 class="modal-title boxtitletable"><span>{{ 'dashboard.search.searchTitle' | translate }} -> {{ 'dashboard.loi.'+loi | translate }}</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+          </div>
+          <div class="modal-body">
+              <div class="sub-title">{{ 'dashboard.search.searchDescription' | translate }}</div>
+              <div class="input-group input-group-sm" style="margin-bottom: 15px;">
+                  <input autofocus id="search-county" (keyup)="handleFilterChange($event.target.value)" type="text" class="form-control">
+                  <i class="material-icons search-pos">search</i>
+              </div>
+              <div class="counties-list">
+                <ul *ngIf="results" class="list-group">
+                  <li *ngFor="let result of results" class="list-group-item loi-list" id="{{ result.key + '_item'}}">
+                    <span (click)="filterByLoi(result.key);">
+                      {{ result.value }}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <div class="checkbox pull-right">
+                  <label>
+                      <button type="button" class="btn btngreen" data-dismiss="modal">
+                      <span>{{ 'dashboard.search.close' | translate }}</span>
+                  </button>
+                  </label>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

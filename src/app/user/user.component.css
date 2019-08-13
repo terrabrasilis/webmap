@@ -1,0 +1,19 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 1%;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .example-icon {
+    padding: 0 14px;
+  }
+  
+  .example-spacer {
+    flex: 1 1 auto;
+  }

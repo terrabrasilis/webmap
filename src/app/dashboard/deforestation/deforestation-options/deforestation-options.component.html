@@ -1,0 +1,151 @@
+<div id="content">
+    <nav class="navbar navbar-expand-lg materialnav navbar-header"> 
+        <i class="material-icons menuicon" id="sidebarCollapse" >menu</i>
+        <a class="navbar-brand" href="#"><span class="amarelo" >Terra</span><span class="verde">Brasilis</span></a>
+        <div class="navbar-nav collapse navbar-collapse justify-content-between"> 
+            <a class="nav-item nav-link" href="#">| {{ 'dashboard.title.' + type | translate }}</a> 
+        </div>
+        <button class="navbar-toggler" id="menuanaliseid" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
+            <i class="material-icons menuicon">more_vert</i> 
+        </button>
+        <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+            <ul class="navbar-nav navbar-right analises">
+            <li class="nav-item dropdown"> 
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+                    <i class="material-icons iconmobile">assignment </i> {{ 'menu.analyses.name' | translate }} 
+                </a>
+                <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="javascript:return false;"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
+                    <a class="dropdown-item" href="{{ imgPath }}dashboard/alerts/biomes/cerrado/daily/" target="_blank"><i class="material-icons iconmenu">warning</i>{{ 'menu.analyses.option2' | translate }}</a> 
+                </div>
+            </li>            
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="showAbout()"> <i class="material-icons iconmobile">info</i>{{ 'menu.about' | translate }} </a> </li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="showContact()"> <i class="material-icons iconmobile">email</i>{{ 'menu.contact' | translate }}</a> </li>
+            <li class="nav-item"> <a class="nav-link" target="_blank" style="cursor: pointer;" href="{{ imgPath }}assets/files/manual-terrabrasilis-v1.pdf"> <i class="material-icons iconmobile">help</i>{{ 'menu.help' | translate }}</a> </li>
+            <li class="dropdown-divider"></li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="changeLanguage('pt-br')"><img src="{{ imgPath }}assets/img/map/br.svg" class="bandeira" alt="portugues"></a> </li>
+            <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="changeLanguage('en')"><img src="{{ imgPath }}assets/img/map/usa.svg" class="bandeira" alt="ingles"></a> </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper" id="connected" >
+  <!-- Sidebar Holder -->
+  <nav id="sidebar">
+    <div class="sidebar-header" style="background-image: url('{{ imgPath }}assets/img/dashboard/i-mapa.jpg');">
+      <div class="desctxt">
+        <h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span></h5>
+        <a class="nav-item nav-link" href="#">{{ 'dashboard.title.' + type | translate }}</a>         
+      </div>
+    </div>
+    <ul class="list-unstyled components">
+      <li class="active"><!-- manter active no primeiro -->
+        <a href="#ferramentas" data-toggle="collapse" aria-expanded="true"> <i class="material-icons">build</i><span id="tools">{{ 'dashboard.openOptions.tools' | translate }}</span></a> 
+      </li>   
+      <li>
+        <a href="#modal-ondemand-download" id="downloadBtn" data-toggle="modal" data-target="#modal-ondemand-download"> 
+          <i class="material-icons">cloud_download</i><span id="txt4"> {{ 'dashboard.download.munBystate' | translate }} </span>
+        </a>
+      </li>
+    </ul>    
+    <ul class="list-unstyled components">
+      <li class="active"><!-- manter active no primeiro -->
+        <a href="#graficos" data-toggle="collapse" aria-expanded="true"> <i class="material-icons">dashboard</i><span id="nv-chart">{{ 'dashboard.openOptions.increProdes' | translate }}</span></a> 
+      </li>
+      <li> 
+        <a href="{{ imgPath }}dashboard/deforestation/biomes/legal_amazon/increments" aria-expanded="false"> <i class="material-icons">insert_chart</i><span id="nv-increments">{{ 'dashboard.openOptions.increLegalAmazon' | translate }}</span></a> 
+      </li>
+      <li> 
+        <a href="{{ imgPath }}dashboard/deforestation/biomes/amazon/increments" aria-expanded="false"> <i class="material-icons">insert_chart</i><span id="nv-increments">{{ 'dashboard.openOptions.increAmazon' | translate }}</span></a> 
+      </li>
+      <li> 
+        <a href="{{ imgPath }}dashboard/deforestation/biomes/cerrado/increments" aria-expanded="false"> <i class="material-icons">insert_chart</i><span id="nv-increments">{{ 'dashboard.openOptions.increCerrado' | translate }}</span></a> 
+      </li>
+    </ul>
+    <ul class="list-unstyled components">
+      <li class="active"><!-- manter active no primeiro -->
+        <a href="#graficos" data-toggle="collapse" aria-expanded="true"> <i class="material-icons">dashboard</i><span id="nv-chart">{{ 'dashboard.openOptions.ratesProdes' | translate }}</span></a> 
+      </li>
+      <li> 
+        <a href="{{ imgPath }}dashboard/deforestation/biomes/legal_amazon/rates" aria-expanded="false"> <i class="material-icons">insert_chart</i><span id="nv-increments">{{ 'dashboard.openOptions.ratesAmazon' | translate }}</span></a> 
+      </li>      
+    </ul>
+    <ul class="list-unstyled CTAs">
+      <li><a href="http://terrabrasilis.dpi.inpe.br" class="btn btn-primary btn-success" target="_blank"><span id="nv-home">Home TerraBrasilis</span></a></li>
+    </ul>
+  </nav>
+</div>  
+
+<!-- Menu superior -->
+<div id="content" class="graph">
+  <div id="title-chart" class="all-charts-title boxtitlepanel"> {{ 'dashboard.title.analysis' | translate }} {{ 'dashboard.title.'+ biome | translate}} -> {{ 'dashboard.loi.' + selectedLoi | translate }} -> {{loiname}} </div>
+  <div class="row" id="sub-bar-options">
+    <!-- Seleciona -->
+    <!--<div class="col-sm-2 boxselect">
+      <div class="form-group">
+       {{ 'dashboard.class.title' | translate }}
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>{{ 'dashboard.class.deforestation' | translate }}</option>
+        </select>
+      </div>
+    </div>-->
+    <!-- Menu abas -->
+    <div class="col-sm-5"> <!-- alterado para 6 colunas -->
+      <div class="tab "> 
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item"> 
+            <a class="nav-link active ripple" id="0" data-toggle="tab" role="tab" aria-controls="tab1" aria-selected="true">{{ 'dashboard.loi.UF' | translate }}</a> 
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link ripple" id="1" data-toggle="tab" role="tab" aria-controls="tab2" aria-selected="false">{{ 'dashboard.loi.MUN' | translate }}</a> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link ripple" id="2" data-toggle="tab" role="tab" aria-controls="tab3" aria-selected="false">{{ 'dashboard.loi.ConsUnit' | translate }}</a> 
+          </li>
+          <li class="nav-item"> 
+            <a class="nav-link ripple" id="3" data-toggle="tab" role="tab" aria-controls="tab4" aria-selected="false">{{ 'dashboard.loi.Indi' | translate }}</a> 
+          </li>
+          <!--<li class="nav-item"> 
+            <a class="nav-link ripple" id="4" data-toggle="tab" role="tab" aria-controls="tab4" aria-selected="false">{{ 'dashboard.loi.pathrow' | translate }}</a>
+          </li>-->
+        </ul>
+      </div>
+    </div>
+
+    <!-- Adicionado -->
+    <div class="col-sm-4 align-content-end ">
+      <a class="btn btnicones ripple" id="reset_filter">
+        <i class="fa fa-trash fa-2x"></i>
+        <small>{{ 'dashboard.options.removefilter' | translate }}</small>
+      </a> 
+      <a class="btn btnicones ripple" id="load_grid">
+        <i class="fa fa-window-restore fa-2x"></i>
+        <small>{{ 'dashboard.options.restoreview' | translate }}</small>
+      </a>
+      <app-loi-search></app-loi-search>         
+    </div>
+    <!-- div adicionado -->
+
+  <!-- Menu top graficos -->
+  </div>
+  
+  <!-- Menu top graficos -->      
+  <div class="tab-content box-grafico" id="myTabContent">
+    <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
+      <div class="row-sidenav-main-content">         
+        <div class="col-md-12">
+          <div class="grid-stack grid-stack-12" id="main-grid" #mygrid>              
+          </div>
+          <div style="height: 60px;"></div>
+        </div>        
+      </div>          
+    <!-- graficos -->
+    </div>
+  </div>
+
+  <!-- download modal -->      
+  <app-on-demand-download></app-on-demand-download>    
+
+</div>

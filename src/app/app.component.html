@@ -1,0 +1,72 @@
+<router-outlet></router-outlet>
+
+<!-- slide -->
+<div class="container">
+    <div class="row">
+        <div class="modal fade" id="firstNotice">
+            <div class="modal-dialog">
+                <div class="modal-content modalinf">
+                    <div class="modal-header fechar">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                    </div> 					
+                    <!-- / modal-header -->
+                    <div class="modal-body ">						
+                        <div id="carouselExampleIndicators" class="carousel slide sobre" data-ride="carousel">
+                            <!-- <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" id="" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                            </ol> -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{{ imgPath }}assets/img/map/slider7.jpg" alt="Primeiro slide">
+                                    <h1 class="titulo">{{ 'menu.about' | translate }} <span class="amarelo">Terra</span><span class="verde">Brasillis</span></h1>
+                                        <p class="descricaoslide"> {{ 'app.text' | translate }}. </p>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>				
+                    </div>                    
+                    <!-- / modal-body -->
+                    <div class="modal-footer">
+                        <div class="checkbox pull-right">
+                            <label>
+                                <input id="notice" class="modal-check" name="modal-check" type="checkbox"><span class="textoc">{{ 'tools.notice' | translate }}.</span>
+                            </label>
+                        </div>
+                        <!--/ checkbox -->
+                    </div>
+                    <!--/ modal-footer -->
+                </div>
+                <!-- / modal-content -->
+            </div>
+            <!--/ modal-dialog -->
+        </div>
+        <!-- / modal -->
+    </div>
+    <!-- / row -->
+</div>
+<!-- / container -->
+
+<!-- Carousel Slider --> 
+<script>
+    $(document).ready(function() {
+        $('#carouselExampleIndicators').modal('show');
+        $('.carousel').carousel({
+            interval: 2000
+        })
+    });
+</script>
+
+<!--Footer-->
+<footer class="footer">
+    <p>© 2019<a href="#"> TerraBrasilis</a></p>
+</footer>
+<!--/.Footer-->

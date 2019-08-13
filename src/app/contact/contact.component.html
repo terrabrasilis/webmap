@@ -1,0 +1,45 @@
+<div class="modal-header fechar">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+</div>
+<div></div>
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ 'contact.title' | translate }}</h5>
+      <p class="card-text">prodes@dpi.inpe.br</p>
+  </div>
+</div>
+
+<!-- <div class="modal-header fechar">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+</div>
+<div></div>
+
+<div class="contact-container">
+  <form [formGroup]="contactForm" (ngSubmit)="sendContact(contactForm.value)">
+    <mat-form-field>
+      <input matInput placeholder="name" formControlName="name" required>    
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="last name" formControlName="lastname" required>    
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="organization" formControlName="organization">    
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="email" placeholder="email" formControlName="email" required>
+      <mat-error *ngFor="let validation of contact_validation_messages.email">
+        <mat-error class="error-message" *ngIf="contactForm.get('email').hasError(validation.type) && (contactForm.get('email').dirty || contactForm.get('email').touched)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field style="width: 400px !important;">
+      <span><textarea matInput placeholder="message" formControlName="message" required></textarea></span>
+    </mat-form-field>
+    
+    <mat-dialog-actions>
+      <button color="primary" mat-raised-button type="submit" *ngIf="contactForm.status !== 'INVALID'">Send</button>
+      <button color="primary" mat-raised-button type="reset">Clean</button>
+    </mat-dialog-actions>
+  </form>
+</div> -->

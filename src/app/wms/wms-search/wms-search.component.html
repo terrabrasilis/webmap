@@ -1,0 +1,79 @@
+
+<!-- close button -->
+<div class="modal-header fechar">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+</div>
+<div></div>
+<!-- end -->
+
+<h2 mat-dialog-title>WMS Capabilities search</h2>
+
+<label *ngIf="capabilitiesFailure" style="color: deeppink;">{{ capabilitiesFailure }}</label>
+<br/>
+<mat-dialog-content class="capabilities-container mat-elevation-z8">
+    
+    <mat-form-field>
+        <mat-select placeholder="Data Source" [(ngModel)]="selectedValue" name="source">
+            <mat-option *ngFor="let source of sources" [value]="source.host" (click)="loadCapabilities()">
+                {{source.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="url-form-field">
+        <input matInput type="text" placeholder="WMS URL" [(ngModel)]="selectedValue"/> 
+        <button mat-button *ngIf="selectedValue" matSuffix mat-icon-button aria-label="Load capabilities" (click)="loadCapabilities()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <mat-progress-bar [mode]="progressBarMode" [value]="progressBarValue" [color]="progressBarColor" mode="indeterminate"></mat-progress-bar>
+    <br />
+
+    <div class="filter-header">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
+    
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="metadata">
+            <mat-header-cell *matHeaderCellDef> Metadata </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button *ngIf="element.metadata" matSuffix mat-icon-button aria-label="Display metadata" (click)="displayMetadata(element.metadata)">
+                    <mat-icon>information</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="url">
+            <mat-header-cell *matHeaderCellDef> Add layer </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button *ngIf="element" matSuffix mat-icon-button aria-label="Add layer to map" (click)="addlayerToMap(element)">
+                    <mat-icon>layers</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click) = "rowClicked(row)" ></mat-row>
+    </mat-table>
+    
+    <mat-paginator #paginator [length]="5" [pageSize]="4" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>        
+</mat-dialog-content><br/>
+
+<!-- <mat-dialog-actions>
+    <button color="primary" mat-raised-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions> -->
+

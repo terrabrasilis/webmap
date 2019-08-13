@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+@import url("http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+
+/*--------------------------------------------------------
+    ABOUT
+----------------------------------------------------------*/
+.about {position: relative;top: -130px !important;}
+.aboutdialog { top: 80px; border:0px }
+.about .btn-primary:hover,.about .btn-primary:focus { background-color: #006950; border-color: #108d6f; box-shadow: none; outline: none;}
+.about .btn-primary {color: #fff; background-color: #108d6f; border-color: #108d6f;}
+.about section {padding: 20px 0;}
+.about section .titleb {  text-align: center; color: #007b5e;margin-bottom: 50px; text-transform: uppercase;}
+.about .titlegreen {color: #fff;}
+.about .cardfront {position: relative; -webkit-transform: rotateY(0deg); -ms-transform: rotateY(0deg); z-index: 2; margin-bottom: 30px;}
+.about .cardfront .card{min-height: 312px;}
+.about .cardfront .card .card-title,.card-title {color: #007b5e !important;}
+.about .cardfront .card .card-body img {width: 120px; height: 120px; border-radius: 50%;}
+.about .msgn { color:#3fc3a3; font-size: 14px; padding: 15px; }
+.about .padding80 {padding:40px;}
+.about .bgcolor-voilet {background-color: #007b5e;color:#fff;}
+.about .tmargin10 { margin-top :10px;}
+.about .txtvisao { color: #fff;}
+.aboutcard-title{text-align: center; margin-top: 15px;}
+.about .logo-card .logo-img{ width: 8em; position: relative; top: 130px;left: 51%; margin-left: -5em; border-radius: 100%;overflow: hidden; z-index: 999; }
+.about ul li {border:0px; background-color:transparent;}
+.about .card {background-color:transparent !important;}
+.about .card-title { color:#3fc3a3 !important; }
+.about aboutdialog { top:0px !important;}
+.about .logo-img {top:55px;}

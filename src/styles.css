@@ -1,0 +1,119 @@
+/* 
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import '~@angular/material/prebuilt-themes/purple-green.css'; 
+*/
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    position: fixed;
+    top:0 ;
+    left: 0;
+    height: 90%;
+    width: 100%;
+}
+
+.done {
+    position: fixed;
+    bottom: 30px;
+    right: 10px;
+    color: white;
+}
+
+.graph {
+    margin-top: 64px;
+}
+
+mat-card {
+    max-width: 80%;
+    margin: 2em auto;
+    text-align: center;
+}
+
+mat-toolbar-row {
+    justify-content: space-between;
+}
+
+.mat-slider {
+    color: #108d6f !important;
+}
+
+.mat-dialog-container {
+    border-radius: 10px !important; 
+}
+
+#map {
+    position: fixed;
+    top: 64px;
+    height: calc(100% - 109px);
+    width: calc(100% - 290px);
+    /* outline: none;  */
+    margin: 0;  
+    margin-left: 290px;  
+    z-index: -1;
+}
+
+#map.active {
+    margin-left: 0px;
+    width: 100%;
+}
+
+#map.leaflet-fullscreen-on {
+    margin: 0px;
+    top: 0px;
+}
+
+/* from alias defined in webpack.common.js */
+@import '~leafletcss';
+@import '~timedimension';
+@import '~leafletplugins';
+/* from alias to import static style files */
+@import '~cssDc';
+@import '~cssGridstack';
+@import '~cssGridstackExtra';
+@import '~cssAbout';
+@import '~cssBaselayer';
+@import '~cssEstilo';
+@import '~cssMCustomScrollbar';
+@import '~cssRangeSlider';
+@import '~cssJqueryLoading';
+@import '~cssScrollingTabs';
+
+@font-face {
+    font-family: 'icon';
+    src: url(data:font/ttf;base64,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);
+    font-weight: normal;
+    font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icon' !important;
+    speak-as: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-eye-slash:before {
+    content: "\e903";
+}
+.icon-eye:before {
+    content: "\e904";
+}
+.leaflet-html-legend {
+    margin-bottom: 20% !important;
+}
+.leaflet-popup-content { 
+    max-height : 350px; overflow : auto; 
+}
+
+.cursor-feature-info {
+    cursor: auto;
+    cursor: url('assets/img/map/cursor-info.png') 2 1, auto;
+}

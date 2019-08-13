@@ -1,0 +1,125 @@
+.container-icon {
+  padding: 0 14px;
+}
+
+.container-spacer {
+  flex: 1 1 auto;
+}
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  margin: 0;
+}
+
+.customized-layer-control {
+  float: right;
+  width: 20%;
+  position: fixed;
+  margin-left: 79.5%;
+  margin-top: 0.5%;
+}
+
+.mat-slider {
+  width: 100%;
+}
+
+.project-group-closed{
+  width: 100%;
+  height: 40px;
+  overflow: hidden;
+  padding: 1px;
+}
+.group-title-closed{
+  background-color: #268f99;
+  color: #ffffff;
+  padding-top: 8px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  font-weight: normal;
+  width: 100%;
+  cursor: pointer;
+}
+.project-group-opened{
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+}
+.group-title-opened{
+  color: #ffffff;
+  background-color: #1d757f;
+  padding-top: 8px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  font-weight: 500;
+  width: 100%;
+  cursor: pointer;
+}
+.badge-light {
+  color: #1e757e;
+  background-color: #ffffff;
+  position: relative;
+  left: 1px;
+  top: -2px;
+}
+.grp-prj{
+  top: -25px;
+  right: 1px;
+}
+
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  overflow: hidden;
+  right: 0px;
+  left: 0px;
+}
+
+/* .legend-title{
+  background-color: #197f64;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-top: #1d757f;
+}
+
+.legend-body {
+  background-color: #49bc95;
+  display: grid !important;
+} */
+
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+  width: 250px !important;
+}
+
+/**
+* Sidebar customization
+*/
+.project-group-opened[_ngcontent-c1] {padding: 0px !important;}
+.group-title-opened[_ngcontent-c1] { padding:8px !important; background-color: #009688;
+}
+.grp-prj[_ngcontent-c1] {right: 12px !important;}
+
+.material-switch>label::before {
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.material-switch>input[type="checkbox"]:checked+label::before {
+    background: #49bc95 !important;
+    opacity: 0.9 !important;
+}
+.group-title-closed[_ngcontent-c1] {
+    background-color: #009688 !important;
+}
+.project-group-closed[_ngcontent-c1] {
+   padding: 0px !important;
+   height: 38px !important; 
+}
+
+/**
+* Legend customization
+*/
+.legend-body[_ngcontent-c1] { background-color:none !important; }
+.legend-title[_ngcontent-c1] { background-color: #49bc95 !important; border-top:0px !important; padding: 5px; color: #fff; font-weight: 500}
+.btn-success { border-color: none !important;}

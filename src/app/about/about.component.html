@@ -1,0 +1,257 @@
+<!-- close button -->
+<div class="modal-header fechar" style="z-index: 999;">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+</div>
+<div></div>
+<!-- end -->
+
+<!-- modal About -->
+<div class="about">
+  <div class="logo-card">
+    <!-- logo -->
+    <img class="logo-img" src="{{ imgPath }}assets/img/about/logo.png" alt="logo">
+    <!-- Visao -->
+    <div id="visao" class="card aboutdialog">
+      <div class="padding80 bgcolor-voilet ">
+        <div class="container ">
+          <h2 class="aboutcard-title"><span class="amarelo">Terra</span><span class="verde">Brasilis</span></h2>
+          <div class="row">
+            <p class="tmargin10 txtvisao">{{ 'about.description' | translate }}</p>
+            <a href="http://terrabrasilis.dpi.inpe.br" target="_blank" class="btn btn-primary">{{ 'about.more' | translate }}</a>            
+          </div>
+        </div>
+      </div>
+
+      <!-- Equipe -->
+      <section id="equipe" class="pb-5">
+        <div class="container">
+          <h5 class="titleb h2">{{ 'about.coordinators' | translate }}</h5>
+          <div class="row">
+            <!-- karine -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/karine.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="http://www.dpi.inpe.br/DPI/acesso-a-informacao/pessoal/servidores/karine-reis-ferreira" target="_blank">Karine Reis Ferreira</a></h4>
+                      <p class="card-text">{{ 'about.occupation.female' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./karine -->
+            <!-- lubia -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/lubia.png" alt="card image"></p>
+                      <h4 class="card-title"><a href= "http://www.dpi.inpe.br/DPI/acesso-a-informacao/pessoal/servidores/lubia-vinhas" target="_blank">Lubia Vinhas</a></h4>
+                      <p class="card-text">{{ 'about.occupation.female' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./lubia -->
+            <!-- maurano -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/maurano.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="http://www.dpi.inpe.br/DPI/acesso-a-informacao/pessoal/servidores/luis-eduardo-pinheiro-maurano" target="_blank">Luis E. Maurano</a></h4>
+                      <p class="card-text">{{ 'about.occupation.technologist.male' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./Maurano -->
+
+          </div>
+          <!-- Equipe de TI -->
+          <h5 class="titleb h2">{{ 'about.team.ti' | translate }}</h5>
+          <div class="row">
+
+            <!-- adeline -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/adeline.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="https://www.linkedin.com/in/adelinemarinhomaciel" target="_blank">Adeline Maciel</a></h4>
+                      <p class="card-text">{{ 'about.research.fellow' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./adeline -->
+
+            <!-- andre -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/andre.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="https://github.com/andre-carvalho" target="_blank">André Carvalho</a></h4>
+                      <p class="card-text">{{ 'about.developer' | translate }} Sênior</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./andre -->
+            <!-- claudinei -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/claudinei.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="http://lattes.cnpq.br/9744765350087148" target="_blank">Claudinei de Camargo</a></h4>
+                      <p class="card-text">{{ 'about.webdesigner' | translate }} Sênior</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./claudinei -->
+            <!-- fabio -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/fabio.png" alt="card image"></p>                      
+                      <h4 class="card-title"><a href="https://www.linkedin.com/in/fabiocpinheiro" target="_blank">Fábio da Conceição Pinheiro</a></h4>
+                      <p class="card-text">{{ 'about.dba' | translate }}</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./fabio -->
+            <!-- jether -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/jether.png" alt="card image"></p>
+                      <h4 class="card-title"><a href="https://www.linkedin.com/in/jetherodrigues" target="_blank">Jether Rodrigues</a></h4>
+                      <p class="card-text">{{ 'about.developer' | translate }} Sênior</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ./jether -->
+            <!-- luiz -->
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <div>
+                <div class="cardfront">
+                  <div class="card">
+                    <div class="card-body text-center">
+                      <p><img class=" img-fluid" src="{{ imgPath }}assets/img/about/luiz.png" alt="card image"></p>
+                      <h4 class="card-title"><a href= "https://br.linkedin.com/in/luizffgassis" target="_blank"> Luiz Fernando F. G. de Assis </a></h4>
+                      <p class="card-text">{{ 'about.developer' | translate }} Pleno</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- ./luiz -->
+            <!-- row -->
+
+          </div>
+        </div>
+      </section>
+      <!-- equipe -->
+
+
+      <!-- Outros -->
+      <section id="other" class="pb-0">
+        <div class="padding80 bgcolor-voilet">
+          <div class="container">
+            <div class="row">
+              <div class="row">
+
+                <!-- Ex-colaboradores -->
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ 'about.ex.contributors' | translate }}</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item">Claudio Bogossian</li>
+                        <li class="list-group-item">Gustavo Furtado</li>
+                        <li class="list-group-item">Paulo Luan</li>
+                        <li class="list-group-item">Marcos Alexandre</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- ./ex-colaboradores -->
+
+                <!-- apoio -->
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ 'about.support' | translate }}</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item">{{ 'about.support.inpe' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.support.funcate' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.support.fundep' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.support.worldbank' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.support.bndes' | translate }}</li>
+                      </ul>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- ./apoio -->
+
+                <!-- technology -->
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ 'about.technology' | translate }}</h4>
+                      <ul class="list-group">
+                        <li class="list-group-item">{{ 'about.technology.languages' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.technology.heterogeneous' | translate }}</li>
+                        <li class="list-group-item">{{ 'about.technology.services' | translate }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- ./technology -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- / modal-body -->
+
+    </div>
+    <!-- / modal-content -->
+  </div>
+  <!--/ modal-dialog -->
+</div>
+<!-- / modal -->
