@@ -1,9 +1,8 @@
 
 import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-
 
 import { Contact } from "../entity/contact";
 import { Constants } from '../util/constants';
@@ -20,8 +19,10 @@ export class ContactService {
   saveContact(contact: Contact): Observable<Contact> {
     console.log(JSON.stringify(contact));
     return this.http.post(Constants.TERRABRASILIS_API_HOST + "contact", JSON.stringify(contact), httpOptions)
-      .map(this.extractData)
-      .catch(this.handleErrorObservable);
+      .pipe(
+        map(this.extractData),
+        catchError(this.handleErrorObservable)
+      )
   }
 
   private extractData(res: Response): any {

@@ -1,5 +1,6 @@
 
 import {throwError as observableThrowError,  Observable ,  of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -22,9 +23,11 @@ export class DatasourceService {
    * API: GET datasource/all
    */
   public getAllDatasource(): Observable<Datasource[]> {
-    return this.http.get(this.hostApi + "datasource/all")
-                    .map(res => res)
-                    .catch(err=> observableThrowError(err.message));      
+    return this.http.get<Datasource[]>(this.hostApi + "datasource/all")
+                    .pipe(
+                        map(res => res),
+                        catchError(err=> observableThrowError(err.message))
+                    )                    
   }
 
   /**
@@ -32,8 +35,10 @@ export class DatasourceService {
    * @param type 
    */
   public getAllDatasourceByType(type:string): Observable<Datasource[]> {
-    return this.http.get(this.hostApi + "datasource/" + type.toUpperCase() + "/type")
-                    .map(res => res)
-                    .catch(err=> observableThrowError(err.message));      
+    return this.http.get<Datasource[]>(this.hostApi + "datasource/" + type.toUpperCase() + "/type")
+                    .pipe(
+                        map(res => res),
+                        catchError(err=> observableThrowError(err.message))
+                    )
   }
 }

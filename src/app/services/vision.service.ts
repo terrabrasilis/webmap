@@ -1,5 +1,6 @@
 
 import {throwError as observableThrowError,  Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Constants } from '../util/constants';
@@ -22,7 +23,9 @@ export class VisionService {
    */
   public getVisionAndAllRelationshipmentByName(name:string): Observable<any> {
     return this.http.get(this.hostApi + "vision/name/" + name + "/all")
-                    .map(res => res)
-                    .catch(err=> observableThrowError(err.message));      
+                .pipe(
+                    map(res => res),
+                    catchError(err=> observableThrowError(err.message))
+                )
   }
 }
