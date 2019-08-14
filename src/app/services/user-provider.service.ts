@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
+import { delay } from 'rxjs/operators';
+
 import { User } from "../entity/user";
 
 @Injectable()
@@ -16,7 +18,7 @@ export class UserProviderService {
       {position: 3, firstName: 'Hary', lastName: 'Pan', email: 'hary@gmail.com'},
       {position: 4, firstName: 'praks', lastName: 'pb', email: 'praks@gmail.com'},
     ];
-    return of(fakeUsers).delay(500);
+    return of(fakeUsers).pipe(delay(500));
   }
 
 }
