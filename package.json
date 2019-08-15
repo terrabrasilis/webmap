@@ -111,5 +111,14 @@
     "webpack-cli": "3.3.6",
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.1"
+  },
+  "browser": {
+    "fs": false,
+    "http": false,
+    "https":false,
+    "net": false,
+    "path": false,
+    "stream": false,
+    "tls": false
   }
 }

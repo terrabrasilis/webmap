@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
-
-
-
+import { Observable, merge } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { DeforestationOptionsComponent } from '../dashboard/deforestation/deforestation-options/deforestation-options.component'
 
 @Injectable()
@@ -17,9 +14,11 @@ export class DashboardLoiSearchService {
   }
 
   search(terms: Observable<string>) {
-    return terms.debounceTime(400)
-      .distinctUntilChanged()
-      .switchMap(term => this.searchEntries(term));
+    return terms.pipe(
+      debounceTime(400), 
+      distinctUntilChanged(),
+      switchMap(term => this.searchEntries(term))
+    )
   }
 
   searchEntries(term: any) {
@@ -34,7 +33,7 @@ export class DashboardLoiSearchService {
     }
     this.lois = this.panelReference.getLoiNames();
     this.lois.forEach(searchInMapElements);
-    let observable=Observable.merge(results);
+    let observable=merge(results);
     return observable;
   }
 }
