@@ -28,6 +28,20 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/terrabrasilis-timedimension/leaflet.timedimension.control.min.css",
+              "node_modules/terrabrasilis-map-plugins/dist/terrabrasilis-leaflet-plugins.min.css",
+              "src/assets/css/dc/dc.css",
+              "src/assets/css/gridstack/gridstack.css",
+              "src/assets/css/gridstack/gridstack-extra.css",
+              "src/assets/css/about/about.css",
+              "src/assets/css/map/baselayer.css",
+              "src/assets/css/map/estilo.css",
+              "src/assets/css/map/jquery.mCustomScrollbar.min.css",
+              "src/assets/css/map/rangeslider.css",
+              "src/assets/css/jquery-ui/jquery.loading.css",
+              "src/assets/css/jquery-scrolling/jquery.scrolling-tabs.min.css",
               "src/styles.scss"
             ],
             "scripts": []
