@@ -8,7 +8,7 @@
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "yarn build && ng serve --port 3001",
+    "start": "ng serve --port 3001",
     "test": "ng test"
   },
   "dependencies": {
