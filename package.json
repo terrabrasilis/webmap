@@ -4,20 +4,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "ng build --prod",
+    "build": "ng build",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.js",
-    "start-build-homologation": "rimraf dist && webpack --config config/webpack.dev.js --profile --env --bail -p --preserve-symlinks",
-    "start-build-production": "rimraf dist && webpack --config config/webpack.prod.js --profile --env --bail -p --preserve-symlinks",
-    "start-build-webpack-prod": "webpack --config config/webpack.prod.js",
-    "start-dev": "webpack --mode development",
-    "start-webpack-dev": "webpack-dev-server --port 3001 --config config/webpack.dev.js --mode development --preserve-symlinks --watch-content-base --open --optimize-minimize",
-    "test": "ng test",
-    "test-karma": "karma test",
-    "webpack-dev": "cross-env NODE_ENV=development webpack --mode development",
-    "webpack-prod": "cross-env NODE_ENV=production webpack --mode production"
+    "start": "yarn build && ng serve --port 3001",
+    "test": "ng test"
   },
   "dependencies": {
     "@angular/animations": "^8.2.1",
@@ -56,8 +48,9 @@
     "ogc-schemas": "^2.6.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "latest",
-    "terrabrasilis-jsonix": "^2.4.2",
+    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#master",
+    "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#master",
+    "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#master",
     "w3c-schemas": "^1.4.0",
     "zone.js": "^0.8.19"
   },
@@ -115,7 +108,7 @@
   "browser": {
     "fs": false,
     "http": false,
-    "https":false,
+    "https": false,
     "net": false,
     "path": false,
     "stream": false,
