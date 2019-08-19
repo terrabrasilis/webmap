@@ -90,14 +90,14 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * privates
      */    
-    private languageKey: string = "translate";
-    private baselayers: Array<Layer> = new Array();
-    private overlayers: Array<Vision> = new Array();
-    private downloads: Array<Download> = new Array();
-    private thirdProject: Vision;
-    private layersToLegend: Array<Vision> = new Array();
-    private _subscription: Array<ISubscription> = new Array();    
-    @HostBinding() private thirdlayers: Array<Layer> = new Array();      
+    public languageKey: string = "translate";
+    public baselayers: Array<Layer> = new Array();
+    public overlayers: Array<Vision> = new Array();
+    public downloads: Array<Download> = new Array();
+    public thirdProject: Vision;
+    public layersToLegend: Array<Vision> = new Array();
+    public _subscription: Array<ISubscription> = new Array();    
+    @HostBinding() public thirdlayers: Array<Layer> = new Array();      
     
     constructor(
         private dialog : MatDialog

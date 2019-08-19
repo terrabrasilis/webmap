@@ -35,7 +35,7 @@ export class OnDemandDownloadComponent implements OnInit {
   
   private dataJson: any;
   private loiNamesJson: any;
-  private biome: any;
+  public biome: any;
   private DB_NoContain:any;
 
   constructor(private route: ActivatedRoute,    

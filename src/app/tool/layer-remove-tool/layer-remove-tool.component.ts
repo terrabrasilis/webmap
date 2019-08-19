@@ -37,6 +37,7 @@ export class LayerRemoveToolComponent extends ToolComponent implements OnInit, O
    * TerraBrasilis
    */    
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef);
+  public project:any;
 
   ngOnInit() {    
     this.layer = this.shared;

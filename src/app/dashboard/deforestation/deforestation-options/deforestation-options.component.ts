@@ -132,7 +132,7 @@ export class DeforestationOptionsComponent implements OnInit  {
 
   // dashboard title
   private loi: any;
-  private loiname: any;
+  public loiname: any;
 
   private loiNames: Map<number, string>;
   private loiNamesObject: Array<Object>;

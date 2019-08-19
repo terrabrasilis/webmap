@@ -4,11 +4,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "ng build",
+    "build": "ng build --prod",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
     "start": "ng serve --port 3001",
+    "start-prod": "ng serve --prod --port 3001",
     "test": "ng test"
   },
   "dependencies": {

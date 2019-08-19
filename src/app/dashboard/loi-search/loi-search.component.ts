@@ -24,7 +24,7 @@ export class LoiSearchComponent implements OnInit {
   /* Variável que recebe o valor da função handleFilterChange */
   private filterString: Subject<string> = new Subject<string>();
   private searchSubscription: any;
-  private loi:any;
+  public loi:any;
   private languageKey: string = "translate";
   
   constructor(private deforestationOptionsComponent: DeforestationOptionsComponent,
