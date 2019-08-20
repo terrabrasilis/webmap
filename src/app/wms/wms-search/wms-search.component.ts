@@ -260,7 +260,7 @@ export class WmsSearchComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  @HostListener('updateLayerToMap')
+  // @HostListener('updateLayerToMap') // FIXME: fazer testes funcionais, não sei se isso vai funcionar (@pauloluan)
   updateLayerToMap(layer:any) {
     this.mapWmsSearchDialogService.updateMapLayerFromWmsSearch(layer);
   }
