@@ -52,8 +52,7 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                }
-                ,
+                },
                 {
                   "replace": "src/index.html",
                   "with": "src/index.prod.html"
@@ -64,10 +63,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
+              "aot": false, // FIXME: se true a aplicação quebra...
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false, // FIXME: se true a aplicação quebra...
               "budgets": [
                 {
                   "type": "initial",
