@@ -1,6 +1,18 @@
 language: node_js
+
 node_js:
   - v10
   - v12
+
+addons:
+  chrome: stable
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng lint
+  - ng test --code-coverage --watch=false
+
 notifications:
   email: false
