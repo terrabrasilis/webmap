@@ -8,8 +8,8 @@
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --port 3001",
-    "start-prod": "ng serve --prod --port 3001",
+    "start": "ng serve --open --port 3001",
+    "start-prod": "ng serve --open --prod --port 3001",
     "test": "ng test"
   },
   "dependencies": {
