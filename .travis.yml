@@ -11,8 +11,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
-  - ng lint
-  - ng test --code-coverage --watch=false
+  - yarn all_tests
 
 notifications:
   email: false

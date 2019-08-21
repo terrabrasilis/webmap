@@ -12,7 +12,11 @@
     "start-prod": "ng serve --open --prod --port 3001",
     "start-build-homologation": "yarn build",
     "start-build-production": "yarn build",
-    "test": "ng test"
+    "test": "ng test",
+
+    "test_headless": "ng test --watch false --browsers ChromeHeadless",
+    "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
+    "all_tests": "yarn lint && yarn test_headless"
   },
   "dependencies": {
     "@angular/animations": "^8.2.1",
