@@ -16,29 +16,29 @@ export class DatasourceService {
   private hostApi = Constants.TERRABRASILIS_BUSINESS_API_HOST;
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
   /**
    * API: GET datasource/all
    */
   public getAllDatasource(): Observable<Datasource[]> {
-    return this.http.get<Datasource[]>(this.hostApi + "datasource/all")
+    return this.http.get<Datasource[]>(this.hostApi + 'datasource/all')
                     .pipe(
                         map(res => res),
-                        catchError(err=> observableThrowError(err.message))
-                    )                    
+                        catchError(err => observableThrowError(err.message))
+                    );
   }
 
   /**
    * API: GET datasource/{type}/type
-   * @param type 
+   * @param type
    */
-  public getAllDatasourceByType(type:string): Observable<Datasource[]> {
-    return this.http.get<Datasource[]>(this.hostApi + "datasource/" + type.toUpperCase() + "/type")
+  public getAllDatasourceByType(type: string): Observable<Datasource[]> {
+    return this.http.get<Datasource[]>(this.hostApi + 'datasource/' + type.toUpperCase() + '/type')
                     .pipe(
                         map(res => res),
-                        catchError(err=> observableThrowError(err.message))
-                    )
+                        catchError(err => observableThrowError(err.message))
+                    );
   }
 }

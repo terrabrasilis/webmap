@@ -1,3 +1,3 @@
 export interface OpenUrl {
-    goTo(url:string): void ; 
+    goTo(url: string): void ;
 }

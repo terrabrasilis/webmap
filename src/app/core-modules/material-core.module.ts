@@ -1,8 +1,8 @@
 /**
  * Using the @angular/material
- * 
+ *
  * https://www.npmjs.com/org/material
- * 
+ *
  */
 
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -26,9 +26,9 @@ import { MatAutocompleteModule
   , MatRadioModule
   , MatSelectModule
   , MatSidenavModule
-  , MatSliderModule  
-  , MatSlideToggleModule      
-  , MatTabChangeEvent  
+  , MatSliderModule
+  , MatSlideToggleModule
+  , MatTabChangeEvent
   , MatTableModule
   , MatTabsModule
   , MatToolbarModule
@@ -36,61 +36,61 @@ import { MatAutocompleteModule
 
 @NgModule({
   imports: [
-    CommonModule, 
+    CommonModule,
     EcoFabSpeedDialModule,
     MatAutocompleteModule,
-    MatButtonModule, 
-    MatCardModule, 
-    MatCheckboxModule, 
-    MatDialogModule, 
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatIconModule, 
-    MatInputModule, 
-    MatListModule,    
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
     MatMenuModule,
-    MatPaginatorModule, 
-    MatProgressBarModule,
-    MatProgressSpinnerModule,    
-    MatRadioModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,  
-    MatSlideToggleModule,
-    MatTableModule, 
-    MatTabsModule,
-    MatToolbarModule    
-  ],
-  exports: [
-    CommonModule, 
-    EcoFabSpeedDialModule,
-    MatAutocompleteModule,
-    MatButtonModule, 
-    MatCardModule,     
-    MatCheckboxModule, 
-    MatDialogModule, 
-    MatDividerModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatIconModule, 
-    MatInputModule, 
-    MatListModule,        
-    MatMenuModule,
-    MatPaginatorModule, 
+    MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
-    MatSliderModule,     
-    MatSlideToggleModule,        
-    MatTableModule, 
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule
+  ],
+  exports: [
+    CommonModule,
+    EcoFabSpeedDialModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatTableModule,
     MatTabsModule,
     MatToolbarModule
   ],
   schemas: [
-    CUSTOM_ELEMENTS_SCHEMA, 
+    CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
   declarations: []

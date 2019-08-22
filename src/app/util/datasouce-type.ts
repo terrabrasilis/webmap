@@ -1,5 +1,5 @@
 export enum DatasourceType {
-    OWS = "OWS",
-    TMS = "TMS",
-    WMS = "WMS"
+    OWS = 'OWS',
+    TMS = 'TMS',
+    WMS = 'WMS'
 }

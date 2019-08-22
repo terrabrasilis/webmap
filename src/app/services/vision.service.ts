@@ -13,19 +13,19 @@ const httpOptions = {
 @Injectable()
 export class VisionService {
   private hostApi = Constants.TERRABRASILIS_BUSINESS_API_HOST;
-  
+
   constructor(
-    private http:HttpClient 
+    private http: HttpClient
   ) { }
 
   /**
    * API: GET vision/name/{desforestation}/all
    */
-  public getVisionAndAllRelationshipmentByName(name:string): Observable<any> {
-    return this.http.get(this.hostApi + "vision/name/" + name + "/all")
+  public getVisionAndAllRelationshipmentByName(name: string): Observable<any> {
+    return this.http.get(this.hostApi + 'vision/name/' + name + '/all')
                 .pipe(
                     map(res => res),
-                    catchError(err=> observableThrowError(err.message))
-                )
+                    catchError(err => observableThrowError(err.message))
+                );
   }
 }

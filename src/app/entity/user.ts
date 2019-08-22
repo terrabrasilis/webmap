@@ -1,8 +1,8 @@
 export class User {
-    position: number
-    firstName: string
-    lastName: string
-    email: string
+    position: number;
+    firstName: string;
+    lastName: string;
+    email: string;
 
-    constructor(){}
+    constructor() {}
 }

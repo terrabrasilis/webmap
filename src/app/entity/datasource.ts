@@ -9,7 +9,7 @@ export class Datasource {
     /**
      * the link list of downloads to download data
      */
-    public downloads: Download[]; 
+    public downloads: Download[];
 
     // constructor(id:string, name:string, description:string, host: string, metadata:string, enabled:boolean, created:string, downloads: Download[]){
     //     this.id = id;
@@ -20,14 +20,14 @@ export class Datasource {
     //     this.enabled = enabled;
     //     this.created = created;
     //     this.downloads = downloads;
-    // } 
-    
+    // }
+
     constructor() {}
 
-    addHost(host:string) {
+    addHost(host: string) {
         this.host = host;
         return this;
-    }    
+    }
 }
 
 export class Download {
@@ -38,12 +38,12 @@ export class Download {
     public enabled: boolean;
     public created: string;
 
-    constructor(id:string, name:string, description:string, link: string, enabled:boolean, created:string){
+    constructor(id: string, name: string, description: string, link: string, enabled: boolean, created: string) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.link = link;
         this.enabled = enabled;
         this.created = created;
-    } 
+    }
 }

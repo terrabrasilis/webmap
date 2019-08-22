@@ -17,30 +17,30 @@ export class LocalStorageService {
    * key
    * value
    */
-  private toStorage:any = {};  
-  private prefix:string = "tbv01_";
+  private toStorage: any = {};
+  private prefix = 'tbv01_';
 
   constructor(private localStorage: LocalStorage) { }
 
-  setValue (key:any, value:any) {
+  setValue(key: any, value: any) {
     this.toStorage.key = key;
     this.toStorage.value = value;
 
     this.localStorage.setItem(this.prefix + key, JSON.stringify(this.toStorage)).subscribe(() => {
-      //console.log("Object storaged!");
-      //console.log(this.toStorage);
+      // console.log("Object storaged!");
+      // console.log(this.toStorage);
     });
   }
 
-  getValue(key:any): any {    
-    return this.localStorage.getItem(this.prefix + key);    
+  getValue(key: any): any {
+    return this.localStorage.getItem(this.prefix + key);
   }
 
   clearAll(): void {
     this.localStorage.clear().subscribe(() => {});
   }
 
-  removeItem(key:any): void {
+  removeItem(key: any): void {
     this.localStorage.removeItem(this.prefix + key).subscribe(() => {});
   }
 }

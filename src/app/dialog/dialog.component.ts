@@ -8,7 +8,7 @@ import { SafeHtml } from '@angular/platform-browser';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  content: SafeHtml
+  content: SafeHtml;
 
   constructor(private dialogRef: MatDialogRef<DialogComponent>) { }
 

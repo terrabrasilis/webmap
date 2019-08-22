@@ -5,8 +5,8 @@ import { MatDialogRef, MatPaginator, MatSort, MatTableDataSource, MAT_DIALOG_DAT
  * services
  */
 import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
-import { MapWmsSearchDialogService } from "../../services/map-wms-search-dialog.service";
-import { DatasourceService } from "../../services/datasource.service";
+import { MapWmsSearchDialogService } from '../../services/map-wms-search-dialog.service';
+import { DatasourceService } from '../../services/datasource.service';
 
 /**
  * components
@@ -24,7 +24,7 @@ import { DatasourceType } from '../../util/datasouce-type';
 
 // import terrabrasilis api from node_modules
 import * as Jsonix from 'terrabrasilis-jsonix';
-import * as Terrabrasilis from "terrabrasilis-api";
+import * as Terrabrasilis from 'terrabrasilis-api';
 import * as ogcSchemas from 'ogc-schemas';
 import * as w3cSchemas from 'w3c-schemas';
 
@@ -45,7 +45,7 @@ export class WmsSearchComponent implements OnInit {
     private mapWmsSearchDialogService: MapWmsSearchDialogService,
     private dialogRef: MatDialogRef<WmsSearchComponent>,
     private datasourceService: DatasourceService,
-    @Inject(MAT_DIALOG_DATA) public data : any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   /**
    * publics
@@ -61,17 +61,17 @@ export class WmsSearchComponent implements OnInit {
   progressBarColor = 'primary';
   progressBarMode = 'determinate';
   progressBarValue = '0';
-  capabilitiesFailure:any = undefined;
+  capabilitiesFailure: any = undefined;
 
   wmsServerCapabilities: WmsServerCapabilities;
-  
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;  
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   /**
    * List os datasource
    */
-  sources = new Array<Datasource>()
+  sources = new Array<Datasource>();
 
   /**
    * privates
@@ -99,7 +99,7 @@ export class WmsSearchComponent implements OnInit {
           .subscribe(
               (datasources) => {
 
-                let sortDatasources=function(a:Datasource,b:Datasource){
+                const sortDatasources = function(a: Datasource, b: Datasource) {
                   if (a.host > b.host) {
                     return 1;
                   }
@@ -109,16 +109,16 @@ export class WmsSearchComponent implements OnInit {
                   return 0;
                 };
 
-                let dsGroup:any[] = [],
+                const dsGroup: any[] = [],
                 dtCtrl = {};
 
                 datasources.forEach(
                   (dtElement) => {
                     let h = dtElement.host;
-                    h=h.replace('http://','').split('/')[0];
-                    if(dtCtrl[h]===undefined) {
+                    h = h.replace('http://', '').split('/')[0];
+                    if (dtCtrl[h] === undefined) {
                       dsGroup.push(h);
-                      dtCtrl[h]=[];
+                      dtCtrl[h] = [];
                     }
                     dtCtrl[h].push(dtElement);
                   }
@@ -127,7 +127,7 @@ export class WmsSearchComponent implements OnInit {
                 dsGroup.forEach(
                   (h) => {
                     dtCtrl[h].sort(sortDatasources);
-                    while(dtCtrl[h].length){
+                    while (dtCtrl[h].length) {
                       this.sources.push(dtCtrl[h].pop());
                     }
                   }
@@ -154,21 +154,21 @@ export class WmsSearchComponent implements OnInit {
     this.capabilitiesFailure = undefined;
     this.progressBarMode = 'indeterminate';
     this.wmsCapabilitiesProviderService.getCapabilities(this.selectedValue).subscribe(
-      data => { //defaultUrl
-        //console.log(data);
-        if (data.ok){
+      data => { // defaultUrl
+        // console.log(data);
+        if (data.ok) {
           this.xmlToJson(data.body);
-        }else{
+        } else {
           this.progressBarMode = 'determinate';
           this.progressBarValue = '0';
-          this.capabilitiesFailure = 'Failure on request, review your URL and try again.';          
+          this.capabilitiesFailure = 'Failure on request, review your URL and try again.';
         }
       }
-    )
+    );
   }
 
   addlayerToMap(layer: Layer2View) {
-    let layerMap = {
+    const layerMap = {
       geospatialHost: layer.url,
       workspace:      layer.namespace,
       name:           layer.name,
@@ -179,7 +179,7 @@ export class WmsSearchComponent implements OnInit {
 
     Terrabrasilis.addLayerByGetCapabilities(layerMap, true);
 
-    //console.log(layer.url);
+    // console.log(layer.url);
     this.updateLayerToMap(layerMap);
   }
 
@@ -189,25 +189,25 @@ export class WmsSearchComponent implements OnInit {
 
   private mappingCapabilities(jsonCapabilities: any) {
 
-    let json=jsonCapabilities.WMS_Capabilities;
+    const json = jsonCapabilities.WMS_Capabilities;
 
     // find the registered data source name to these layers
-    let datasourceName:string='';
+    let datasourceName = '';
     this.sources.some((value: Datasource) => {
-      if(value.host===this.selectedValue){
-        datasourceName=value.name;
+      if (value.host === this.selectedValue) {
+        datasourceName = value.name;
         return true;
       }
     });
 
     this.wmsServerCapabilities = new WmsServerCapabilities(json, datasourceName);
-    
-    let layers = new Array();
-    let serverMapUrl = this.wmsServerCapabilities.request.getmap.href_get;
+
+    const layers = new Array();
+    const serverMapUrl = this.wmsServerCapabilities.request.getmap.href_get;
 
     this.wmsServerCapabilities.layers.layers.forEach(
       function(l) {
-        let lv = new Layer2View();
+        const lv = new Layer2View();
         lv.name = l.name;
         lv.title = l.title;
         lv.metadata = l.metadataURL.href_get;
@@ -222,27 +222,27 @@ export class WmsSearchComponent implements OnInit {
 
   private xmlToJson(xml: string) {
     try {
-      let wmsContext = new this.jsonix.Context([
-          w3cSchemas["XLink_1_0"],
-          ogcSchemas["OWS_1_0_0"],
-          ogcSchemas["SLD_1_1_0"],
-          ogcSchemas["SE_1_1_0"],
-          ogcSchemas["Filter_1_1_0"],
-          ogcSchemas["GML_3_1_1"],
-          ogcSchemas["SMIL_2_0_Language"],
-          ogcSchemas["SMIL_2_0"],
-          ogcSchemas["WMS_1_3_0"]
+      const wmsContext = new this.jsonix.Context([
+          w3cSchemas.XLink_1_0,
+          ogcSchemas.OWS_1_0_0,
+          ogcSchemas.SLD_1_1_0,
+          ogcSchemas.SE_1_1_0,
+          ogcSchemas.Filter_1_1_0,
+          ogcSchemas.GML_3_1_1,
+          ogcSchemas.SMIL_2_0_Language,
+          ogcSchemas.SMIL_2_0,
+          ogcSchemas.WMS_1_3_0
         ],
         {
             namespacePrefixes : {
-                "http://www.opengis.net/wms" : "",
-                "http://www.w3.org/1999/xlink" : "xlink"
+                'http://www.opengis.net/wms' : '',
+                'http://www.w3.org/1999/xlink' : 'xlink'
             },
-            mappingStyle : "simplified"
+            mappingStyle : 'simplified'
         });
 
       // Create an unmarshaller (parser)
-      let unmarshaller = wmsContext.createUnmarshaller();
+      const unmarshaller = wmsContext.createUnmarshaller();
 
       // Unmarshal from URL
       this.capabilities = unmarshaller.unmarshalString(xml);
@@ -252,7 +252,7 @@ export class WmsSearchComponent implements OnInit {
     } catch (error) {
       this.progressBarMode = 'determinate';
       this.progressBarValue = '0';
-      this.capabilitiesFailure = 'Failure on parse the server response. '+error;
+      this.capabilitiesFailure = 'Failure on parse the server response. ' + error;
     }
   }
 
@@ -261,7 +261,7 @@ export class WmsSearchComponent implements OnInit {
   }
 
   // @HostListener('updateLayerToMap') // FIXME: fazer testes funcionais, não sei se isso vai funcionar (@pauloluan)
-  updateLayerToMap(layer:any) {
+  updateLayerToMap(layer: any) {
     this.mapWmsSearchDialogService.updateMapLayerFromWmsSearch(layer);
   }
 }

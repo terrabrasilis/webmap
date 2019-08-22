@@ -2,8 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { User } from "../entity/user";
-import { UserProviderService } from "../services/user-provider.service";
+import { User } from '../entity/user';
+import { UserProviderService } from '../services/user-provider.service';
 
 @Component({
   selector: 'app-user',
@@ -19,7 +19,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  
+
   /**
    * Set the paginator after the view init since this component will
    * be able to query its view for the initialized paginator.
@@ -44,11 +44,11 @@ export class UserComponent implements OnInit, AfterViewInit {
       data => {
         this.dataSource.data = data;
       }
-    )
+    );
   }
 
-  goHome(){
-    this.router.navigate([""]);
+  goHome() {
+    this.router.navigate(['']);
   }
 
 }

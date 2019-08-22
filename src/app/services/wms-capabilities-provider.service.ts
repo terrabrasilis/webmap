@@ -20,11 +20,11 @@ export class WmsCapabilitiesProviderService {
   getCapabilities(base_url: string) {
     let url = base_url + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0';
     url = this.proxy + encodeURIComponent(url);
-    
-    //console.log(url);
 
-    return this.http.get(url, { 
-      observe: "response",
+    // console.log(url);
+
+    return this.http.get(url, {
+      observe: 'response',
       responseType: 'text'
      }).pipe(
         map(response => response),
@@ -38,10 +38,10 @@ export class WmsCapabilitiesProviderService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> () {
+  private handleError<T>() {
     return (error: any): Observable<any> => {
       // Let the app keep running by returning an empty result.
-      //return of(result as T);
+      // return of(result as T);
       return of(error as any);
     };
   }

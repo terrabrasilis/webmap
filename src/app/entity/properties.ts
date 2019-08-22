@@ -1,3 +1,3 @@
 export class Properties {
-    name:string;
+    name: string;
 }

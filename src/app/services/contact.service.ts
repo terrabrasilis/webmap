@@ -4,7 +4,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Contact } from "../entity/contact";
+import { Contact } from '../entity/contact';
 import { Constants } from '../util/constants';
 
 const httpOptions = {
@@ -18,21 +18,21 @@ export class ContactService {
 
   saveContact(contact: Contact): Observable<Contact> {
     console.log(JSON.stringify(contact));
-    return this.http.post(Constants.TERRABRASILIS_API_HOST + "contact", JSON.stringify(contact), httpOptions)
+    return this.http.post(Constants.TERRABRASILIS_API_HOST + 'contact', JSON.stringify(contact), httpOptions)
       .pipe(
         map(this.extractData),
         catchError(this.handleErrorObservable)
-      )
+      );
   }
 
   private extractData(res: Response): any {
-    let body = res.json();
+    const body = res.json();
     return body || {};
   }
-  
-  private handleErrorObservable (error: Response | any): any {
+
+  private handleErrorObservable(error: Response | any): any {
     console.error(error.message || error);
     return observableThrowError(error.message || error);
   }
-  
+
 }

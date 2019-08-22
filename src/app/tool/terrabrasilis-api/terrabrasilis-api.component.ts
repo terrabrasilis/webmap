@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 /**
  *  import terrabrasilis api from node_modules
  */
-import * as Terrabrasilis from "terrabrasilis-api";
+import * as Terrabrasilis from 'terrabrasilis-api';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     private Terrabrasilis: any = Terrabrasilis;
 
     constructor(
-        private dialog : MatDialog
+        private dialog: MatDialog
         , private dom: DomSanitizer
         , private cdRef: ChangeDetectorRef
     ) { }
@@ -33,13 +33,13 @@ export class TerrabrasilisApiComponent implements OnInit {
     ////////////////////////////////////////////////
     //// MapBuilder
     ////////////////////////////////////////////////
-    public map(points: any, baselayers: any, overlayers:any ): void  {
-        Terrabrasilis.map(points.longitude, points.latitude) 
+    public map(points: any, baselayers: any, overlayers: any ): void  {
+        Terrabrasilis.map(points.longitude, points.latitude)
             .addCustomizedBaseLayers(JSON.parse(JSON.stringify(baselayers)))
             .addCustomizedOverLayers(JSON.parse(JSON.stringify(overlayers)))
-            //.addBaseLayers(JSON.parse(JSON.stringify(this.baselayers)))
-            //.addOverLayers(JSON.parse(JSON.stringify(this.overlayers)))
-            //.enableLegendAndToolToLayers()
+            // .addBaseLayers(JSON.parse(JSON.stringify(this.baselayers)))
+            // .addOverLayers(JSON.parse(JSON.stringify(this.overlayers)))
+            // .enableLegendAndToolToLayers()
             .enableDrawFeatureTool()
             .enableLayersControlTool()
             .enableScaleControlTool()
@@ -52,7 +52,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     ////////////////////////////////////////////////
     //// Layers interactions
     ////////////////////////////////////////////////
-    layerOpacity(layerObject:any, event:any) {      
+    layerOpacity(layerObject: any, event: any) {
         this.Terrabrasilis.setOpacityToLayer(layerObject, (event.value));
     }
 
@@ -64,7 +64,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     }
 
     drawSimpleShape() {
-        this.showDialog("Terrabrasilis web application.");
+        this.showDialog('Terrabrasilis web application.');
     }
 
     resetMap() {
@@ -79,68 +79,68 @@ export class TerrabrasilisApiComponent implements OnInit {
         Terrabrasilis.redo();
     }
 
-    getFeatureInfo(event:any) {        
+    getFeatureInfo(event: any) {
         Terrabrasilis.addGetLayerFeatureInfoEventToMap(event);
     }
 
-    showCoordinates(event:any) {
+    showCoordinates(event: any) {
         Terrabrasilis.addShowCoordinatesEventToMap(event);
     }
 
     ////////////////////////////////////////////////
     //// Components
     ////////////////////////////////////////////////
-    download(layer: Layer) {       
-        let download = "";
-        layer.downloads.forEach((d:any) => {
-            download += "<div><h5 class=\"card-title\">Obter shapefile para " + layer.title + ".</h5>" +
-            "            <p class=\"card-text\">" + d.name + ": " + d.description + "</p>" +
-            "            <a href=\"" + d.link + "\" class=\"btn btn-primary btn-success\">Download</a><div>";
+    download(layer: Layer) {
+        let download = '';
+        layer.downloads.forEach((d: any) => {
+            download += '<div><h5 class="card-title">Obter shapefile para ' + layer.title + '.</h5>' +
+            '            <p class="card-text">' + d.name + ': ' + d.description + '</p>' +
+            '            <a href="' + d.link + '" class="btn btn-primary btn-success">Download</a><div>';
         });
-        
-        let html =         
-        "<div class=\"container\">" +
-        "    <div class=\"card\">" +
-        "        <div class=\"card-body\">" + download +   
-        "        </div>" +
-        "    </div>" +
-        "</div>";
+
+        const html =
+        '<div class="container">' +
+        '    <div class="card">' +
+        '        <div class="card-body">' + download +
+        '        </div>' +
+        '    </div>' +
+        '</div>';
         this.showDialog(html);
     }
 
-    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {        
-        let host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
-        let indexof = host.indexOf("?");
-        
-        let url = indexof < 0 ? host + "?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=" + layer.workspace + ":" + layer.name + "&service=WMS" 
-                            : host + "request=GetLegendGraphic&format=image/png&width=20&height=20&layer=" + layer.workspace + ":" + layer.name  + "&service=WMS"; 
-        
-        return   urlOrCompleteSrcImgElement == true ? "<img src='" + url + "' />" : url;
+    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
+        const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
+        const indexof = host.indexOf('?');
+
+        const url = indexof < 0 ? host + '?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
+                            : host + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name  + '&service=WMS';
+
+        return   urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url;
     }
 
-    getBasicLayerInfo(layerObject:any) {
+    getBasicLayerInfo(layerObject: any) {
         this.cdRef.detectChanges();
 
         console.log(layerObject);
-        
-        let match = /gwc\/service\/wms/;
 
-        let source = layerObject.datasource != null ?
-            (match.test(layerObject.datasource.host) == true ? 
-                layerObject.datasource.host.replace("gwc/service/wms", "ows") : layerObject.datasource.host) :
-            layerObject.thirdHost
+        const match = /gwc\/service\/wms/;
 
-        let layerBasicInfo = {
+        const source = layerObject.datasource != null ?
+            (match.test(layerObject.datasource.host) == true ?
+                layerObject.datasource.host.replace('gwc/service/wms', 'ows') : layerObject.datasource.host) :
+            layerObject.thirdHost;
+
+        const layerBasicInfo = {
             title: layerObject.title,
             layer: layerObject.name,
             workspace: layerObject.workspace,
-            source: source
-        }
+            source
+        };
 
-        let infoTable = "<table class=\"table-responsive table \"><tr class=\"table-active\"><th colspan=\"3\">" + layerBasicInfo.title + "</th></tr>" 
-                        + " <tr> <td><b>Layer</b></td><td colspan=\"2\">" + layerBasicInfo.layer + "</td></tr>"
-                        + "<tr><td><b>Workspace</b></td><td colspan=\"2\">" + layerBasicInfo.workspace + "</td></tr>"
-                        + "<tr><td><b>Source</b></td><td colspan=\"2\">" + layerBasicInfo.source + "</td></tr></table>";
+        const infoTable = '<table class="table-responsive table "><tr class="table-active"><th colspan="3">' + layerBasicInfo.title + '</th></tr>'
+                        + ' <tr> <td><b>Layer</b></td><td colspan="2">' + layerBasicInfo.layer + '</td></tr>'
+                        + '<tr><td><b>Workspace</b></td><td colspan="2">' + layerBasicInfo.workspace + '</td></tr>'
+                        + '<tr><td><b>Source</b></td><td colspan="2">' + layerBasicInfo.source + '</td></tr></table>';
 
         this.showDialog(infoTable);
     }
@@ -148,11 +148,11 @@ export class TerrabrasilisApiComponent implements OnInit {
     ////////////////////////////////////////////////
     //// General tools
     ////////////////////////////////////////////////
-    enableLoading(dom?:string): void {
+    enableLoading(dom?: string): void {
         Terrabrasilis.enableLoading(dom);
     }
 
-    disableLoading(dom?:string): void {
+    disableLoading(dom?: string): void {
         Terrabrasilis.disableLoading(dom);
     }
 
@@ -164,22 +164,22 @@ export class TerrabrasilisApiComponent implements OnInit {
         return Terrabrasilis.getTerrabrasilisBaselayers();
     }
 
-    deactiveLayer(layer:any):void {
+    deactiveLayer(layer: any): void {
         Terrabrasilis.deactiveLayer(layer);
     }
-    
+
     activeLayer(layer: any): void {
         Terrabrasilis.activeLayer(layer);
     }
 
-    isLayerActived(layer:any): boolean {
+    isLayerActived(layer: any): boolean {
         return Terrabrasilis.isLayerActived(layer);
     }
 
-    getLayerByName(layerName:string): any {
-        return Terrabrasilis.getLayerByName(layerName);        
+    getLayerByName(layerName: string): any {
+        return Terrabrasilis.getLayerByName(layerName);
     }
-    
+
     addGetLayerFeatureInfoEventToMap(event: any): void {
         Terrabrasilis.addGetLayerFeatureInfoEventToMap(event);
     }
@@ -188,19 +188,19 @@ export class TerrabrasilisApiComponent implements OnInit {
         Terrabrasilis.addShowCoordinatesEventToMap(event);
     }
 
-    moveLayerToBack(layer:any): void {
+    moveLayerToBack(layer: any): void {
         Terrabrasilis.moveLayerToBack(layer);
     }
-    
-    moveLayerToFront(layer:any) {
+
+    moveLayerToFront(layer: any) {
         Terrabrasilis.moveLayerToFront(layer);
     }
-    
+
     ////////////////////////////////////////////////
     //// General use dialog
     ////////////////////////////////////////////////
-    showDialog(content: string) : void {
-        let dialogRef = this.dialog.open(DialogComponent, { width : '450px' });
+    showDialog(content: string): void {
+        const dialogRef = this.dialog.open(DialogComponent, { width : '450px' });
         dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(content);
     }
 
@@ -215,5 +215,5 @@ export class TerrabrasilisApiComponent implements OnInit {
 
     ////////////////////////////////////////////////
     //// Private methods
-    ////////////////////////////////////////////////    
+    ////////////////////////////////////////////////
 }

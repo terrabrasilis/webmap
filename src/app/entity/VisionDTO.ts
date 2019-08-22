@@ -1,4 +1,4 @@
-import { Vision } from "./vision";
+import { Vision } from './vision';
 
 export class VisionDTO {
     public id: string;
@@ -6,7 +6,7 @@ export class VisionDTO {
     public visions: Vision[];
 
     constructor(
-        id:string,
+        id: string,
         root: Vision,
         visions: Vision[]
     ) {
