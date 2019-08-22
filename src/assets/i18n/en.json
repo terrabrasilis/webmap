@@ -12,8 +12,8 @@
     "menu" : {
         "analyses": {
             "name": "Analyses",
-            "option1" : "Deforestation",
-            "option2" : "Alerts",
+            "option1" : "PRODES (Deforestation)",
+            "option2" : "DETER (Alerts)",
             "option3" : "Land User and Land Cover",
             "option4" : "Amazon Desforestation",
             "option5" : "Amazon Alerts"
@@ -22,7 +22,13 @@
         "about": "About",
         "contact": "Contact",
         "help": "Help",
-        "login": "Login"
+        "login": "Login",
+        "map": {
+            "name": "Maps",
+            "option1" : "PRODES (Deforestation)",
+            "option2" : "DETER (Alerts)"
+
+        }
     },
     "layerControl" : {
         "control1" : "Baselayers",
@@ -133,42 +139,47 @@
             "deforestation": "Deforestation"
         },
         "download": {
-            "munBystate": "Municipalities by State"
+            "munBystate": "Municipalities by State",
+            "observation": "(Option only for increments)"
         },
         "graph": {
-            "absoluteData": "Absolute Data",
-            "aggregateSpatial": "Aggregated Spatial Data",
-            "aggregateTemporal": "Aggregated Temporal Data",
-            "timeSeries": "Time series",
+            "amazon": "Amazon Biome",
+            "absoluteData": "Accumulated deforestation until {{maxDate}}",
+            "aggregateSpatial": "Accumlated deforestation map until {{maxDate}}",
+            "aggregateTemporalIncrements": "Deforestation increments",
+            "aggregateTemporalRates": "Deforestation rates",
+            "cerrado": "Cerrado Biome",
+            "label": {
+                "monitoring": "Monitoring Period : {{minDate}} - {{maxDate}}",
+                "area": "Areas (km²)",
+                "taxa": "Rates (km²)",
+                "regularArea": "Regular Area",
+                "filteredArea": "Less than 6.25ha"
+            },
+            "legal_amazon": "Legal Amazon", 
+            "timeSeriesIncrements": "Deforestation increments",
+            "timeSeriesRates": "Deforestation rates",
             "tableLois": {
-                "title": "Area per years and Lois",
+                "title": "Accumulated deforestation per year until {{maxDate}}",
                 "year": "Year",
                 "regular": "Regular area (km²)",
                 "less": "Area (km²) less than 6.25ha",
                 "total": "Total area (km²)"
-            },
-            "label": {
-                "monitoring": "Monitoring Period : {{minDate}} - {{maxDate}}",
-                "area": "Deforestation increments area (km²/year)",
-                "taxa": "Deforestation rate (km²/year)",
-                "regularArea": "Regular Area",
-                "filteredArea": "Less than 6.25ha"
             }
         },
         "loi": {
-            "UF": "States",
-            "MUN": "Municipalities",
-            "ConsUnit": "Conservation Units",
-            "Indi": "Indigeneous Areas",
-            "Pathrow": "Path Row"
+            "uf": "States",
+            "mun": "Municipalities",
+            "consunit": "Conservation Units",
+            "indi": "Indigeneous Areas"
         },
         "openOptions": {
             "tools": "Tools",
-            "increProdes": "Chart - Deforestation Increments",
+            "increProdes": "Deforestation Increments",
             "increLegalAmazon": "Legal Amazon",
             "increAmazon": "Amazon",
             "increCerrado": "Cerrado",
-            "ratesProdes": "Chart - Deforestation Rates",
+            "ratesProdes": "Deforestation Rates",
             "alertsDeter": "Chart - Alerts",
             "dailyCerradoDeter": "Cerrado Daily Alerts",
             "monthlyCerradoDeter": "Cerrado Monthly Alerts",            
@@ -201,11 +212,17 @@
         },
         "title": {
             "analysis": "Analyses - ",
-            "increments": "Deforestation",
-            "rates": "Deforestation",
+            "increments": "PRODES (Deforestation)",
+            "rates": "PRODES (Deforestation)",
             "legal_amazon": "Legal Amazon",
             "amazon": "Amazon",
-            "cerrado": "Cerrado"
-        }        
+            "cerrado": "Cerrado",
+            "update": "Last Update: 07 - 29 - 2019"
+        },
+        "tooltip": {
+            "rates": "Deforestation rates are calculated based on deforestation areas greater than 6.25 hectares",
+            "incr": "Deforestation increments are calculated based on all deforestation data available",
+            "download": "This download option is only available for deforestation increments"
+        }
     }
 }

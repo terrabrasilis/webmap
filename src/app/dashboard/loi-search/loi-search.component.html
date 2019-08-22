@@ -1,11 +1,9 @@
-<!-- <a href="#modal-container-filtered" role="button" data-toggle="modal" class="search-mun boxsearch">
-  <span aria-hidden="true" title="Procurar um município."><i class="material-icons" style="color:gray">pageview</i></span>
-</a> -->
-
-<a class="btn btnicones ripple" (click)="updateLoi()" id="search_lois" href="#modal-container-filtered" role="button" data-toggle="modal">
-  <i class="fa fa-search fa-2x"></i>
-  <small>{{ 'dashboard.options.searchloi' | translate }}</small>
-</a>
+<li class="nav-item">
+  <a class="nav-link" (click)="updateLoi()" id="search_lois" href="#modal-container-filtered" role="button" data-toggle="modal">
+    <i class="fa fa-search"></i>
+    {{ 'dashboard.options.searchloi' | translate }}
+  </a>
+</li>  
 
 <div class="modal fade" id="modal-container-filtered">
   <div class="modal-dialog">
@@ -33,9 +31,9 @@
           <div class="modal-footer">
               <div class="checkbox pull-right">
                   <label>
-                      <button type="button" class="btn btngreen" data-dismiss="modal">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
                       <span>{{ 'dashboard.search.close' | translate }}</span>
-                  </button>
+                    </button>
                   </label>
               </div>
           </div>

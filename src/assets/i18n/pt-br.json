@@ -12,8 +12,8 @@
     "menu" : {
         "analyses": {
             "name": "Análises",
-            "option1" : "Desmatamento",
-            "option2" : "Alertas",
+            "option1" : "PRODES (Desmatamento)",
+            "option2" : "DETER (Alertas)",
             "option3" : "Uso e cobertura da terra",
             "option4" : "Desmatamento Amazônia",
             "option5" : "Alertas Amazônia"
@@ -21,7 +21,13 @@
         "about": "Sobre",
         "contact": "Contato",
         "help": "Ajuda",
-        "login": "Acesso"
+        "login": "Acesso",
+        "map": {
+            "name": "Mapas",
+            "option1" : "PRODES (Desmatamento)",
+            "option2" : "DETER (Alertas)"
+
+        }
     },
     "layerControl" : {
         "control1" : "Baselayers",
@@ -132,42 +138,47 @@
             "deforestation": "Desmatamento"
         },
         "download": {
-            "munBystate": "Municípios por Estado"
+            "munBystate": "Municípios por Estado",
+            "observation": "(Opcao apenas para incrementos)"
         },
         "graph": {
-            "absoluteData": "Dados Absolutos",
-            "aggregateSpatial": "Dados Espaciais Agregados",
-            "aggregateTemporal": "Dados Temporais Agregados",
-            "timeSeries": "Séries Temporais",
+            "amazon": "Amazônia",
+            "absoluteData": "Desmatamento acumulado até {{maxDate}}",
+            "aggregateSpatial": "Mapa do desmatamento acumulado até {{maxDate}}",
+            "aggregateTemporalIncrements": "Incrementos de desmatamento",
+            "aggregateTemporalRates": "Taxas de desmatamento",
+            "cerrado": "Cerrado",
+            "label": {
+                "monitoring": "Período de monitoramento : {{minDate}} - {{maxDate}}",
+                "area": "Áreas (km²)",
+                "taxa": "Taxas (km²)",
+                "regularArea": "Área Regular",
+                "filteredArea": "Menor que 6ha"
+            },
+            "legal_amazon": "Amazônia Legal",
+            "timeSeriesIncrements": "Incrementos de desmatamento",
+            "timeSeriesRates": "Taxas de desmatamento",
             "tableLois": {
-                "title": "Área por Anos e Locais de Interesse",
+                "title": "Desmatamento acumulado por Ano até {{maxDate}}",
                 "year": "Ano",
                 "regular": "Área Regular (km²)",
                 "less": "Área (km²) menor que 6.25ha",
                 "total": "Área total"
-            },
-            "label": {
-                "monitoring": "Período de monitoramento : {{minDate}} - {{maxDate}}",
-                "area": "Área de Incrementos de Desmatamento (km²/ano)",
-                "taxa": "Taxa de Desmatamento (km²/ano)",
-                "regularArea": "Área Regular",
-                "filteredArea": "Menor que 6ha"
             }
         },
         "loi": {
-            "UF": "Estados",
-            "MUN": "Municípios",
-            "ConsUnit": "Unidades de Conservação",
-            "Indi": "Áreas Indígenas",
-            "Pathrow": "Órbita Ponto"
+            "uf": "Estados",
+            "mun": "Municípios",
+            "consunit": "Unidades de Conservação",
+            "indi": "Áreas Indígenas"
         },
         "openOptions": {
             "tools": "Ferramentas",
-            "increProdes": "Gráficos - Incrementos do Desmatamento",
+            "increProdes": "Incrementos do Desmatamento",
             "increLegalAmazon": "Amazônia Legal",
             "increAmazon": "Amazônia",
             "increCerrado": "Cerrado",
-            "ratesProdes": "Gráficos - Taxas de Desmatamento",
+            "ratesProdes": "Taxas de Desmatamento",
             "alertsDeter": "Gráficos - Alertas",
             "dailyCerradoDeter": "Alertas Diários do Cerrado",
             "monthlyCerradoDeter": "Alertas Mensais Agregados do Cerrado",
@@ -207,11 +218,17 @@
         },
         "title": {
             "analysis": "Análise - ",
-            "increments": "Desmatamento",
-            "rates": "Desmatamento",
+            "increments": "PRODES (Desmatamento)",
+            "rates": "PRODES (Desmatamento)",
             "legal_amazon": "Amazônia Legal",
             "amazon": "Amazônia",
-            "cerrado": "Cerrado"
-        }   
+            "cerrado": "Cerrado",
+            "update": "Última Atualização: 29 - 07 - 2019"
+        },
+        "tooltip": {
+            "rates": "As taxas de desmatamento são calculadas baseadas nas áreas de desmatamento maiores que 6.25 hectares",
+            "incr": "Os incrementos de desmatamento são calculados baseados em todas as áreas de desmatamento disponíveis",
+            "download": "Esta opção de download está disponível somente para os incrementos de desmatamento"
+        } 
     }
 }
