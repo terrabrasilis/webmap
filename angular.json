@@ -42,7 +42,8 @@
               "src/assets/css/map/rangeslider.css",
               "src/assets/css/jquery-ui/jquery.loading.css",
               "src/assets/css/jquery-scrolling/jquery.scrolling-tabs.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": []
           },

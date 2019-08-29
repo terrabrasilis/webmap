@@ -1,8 +1,10 @@
-/*
+/* 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
-@import '~@angular/material/prebuilt-themes/purple-green.css';
+@import '~@angular/material/prebuilt-themes/purple-green.css'; 
 */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
     margin: 0;
@@ -40,7 +42,7 @@ mat-toolbar-row {
 }
 
 .mat-dialog-container {
-    border-radius: 10px !important;
+    border-radius: 10px !important; 
 }
 
 #map {
@@ -49,8 +51,8 @@ mat-toolbar-row {
     height: calc(100% - 109px);
     width: calc(100% - 290px);
     /* outline: none;  */
-    margin: 0;
-    margin-left: 290px;
+    margin: 0;  
+    margin-left: 290px;  
     z-index: -1;
 }
 
@@ -63,6 +65,22 @@ mat-toolbar-row {
     margin: 0px;
     top: 0px;
 }
+
+/* from alias defined in webpack.common.js */
+@import '~leaflet/dist/leaflet.css';
+@import '~terrabrasilis-timedimension/leaflet.timedimension.control.min.css';
+@import '~terrabrasilis-map-plugins/dist/terrabrasilis-leaflet-plugins.min.css';
+/* from alias to import static style files */
+@import '~assets/css/dc/dc.css';
+@import '~assets/css/gridstack/gridstack.css';
+@import '~assets/css/gridstack/gridstack-extra.css';
+@import '~assets/css/about/about.css';
+@import '~assets/css/map/baselayer.css';
+@import '~assets/css/map/estilo.css';
+@import '~assets/css/map/jquery.mCustomScrollbar.min.css';
+@import '~assets/css/map/rangeslider.css';
+@import '~assets/css/jquery-ui/jquery.loading.css';
+@import '~assets/css/jquery-scrolling/jquery.scrolling-tabs.min.css';
 
 @font-face {
     font-family: 'icon';
@@ -91,8 +109,8 @@ mat-toolbar-row {
 .leaflet-html-legend {
     margin-bottom: 20% !important;
 }
-.leaflet-popup-content {
-    max-height : 350px; overflow : auto;
+.leaflet-popup-content { 
+    max-height : 350px; overflow : auto; 
 }
 
 .cursor-feature-info {
