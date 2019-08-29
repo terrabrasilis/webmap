@@ -61,7 +61,6 @@ import { GraphProviderService } from './services/graph-provider.service';
 import { DashboardLoiSearchService } from './services/dashboard-loi-search.service';
 
 // deforestation
-import { DeforestationBiomesComponent } from './dashboard/deforestation/deforestation-biomes.component';
 import { DeforestationOptionsComponent } from './dashboard/deforestation/deforestation-options/deforestation-options.component';
 import { LoiSearchComponent } from './dashboard/loi-search/loi-search.component';
 
@@ -94,7 +93,6 @@ import * as gridstack from 'gridstack';
     UserComponent,
     DialogComponent,
     WmsSearchComponent,
-    DeforestationBiomesComponent,
     DeforestationOptionsComponent,
     ContactComponent,
     AboutComponent,

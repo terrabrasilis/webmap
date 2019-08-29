@@ -21,6 +21,10 @@
   margin-top: 0.5%;
 }
 
+.dropdown-menu {
+  min-width: 18rem;
+}
+
 .mat-slider {
   width: 100%;
 }

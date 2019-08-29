@@ -1,13 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, 
+          OnInit } from '@angular/core';
 
-import {  HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {  HttpClient, 
+          HttpHeaders, 
+          HttpParams } from '@angular/common/http';
 
-import {  SubscriptionLike as ISubscription ,   Observable  ,   forkJoin  } from "rxjs";
+import {  ISubscription } from "rxjs/Subscription";
+
+import {  Observable  } from 'rxjs/Observable';
+
+import {  forkJoin  } from "rxjs/observable/forkJoin";
 
 import { DashboardApiProviderService } from '../../services/dashboard-api-provider.service';
+
 import { DeforestationOptionsUtils } from '../../util/deforestation-options-utils';
+
 import { Constants } from '../../util/constants';
-import { ActivatedRoute, Router } from '@angular/router';
+
+import {  ActivatedRoute, 
+          Router } from '@angular/router';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -28,14 +39,13 @@ export class OnDemandDownloadComponent implements OnInit {
   dataObservable: Observable<any>;
   loiNamesObservable: Observable<any>;
   value: string;
-
   private biomeSubscription: ISubscription;
   private typeSubscription: ISubscription;
   public httpOptions: any;
   
   private dataJson: any;
   private loiNamesJson: any;
-  public biome: any;
+  private biome: any;
   private DB_NoContain:any;
 
   constructor(private route: ActivatedRoute,    
@@ -46,8 +56,9 @@ export class OnDemandDownloadComponent implements OnInit {
 
     this.biomeSubscription = this.route.params.subscribe(params => this.biome = params["biome"].replace("-", " "));
     this.typeSubscription = this.route.params.subscribe(params => this.type = params["type"].replace("-", " "));
-    
+
     this.DB_NoContain = true;
+    
     if (this.biome == "cerrado")
       this.states = Constants.DASHBOARD_CERRADO_STATES;
     else
@@ -105,7 +116,7 @@ export class OnDemandDownloadComponent implements OnInit {
 
     var allFeatures:any[];
     if (this.type == "increments")
-      allFeatures = DeforestationOptionsUtils.dataWranglingIncrements(this.dataJson);
+      allFeatures = DeforestationOptionsUtils.dataWranglingIncrements(this.dataJson, this.biome);
     else
       allFeatures = DeforestationOptionsUtils.dataWranglingRates(this.dataJson);
     

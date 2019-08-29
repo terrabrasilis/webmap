@@ -12,11 +12,20 @@
         <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
             <ul class="navbar-nav navbar-right analises">
             <li class="nav-item dropdown"> 
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons iconmobile">assignment </i> {{ 'menu.map.name' | translate }}                     
+                </a>
+                <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="javascript:return false;"><i class="material-icons iconmenu">nature</i>{{ 'menu.map.option1' | translate }}</a>
+                    <a class="dropdown-item" href="{{ imgPath }}dashboard/alerts/biomes/cerrado/daily/" target="_blank"><i class="material-icons iconmenu">warning</i>{{ 'menu.map.option2' | translate }}</a> 
+                </div>
+            </li>
+            <li class="nav-item dropdown"> 
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
                     <i class="material-icons iconmobile">assignment </i> {{ 'menu.analyses.name' | translate }} 
                 </a>
                 <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink"> 
-                    <a class="dropdown-item" target="_blank" routerLink="/dashboard/deforestation/biomes/amazon/increments"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
+                    <a class="dropdown-item" target="_blank" routerLink="/dashboard/deforestation/biomes/legal_amazon/rates"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
                     <a class="dropdown-item" target="_blank" href="http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/legal/amazon/daily"><i class="material-icons iconmenu">warning</i>{{ 'menu.analyses.option2' | translate }}</a> 
                 </div>
             </li>
@@ -161,7 +170,7 @@
                   value="{{layer.active}}" 
                   checked="{{ (layer.active) ? 'checked' : null }}"
                   (change)="layerBaseLayerChange(layer)">
-                <label for="{{layer.title}}"><span></span></label> 				
+                <label for="{{layer.title}}"><span></span></label>              
                 <span class="text">{{layer.title}}<br *ngIf="layer.description" />
                     <div *ngIf="layer.description" style="font-size: small;">{{layer.description}}</div>
                 </span>
