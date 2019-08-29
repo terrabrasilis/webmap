@@ -79,6 +79,35 @@
                   "maximumError": "100kb"
                 }
               ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false, // FIXME: se true a aplicação quebra...
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false, // FIXME: se true a aplicação quebra...
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "15mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "30kb",
+                  "maximumError": "100kb"
+                }
+              ]
             }
           }
         },
@@ -90,6 +119,9 @@
           "configurations": {
             "production": {
               "browserTarget": "terrabrasilis:build:production"
+            },
+            "staging": {
+              "browserTarget": "terrabrasilis:build:staging"
             }
           }
         },
@@ -138,6 +170,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "terrabrasilis:serve:production"
+            },
+            "staging": {
+              "devServerTarget": "terrabrasilis:serve:staging"
             }
           }
         }

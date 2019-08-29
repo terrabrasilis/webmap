@@ -4,16 +4,15 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "ng build --prod",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --open --port 3001",
-    "start-prod": "ng serve --open --prod --port 3001",
-    "start-build-homologation": "yarn build",
-    "start-build-production": "yarn build",
     "test": "ng test",
-
+    "start": "ng serve --open --port 3001",
+    "start-staging": "ng serve --open --configuration=staging --port 3001",
+    "build-staging": "ng build --configuration=staging",
+    "start-production": "ng serve --open --configuration=production --port 3001",
+    "build-production": "ng build --configuration=production",
     "test_headless": "ng test --watch false --browsers ChromeHeadless",
     "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
     "all_tests": "yarn lint && yarn test_headless"
