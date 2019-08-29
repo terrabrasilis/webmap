@@ -13,12 +13,12 @@ ARG ENV
 
 ARG env=$ENV
 
-RUN npm run start-build-$BUILD_TYPE
+RUN npm run build-$BUILD_TYPE
 
 FROM nginx:1.13
 
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=node /app/dist/ /usr/share/nginx/html/
+COPY --from=node /app/dist/terrabrasilis /usr/share/nginx/html/
 
 COPY nginx-custom.conf /etc/nginx/conf.d/default.conf

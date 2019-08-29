@@ -3,7 +3,7 @@
 echo "Help"
 echo "Call with parameters to customize the build: ./build.sh <VERSION> <BUILD_TYPE>"
 echo "VERSION parameter allows (ex.: v1.1 or v1.2-beta among others)"
-echo "BUILD_TYPE parameter allows (ex.: developer or production)"
+echo "BUILD_TYPE parameter allows (ex.: staging or production)"
 echo ""
 
 # get version number to build image
@@ -20,14 +20,14 @@ fi
 echo "Building terrabrasilis/terrabrasilis-webapp:$VERSION"
 echo "...................................................."
 
-# environment to developer or production build
-# to homologation use developer
+# environment to staging or production build
+# to staging use staging
 ENV="production"
 BUILD_TYPE="production"
 
 if [[ ! "$2" = "" ]]; then
     ENV="dev"
-    BUILD_TYPE="homologation"
+    BUILD_TYPE="staging"
 else
     read -p "I will build on production mode by default. May i continue? If yes, type yes or Ctrl+C to exit. " -d'y' -d'e' -d's' RESPONSE; echo
 fi
