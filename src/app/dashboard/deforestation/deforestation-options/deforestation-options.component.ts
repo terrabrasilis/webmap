@@ -75,6 +75,7 @@ export class DeforestationOptionsComponent implements OnInit  {
   area:any;
   filteredArea:any;
   seriesChart:any;
+  legendSize: any;
   tagId:any;
   minDate: any;
   maxDate: any;
@@ -109,6 +110,7 @@ export class DeforestationOptionsComponent implements OnInit  {
 
   // dashboard title
   private loiname: any;
+  private selectedTime: any;
 
   private loiNames: Map<number, string>;
   private loiNamesObject: Array<Object>;
@@ -165,6 +167,7 @@ export class DeforestationOptionsComponent implements OnInit  {
     this.maxLoi = 13;
 
     this.loiname = "*";
+    this.selectedTime = "*";
     
   }
 
@@ -219,40 +222,6 @@ export class DeforestationOptionsComponent implements OnInit  {
   filterByLoi(key:number) {
     this.applyCountyFilter(key);
     dc.redrawAll();
-  }
-
-  updateLegend():void {
-
-    var self = this;
-    $("#barchart-legend").click(function() {
-      if($("#barchart-legend").hasClass('active')) {
-        $("#barchart-legend").removeClass('active');
-        $("#barchart-legend").addClass('deactivate');
-        $(".dc-legend").first().hide();
-      } else {
-        $("#barchart-legend").removeClass('deactivate');
-        $("#barchart-legend").addClass('active');      
-        $(".dc-legend").first().show();
-      }
-    });
-
-    $("#serieschart-legend").click(function() {
-      if($("#serieschart-legend").hasClass('active')) {
-        $("#serieschart-legend").removeClass('active');
-        $("#serieschart-legend").addClass('deactivate');
-        if(self.type == 'rates')
-          $(".dc-legend").hide();
-        else
-          $(".dc-legend:eq(1)").hide();
-      } else {
-        $("#serieschart-legend").removeClass('deactivate');
-        $("#serieschart-legend").addClass('active');      
-        if(self.type == 'rates')
-          $(".dc-legend").show();
-        else
-          $(".dc-legend:eq(1)").show();
-      }
-    });
   }
 
   applyCountyFilter(key:number){
@@ -342,13 +311,13 @@ export class DeforestationOptionsComponent implements OnInit  {
     let allData=this.tableDateDim.top(Infinity);
     let csv:any=[];
     allData.forEach(function(d:any) {
-      csv.push({
-        year:d.endDate,
-        //areaTotal:d.area+d.filteredArea,
-        area:d.area,
-        //filteredArea:d.filteredArea,
-        loi:self.loiNames[d.loiName]
-      });
+      let aux = {
+        time:d.endDate,
+        area:d.area
+        //filteredArea:d.filteredArea,        
+      }      
+      aux[self.selectedLoi] = self.loiNames[d.loiName];
+      csv.push(aux);
     });
     let blob = new Blob([self.csvFormat(csv)], {type: "text/csv;charset=utf-8"}),
     dt = new Date(),
@@ -406,26 +375,12 @@ export class DeforestationOptionsComponent implements OnInit  {
       
       // build main grid
       function buildMainGrid() {
-        if(self.type != 'rates') {
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="aggregateTemporal">Aggregated Temporal Data </span> <i class="material-icons pull-right">open_with</i> <button id="barchart-legend" class="btn btn-primary btn-success btn-sm btn-csv active" ng-click="barChartLegend()">Legend</button></div><div id="bar-chart"></div></div></div>', 0, 0, 7, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="absoluteData"> Absolute Data </span> <i class="material-icons pull-right">open_with</i> </div><div id="row-chart"></div></div></div>', 8, 0, 5, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="timeSeries"> Time Series </span> <i class="material-icons pull-right">open_with</i> <button id="serieschart-legend" class="btn btn-primary btn-success btn-sm btn-csv active" ng-click="seriesChartLegend()">Legend</button> </div><div id="series-chart"></div></div></div>', 0, 7, 7, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="tableLois"> Area per years and Local of Interests </span> <i class="material-icons pull-right">open_with</i><button id="download-csv" class="btn btn-primary btn-success btn-sm btn-csv" ng-click="downloadCSV()">Download CSV</button> </div><div id="table-chart"><table id="tb-area" class="table table-hover dc-data-table dc-chart"></table></div></div></div>', 8, 7, 5, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="aggregateSpatial"> Aggregated Spatial Data </span> <i class="material-icons pull-right">open_with</i> </div><div id="loi-chart"></div></div></div>', 0, 15, 12, 6);
-          $('.grid-stack-item').draggable({cancel: "#bar-chart, #loi-chart, #series-chart, #row-chart, #download-csv, #table-chart" });
-        } else {
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-rates"> <span class="aggregateTemporal">Aggregated Temporal Data </span> <button id="barchart-legend" class="btn btn-primary btn-success btn-sm btn-csv active" ng-click="barChartLegend()">Legend</button></div><div id="bar-chart"></div></div></div>', 0, 0, 12, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-rates"> <span class="timeSeries"> Time Series </span> <button id="serieschart-legend" class="btn btn-primary btn-success btn-sm btn-csv active" ng-click="seriesChartLegend()">Legend</button> </div><div id="series-chart"></div></div></div>', 0, 7, 12, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-rates"> <span class="tableLois"> Area per years and Local of Interests </span> <button id="download-csv" class="btn btn-primary btn-success btn-sm btn-csv" ng-click="downloadCSV()">Download CSV</button> </div><div id="table-chart"><table id="tb-area" class="table table-hover dc-data-table dc-chart"></table></div></div></div>', 0, 14, 12, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-rates"> <span class="absoluteData"> Absolute Data </span> </div><div id="row-chart"></div></div></div>', 0, 20, 12, 6);
-          append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-rates"> <span class="aggregateSpatial"> Aggregated Spatial Data </span> </div><div id="loi-chart"></div></div></div>', 0, 26, 12, 6);
-          $(".grid-stack-item").resizable("disable");
-          $(".grid-stack-item").draggable("disable");
-          $('.aggregateSpatial').closest(".grid-stack-item").hide();
-          $('.absoluteData').closest(".grid-stack-item").hide();
-          $('div#main-grid').removeAttr("style");
-        }
-
+        append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="aggregateTemporal">Aggregated Temporal Data </span> <i class="material-icons pull-right">open_with</i> </div><div id="bar-chart"></div></div></div>', 0, 0, 7, 6);
+        append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="absoluteData"> Absolute Data </span> <i class="material-icons pull-right">open_with</i> </div><div id="row-chart"></div></div></div>', 8, 0, 5, 6);
+        append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="timeSeries"> Time Series </span> <i class="material-icons pull-right">open_with</i> </div><div id="series-chart"></div></div></div>', 0, 7, 12, 6);
+        append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="tableLois"> Area per years and Local of Interests </span> <i class="material-icons pull-right">open_with</i><button id="download-csv" class="btn btn-primary btn-success btn-sm btn-csv" ng-click="downloadCSV()">Download CSV</button> </div><div id="table-chart"><table id="tb-area" class="table table-hover dc-data-table dc-chart"></table></div></div></div>', 8, 15, 5, 6);
+        append2Grid(mainGrid, '<div class="grid-stack-item"><div class="grid-stack-item-content"><div class="custom-drag-incr"> <span class="aggregateSpatial"> Aggregated Spatial Data </span> <i class="material-icons pull-right">open_with</i> </div><div id="loi-chart"></div></div></div>', 0, 15, 7, 6);
+        $('.grid-stack-item').draggable({cancel: "#bar-chart, #loi-chart, #series-chart, #row-chart, #download-csv, #table-chart" });
       }
             
       buildMainGrid();
@@ -456,8 +411,6 @@ export class DeforestationOptionsComponent implements OnInit  {
         $("#download-csv").click(function() {
           self.downloadCSV();
         });
-
-        self.updateLegend();
       }
       
       // add on click handle loadGrid call for restore view button 
@@ -837,7 +790,7 @@ export class DeforestationOptionsComponent implements OnInit  {
           + a;
         }
       )
-      .addFilterHandler(function(filters:any, filter:any) {
+      /*.addFilterHandler(function(filters:any, filter:any) {
         filters.push(filter);
         if(!self.filteredArea.hasFilter() || self.filteredArea.filters().indexOf(filter)<0){
           self.filteredArea.filter(filter);
@@ -852,7 +805,7 @@ export class DeforestationOptionsComponent implements OnInit  {
           self.filteredArea.filter(f);
         });
         return filters;
-      });      
+      }); */
 
     this.filteredArea
       .clipPadding(0)
@@ -894,7 +847,9 @@ export class DeforestationOptionsComponent implements OnInit  {
     var barChartWidth = $('#bar-chart')[0].offsetWidth;
     var barChartHeight = $('#bar-chart')[0].offsetHeight;
     
-    this.barChart.width(barChartWidth)
+    var barLegend = Constants.DASHBOARD_LEGEND_WIDTH_BAR_CHART;
+
+    this.barChart.width(barChartWidth-barLegend)
             .height(barChartHeight)
             .shareTitle(false)
             .transitionDuration(transition)
@@ -913,14 +868,16 @@ export class DeforestationOptionsComponent implements OnInit  {
             .renderHorizontalGridLines(true)
             .renderVerticalGridLines(true)
             ._rangeBandPadding(0.2)
-            .compose([this.area, this.filteredArea])
+            .compose([this.area])
             .on("pretransition", (chart:any) => {
               Terrabrasilis.enableLoading("#bar-chart");
               var bars = chart.selectAll("rect.bar");
-              if (self.area.hasFilter() || self.filteredArea.hasFilter()) {
+              //if (self.area.hasFilter() || self.filteredArea.hasFilter()) {
+                if (self.area.hasFilter()) {
                 bars.classed(dc.constants.DESELECTED_CLASS, true);
                 bars._groups[0].forEach( (bar:any) => {
-                  if(self.area.filters().indexOf(bar.__data__.x) >= 0 || self.filteredArea.filters().indexOf(bar.__data__.x) >= 0){
+                  //if(self.area.filters().indexOf(bar.__data__.x) >= 0 || self.filteredArea.filters().indexOf(bar.__data__.x) >= 0){
+                    if(self.area.filters().indexOf(bar.__data__.x) >= 0){
                     bar.setAttribute('class', 'bar selected');
                   }
                 });
@@ -931,12 +888,12 @@ export class DeforestationOptionsComponent implements OnInit  {
             });
 
     if(this.type != "rates") {
-      this.barChart.legend( dc.legend().x(2*barChartWidth/3).y(5).itemHeight(13).gap(5).legendText(function(d:any, i:any) { return d.name; }) );
+      this.barChart.legend( dc.legend().x(barChartWidth-barLegend).y(5).itemHeight(13).gap(5).legendText(function(d:any, i:any) { return d.name; }) );
     }
     
     this.barChart.on('renderlet', function (chart:any) {
       
-      var br:any = d3.selectAll(chart.select('g.sub._1').selectAll('rect.bar'));
+      /*var br:any = d3.selectAll(chart.select('g.sub._1').selectAll('rect.bar'));
       
       var y:any=[];
       
@@ -948,7 +905,7 @@ export class DeforestationOptionsComponent implements OnInit  {
       
       txt._groups[0]._groups[0].forEach((el:any, idx:any) => {
         el.setAttribute("y", y[idx]+11);
-      });
+      });*/
 
       Terrabrasilis.disableLoading("#bar-chart");
 
@@ -958,13 +915,44 @@ export class DeforestationOptionsComponent implements OnInit  {
       // rotate x-axis labels
       chart.selectAll('g.x text')
         .attr('transform', 'translate(-10,10) rotate(315)');
+      $("#bar-chart > svg").attr("width", barChartWidth);
     });
+
+    this.area.on('filtered', function(chart:any) {
+      if (!chart.hasFilter())
+        self.selectedTime="*";
+    });
+
+    this.area.filterPrinter(function(filters:any) {
+      
+      if (!filters.length)
+         self.selectedTime="*";
+      else {
+        self.selectedTime = "[";
+        var first = 1;
+        filters.forEach(function(f:any) {
+          if (first) {
+            self.selectedTime = self.selectedTime.concat(f);
+            first = 0;
+          } else {
+            self.selectedTime = self.selectedTime.concat(", ", f);
+          }
+        });        
+        self.selectedTime = self.selectedTime + "]";
+      }
+
+      return (filters.length)?(self.selectedTime):("*");
+    });
+
+    self.selectedTime="*";
 
     // add one graph
     this.listCharts.set('bar-chart', this.barChart);
 
     var seriesChartWidth = $('#series-chart')[0].offsetWidth;
     var seriesChartHeight = $('#series-chart')[0].offsetHeight;
+
+    self.legendSize = Constants.DASHBOARD_LEGEND_WIDTH_SERIES_CHART.get(this.selectedLoi);
     
     var auxYears:any=[],auxRates:any=[];
     yearGroup.all().forEach(function(y){
@@ -982,7 +970,7 @@ export class DeforestationOptionsComponent implements OnInit  {
                     .renderDataPoints({radius: 4})
                     .evadeDomainFilter(true);
                 })
-                .width(seriesChartWidth)
+                .width(seriesChartWidth-self.legendSize)
                 .height(seriesChartHeight)
                 .margins({top: 10, right: 15, bottom: 30, left: 50})
                 .dimension(loiNameYearDim)
@@ -1004,13 +992,12 @@ export class DeforestationOptionsComponent implements OnInit  {
                 .yAxisPadding('15%')
                 .elasticY(true)
                 .elasticX(false)
-                //.xAxisLabel("Brazilian "+this.biome.charAt(0).toUpperCase() + this.biome.slice(1).replace("_", " ")+" Monitoring Period: "+this.minDate+" - "+this.maxDate)
                 .yAxisLabel(this.labelArea)
                 .x(xScale)
                 .mouseZoomable(false)
                 .renderHorizontalGridLines(true)
                 .renderVerticalGridLines(true)
-                .legend(dc.legend().x(0.65*seriesChartWidth).y(10).itemHeight(13).gap(5).legendText(function(d:any, i:any) { 
+                .legend(dc.legend().x(seriesChartWidth-self.legendSize).y(10).gap(5).legendText(function(d:any) { 
                   return self.loiNames[d.name];
                 }))
                 .brushOn(false);
@@ -1057,7 +1044,7 @@ export class DeforestationOptionsComponent implements OnInit  {
                     })
                   } else {
                     self.rowChart.filters().forEach(function(element:any) { 
-                      result = result.concat(aux//group.top(Infinity)
+                      result = result.concat(aux
                                 .filter(function(loiname:any){ 
                                   return loiname.key[0] == element
                                 })
@@ -1092,6 +1079,7 @@ export class DeforestationOptionsComponent implements OnInit  {
       // rotate x-axis labels
       chart.selectAll('g.x text')
         .attr('transform', 'translate(-10,10) rotate(315)');
+      $("#series-chart > svg").attr("width", seriesChartWidth);
     });
     
     // add one graph
@@ -1143,48 +1131,47 @@ export class DeforestationOptionsComponent implements OnInit  {
       return group.top(self.maxLoi);
     });
 
-    this.rowChart.on('renderlet', function (chart:any) {
-      
-      if(!chart.hasFilter())
-        self.loiname="*";
-      else {
-        self.loiname = "[";
-        chart.filters().forEach(function(element:any) { 
-          self.loiname = self.loiname.concat(chart.group().top(Infinity)
-                    .filter(function(ln:any){ 
-                      return ln.key == element
-                    })
-                    .map(function(ln:any){ 
-                      return self.loiNames[ln.key];
-                    })
-                  , ",")
-        })
-        self.loiname = self.loiname.slice(0, -1) + "]";
-      }
-
+    this.rowChart.on('renderlet', function () {      
       Terrabrasilis.disableLoading("#row-chart");
+    });
 
+    this.rowChart.on('filtered', function(chart:any) {
+      if (!chart.hasFilter())
+        self.loiname="*";
     });
 
     this.rowChart.filterPrinter(function(filters:any) {
-        var t:any[]=[];
+      
+      if (!filters.length)
+         self.loiname="*";
+      else {
+        self.loiname = "[";
+        var first = 1;
         filters.forEach(function(f:any) {
-          t.push(self.loiNames[f]);
-        });
-        return (filters.length)?(t):(['no filters']);
+          if (first) {
+            self.loiname = self.loiname.concat(self.loiNames[f]);
+            first = 0;
+          } else {
+            self.loiname = self.loiname.concat(", ", self.loiNames[f]);
+          }
+        });        
+        self.loiname = self.loiname + "]";
+      }
+
+      return (filters.length)?(self.loiname):("*");
     });
+
+    self.loiname="*";
 
     // render chart   
     this.listCharts.set('row-chart', this.rowChart);
 
     $('#reset_filter').click(function() {    
-      $("#barchart-legend").removeClass('deactivate');
-      $("#barchart-legend").addClass('active');
-      $("#serieschart-legend").removeClass('deactivate');
-      $("#serieschart-legend").addClass('active');
       self.barChart.filterAll();
       self.rowChart.filterAll();      
       self.seriesChart.filterAll();
+      self.loiname="*";
+      self.selectedTime="*";
       dc.redrawAll();
     });
 
@@ -1211,25 +1198,7 @@ export class DeforestationOptionsComponent implements OnInit  {
           scope.tableArea.render();
         },100 * j);
       })(10, self);
-
-      // dc legend
-      if($("#barchart-legend").hasClass('active'))
-        $(".dc-legend").first().show();        
-      else
-        $(".dc-legend").first().hide();
       
-      if($("#serieschart-legend").hasClass('active')) {
-        if(self.type == 'rates')
-          $(".dc-legend").show();
-        else
-          $(".dc-legend:eq(1)").show();
-      }  
-      else {
-        if(self.type == 'rates')
-          $(".dc-legend").hide();
-        else
-          $(".dc-legend:eq(1)").hide();
-      }
     });
 
     // initial window settings
@@ -1246,7 +1215,7 @@ export class DeforestationOptionsComponent implements OnInit  {
         w = nw;
         var arrKeys = Array.from(self.listCharts.keys());
         for (let item of arrKeys) {
-          DeforestationOptionsUtils.render(item, self.listCharts, transition, self.loiNames, self.type); // when window resize render each graph again
+          DeforestationOptionsUtils.render(item, self.listCharts, transition, self.loiNames, self.selectedLoi, self.type); // when window resize render each graph again
         }
       }
 
@@ -1255,7 +1224,7 @@ export class DeforestationOptionsComponent implements OnInit  {
     });
     
     $('#main-grid').on('resizestop', function (event:any, ui:any) {
-      DeforestationOptionsUtils.render(self.tagId, self.listCharts, transition, self.loiNames, self.type);      
+      DeforestationOptionsUtils.render(self.tagId, self.listCharts, transition, self.loiNames, self.selectedLoi, self.type);      
     });
 
     this.updateGridstackLanguage();
@@ -1265,11 +1234,12 @@ export class DeforestationOptionsComponent implements OnInit  {
       $('[id="1"]').closest('li').hide();
       $('[id="2"]').closest('li').hide();
       $('[id="3"]').closest('li').hide();
-      $('#barchart-legend').hide();
+      $('[id="tools-menu"]').hide();
     } else {
       $('[id="1"]').closest('li').show();
       $('[id="2"]').closest('li').show();
-      $('[id="3"]').closest('li').show();      
+      $('[id="3"]').closest('li').show(); 
+      $('[id="tools-menu"]').show();
     }
       
   }
@@ -1284,13 +1254,11 @@ export class DeforestationOptionsComponent implements OnInit  {
 
   updateGridstackLanguage():void {
 
-      
-
     forkJoin([(this.type == "rates")?(this._translate.get('dashboard.graph.aggregateTemporalRates')):(this._translate.get('dashboard.graph.aggregateTemporalIncrements')),
-              this._translate.get('dashboard.graph.aggregateSpatial', { maxDate: this.maxDate }),
+              (this.type == "rates")?(this._translate.get('dashboard.graph.aggregateSpatialRates')):(this._translate.get('dashboard.graph.aggregateSpatialIncrements')),
               (this.type == "rates")?(this._translate.get('dashboard.graph.timeSeriesRates')):(this._translate.get('dashboard.graph.timeSeriesIncrements')),
-              this._translate.get('dashboard.graph.absoluteData', { maxDate: this.maxDate }),
-              this._translate.get('dashboard.graph.tableLois.title', { maxDate: this.maxDate }),
+              (this.type == "rates")?(this._translate.get('dashboard.graph.absoluteDataRates')):(this._translate.get('dashboard.graph.absoluteDataIncrements')),
+              (this.type == "rates")?(this._translate.get('dashboard.graph.tableLois.titleRates')):(this._translate.get('dashboard.graph.tableLois.titleIncrements')),
               this._translate.get('dashboard.graph.label.area'),
               this._translate.get('dashboard.graph.label.taxa'),
               //this._translate.get('dashboard.graph.label.monitoring', {biome: this.biome.charAt(0).toUpperCase()+this.biome.slice(1).replace("_", " "), minDate: this.minDate, maxDate: this.maxDate}),
@@ -1300,15 +1268,14 @@ export class DeforestationOptionsComponent implements OnInit  {
               this._translate.get('dashboard.loi.mun'),
               this._translate.get('dashboard.loi.consunit'),              
               this._translate.get('dashboard.loi.indi'),
-              this._translate.get('dashboard.options.legend'),
               this._translate.get('dashboard.graph.'+this.biome),
               this._translate.get('dashboard.loi.'+this.selectedLoi)
             ]).subscribe((data) => {
-                $('.aggregateTemporal').text(data[0]+" - "+data[14]);
-                $('.aggregateSpatial').text(data[1]);
-                $('.timeSeries').text(data[2]+" - "+data[15]);
-                $('.absoluteData').text(data[3]+" - "+data[15]);
-                $('.tableLois').text(data[4]+" - "+data[15]);
+                $('.aggregateTemporal').text(data[0]+" - "+data[13]+" - "+data[14]);
+                $('.aggregateSpatial').text(data[1]+" - "+data[13]+" - "+data[14]);
+                $('.timeSeries').text(data[2]+" - "+data[13]+" - "+data[14]);
+                $('.absoluteData').text(data[3]+" - "+data[13]+" - "+data[14]);
+                $('.tableLois').text(data[4]+" - "+data[13]+" - "+data[14]);
                 this.labelArea = data[5];
                 this.labelRates = data[6];
                 this.labelRegularArea = data[7];
@@ -1318,15 +1285,10 @@ export class DeforestationOptionsComponent implements OnInit  {
                 this.seriesChart.yAxisLabel((this.type == "rates")?(this.labelRates):(this.labelArea));
                 this.seriesChart.render();
                 Terrabrasilis.disableLoading("#loi-chart");
-                $("#barchart-legend").removeClass('deactivate');
-                $("#barchart-legend").addClass('active');
-                $("#serieschart-legend").removeClass('deactivate');
-                $("#serieschart-legend").addClass('active');
                 $('#0').text(data[9]);
                 $('#1').text(data[10]);
                 $('#2').text(data[11]);
                 $('#3').text(data[12]);
-                $('#barchart-legend, #serieschart-legend').text(data[13]);
               });
     
     }

@@ -100,10 +100,10 @@
 /**
 * Sidebar customization
 */
-.project-group-opened {padding: 0px !important;}
-.group-title-opened { padding:8px !important; background-color: #009688;
+.project-group-opened[_ngcontent-c1] {padding: 0px !important;}
+.group-title-opened[_ngcontent-c1] { padding:8px !important; background-color: #009688;
 }
-.grp-prj {right: 12px !important;}
+.grp-prj[_ngcontent-c1] {right: 12px !important;}
 
 .material-switch>label::before {
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1) !important;
@@ -113,10 +113,10 @@
     background: #49bc95 !important;
     opacity: 0.9 !important;
 }
-.group-title-closed {
+.group-title-closed[_ngcontent-c1] {
     background-color: #009688 !important;
 }
-.project-group-closed {
+.project-group-closed[_ngcontent-c1] {
    padding: 0px !important;
    height: 38px !important; 
 }
@@ -124,6 +124,6 @@
 /**
 * Legend customization
 */
-.legend-body { background-color:none !important; }
-.legend-title { background-color: #49bc95 !important; border-top:0px !important; padding: 5px; color: #fff; font-weight: 500}
+.legend-body[_ngcontent-c1] { background-color:none !important; }
+.legend-title[_ngcontent-c1] { background-color: #49bc95 !important; border-top:0px !important; padding: 5px; color: #fff; font-weight: 500}
 .btn-success { border-color: none !important;}
