@@ -2,8 +2,8 @@
     "app" : {
         "title": "Terrabrasilis",
         "label": "Cerrado",
-        "deforestation": "Deforestation",
-        "alerts": "Alerts",
+        "deforestation": "PRODES (Deforestation)",
+        "alerts": "DETER (Alerts)",
         "text": "TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs"
     },
     "dialog": {
@@ -11,7 +11,7 @@
     },
     "menu" : {
         "analyses": {
-            "name": "Analyses",
+            "name": "Graphs",
             "option1" : "PRODES (Deforestation)",
             "option2" : "DETER (Alerts)",
             "option3" : "Land User and Land Cover",
@@ -42,25 +42,25 @@
         },        
         "5c40fdce0e9b2a14264e03a6" : {
             "name": " Legal Amazon",
-            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Forest - 2016/2017",
-            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Yearly Deforestation - 2013/2018",
-            "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Deforestation Mask - 1988/2012",
+            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Forest - 2016/2018",
+            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Yearly Deforestation - 2008/2018",
+            "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Deforestation Mask - 1988/2007",
             "5c49f61b1a21020001cd663a5c40fdce0e9b2a14264e03a6": "Hydrography",
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "No Forest",
-            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Cloud - 2016/2017",
+            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Cloud - 2016/2018",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Legal Amazon",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "LANDSAT - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Legal Amazon Mosaic - 2000/2018"
         },        
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazon",
-            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Forest - 2016/2017",
-            "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Deforestation Mask - 1988/2012",
-            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Yearly Deforestation - 2013/2018",
+            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Forest - 2016/2018",
+            "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Deforestation Mask - 1988/2007",
+            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Yearly Deforestation - 2008/2018",
             "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hydrography",
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "No Forest",
-            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Cloud - 2016/2017",
+            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Cloud - 2016/2018",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Amazon Biome",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "LANDSAT - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Legal Amazon Mosaic - 2000/2018"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
@@ -144,8 +144,10 @@
         },
         "graph": {
             "amazon": "Amazon Biome",
-            "absoluteData": "Accumulated deforestation until {{maxDate}}",
-            "aggregateSpatial": "Accumlated deforestation map until {{maxDate}}",
+            "absoluteDataIncrements": "Accumulated deforestation increments",
+            "absoluteDataRates": "Accumulated deforestation rates",
+            "aggregateSpatialIncrements": "Accumulated deforestation increments map",
+            "aggregateSpatialRates": "Accumulated deforestation rates map",
             "aggregateTemporalIncrements": "Deforestation increments",
             "aggregateTemporalRates": "Deforestation rates",
             "cerrado": "Cerrado Biome",
@@ -160,7 +162,8 @@
             "timeSeriesIncrements": "Deforestation increments",
             "timeSeriesRates": "Deforestation rates",
             "tableLois": {
-                "title": "Accumulated deforestation per year until {{maxDate}}",
+                "titleIncrements": "Accumulated deforestation increments per year",
+                "titleRates": "Accumulated deforestation rates per year",
                 "year": "Year",
                 "regular": "Regular area (km²)",
                 "less": "Area (km²) less than 6.25ha",
@@ -217,6 +220,7 @@
             "legal_amazon": "Legal Amazon",
             "amazon": "Amazon",
             "cerrado": "Cerrado",
+            "time": "Year",
             "update": "Last Update: 07 - 29 - 2019"
         },
         "tooltip": {

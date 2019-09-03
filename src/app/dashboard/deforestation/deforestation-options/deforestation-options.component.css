@@ -232,6 +232,11 @@ a[data-toggle="collapse"] {
     font-weight: bold;
 }
 
+#title-time-row {
+    background-color: #eeeeee;
+    color: #eeeeee;
+}
+
 .navbar-icon-top .navbar-nav .nav-link {
     color: #6c757d !important;
     cursor: pointer;
@@ -308,6 +313,12 @@ a[data-toggle="collapse"] {
     font-size: 14px; 
     margin-left: 10px; 
     font-weight: bold;
+}
+
+.pull-right {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
 }
 
 .title-chart {
@@ -482,12 +493,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     font-weight: 500;
     text-decoration: none;
     padding: 10px 0px 10px 20px;
-}
-
-.btn-csv{
-    position: absolute;
-    top: 20px;
-    right: 100px;    
 }
 
 .btn-material {

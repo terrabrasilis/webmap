@@ -2,8 +2,8 @@
     "app" : {
         "title": "Terrabrasilis",
         "label": "Cerrado",
-        "deforestation": "Desmatamento",
-        "alerts": "Alertas",
+        "deforestation": "PRODES (Desmatamento)",
+        "alerts": "DETER (Alertas)",
         "text": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental"
     },
     "dialog": {
@@ -11,7 +11,7 @@
     },
     "menu" : {
         "analyses": {
-            "name": "Análises",
+            "name": "Gráficos",
             "option1" : "PRODES (Desmatamento)",
             "option2" : "DETER (Alertas)",
             "option3" : "Uso e cobertura da terra",
@@ -33,33 +33,33 @@
         "control1" : "Baselayers",
         "5c40fe3a0e9b2a14264e03a7" : {
             "name": " Cerrado",
-            "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",            
+            "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
-            "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",            
+            "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",
             "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "LANDSAT - 2000/2018",
             "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Desmatamento Anual - 2000/2018"
         },
         "5c40fdce0e9b2a14264e03a6" : {
             "name": " Amazônia Legal",
-            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta - 2016/2017",
-            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Desmatamento Anual - 2013/2018",
-            "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Máscara de Desmatamento - 1988/2012",
+            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta - 2016/2018",
+            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Desmatamento Anual - 2008/2018",
+            "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Máscara de Desmatamento - 1988/2007",
             "5c49f61b1a21020001cd663a5c40fdce0e9b2a14264e03a6": "Hidrografia",
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
-            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2017",
+            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2018",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Amazonia Legal",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "LANDSAT - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico Amazônia Legal - 2000/2018"
         },
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazônia",
-            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta - 2016/2017",
-            "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Máscara de Desmatamento - 1988/2012",
-            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Desmatamento Anual - 2013/2018",
+            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta - 2016/2018",
+            "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Máscara de Desmatamento - 1988/2007",
+            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Desmatamento Anual - 2008/2018",
             "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hidrografia",
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
-            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2017",
+            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2018",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Bioma Amazônia",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "LANDSAT - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico Amazônia Legal - 2000/2018"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
@@ -73,7 +73,7 @@
         },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
-            "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "Estados",            
+            "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "Estados", 
             "5c49f7791a21020001cd66405c8107880cf423000144ebd8": "Limite do Bioma",
             "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Municípios",
             "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Alerta de Desmatamento no Cerrado"
@@ -143,8 +143,10 @@
         },
         "graph": {
             "amazon": "Amazônia",
-            "absoluteData": "Desmatamento acumulado até {{maxDate}}",
-            "aggregateSpatial": "Mapa do desmatamento acumulado até {{maxDate}}",
+            "absoluteDataIncrements": "Incrementos de desmatamento acumulado",
+            "absoluteDataRates": "Taxas de desmatamento acumulados",
+            "aggregateSpatialIncrements": "Mapa de incrementos de desmatamento",
+            "aggregateSpatialRates": "Mapa de taxas de desmatamento",
             "aggregateTemporalIncrements": "Incrementos de desmatamento",
             "aggregateTemporalRates": "Taxas de desmatamento",
             "cerrado": "Cerrado",
@@ -159,7 +161,8 @@
             "timeSeriesIncrements": "Incrementos de desmatamento",
             "timeSeriesRates": "Taxas de desmatamento",
             "tableLois": {
-                "title": "Desmatamento acumulado por Ano até {{maxDate}}",
+                "titleIncrements": "Incrementos de desmatamento acumulado por ano",
+                "titleRates": "Taxas de desmatamento acumulado por ano",
                 "year": "Ano",
                 "regular": "Área Regular (km²)",
                 "less": "Área (km²) menor que 6.25ha",
@@ -223,6 +226,7 @@
             "legal_amazon": "Amazônia Legal",
             "amazon": "Amazônia",
             "cerrado": "Cerrado",
+            "time": "Ano",
             "update": "Última Atualização: 29 - 07 - 2019"
         },
         "tooltip": {

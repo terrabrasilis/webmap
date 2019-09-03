@@ -167,34 +167,59 @@ export class DeforestationOptionsUtils {
       return 8;
   };    
 
-  public static renderGraph(id:any, listCharts:any, transition:any, loiNames:any, type: any):void {
+  public static renderGraph(id:any, listCharts:any, transition:any, loiNames:any, loi:any, type: any):void {
     
     var width = $('#'+id).width(); // get width from parent div
     var height = $('#'+id).height(); // get height from parent div
   
     var result = listCharts.get(id); // get result from list charts
-    
-    result.width(width*.95) // update width
-          .height(height*.95) // update height
-          .transitionDuration(transition); // update transitions
-    
+        
     if (id == "bar-chart") {      
+        var barChartLegend = Constants.DASHBOARD_LEGEND_WIDTH_BAR_CHART;    
+        
+        result.width(width-barChartLegend) // update width
+              .height(height) // update height
+              .transitionDuration(transition); // update transitions
+
         result.x(d3.scaleBand().rangeRound([0, width]).paddingInner(0.05))
               .xUnits(dc.units.ordinal);  
-        if (type != "rates")
-           result.legend(dc.legend().x(2*width/3).y(5).itemHeight(13).gap(4)/*.horizontal(1).legendWidth(width/4).itemWidth(130)*/.legendText(function(d:any, i:any) { return d.name; }));
-              $("#barchart-legend").removeClass('deactivate');
-              $("#barchart-legend").addClass('active');                
+
+        if (type != "rates")         
+          result.legend(dc.legend().x(width-barChartLegend).y(5).itemHeight(13).gap(4).legendText(function(d:any) { return d.name; }));        
+
+        result.on("renderlet.a",function (chart:any) {
+          // rotate x-axis labels
+          chart.selectAll('g.x text')
+            .attr('transform', 'translate(-10,10) rotate(315)');
+          $("#bar-chart > svg").attr("width", width);
+        });
+
     } else if (id == "series-chart") {
-              result.legend(dc.legend().x(0.65*width).y(10).itemHeight(13).gap(5).legendText(function(d:any, i:any) { 
+
+              var seriesChartLegend = Constants.DASHBOARD_LEGEND_WIDTH_SERIES_CHART.get(loi);
+              
+              result.width(width-seriesChartLegend) // update width
+                    .height(height) // update height
+                    .transitionDuration(transition); // update transitions
+              
+              result.legend(dc.legend().x(width-seriesChartLegend).y(10).itemHeight(13).gap(5).legendText(function(d:any) { 
                 return loiNames[d.name];
               }));
-              $("#serieschart-legend").removeClass('deactivate');
-              $("#serieschart-legend").addClass('active');                
+
+              result.on("renderlet.a",function (chart:any) {
+                // rotate x-axis labels
+                chart.selectAll('g.x text')
+                  .attr('transform', 'translate(-10,10) rotate(315)');
+                $("#series-chart > svg").attr("width", width);
+              });
+
             }
             else if (id == "row-chart") {
-              $('.search-loi').width(0.8*width);
-              
+                result.width(width*.95) // update width
+                .height(height*.95) // update height
+                .transitionDuration(transition); // update transitions
+
+                $('.search-loi').width(0.8*width);
             }
 
     (function(j, result){
@@ -212,9 +237,9 @@ export class DeforestationOptionsUtils {
     
   }
 
-  public static render(item:any, listCharts:any, transition:any, loiNames:any, type:any):void {
+  public static render(item:any, listCharts:any, transition:any, loiNames:any, loi:any, type:any):void {
     if (item != "loi-chart")        
-      this.renderGraph(item, listCharts, transition, loiNames, type);
+      this.renderGraph(item, listCharts, transition, loiNames, loi, type);
     else
       this.renderMap();
   }

@@ -2,9 +2,9 @@
 <div id="content">
     <nav class="navbar navbar-expand-lg materialnav navbar-header"> 
         <i class="material-icons menuicon" id="sidebarCollapse" >menu</i>
-        <a class="navbar-brand" href="#"><span class="amarelo" >Terra</span><span class="verde">Brasilis</span></a>
+        <a class="navbar-brand" href="http://terrabrasilis.dpi.inpe.br"><span class="amarelo" >Terra</span><span class="verde">Brasilis</span></a>
         <div class="navbar-nav collapse navbar-collapse justify-content-between"> 
-            <a class="nav-item nav-link" href="#">| {{ 'app.' + type | translate }}</a> 
+            <a class="nav-item nav-link">| {{ 'app.' + type | translate }}</a> 
         </div>
         <button class="navbar-toggler" id="menuanaliseid" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> 
             <i class="material-icons menuicon">more_vert</i> 
@@ -16,8 +16,8 @@
                     <i class="material-icons iconmobile">assignment </i> {{ 'menu.map.name' | translate }}                     
                 </a>
                 <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:return false;"><i class="material-icons iconmenu">nature</i>{{ 'menu.map.option1' | translate }}</a>
-                    <a class="dropdown-item" href="{{ imgPath }}dashboard/alerts/biomes/cerrado/daily/" target="_blank"><i class="material-icons iconmenu">warning</i>{{ 'menu.map.option2' | translate }}</a> 
+                    <a class="dropdown-item" href="{{ imgPath }}map/deforestation/"><i class="material-icons iconmenu">nature</i>{{ 'menu.map.option1' | translate }}</a>
+                    <a class="dropdown-item" href="{{ imgPath }}map/alerts/" target="_blank"><i class="material-icons iconmenu">warning</i>{{ 'menu.map.option2' | translate }}</a> 
                 </div>
             </li>
             <li class="nav-item dropdown"> 
@@ -25,8 +25,8 @@
                     <i class="material-icons iconmobile">assignment </i> {{ 'menu.analyses.name' | translate }} 
                 </a>
                 <div class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink"> 
-                    <a class="dropdown-item" target="_blank" routerLink="/dashboard/deforestation/biomes/legal_amazon/rates"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
-                    <a class="dropdown-item" target="_blank" href="http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/legal/amazon/daily"><i class="material-icons iconmenu">warning</i>{{ 'menu.analyses.option2' | translate }}</a> 
+                    <a class="dropdown-item" target="_blank" href="{{ imgPath }}dashboard/deforestation/biomes/legal_amazon/rates/"><i class="material-icons iconmenu">nature</i>{{ 'menu.analyses.option1' | translate }}</a>
+                    <a class="dropdown-item" target="_blank" href="{{ imgPath }}dashboard/alerts/biomes/cerrado/daily/"><i class="material-icons iconmenu">warning</i>{{ 'menu.analyses.option2' | translate }}</a> 
                 </div>
             </li>
             <li class="nav-item"> <a class="nav-link" style="cursor: pointer;" (click)="showAbout()"> <i class="material-icons iconmobile">info</i>{{ 'menu.about' | translate }} </a> </li>
@@ -49,11 +49,12 @@
             </label>
             <input class="search-box__input" id="search" type="text" placeholder="cidade, uf">
         </div> -->
-        
-        <div class="desctxt">
-                <h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
-                <div class="texto">{{ 'app.' + type | translate }}</div>
-        </div>
+        <a href="http://terrabrasilis.dpi.inpe.br">
+            <div class="desctxt">
+                    <h5><span class="amarelo">Terra</span><span class="verde">Brasilis</span> </h5>
+                    <div class="texto">{{ 'app.' + type | translate }}</div>
+            </div>
+        </a>
     </div>
     <!-- ferramentas gerais --> 
     <div class="ferramentas">
