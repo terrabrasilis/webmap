@@ -45,7 +45,20 @@ export class Constants {
     public static get MAP_LEGEND_GRADES(): number {
         return 8;
     };  
-    
+
+    public static get DASHBOARD_LEGEND_WIDTH_BAR_CHART(): any {
+        return 69;
+    };
+
+    public static get DASHBOARD_LEGEND_WIDTH_SERIES_CHART(): any {
+        var map = new Map();
+        map.set("uf", 140);
+        map.set("mun", 210);
+        map.set("consunit", 350);
+        map.set("indi", 200);
+        return map;
+    };
+        
     public static get DASHBOARD_CERRADO_STATES(): any[] {
         return ['MATO GROSSO', 'MARANHÃO', 'PIAUÍ', 'BAHIA', 'MATO GROSSO DO SUL', 'GOIÁS', 'MINAS GERAIS', 'SÃO PAULO', 'PARANÁ', 'TOCANTINS', 'DISTRITO FEDERAL'];
     };  
