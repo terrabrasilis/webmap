@@ -1,47 +1,17 @@
 /**
  * This class is responsible to store all global variables to use in entire application and not duplicate code
  */
+
+import { get } from 'lodash';
+import { environment } from '../../environments/environment';
+
 export class Constants {
-    
-    public static get TERRABRASILIS_MAPS_GWC(): string { 
-        return "http://terrabrasilis.info/fip-service/gwc/service/wms"; 
-    };
-
-    public static get TERRABRASILIS_MAPS_WMS(): string { 
-        return "http://terrabrasilis.info/fip-service/wms"; 
-    };
-
-    public static get FIPCERRADO_OPERACAO(): string { 
-        return "http://fipcerrado.dpi.inpe.br:8080/fipcerrado-geoserver/terraamazon/wms"; 
-    };
-
-    public static get FEATURE_INFO_PARAMS(): string {
-        let host = "{0}"
-        let service = "/wms?SERVICE=WMS";
-        let version = "&VERSION=1.1.1";
-        let request = "&REQUEST=GetFeatureInfo";
-        let layers = "&LAYERS={1}";
-        let query = "&QUERY_LAYERS={2}";
-        let style = "&STYLES=";
-        let bbox = "&BBOX={3}";
-        let count = "&FEATURE_COUNT=";
-        let width = "&WIDTH={4}";
-        let heigth = "&HEIGHT={5}";
-        let format = "&FORMAT=";
-        let infoFormat = "&INFO_FORMAT={6}";
-        let srs = "&SRS=EPSG:4326";
-        let x = "&X={7}";
-        let y = "&Y={8}";
-
-        return host + service + version + request + layers + query + style + bbox + count + width + heigth + format + infoFormat + srs + x + y;
-    }
-
     public static get PROXY_OGC(): string { 
-        return "http://terrabrasilis.dpi.inpe.br/proxy?url="; 
+        return environment.PROXY_OGC
     };
 
     public static get DASHBOARD_API_HOST(): string {
-        return "http://terrabrasilis2.dpi.inpe.br:30026/dashboard/api/v1/redis-cli/";
+        return environment.DASHBOARD_API_HOST 
     };
 
     public static get DASHBOARD_BIOMES_COLORS(): string[] {
@@ -69,7 +39,7 @@ export class Constants {
     }
 
     public static get TERRABRASILIS_API_HOST(): string {
-        return "http://terrabrasilis.dpi.inpe.br/terrabrasilis/api/v1/";
+        return environment.TERRABRASILIS_API_HOST 
     };    
 
     public static get MAP_LEGEND_GRADES(): number {
@@ -87,29 +57,16 @@ export class Constants {
     public static get DASHBOARD_LEGAL_AMAZON_STATES(): any[] {
         return ['PARÁ', 'AMAZONAS', 'RORAIMA', 'ACRE', 'MATO GROSSO', 'RONDÔNIA', 'AMAPÁ', 'MARANHÃO', 'TOCANTINS'];
     };  
-
-    public static get DASHBOARD_LEGEND_WIDTH_BAR_CHART(): any {
-        return 69;
-    };  
-
-    public static get DASHBOARD_LEGEND_WIDTH_SERIES_CHART(): any {
-        var map = new Map();
-        map.set("uf", 140);
-        map.set("mun", 210);
-        map.set("consunit", 350);
-        map.set("indi", 200);
-        return map;
-    };  
     
     public static get TERRABRASILIS_BUSINESS_API_HOST(): string {
-        let url="http://terrabrasilis.dpi.inpe.br/business/api/v1/";
+        let url = 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
 
-        if(process.env.BUILD_TYPE && process.env.ENV == 'production') {
+        if(environment.BUILD_TYPE && environment.ENV == 'production') {
             // confirm the 13111 port in docker-stacks/api/business-api-homologation.yaml
-            if(process.env.BUILD_TYPE == 'homologation') url = "http://terrabrasilis2.dpi.inpe.br:13111/api/v1/";
+            if(environment.BUILD_TYPE == 'homologation') url = 'http://terrabrasilis2.dpi.inpe.br:13111/api/v1/';
             
             // confirm the 2222 port in docker-stacks/demo/docker-compose.yaml
-            if(process.env.BUILD_TYPE == 'compose') url = "http://localhost:2222/api/v1/";
+            if(environment.BUILD_TYPE == 'compose') url = 'http://localhost:2222/api/v1/';
         }
         return url;
     };
