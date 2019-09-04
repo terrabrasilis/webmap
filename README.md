@@ -1,14 +1,18 @@
 # Terrabrasilis
 
-[![Build Status](https://travis-ci.org/Terrabrasilis/client_v2.svg?branch=master)](https://travis-ci.org/Terrabrasilis/client_v2)
+[![Build Status](https://travis-ci.org/Terrabrasilis/client_v2.svg?branch=master)](https://travis-ci.org/Terrabrasilis/client_v2) [![codecov.io](https://codecov.io/github/terrabrasilis/client_v2/coverage.svg?branch=master)](https://codecov.io/github/terrabrasilis/client_v2?branch=master)  [![Code Climate](https://codeclimate.com/github/terrabrasilis/client_v2/badges/gpa.svg)](https://codeclimate.com/github/terrabrasilis/client_v2)  [![Dependency Status](https://david-dm.org/terrabrasilis/client_v2/status.svg)](https://david-dm.org/terrabrasilis/client_v2)  [![devDependency Status](https://david-dm.org/terrabrasilis/client_v2/dev-status.svg)](https://david-dm.org/terrabrasilis/client_v2#info=devDependencies)
 
-[![codecov.io](https://codecov.io/github/terrabrasilis/client_v2/coverage.svg?branch=master)](https://codecov.io/github/terrabrasilis/client_v2?branch=master) 
+## Configuring the environment variables
 
-[![Code Climate](https://codeclimate.com/github/terrabrasilis/client_v2/badges/gpa.svg)](https://codeclimate.com/github/terrabrasilis/client_v2) 
-
-[![Dependency Status](https://david-dm.org/terrabrasilis/client_v2/status.svg)](https://david-dm.org/terrabrasilis/client_v2) 
-
-[![devDependency Status](https://david-dm.org/terrabrasilis/client_v2/dev-status.svg)](https://david-dm.org/terrabrasilis/client_v2#info=devDependencies)
+```bash
+export NODE_ENV="development"
+export INPE_PROXY="http://terrabrasilis2.dpi.inpe.br:7000/cgi-bin/proxy.cgi?url="
+export FIPCERRADO_OPERACAO="http://fipcerrado.dpi.inpe.br:8080/fipcerrado-geoserver/terraamazon/wms"
+export PROXY_OGC="http://terrabrasilis.dpi.inpe.br/proxy?url="; 
+export DASHBOARD_API_HOST="http://terrabrasilis.dpi.inpe.br/dashboard/api/v1/redis-cli/"
+export TERRABRASILIS_API_HOST="http://terrabrasilis.dpi.inpe.br/terrabrasilis/api/v1/"
+export TERRABRASILIS_BUSINESS_API_HOST="http://terrabrasilis.dpi.inpe.br/business/api/v1/"
+```
 
 ## About
 
