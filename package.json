@@ -15,7 +15,7 @@
     "build-production": "ng build --configuration=production",
     "test_headless": "ng test --watch false --browsers ChromeHeadless",
     "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
-    "all_tests": "yarn lint && yarn test_headless"
+    "all_tests": "yarn test_headless && yarn lint"
   },
   "dependencies": {
     "@angular/animations": "^8.2.1",
