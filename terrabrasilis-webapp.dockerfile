@@ -21,4 +21,4 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=node /app/dist/terrabrasilis /usr/share/nginx/html/
 
-COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
+COPY nginx-custom-$BUILD_TYPE.conf /etc/nginx/conf.d/default.conf
