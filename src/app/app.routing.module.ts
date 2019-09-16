@@ -12,12 +12,8 @@ import { DeforestationOptionsComponent } from './dashboard/deforestation/defores
 
 
 const routes: Routes = [
-    // { path : '', component : MapComponent },
     { path: 'map/:type', component : MapComponent },
-    { path: 'user', component: UserComponent },
-    { path: 'login', component: LoginComponent },
     { path: 'wms', component: WmsSearchComponent },    
-    { path: 'dashboard/deforestation/biomes/:biome/:type', component: DeforestationOptionsComponent },
     {
         path: "**",
         redirectTo: "/map/deforestation",
