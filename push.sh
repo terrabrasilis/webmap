@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker push terrabrasilis/terrabrasilis-webapp:$1
+docker push terrabrasilis/webmap:$1

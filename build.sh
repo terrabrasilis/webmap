@@ -17,7 +17,7 @@ else
     fi
 fi
 
-echo "Building terrabrasilis/terrabrasilis-webapp:$VERSION"
+echo "Building terrabrasilis/webmap:$VERSION"
 echo "...................................................."
 
 # environment to staging or production build
@@ -35,7 +35,7 @@ fi
 echo "Building $ENV mode..."
 echo "........................"
 
-docker build --no-cache --build-arg ENV=$ENV --build-arg BUILD_TYPE=$BUILD_TYPE -t terrabrasilis/terrabrasilis-webapp:$VERSION -f terrabrasilis-webapp.dockerfile .
+docker build --no-cache --build-arg ENV=$ENV --build-arg BUILD_TYPE=$BUILD_TYPE -t terrabrasilis/webmap:$VERSION -f Dockerfile .
 
 echo "The building was finished! Do you want sending this new image to Docker HUB? Type yes to continue." ; read SEND_TO_HUB
 if [[ ! "$SEND_TO_HUB" = "yes" ]]; then
