@@ -14,7 +14,7 @@
     "start-production": "ng serve --open --configuration=production --port 3001",
     "build-production": "ng build --configuration=production",
     "build-gh-pages": "ng build --configuration=staging --base-href 'https://terrabrasilis.github.io/webmap/'",
-    "deploy-gh-pages": "yarn build-gh-pages && ./node_modules/angular-cli-ghpages/angular-cli-ghpages --dir=dist/terrabrasilis",
+    "deploy-gh-pages": "yarn build-gh-pages && ./node_modules/angular-cli-ghpages/angular-cli-ghpages --dir=dist/terrabrasilis --no-silent",
     "test_headless": "ng test --watch false --browsers ChromeHeadless",
     "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
     "all_tests": "yarn test_headless && yarn lint"
