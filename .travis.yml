@@ -4,6 +4,12 @@ node_js:
   - v10
   - v12
 
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+
 addons:
   chrome: stable
 
@@ -11,6 +17,7 @@ before_script:
   - npm install -g @angular/cli
 
 script:
+  - yarn deploy-gh-pages
   - yarn all_tests
 
 notifications:
