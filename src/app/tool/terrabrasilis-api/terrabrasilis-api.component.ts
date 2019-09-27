@@ -213,6 +213,10 @@ export class TerrabrasilisApiComponent implements OnInit {
         Terrabrasilis.onOffTimeDimension(layer.name, layer.isAggregatable /*aggregateTimes*/);
     }
 
+    fitBounds(layer: Layer) {
+        Terrabrasilis.fitBounds(layer).then(console.log).catch(console.error)
+    }
+
     ////////////////////////////////////////////////
     //// Private methods
     ////////////////////////////////////////////////
