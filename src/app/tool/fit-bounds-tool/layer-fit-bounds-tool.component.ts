@@ -1,11 +1,13 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { Layer } from '../../entity/layer';
+import { Constants } from '../../util/constants';
 import { RegisterComponent } from '../../util/component-decorator';
 import { ToolComponent } from '../tool-component-interface';
 import { OnMount } from '../../core-modules/dynamic-html';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { merge } from 'lodash';
 
 /**
  * LayerFitBoundsToolComponent
@@ -23,6 +25,7 @@ import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-ap
 @RegisterComponent
 export class LayerFitBoundsToolComponent extends ToolComponent implements OnInit, OnMount {
   layer:Layer;
+  private proxy: string;
 
   @Input() shared: any;  
   @ViewChild('innerContent', {static: true}) innerContent: ElementRef;
@@ -34,6 +37,7 @@ export class LayerFitBoundsToolComponent extends ToolComponent implements OnInit
   
   constructor(private dialog: MatDialog, private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { 
     super();        
+    this.proxy = Constants.PROXY_OGC;
   }
 
   /**
@@ -46,6 +50,9 @@ export class LayerFitBoundsToolComponent extends ToolComponent implements OnInit
   }
 
   fitBounds() {
-    this.terrabrasilisApi.fitBounds(this.layer);
+    const unproxiedUrl = this.layer.datasource.host
+    const proxiedUrl = this.proxy + encodeURIComponent(unproxiedUrl)
+    const proxyLayer = merge({}, this.layer, {'datasource.host': proxiedUrl});
+    this.terrabrasilisApi.fitBounds(proxyLayer);
   }
 }
