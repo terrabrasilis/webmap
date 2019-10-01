@@ -8,7 +8,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class AboutComponent implements OnInit {
 
-  imgPath: string = ( process.env.ENV === 'production' ) ? ('/app/') : ('');
+  imgPath: string = ( process.env.ENV === 'production' ) ? ('/app/') : ('/');
 
   constructor(private dialogRef: MatDialogRef<AboutComponent>) { }
 

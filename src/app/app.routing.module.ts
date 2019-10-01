@@ -5,15 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { WmsSearchComponent } from './wms/wms-search/wms-search.component';
 
-/*
- * Dashboard modules import
- */
-import { DeforestationOptionsComponent } from './dashboard/deforestation/deforestation-options/deforestation-options.component';
-
-
 const routes: Routes = [
     { path: 'map/:type', component : MapComponent },
-    { path: 'wms', component: WmsSearchComponent },    
+    { path: 'user', component: UserComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'wms', component: WmsSearchComponent },
     {
         path: "**",
         redirectTo: "/map/deforestation",
