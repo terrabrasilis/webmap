@@ -2,13 +2,13 @@ import { get } from 'lodash'
 
 export const common = {
   production: false,
-  NODE_ENV: JSON.stringify(get(process, 'env.NODE_ENV', 'development')),
-  ENV: JSON.stringify(get(process, 'env.NODE_ENV', 'development')),
-  BUILD_TYPE: JSON.stringify(get(process, 'env.BUILD_TYPE', 'development')),
-  INPE_PROXY: JSON.stringify(get(process, 'env.INPE_PROXY', '')),
-  FIPCERRADO_OPERACAO: JSON.stringify(get(process, 'env.FIPCERRADO_OPERACAO', '')),
-  PROXY_OGC: JSON.stringify(get(process, 'env.PROXY_OGC', '')),
-  DASHBOARD_API_HOST: JSON.stringify(get(process, 'env.DASHBOARD_API_HOST', '')),
-  TERRABRASILIS_API_HOST: JSON.stringify(get(process, 'env.TERRABRASILIS_API_HOST', '')),
-  TERRABRASILIS_BUSINESS_API_HOST: JSON.stringify(get(process, 'env.TERRABRASILIS_BUSINESS_API_HOST', ''))
+  NODE_ENV: get(process, 'env.NODE_ENV', 'production'),
+  ENV: get(process, 'env.NODE_ENV', 'production'),
+  BUILD_TYPE: get(process, 'env.BUILD_TYPE', 'production'),
+  INPE_PROXY: get(process, 'env.INPE_PROXY', 'http://terrabrasilis2.dpi.inpe.br:7000/cgi-bin/proxy.cgi?url='),
+  FIPCERRADO_OPERACAO: get(process, 'env.FIPCERRADO_OPERACAO', 'http://fipcerrado.dpi.inpe.br:8080/fipcerrado-geoserver/terraamazon/wms'),
+  PROXY_OGC: get(process, 'env.PROXY_OGC', 'http://terrabrasilis.dpi.inpe.br/proxy?url='),
+  DASHBOARD_API_HOST: get(process, 'env.DASHBOARD_API_HOST', 'http://terrabrasilis.dpi.inpe.br/dashboard/api/v1/redis-cli/'),
+  TERRABRASILIS_API_HOST: get(process, 'env.TERRABRASILIS_API_HOST', 'http://terrabrasilis.dpi.inpe.br/terrabrasilis/api/v1/'),
+  TERRABRASILIS_BUSINESS_API_HOST: get(process, 'env.TERRABRASILIS_BUSINESS_API_HOST', 'http://terrabrasilis.dpi.inpe.br/business/api/v1/')
 }

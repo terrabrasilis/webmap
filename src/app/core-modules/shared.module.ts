@@ -17,6 +17,7 @@ import { MaterialCoreModule } from "./material-core.module";
 import { LayerDownloadToolComponent } from '../tool/layer-download-tool/layer-download-tool.component';
 import { LayerLegendToolComponent } from '../tool/layer-legend-tool/layer-legend-tool.component';
 import { LayerDashboardToolComponent } from '../tool/layer-dashboard-tool/layer-dashboard-tool.component';
+import { LayerFitBoundsToolComponent } from '../tool/fit-bounds-tool/layer-fit-bounds-tool.component';
 import { LayerMetadataToolComponent } from '../tool/layer-metadata-tool/layer-metadata-tool.component';
 import { LayerRemoveToolComponent } from '../tool/layer-remove-tool/layer-remove-tool.component';
 
@@ -38,11 +39,11 @@ import { LayerRemoveToolComponent } from '../tool/layer-remove-tool/layer-remove
   ],
   declarations: [
     /** Components */
-    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, 
+    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent,
   ],
   exports: [
     /** Components */
-    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent,
+    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
