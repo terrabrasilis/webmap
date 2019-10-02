@@ -22,20 +22,26 @@ echo "...................................................."
 
 # environment to staging or production build
 # to staging use staging
-ENV="production"
-BUILD_TYPE="production"
-
-if [[ ! "$2" = "" ]]; then
-    ENV="dev"
-    BUILD_TYPE="staging"
-else
+if [[ "$2" = "" ]]; then
+    ENV="production"
+    BUILD_TYPE="production"
     read -p "I will build on production mode by default. May i continue? If yes, type yes or Ctrl+C to exit. " -d'y' -d'e' -d's' RESPONSE; echo
+else
+
+    if [[ "$2" = "staging" ]]; then
+        ENV="dev"
+        BUILD_TYPE="$2"
+    else
+        ENV="production"
+        BUILD_TYPE="production"
+    fi
 fi
 
-echo "Building $ENV mode..."
+echo "Building $BUILD_TYPE mode..."
 echo "........................"
 
-docker build --no-cache --build-arg ENV=$ENV --build-arg BUILD_TYPE=$BUILD_TYPE -t terrabrasilis/webmap:$VERSION -f Dockerfile .
+# --no-cache
+docker build --build-arg ENV=$ENV --build-arg BUILD_TYPE=$BUILD_TYPE -t terrabrasilis/webmap:$VERSION -f Dockerfile .
 
 echo "The building was finished! Do you want sending this new image to Docker HUB? Type yes to continue." ; read SEND_TO_HUB
 if [[ ! "$SEND_TO_HUB" = "yes" ]]; then
