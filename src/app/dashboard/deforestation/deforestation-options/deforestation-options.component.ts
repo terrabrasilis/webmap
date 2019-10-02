@@ -53,7 +53,7 @@ export interface State {
 
 export class DeforestationOptionsComponent implements OnInit  {
 
-  imgPath:string=( process.env.ENV === 'production' )?('/app/'):('/');
+  imgPath:string=( process.env.ENV === 'production' )?('/app/'):('');
   
   // variables definition
   biome: string;

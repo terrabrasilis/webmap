@@ -2,7 +2,6 @@
  * This class is responsible to store all global variables to use in entire application and not duplicate code
  */
 
-import { get } from 'lodash';
 import { environment } from '../../environments/environment';
 
 export class Constants {

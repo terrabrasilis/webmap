@@ -51,7 +51,7 @@ import * as _ from 'lodash'; // using the _.uniqueId() method
 })
 export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
-    imgPath: string = ( process.env.ENV === 'production' ) ? ('/app/') : ('/');
+    imgPath: string = ( process.env.ENV === 'production' ) ? ('/app/') : ('');
 
     /**
      * FAB Speed Dial Button

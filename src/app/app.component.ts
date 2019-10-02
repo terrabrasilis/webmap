@@ -19,7 +19,7 @@ import { LocalStorageService } from './services/local-storage.service';
 })
 export class AppComponent implements OnInit {
   
-  imgPath:string=( process.env.ENV === 'production' )?('/app/'):('/');
+  imgPath:string=( process.env.ENV === 'production' )?('/app/'):('');
 
   public title:string = '';
   public type:string = '';
