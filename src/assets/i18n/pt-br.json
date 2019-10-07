@@ -99,6 +99,7 @@
         "layerOptions": "Ferramentas da Camada",
         "basicInfo": "Informação Básica",
         "metadata": "Metadados",
+        "fitBounds": "Zoom para camada",
         "dashboard": "Gráficos",
         "transparency": "Transparência",
         "removeLayer": "Excluir Camada",
