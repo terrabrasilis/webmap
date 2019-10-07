@@ -40,6 +40,7 @@ export class TerrabrasilisApiComponent implements OnInit {
             // .addBaseLayers(JSON.parse(JSON.stringify(this.baselayers)))
             // .addOverLayers(JSON.parse(JSON.stringify(this.overlayers)))
             // .enableLegendAndToolToLayers()
+            .enableZoomBox()
             .enableDrawFeatureTool()
             .enableLayersControlTool()
             .enableScaleControlTool()
