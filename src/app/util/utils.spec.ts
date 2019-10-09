@@ -30,31 +30,33 @@ describe('UTILS: ', () => {
       thirdHost: ''
     }
 
+    const language = 'pt-br'
+
     it('should build the url for the legend', async (() => {
       const SHOULD_RETURN_AS_TAG = false
-      const result = Utils.getLegend({ ...layerMock }, SHOULD_RETURN_AS_TAG)
-      const expected = 'http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS'
+      const result = Utils.getLegend({ ...layerMock }, SHOULD_RETURN_AS_TAG, language)
+      const expected = 'http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS&style=yearly_deforestation_2008_2018_biome_pt-br'
       expect(result).toEqual(expected)
     }))
 
     it('should build the entire img tag with all informations', async (() => {
       const SHOULD_RETURN_AS_TAG = true
-      const result = Utils.getLegend({ ...layerMock }, SHOULD_RETURN_AS_TAG)
-      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS' />"
+      const result = Utils.getLegend({ ...layerMock }, SHOULD_RETURN_AS_TAG, language)
+      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS&style=yearly_deforestation_2008_2018_biome_pt-br' />"
       expect(result).toEqual(expected)
     }))
 
     it('should built the tag for an intern INPE url applying the style', async (() => {
       const SHOULD_RETURN_AS_TAG = true
-      const result = Utils.getLegend({ datasource: { host: '' }, thirdHost: true, ...layerMock }, SHOULD_RETURN_AS_TAG)
-      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS' />"
+      const result = Utils.getLegend({ datasource: { host: '' }, thirdHost: true, ...layerMock }, SHOULD_RETURN_AS_TAG, language)
+      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS&style=yearly_deforestation_2008_2018_biome_pt-br' />"
       expect(result).toEqual(expected)
     }))
 
-    it('should built the tag for an external URL in which not applier the style', async (() => {
+    it('should built the tag for an external URL in which not apply the style', async (() => {
       const SHOULD_RETURN_AS_TAG = true
-      const result = Utils.getLegend({ datasource: { host: '' }, ...layerMock }, SHOULD_RETURN_AS_TAG)
-      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS' />"
+      const result = Utils.getLegend({ datasource: { host: '' }, ...layerMock }, SHOULD_RETURN_AS_TAG, language)
+      const expected = "<img src='http://terrabrasilis.dpi.inpe.br/geoserver/ows?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=prodes-amz:yearly_deforestation_2008_2018_biome&service=WMS&style=yearly_deforestation_2008_2018_biome_pt-br' />"
       expect(result).toEqual(expected)
     }))
   })

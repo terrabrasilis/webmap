@@ -20,10 +20,14 @@ export const Utils = {
     return kebabCase(word.toLowerCase()).split('-').join(' ')
   },
 
-  getLegend (layer, urlOrCompleteSrcImgElement) {
+  getLegend (layer, urlOrCompleteSrcImgElement, language) {
     const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host
     const params = (host.split('?')[1] ? '&':'?') + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
-    const url = host + params
+    let url = host + params
+
+    const IS_INPE_HOST = this.isInpeUrl(host)
+    if(IS_INPE_HOST) { url += `&style=${layer.name}_${language}` }
+
     return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url
   },
 
