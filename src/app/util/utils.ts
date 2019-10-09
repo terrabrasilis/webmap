@@ -1,4 +1,4 @@
-import { includes, filter, forEach, kebabCase, get } from 'lodash';
+import { includes, filter, forEach, kebabCase, get } from 'lodash'
 
 export const Utils = {
 
@@ -18,6 +18,16 @@ export const Utils = {
 
   removeSpecialCharactersAndCase (word = '') {
     return kebabCase(word.toLowerCase()).split('-').join(' ')
-  }
+  },
 
+  getLegend (layer, urlOrCompleteSrcImgElement) {
+    const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host
+    const params = (host.split('?')[1] ? '&':'?') + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
+    const url = host + params
+    return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url
+  },
+
+  isInpeUrl (url) {
+    return includes(url, 'dpi.inpe')
+  }
 }
