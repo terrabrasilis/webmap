@@ -114,7 +114,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -683,6 +683,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
      * Used to update state of legend...
      */
     private updateOverlayerLegends() {
+        let self = this
         this.cdRef.detectChanges();
 
         this.layersToLegend = [];
@@ -693,6 +694,12 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             p.layers.sort(function(a, b) {
                 if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
             });
+
+            p.layers.forEach((layer) => {
+                const legendURL = self.getLegend(layer, false)
+                layer.addLegendURL(legendURL)
+            });
+
             this.layersToLegend.push(p);
         });
     }

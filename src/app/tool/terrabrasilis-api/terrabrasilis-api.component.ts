@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 
 /**
  *  import terrabrasilis api from node_modules
@@ -8,6 +8,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-terrabrasilis-api',
@@ -23,6 +24,7 @@ export class TerrabrasilisApiComponent implements OnInit {
         private dialog: MatDialog
         , private dom: DomSanitizer
         , private cdRef: ChangeDetectorRef
+        , private localStorageService: LocalStorageService
     ) { }
 
     ////////////////////////////////////////////////
@@ -110,14 +112,22 @@ export class TerrabrasilisApiComponent implements OnInit {
     }
 
     getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
-        const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
-        const indexof = host.indexOf('?');
+      const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
+      const indexof = host.indexOf('?');
 
-        const url = indexof < 0 ? host + '?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
-                            : host + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name  + '&service=WMS';
+      const url = indexof < 0 ? host + '?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS' :
+        host + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS';
 
-        return   urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url;
+      this.localStorageService.getValue('translate').subscribe((item: any) => {
+        let toUse = JSON.parse(item);
+        console.log('=======================')
+        console.log(JSON.stringify({ toUse }))
+        console.log('=======================')
+      });
+
+      return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url;
     }
+
 
     getBasicLayerInfo(layerObject: any) {
         this.cdRef.detectChanges();
