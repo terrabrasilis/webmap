@@ -8,7 +8,10 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
+import { Utils } from '../../util/utils';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { get } from 'lodash' 
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-terrabrasilis-api',
@@ -111,21 +114,12 @@ export class TerrabrasilisApiComponent implements OnInit {
         this.showDialog(html);
     }
 
-    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
-      const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
-      const indexof = host.indexOf('?');
-
-      const url = indexof < 0 ? host + '?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS' :
-        host + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS';
-
-      this.localStorageService.getValue('translate').subscribe((item: any) => {
-        let toUse = JSON.parse(item);
-        console.log('=======================')
-        console.log(JSON.stringify({ toUse }))
-        console.log('=======================')
-      });
-
-      return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url;
+    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): Promise<any> {
+      return this.localStorageService.getValue('translate').toPromise()
+        .then((item: any) => {
+            let language = get(JSON.parse(item), 'value', 'en')
+            return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language)
+        });
     }
 
 

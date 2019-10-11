@@ -9,6 +9,7 @@ import {
     , DoCheck
 } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Observable, of } from 'rxjs';
 
 /**
  * components
@@ -654,8 +655,16 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.showDialog(this.getDownloadHtmlOptions());
     }
 
-    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
-        return this.terrabrasilisApi.getLegend(layer, urlOrCompleteSrcImgElement);
+    processLegendForLayers(layers: any): Promise<any> {
+        const promises = layers.map((layer) => {
+          return this.terrabrasilisApi.getLegend(layer, false)
+            .then((url) => {
+              layer.addLegendURL(url)
+              return layer
+            })
+        });
+
+        return Promise.all(promises)
     }
 
     ///////////////////////////////////////////////////
@@ -689,18 +698,17 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.layersToLegend = [];
 
         this.overlayers.forEach(vision => {
-            const l = vision.layers.slice();
-            const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
-            p.layers.sort(function(a, b) {
+          const l = vision.layers.slice();
+          const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
+
+          self.processLegendForLayers(p.layers)
+            .then((layers) => {
+              p.layers = layers.sort(function(a, b) {
                 if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
-            });
+              });
+            })
 
-            p.layers.forEach((layer) => {
-                const legendURL = self.getLegend(layer, false)
-                layer.addLegendURL(legendURL)
-            });
-
-            this.layersToLegend.push(p);
+          self.layersToLegend.push(p);
         });
     }
 

@@ -42,6 +42,8 @@ export class LayerLegendToolComponent extends ToolComponent implements OnInit, O
   }
 
   showDialog(layer:Layer): void {
-    this.terrabrasilisApi.showDialog(this.terrabrasilisApi.getLegend(layer, true));
+    this.terrabrasilisApi.getLegend(layer, true).then((imgTag)=> {
+      this.terrabrasilisApi.showDialog(imgTag)
+    })
   }
 }
