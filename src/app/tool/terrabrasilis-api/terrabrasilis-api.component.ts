@@ -11,7 +11,6 @@ import { Layer } from '../../entity/layer';
 import { Utils } from '../../util/utils';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { get } from 'lodash' 
-import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-terrabrasilis-api',

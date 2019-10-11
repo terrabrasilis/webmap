@@ -9,7 +9,6 @@ import {
     , DoCheck
 } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Observable, of } from 'rxjs';
 
 /**
  * components
