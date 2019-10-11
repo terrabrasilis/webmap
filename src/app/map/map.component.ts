@@ -645,6 +645,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     changeLanguage(value: string) {
         this.localStorageService.setValue(this.languageKey, value);
         this._translate.use(value);
+        this.updateOverlayerLegends()
     }
 
     goTo(url: string) {
@@ -694,7 +695,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     private updateOverlayerLegends() {
         let self = this
         this.cdRef.detectChanges();
-
         this.layersToLegend = [];
 
         this.overlayers.forEach(vision => {
