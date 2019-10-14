@@ -39,7 +39,7 @@ export class LayerFitBoundsToolComponent extends ToolComponent implements OnInit
   /**
    * TerraBrasilis
    */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
 
   ngOnInit() {      
     this.layer = this.shared;

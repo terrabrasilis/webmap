@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 
 /**
  *  import terrabrasilis api from node_modules
@@ -8,6 +8,9 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
+import { Utils } from '../../util/utils';
+import { LocalStorageService } from '../../services/local-storage.service';
+import { get } from 'lodash' 
 
 @Component({
   selector: 'app-terrabrasilis-api',
@@ -23,6 +26,7 @@ export class TerrabrasilisApiComponent implements OnInit {
         private dialog: MatDialog
         , private dom: DomSanitizer
         , private cdRef: ChangeDetectorRef
+        , private localStorageService: LocalStorageService
     ) { }
 
     ////////////////////////////////////////////////
@@ -109,15 +113,14 @@ export class TerrabrasilisApiComponent implements OnInit {
         this.showDialog(html);
     }
 
-    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
-        const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host;
-        const indexof = host.indexOf('?');
-
-        const url = indexof < 0 ? host + '?request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
-                            : host + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name  + '&service=WMS';
-
-        return   urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url;
+    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): Promise<any> {
+      return this.localStorageService.getValue('translate').toPromise()
+        .then((item: any) => {
+            let language = get(JSON.parse(item), 'value', 'en')
+            return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language)
+        });
     }
+
 
     getBasicLayerInfo(layerObject: any) {
         this.cdRef.detectChanges();

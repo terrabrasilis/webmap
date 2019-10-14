@@ -38,7 +38,7 @@ export class BasicInfoToolComponent extends ToolComponent implements OnInit, OnM
   /**
    * TerraBrasilis
    */
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
 
   ngOnInit() {
     this.layer = this.shared;
