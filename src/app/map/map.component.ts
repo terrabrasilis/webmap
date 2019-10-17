@@ -15,7 +15,6 @@ import { MatDialog } from '@angular/material';
  */
 import { DialogComponent } from '../dialog/dialog.component';
 import { WmsSearchComponent } from '../wms/wms-search/wms-search.component';
-import { AboutComponent } from '../about/about.component';
 import { ContactComponent } from '../contact/contact.component';
 
 /**
@@ -68,6 +67,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     public type = '';
     public language = '';
     public template: any;
+    public terraBrasilisAboutURL: string;
 
     /**
      * radio button
@@ -139,7 +139,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         urlParams.subscribe(routeParams => {
             this.type = routeParams.type;
             this.language = routeParams.hl !== 'undefined' ? routeParams.hl : null;
-            // console.log("language", this.language);
+            this.terraBrasilisAboutURL="http://terrabrasilis.dpi.inpe.br/sobre/";
 
             this.visionService.getVisionAndAllRelationshipmentByName(this.type)
                 .subscribe(visions => {
@@ -153,8 +153,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         layersToMap = layersToMap.concat(this.gridStackInstance(vision));
                     });
 
-                    // console.log(JSON.stringify(this.baselayers), JSON.parse(JSON.stringify(layersToMap)));
-
                     this.zone.runOutsideAngular(() => {
                         this.terrabrasilisApi.map({
                                 longitude: -51.921875,
@@ -166,6 +164,12 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     this.terrabrasilisApi.disableLoading();
 
                     if (this.language != null) { this.changeLanguage(this.language); }
+                });
+
+            this.localStorageService.getValue(this.languageKey)
+                .subscribe((item:any) => {
+                    let toUse = JSON.parse(item);
+                    this.changeAboutURL((toUse === null)?('pt-br'):(toUse.value));
                 });
         });
 
@@ -626,16 +630,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         }
     }
 
-    showAbout() {
-        this.cdRef.detectChanges();
-        this.dialog.open(AboutComponent, {
-            width : '980px',
-            minWidth: '700px',
-            height: '630px',
-            minHeight: '410px'
-        });
-    }
-
     showContact() {
         this.cdRef.detectChanges();
         this.dialog.open(ContactComponent, { width : '450px' });
@@ -644,6 +638,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     changeLanguage(value: string) {
         this.localStorageService.setValue(this.languageKey, value);
         this._translate.use(value);
+        this.changeAboutURL(value);
+    }
+
+    changeAboutURL(value: string) {
+        this.terraBrasilisAboutURL=(value=='en')?("http://terrabrasilis.dpi.inpe.br/en/about/"):("http://terrabrasilis.dpi.inpe.br/sobre/");
     }
 
     goTo(url: string) {
