@@ -114,7 +114,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -639,6 +639,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.localStorageService.setValue(this.languageKey, value);
         this._translate.use(value);
         this.changeAboutURL(value);
+        this.updateOverlayerLegends();
     }
 
     changeAboutURL(value: string) {
@@ -653,8 +654,16 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.showDialog(this.getDownloadHtmlOptions());
     }
 
-    getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): string {
-        return this.terrabrasilisApi.getLegend(layer, urlOrCompleteSrcImgElement);
+    processLegendForLayers(layers: any): Promise<any> {
+        const promises = layers.map((layer) => {
+          return this.terrabrasilisApi.getLegend(layer, false)
+            .then((url) => {
+              layer.addLegendURL(url)
+              return layer
+            })
+        });
+
+        return Promise.all(promises)
     }
 
     ///////////////////////////////////////////////////
@@ -682,17 +691,22 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
      * Used to update state of legend...
      */
     private updateOverlayerLegends() {
+        let self = this
         this.cdRef.detectChanges();
-
         this.layersToLegend = [];
 
         this.overlayers.forEach(vision => {
-            const l = vision.layers.slice();
-            const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
-            p.layers.sort(function(a, b) {
+          const l = vision.layers.slice();
+          const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
+
+          self.processLegendForLayers(p.layers)
+            .then((layers) => {
+              p.layers = layers.sort(function(a, b) {
                 if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
-            });
-            this.layersToLegend.push(p);
+              });
+            })
+
+          self.layersToLegend.push(p);
         });
     }
 

@@ -200,7 +200,7 @@
                         <ng-template #templateTitle>
                             <div title="{{ layer.title }}"><h2>{{ layer.title | slice:0:21 }}{{ (layer.title.length>21)?('...'):('') }}</h2></div>
                         </ng-template>
-                        <img [src]="getLegend(layer, false)" alt="{{layer.title}}">
+                        <img [src]="layer.legendURL" alt="{{layer.title}}">
                     </div>
                 </div>
             </div>

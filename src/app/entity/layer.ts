@@ -24,6 +24,7 @@ export class Layer {
     enable = false;
     created = '';
     timeDimension = false;
+    legendURL = '';
 
     datasource: Datasource = null;
     tools: Tool[] = [];
@@ -69,6 +70,11 @@ export class Layer {
 
     addTitle(title: string) {
         this.title = title;
+        return this;
+    }
+
+    addLegendURL(legendURL: string) {
+        this.legendURL = legendURL;
         return this;
     }
 
