@@ -29,7 +29,6 @@ import { UserComponent } from './user/user.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { WmsSearchComponent } from './wms/wms-search/wms-search.component';
 import { ContactComponent } from './contact/contact.component';
-import { AboutComponent } from './about/about.component';
 import { TerrabrasilisApiComponent } from './tool/terrabrasilis-api/terrabrasilis-api.component';
 import { MapComponent } from './map/map.component';
 
@@ -41,7 +40,6 @@ import { LayerInfoProviderService } from './services/layer-info-provider.service
 import { WmsCapabilitiesProviderService } from './services/wms-capabilities-provider.service';
 import { MapWmsSearchDialogService } from './services/map-wms-search-dialog.service';
 import { ContactService } from './services/contact.service';
-import { DownloadService } from './services/download.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { DatasourceService } from './services/datasource.service';
 import { LayerService } from './services/layer.service';
@@ -51,18 +49,6 @@ import { VisionService } from './services/vision.service';
  * Providers
  */
 import { localStorageProviders } from '@ngx-pwa/local-storage';
-
-/**
- * Dashboard modules import
- */
-// services
-import { DashboardApiProviderService } from './services/dashboard-api-provider.service';
-import { GraphProviderService } from './services/graph-provider.service';
-import { DashboardLoiSearchService } from './services/dashboard-loi-search.service';
-
-// deforestation
-import { DeforestationOptionsComponent } from './dashboard/deforestation/deforestation-options/deforestation-options.component';
-import { LoiSearchComponent } from './dashboard/loi-search/loi-search.component';
 
 /**
  * Translate tool
@@ -82,7 +68,6 @@ import * as $ from 'jquery';
 import * as _ from 'lodash';
 import 'gridstack';
 
-import { OnDemandDownloadComponent } from './dashboard/on-demand-download/on-demand-download.component';
 import * as gridstack from 'gridstack';
 
 @NgModule({
@@ -93,11 +78,7 @@ import * as gridstack from 'gridstack';
     UserComponent,
     DialogComponent,
     WmsSearchComponent,
-    DeforestationOptionsComponent,
     ContactComponent,
-    AboutComponent,
-    LoiSearchComponent,
-    OnDemandDownloadComponent,
     TerrabrasilisApiComponent
   ],
   imports: [
@@ -139,14 +120,10 @@ import * as gridstack from 'gridstack';
     UserProviderService,
     LayerInfoProviderService,
     WmsCapabilitiesProviderService,
-    DashboardApiProviderService,
     MapWmsSearchDialogService,
     ContactService,
-    DownloadService,
     LocalStorageService,
     localStorageProviders({ prefix: 'TBV01_' }),
-    GraphProviderService,
-    DashboardLoiSearchService,
     DatasourceService,
     LayerService,
     VisionService,
@@ -160,8 +137,7 @@ import * as gridstack from 'gridstack';
   ],
   entryComponents: [
     DialogComponent,
-    ContactComponent, 
-    AboutComponent,
+    ContactComponent,
     TerrabrasilisApiComponent
   ],
   exports: [

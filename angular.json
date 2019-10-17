@@ -35,7 +35,6 @@
               "src/assets/css/dc/dc.css",
               "src/assets/css/gridstack/gridstack.css",
               "src/assets/css/gridstack/gridstack-extra.css",
-              "src/assets/css/about/about.css",
               "src/assets/css/map/baselayer.css",
               "src/assets/css/map/estilo.css",
               "src/assets/css/map/jquery.mCustomScrollbar.min.css",
@@ -61,10 +60,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": false, // FIXME: se true a aplicação quebra...
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false, // FIXME: se true a aplicação quebra...
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -90,10 +89,10 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": false, // FIXME: se true a aplicação quebra...
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false, // FIXME: se true a aplicação quebra...
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
