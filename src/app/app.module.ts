@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 /**
@@ -94,6 +96,8 @@ import * as gridstack from 'gridstack';
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     /**
      * Active the translate tool for entire app
      */
@@ -130,6 +134,7 @@ import * as gridstack from 'gridstack';
     DatasourceService,
     LayerService,
     VisionService,
+    MatDatepickerModule,
     // {
     //   provide: APP_BASE_HREF,
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */
