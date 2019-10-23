@@ -1,4 +1,4 @@
-/** 
+/**
  * Angular imports
  */
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -31,12 +31,14 @@ import { WmsSearchComponent } from './wms/wms-search/wms-search.component';
 import { ContactComponent } from './contact/contact.component';
 import { TerrabrasilisApiComponent } from './tool/terrabrasilis-api/terrabrasilis-api.component';
 import { MapComponent } from './map/map.component';
+import { LayerFilterComponent } from './tool/layer-filter-tool/layer-filter.component';
+
 
 /**
  * Services
  */
 import { UserProviderService } from './services/user-provider.service';
-import { LayerInfoProviderService } from './services/layer-info-provider.service'; 
+import { LayerInfoProviderService } from './services/layer-info-provider.service';
 import { WmsCapabilitiesProviderService } from './services/wms-capabilities-provider.service';
 import { MapWmsSearchDialogService } from './services/map-wms-search-dialog.service';
 import { ContactService } from './services/contact.service';
@@ -53,7 +55,7 @@ import { localStorageProviders } from '@ngx-pwa/local-storage';
 /**
  * Translate tool
  */
-import { HttpLoaderFactory } from "./factory/httpLoaderFactory"; 
+import { HttpLoaderFactory } from "./factory/httpLoaderFactory";
 
 /**
  * Node modules import
@@ -77,6 +79,7 @@ import * as gridstack from 'gridstack';
     LoginComponent,
     UserComponent,
     DialogComponent,
+    LayerFilterComponent,
     WmsSearchComponent,
     ContactComponent,
     TerrabrasilisApiComponent
@@ -111,7 +114,7 @@ import * as gridstack from 'gridstack';
     * Enable DynamicComponentModule
     */
    DynamicComponentModule.forRoot({
-      imports: [ 
+      imports: [
         SharedModule
       ]
    }),
@@ -128,7 +131,7 @@ import * as gridstack from 'gridstack';
     LayerService,
     VisionService,
     // {
-    //   provide: APP_BASE_HREF, 
+    //   provide: APP_BASE_HREF,
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */
     // }
   ],
@@ -137,6 +140,7 @@ import * as gridstack from 'gridstack';
   ],
   entryComponents: [
     DialogComponent,
+    LayerFilterComponent,
     ContactComponent,
     TerrabrasilisApiComponent
   ],
@@ -145,6 +149,6 @@ import * as gridstack from 'gridstack';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
-  ]  
+  ]
 })
 export class AppModule { }

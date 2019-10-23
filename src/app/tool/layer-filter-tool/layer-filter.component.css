@@ -1,0 +1,8 @@
+.layer-filter-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.layer-filter-container > * {
+    width: 100%;
+}
