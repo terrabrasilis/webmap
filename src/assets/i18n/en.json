@@ -105,7 +105,8 @@
         "transparency": "Transparency",
         "removeLayer": "Remove Layer",
         "legend": "Legend",
-        "timeDimension": "Time Dimension"
+        "timeDimension": "Time Dimension",
+        "layerFilter": "Filter"
     },
     "filter" : {
         "title":"Filter",

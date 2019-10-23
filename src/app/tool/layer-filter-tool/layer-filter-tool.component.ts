@@ -15,7 +15,7 @@ import { LayerFilterComponent } from './layer-filter.component';
 @Component({
   selector: 'layer-filter-tool',
   template: `
-              <dfn attr.data-info="{{ 'tools.fitBounds' | translate }}" #innerContent>
+              <dfn attr.data-info="{{ 'tools.layerFilter' | translate }}" #innerContent>
                 <button type="button" class="btn" *ngIf="layer !== null" (click)="showDialog(layer)"><i class="material-icons md-dark ">filter_list</i></button>
                 <ng-content></ng-content>
               </dfn>
