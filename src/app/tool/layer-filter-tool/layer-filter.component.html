@@ -7,7 +7,7 @@
     <div class="card-body">
       <h5 class="card-title">{{ 'filter.title' | translate }}</h5>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" placeholder="{{ 'filter.placeholder' | translate }}">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
