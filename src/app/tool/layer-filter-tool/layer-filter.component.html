@@ -7,9 +7,10 @@
     <div class="card-body">
       <h5 class="card-title">{{ 'filter.title' | translate }}</h5>
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" placeholder="{{ 'filter.placeholder' | translate }}">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+        </mat-datepicker>
       </mat-form-field>
     </div>
   </div>
