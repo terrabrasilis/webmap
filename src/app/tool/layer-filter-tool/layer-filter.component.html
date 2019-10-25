@@ -6,10 +6,13 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{ 'filter.title' | translate }}</h5>
+
+      <button type="button" class="btn" (click)="getDimensions()"><i class="material-icons md-dark ">zoom_out_map</i></button>
+
       <mat-form-field>
         <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
         <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)" panelClass="example-month-picker">
+        <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)" panelClass="date-month-picker">
         </mat-datepicker>
       </mat-form-field>
     </div>

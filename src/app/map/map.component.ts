@@ -279,7 +279,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             // Define the initial state of the toggle button for layers group.
             vision.enabled = (layer.active && !vision.enabled) ? (true) : (vision.enabled);
 
-            // layer.tools.push(new Tool().addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>"))
+            layer.tools.push(new Tool().addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>"))
             layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
 
             rLayers.push(

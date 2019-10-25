@@ -6,3 +6,11 @@
 .layer-filter-container > * {
     width: 100%;
 }
+
+.date-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.date-month-picker .mat-calendar-arrow {
+  display: none;
+}

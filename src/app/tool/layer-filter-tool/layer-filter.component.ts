@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialog } from '@angular/material';
+import { Component, OnInit, Optional, Inject, ChangeDetectorRef } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { Layer } from '../../entity/layer';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import { MatDatepicker} from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDatepicker } from '@angular/material/datepicker';
 
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
@@ -14,7 +16,7 @@ import { MatDatepicker} from '@angular/material/datepicker';
 // the `default as` syntax.
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import {default as _rollupMoment, Moment} from 'moment';
+import { default as _rollupMoment, Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
@@ -41,17 +43,27 @@ export const MY_FORMATS = {
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
     // our example generation script.
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
 
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 
 export class LayerFilterComponent implements OnInit {
   date = new FormControl(moment());
+  layer: Layer;
 
   constructor(
-    private dialogRef: MatDialogRef <LayerFilterComponent> , private dom: DomSanitizer, private dialog: MatDialog) {}
+    private dialogRef: MatDialogRef < LayerFilterComponent > ,
+    private dom: DomSanitizer,
+    private dialog: MatDialog,
+    private cdRef: ChangeDetectorRef,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.layer = data.layer
+  }
+
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
 
   ngOnInit() {}
 
@@ -61,7 +73,7 @@ export class LayerFilterComponent implements OnInit {
     this.date.setValue(ctrlValue);
   }
 
-  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker<Moment>) {
+  chosenMonthHandler(normalizedMonth: Moment, datepicker: MatDatepicker < Moment > ) {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
@@ -79,5 +91,13 @@ export class LayerFilterComponent implements OnInit {
   showDialog(content: string): void {
     const dialogRef = this.dialog.open(DialogComponent, { width: '450px' });
     dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(content);
+  }
+
+  getDimensions() {
+    this.terrabrasilisApi.getDimensions(this.layer)
+      .then((result) => {
+        console.log(result)
+      })
+      .catch(console.error)
   }
 }

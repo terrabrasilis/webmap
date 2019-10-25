@@ -6,7 +6,6 @@ import { OnMount } from '../../core-modules/dynamic-html';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { LayerFilterComponent } from './layer-filter.component';
-// import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
 
 /**
  * LayerFilterToolComponent
@@ -41,7 +40,6 @@ export class LayerFilterToolComponent extends ToolComponent implements OnInit, O
   /**
    * TerraBrasilis
    */
-  // private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
 
   ngOnInit() {
     this.layer = this.shared;
@@ -49,6 +47,6 @@ export class LayerFilterToolComponent extends ToolComponent implements OnInit, O
 
   showDialog() {
     this.cdRef.detectChanges();
-    this.dialog.open(LayerFilterComponent, { width : '450px' });
+    this.dialog.open(LayerFilterComponent, { width : '450px', data: {layer: this.layer} });
   }
 }

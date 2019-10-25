@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
 import { Utils } from '../../util/utils';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { get } from 'lodash' 
+import { get } from 'lodash'
 
 @Component({
   selector: 'app-terrabrasilis-api',
@@ -219,6 +219,10 @@ export class TerrabrasilisApiComponent implements OnInit {
 
     fitBounds(layer: Layer) {
         Terrabrasilis.fitBounds(layer).then(console.log).catch(console.error)
+    }
+
+    getDimensions(layer: Layer) {
+        return Terrabrasilis.getDimensions(layer)
     }
 
     ////////////////////////////////////////////////
