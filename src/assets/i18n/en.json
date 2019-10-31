@@ -3,7 +3,7 @@
         "title": "Terrabrasilis",
         "label": "Cerrado",
         "deforestation": "PRODES (Deforestation)",
-        "alerts": "DETER (Alerts)",
+        "alerts": "DETER (Notices)",
         "text": "TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs"
     },
     "dialog": {
@@ -13,10 +13,10 @@
         "analyses": {
             "name": "Graphs",
             "option1" : "PRODES (Deforestation)",
-            "option2" : "DETER (Alerts)",
+            "option2" : "DETER (Notices)",
             "option3" : "Land User and Land Cover",
             "option4" : "Amazon Desforestation",
-            "option5" : "Amazon Alerts"
+            "option5" : "Amazon Notices"
 
         },
         "about": "About",
@@ -26,7 +26,7 @@
         "map": {
             "name": "Maps",
             "option1" : "PRODES (Deforestation)",
-            "option2" : "DETER (Alerts)"
+            "option2" : "DETER (Notices)"
 
         }
     },
@@ -34,12 +34,12 @@
         "control1" : "Baselayers",
         "5c40fe3a0e9b2a14264e03a7" : {
             "name": " Cerrado",
-            "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "States",            
+            "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "States",
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Biome Border",
-            "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Counties",            
-            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "LANDSAT - 2000/2018",
+            "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Counties",
+            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Image Mosaic - 2000/2019",
             "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Yearly Deforestation - 2000/2018"
-        },        
+        },
         "5c40fdce0e9b2a14264e03a6" : {
             "name": " Legal Amazon",
             "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Forest - 2016/2018",
@@ -49,8 +49,8 @@
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "No Forest",
             "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Cloud - 2016/2018",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Legal Amazon",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Legal Amazon Mosaic - 2000/2018"
-        },        
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Image Mosaic - 2000/2018"
+        },
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazon",
             "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Forest - 2016/2018",
@@ -60,30 +60,32 @@
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "No Forest",
             "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Cloud - 2016/2018",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Amazon Biome",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Legal Amazon Mosaic - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Image Mosaic - 2000/2018"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
             "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Deforestation Mask up to 2016",
-            "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Biome Border"
+            "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Biome Border",
+            "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Image Mosaic - 2016"
         },
         "5cd460faaa127a00017de861" : {
             "name": " Pantanal",
             "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Deforestation Mask up to 2016",
-            "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Biome Border"
+            "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Biome Border",
+            "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Image Mosaic - 2016"
         },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
-            "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "States",            
+            "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "States",
             "5c49f7791a21020001cd66405c8107880cf423000144ebd8": "Biome Border",
             "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Counties",
-            "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Cerrado Deforestation Alerts"
+            "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Deforestation Notices since 2018"
         },
         "5c810c820cf423000144ebda" : {
             "name": " Legal Amazon",
-            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Legal Amazon Deforestation Alerts",
+            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Deforestation Notices since 2015",
             "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Legal Amazon"
-        },        
+        },
         "control3" : "Others Layers",
         "noLegend" : "To see legends, you should enable layers."
     },
@@ -100,7 +102,6 @@
         "layerOptions": "Layer Tools",
         "basicInfo": "Basic Info",
         "metadata": "Metadata",
-        "fitBounds": "Zoom to fit layer",
         "dashboard": "Graphics",
         "transparency": "Transparency",
         "removeLayer": "Remove Layer",
@@ -184,13 +185,13 @@
             "increAmazon": "Amazon",
             "increCerrado": "Cerrado",
             "ratesProdes": "Deforestation Rates",
-            "alertsDeter": "Chart - Alerts",
-            "dailyCerradoDeter": "Cerrado Daily Alerts",
-            "monthlyCerradoDeter": "Cerrado Monthly Alerts",            
+            "alertsDeter": "Chart - Notices",
+            "dailyCerradoDeter": "Cerrado Daily Notices",
+            "monthlyCerradoDeter": "Cerrado Monthly Notices",            
             "ratesAmazon": "Legal Amazon",
             "relatedPage": "Related Page",
             "deforestationMap": "Deforestation Map",
-            "alertsMap": "Alerts Map",
+            "alertsMap": "Notices Map",
             "cerradoPage": "Home - Cerrado",
             "amazonPage": "Home - Amazon"
         },
@@ -222,7 +223,7 @@
             "amazon": "Amazon",
             "cerrado": "Cerrado",
             "time": "Year",
-            "update": "Last Update: 07 - 29 - 2019"
+            "update": "Updated at: 07/29/2019"
         },
         "tooltip": {
             "rates": "Deforestation rates are calculated based on deforestation areas greater than 6.25 hectares",
