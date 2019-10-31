@@ -1,18 +1,66 @@
 <div class="modal-header fechar">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()"><i class="material-icons">clear</i></button>
+  <button
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    aria-hidden="true"
+    (click)="closeDialog()"
+  >
+    <i class="material-icons">clear</i>
+  </button>
 </div>
 <div></div>
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ 'filter.title' | translate }}</h5>
-
-      <button type="button" class="btn" (click)="getDimensions()"><i class="material-icons md-dark ">zoom_out_map</i></button>
+      <h5 class="card-title">{{ "filter.title" | translate }}</h5>
+      <button type="button" class="btn" (click)="getDimensions()"></button>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
-        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-        <mat-datepicker #dp startView="multi-year" (yearSelected)="chosenYearHandler($event)" (monthSelected)="chosenMonthHandler($event, dp)" panelClass="date-month-picker">
+        <input
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="initialDatePicker"
+          placeholder="Month and Year"
+          [formControl]="initialDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="initialDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #initialDatePicker
+          startView="multi-year"
+          (yearSelected)="chosenYearHandlerInitialDate($event)"
+          (monthSelected)="
+            chosenMonthHandlerInitialDate($event, initialDatePicker)
+          "
+          panelClass="example-month-picker"
+        >
+        </mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="endDatePicker"
+          placeholder="Month and Year"
+          [formControl]="endDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #endDatePicker
+          startView="multi-year"
+          (yearSelected)="chosenYearHandlerEndDate($event)"
+          (monthSelected)="chosenMonthHandlerEndDate($event, endDatePicker)"
+          panelClass="example-month-picker"
+        >
         </mat-datepicker>
       </mat-form-field>
     </div>
