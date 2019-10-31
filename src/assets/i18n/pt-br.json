@@ -105,7 +105,8 @@
         "transparency": "Transparência",
         "removeLayer": "Excluir Camada",
         "legend": "Legenda",
-        "timeDimension": "Dimensão temporal"
+        "timeDimension": "Dimensão temporal",
+        "fitBounds": "Zoom para Camada"
     },
     "contact" : {
         "title":"Envie sugestões ou perguntas para"
