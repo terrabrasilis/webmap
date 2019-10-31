@@ -3,7 +3,7 @@
         "title": "Terrabrasilis",
         "label": "Cerrado",
         "deforestation": "PRODES (Desmatamento)",
-        "alerts": "DETER (Alertas)",
+        "alerts": "DETER (Avisos)",
         "text": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental"
     },
     "dialog": {
@@ -13,10 +13,10 @@
         "analyses": {
             "name": "Gráficos",
             "option1" : "PRODES (Desmatamento)",
-            "option2" : "DETER (Alertas)",
+            "option2" : "DETER (Avisos)",
             "option3" : "Uso e cobertura da terra",
             "option4" : "Desmatamento Amazônia",
-            "option5" : "Alertas Amazônia"
+            "option5" : "Avisos Amazônia"
         },
         "about": "Sobre",
         "contact": "Contato",
@@ -25,7 +25,7 @@
         "map": {
             "name": "Mapas",
             "option1" : "PRODES (Desmatamento)",
-            "option2" : "DETER (Alertas)"
+            "option2" : "DETER (Avisos)"
 
         }
     },
@@ -36,7 +36,7 @@
             "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
             "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",
-            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "LANDSAT - 2000/2018",
+            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens - 2000/2019",
             "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Desmatamento Anual - 2000/2018"
         },
         "5c40fdce0e9b2a14264e03a6" : {
@@ -48,7 +48,7 @@
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
             "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2018",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Amazonia Legal",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico Amazônia Legal - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico de Imagens - 2000/2018"
         },
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazônia",
@@ -59,28 +59,30 @@
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
             "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2018",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Bioma Amazônia",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico Amazônia Legal - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2018"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
             "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
-            "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma"
+            "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma",
+            "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de imagens - 2016"
         },
         "5cd460faaa127a00017de861" : {
             "name": " Pantanal",
             "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2016",
-            "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma"
+            "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma",
+            "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de imagens - 2016"
         },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
             "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "Estados",
             "5c49f7791a21020001cd66405c8107880cf423000144ebd8": "Limite do Bioma",
             "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Municípios",
-            "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Alerta de Desmatamento no Cerrado"
+            "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Avisos de Desmatamento à partir de 2018"
         },
         "5c810c820cf423000144ebda" : {
             "name": " Amazônia Legal",
-            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Alerta de Desmatamento na Amazonia Legal",
+            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Avisos de Desmatamento à partir de 2015",
             "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Amazonia Legal"
         },
         "control3" : "Outras Camadas",
@@ -99,7 +101,6 @@
         "layerOptions": "Ferramentas da Camada",
         "basicInfo": "Informação Básica",
         "metadata": "Metadados",
-        "fitBounds": "Zoom para camada",
         "dashboard": "Gráficos",
         "transparency": "Transparência",
         "removeLayer": "Excluir Camada",
@@ -188,13 +189,13 @@
             "increAmazon": "Amazônia",
             "increCerrado": "Cerrado",
             "ratesProdes": "Taxas de Desmatamento",
-            "alertsDeter": "Gráficos - Alertas",
-            "dailyCerradoDeter": "Alertas Diários do Cerrado",
-            "monthlyCerradoDeter": "Alertas Mensais Agregados do Cerrado",
+            "alertsDeter": "Gráficos - Avisos",
+            "dailyCerradoDeter": "Avisos Diários do Cerrado",
+            "monthlyCerradoDeter": "Avisos Mensais Agregados do Cerrado",
             "ratesAmazon": "Amazônia Legal",
             "relatedPage": "Páginas Relacionadas",
             "deforestationMap": "Mapa de Desmatamento",
-            "alertsMap": "Mapa de Alertas",
+            "alertsMap": "Mapa de Avisos",
             "cerradoPage": "Home - Cerrado",
             "amazonPage": "Home - Amazônia"
         },
@@ -233,7 +234,7 @@
             "amazon": "Amazônia",
             "cerrado": "Cerrado",
             "time": "Ano",
-            "update": "Última Atualização: 29 - 07 - 2019"
+            "update": "Atualizado em: 29/07/2019"
         },
         "tooltip": {
             "rates": "As taxas de desmatamento são calculadas baseadas nas áreas de desmatamento maiores que 6.25 hectares",
