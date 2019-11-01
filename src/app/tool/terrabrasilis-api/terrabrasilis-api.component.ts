@@ -6,6 +6,7 @@ import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 import * as Terrabrasilis from 'terrabrasilis-api';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
 import { Utils } from '../../util/utils';
@@ -27,6 +28,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private dom: DomSanitizer
     , private cdRef: ChangeDetectorRef
     , private localStorageService: LocalStorageService
+    , private _snackBar: MatSnackBar = null
   ) { }
 
   ////////////////////////////////////////////////
@@ -217,8 +219,21 @@ export class TerrabrasilisApiComponent implements OnInit {
     Terrabrasilis.onOffTimeDimension(layer.name, layer.isAggregatable /*aggregateTimes*/);
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
   fitBounds(layer: Layer) {
-    Terrabrasilis.fitBounds(layer).then(console.log).catch(console.error)
+    const self = this
+    this.enableLoading();
+    Terrabrasilis.fitBounds(layer).then(console.log)
+      .catch(() => {
+        self.openSnackBar('Ops, esta layer não tem os atributos necessários pra fazer o zoom', 'Aviso')
+        self.disableLoading()
+      })
+      .finally(this.disableLoading);
   }
 
   ////////////////////////////////////////////////

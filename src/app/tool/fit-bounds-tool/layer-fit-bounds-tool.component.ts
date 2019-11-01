@@ -6,6 +6,7 @@ import { OnMount } from '../../core-modules/dynamic-html';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { MatSnackBar } from '@angular/material';
 
 /**
  * LayerFitBoundsToolComponent
@@ -22,26 +23,31 @@ import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-ap
 })
 @RegisterComponent
 export class LayerFitBoundsToolComponent extends ToolComponent implements OnInit, OnMount {
-  layer:Layer;
+  layer: Layer;
 
-  @Input() shared: any;  
-  @ViewChild('innerContent', {static: true}) innerContent: ElementRef;
-  
+  @Input() shared: any;
+  @ViewChild('innerContent', { static: true }) innerContent: ElementRef;
+
   dynamicOnMount(attr: Map<string, any>, innerHTML: string, el: any) {
-    this.innerContent.nativeElement.innerHTML = innerHTML;    
+    this.innerContent.nativeElement.innerHTML = innerHTML;
     this.layer = this.shared;
   }
-  
-  constructor(private dialog: MatDialog, private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { 
-    super();        
+
+  constructor(
+    private dialog: MatDialog,
+    private dom: DomSanitizer,
+    private cdRef: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
+  ) {
+    super();
   }
 
   /**
    * TerraBrasilis
-   */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
+   */
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, this._snackBar);
 
-  ngOnInit() {      
+  ngOnInit() {
     this.layer = this.shared;
   }
 

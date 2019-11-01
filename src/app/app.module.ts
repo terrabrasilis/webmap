@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { MatSnackBarModule } from '@angular/material';
 
 /**
  * Custom module created imports
@@ -36,7 +37,7 @@ import { MapComponent } from './map/map.component';
  * Services
  */
 import { UserProviderService } from './services/user-provider.service';
-import { LayerInfoProviderService } from './services/layer-info-provider.service'; 
+import { LayerInfoProviderService } from './services/layer-info-provider.service';
 import { WmsCapabilitiesProviderService } from './services/wms-capabilities-provider.service';
 import { MapWmsSearchDialogService } from './services/map-wms-search-dialog.service';
 import { ContactService } from './services/contact.service';
@@ -53,7 +54,7 @@ import { localStorageProviders } from '@ngx-pwa/local-storage';
 /**
  * Translate tool
  */
-import { HttpLoaderFactory } from "./factory/httpLoaderFactory"; 
+import { HttpLoaderFactory } from "./factory/httpLoaderFactory";
 
 /**
  * Node modules import
@@ -90,31 +91,32 @@ import * as gridstack from 'gridstack';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MatSnackBarModule,
     HttpClientModule,
     /**
      * Active the translate tool for entire app
      */
     TranslateModule.forRoot({
       loader: {
-         provide: TranslateLoader,
-         useFactory: HttpLoaderFactory,
-         deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
-   /**
-    * Enable local storage module
-    */
-   LocalStorageModule,
-   CommonModule,
-   SharedModule,
-   /**
-    * Enable DynamicComponentModule
-    */
-   DynamicComponentModule.forRoot({
-      imports: [ 
+    /**
+     * Enable local storage module
+     */
+    LocalStorageModule,
+    CommonModule,
+    SharedModule,
+    /**
+     * Enable DynamicComponentModule
+     */
+    DynamicComponentModule.forRoot({
+      imports: [
         SharedModule
       ]
-   }),
+    }),
   ],
   providers: [
     UserProviderService,
@@ -145,6 +147,6 @@ import * as gridstack from 'gridstack';
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
-  ]  
+  ]
 })
 export class AppModule { }
