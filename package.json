@@ -56,7 +56,7 @@
     "ogc-schemas": "^2.6.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#75c6f55",
+    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#caaa64d",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
     "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#f3665cc",
     "w3c-schemas": "^1.4.0",
