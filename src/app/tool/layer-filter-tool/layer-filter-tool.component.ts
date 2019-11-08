@@ -5,21 +5,21 @@ import {
   ViewChild,
   ElementRef,
   ChangeDetectorRef
-} from "@angular/core";
-import { Layer } from "../../entity/layer";
-import { RegisterComponent } from "../../util/component-decorator";
-import { ToolComponent } from "../tool-component-interface";
-import { OnMount } from "../../core-modules/dynamic-html";
-import { MatDialog } from "@angular/material";
-import { DomSanitizer } from "@angular/platform-browser";
-import { LayerFilterComponent } from "./layer-filter.component";
+} from '@angular/core'
+import { Layer } from '../../entity/layer'
+import { RegisterComponent } from '../../util/component-decorator'
+import { ToolComponent } from '../tool-component-interface'
+import { OnMount } from '../../core-modules/dynamic-html'
+import { MatDialog } from '@angular/material'
+import { DomSanitizer } from '@angular/platform-browser'
+import { LayerFilterComponent } from './layer-filter.component'
 
 /**
  * LayerFilterToolComponent
  * <layer-filter-tool  [shared]="layer"></layer-filter-tool>
  */
 @Component({
-  selector: "layer-filter-tool",
+  selector: 'layer-filter-tool',
   template: `
     <dfn attr.data-info="{{ 'tools.layerFilter' | translate }}" #innerContent>
       <button
@@ -37,14 +37,14 @@ import { LayerFilterComponent } from "./layer-filter.component";
 @RegisterComponent
 export class LayerFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
-  layer: Layer;
+  layer: Layer
 
-  @Input() shared: any;
-  @ViewChild("innerContent", { static: true }) innerContent: ElementRef;
+  @Input() shared: any
+  @ViewChild('innerContent', { static: true }) innerContent: ElementRef
 
   dynamicOnMount(attr: Map<string, any>, innerHTML: string, el: any) {
-    this.innerContent.nativeElement.innerHTML = innerHTML;
-    this.layer = this.shared;
+    this.innerContent.nativeElement.innerHTML = innerHTML
+    this.layer = this.shared
   }
 
   constructor(
@@ -52,7 +52,7 @@ export class LayerFilterToolComponent extends ToolComponent
     private dom: DomSanitizer,
     private cdRef: ChangeDetectorRef
   ) {
-    super();
+    super()
   }
 
   /**
@@ -60,14 +60,14 @@ export class LayerFilterToolComponent extends ToolComponent
    */
 
   ngOnInit() {
-    this.layer = this.shared;
+    this.layer = this.shared
   }
 
   showDialog() {
-    this.cdRef.detectChanges();
+    this.cdRef.detectChanges()
     this.dialog.open(LayerFilterComponent, {
-      width: "450px",
+      width: '450px',
       data: { layer: this.layer }
-    });
+    })
   }
 }
