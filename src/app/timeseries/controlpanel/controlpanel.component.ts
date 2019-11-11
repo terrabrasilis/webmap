@@ -30,7 +30,8 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
     this.dialog,
     this.dom,
-    this.cdRef
+    this.cdRef,
+    null
   )
 
   ngOnInit () {
