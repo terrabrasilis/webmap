@@ -1197,3 +1197,34 @@ footer {
   background-color: #fff !important;
   padding: 8px !important;
 }
+
+/* Timeseries Control panel */
+#ts-control-panel{
+  display: block;
+  top: 75px;
+  left: 340px;
+  width: 290px;
+  transition: all 0.3s;
+  position: absolute;
+  z-index: 999;
+}
+
+#ts-control-panel.active{
+  left: 50px;
+}
+
+/* Timeseries Data panel */
+#ts-data-panel{
+  display: block;
+  bottom: -30px;
+  left: 650px;
+  width: calc(100% - 650px);
+  transition: all 0.3s;
+  position: absolute;
+  z-index: 999;
+}
+
+#ts-data-panel.active{
+  left: 350px;
+  width: calc(100% - 350px);
+}
