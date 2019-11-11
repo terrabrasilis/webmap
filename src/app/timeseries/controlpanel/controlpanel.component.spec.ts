@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ControlpanelComponent } from './controlpanel.component';
+import { ControlpanelComponent } from './controlpanel.component'
 
 describe('ControlpanelComponent', () => {
-  let component: ControlpanelComponent;
-  let fixture: ComponentFixture<ControlpanelComponent>;
+  let component: ControlpanelComponent
+  let fixture: ComponentFixture<ControlpanelComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControlpanelComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [ControlpanelComponent]
+    }).compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ControlpanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ControlpanelComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
