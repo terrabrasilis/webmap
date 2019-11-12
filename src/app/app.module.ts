@@ -10,6 +10,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { MatSnackBarModule } from '@angular/material';
 
 /**
  * Custom module created imports
@@ -95,6 +96,7 @@ import * as gridstack from 'gridstack';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MatSnackBarModule,
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,

@@ -106,6 +106,7 @@
         "removeLayer": "Excluir Camada",
         "legend": "Legenda",
         "timeDimension": "Dimensão temporal",
+        "fitBounds": "Zoom para Camada",
         "layerFilter": "Filtrar"
     },
     "filter" : {
