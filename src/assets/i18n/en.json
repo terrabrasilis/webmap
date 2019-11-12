@@ -229,5 +229,31 @@
       "incr": "Deforestation increments are calculated based on all deforestation data available",
       "download": "This download option is only available for deforestation increments"
     }
-  }
+  },
+  "timeseries" : {
+      "title": "Time series using SITS package functions",
+      "service": "Service",
+      "coverage": "Coverage",
+      "bands": "Bands",
+      "preFilter": "Pre-filter SATVEG",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "submit": "Execute!",
+      "filter": "Filter",
+      "filters": "Filters",
+      "noFilter": "No-filter",
+      "whitParameters": "Whittaker parameters",
+      "sgParameters": "Savitsky-Golay parameters",
+      "applyFilter": "Apply filter!",
+      "point": "Point",
+      "polygon": "Polygon",
+      "timeSeries": "Time Series",
+      "points": "Points",
+      "deleteRows": "Delete Rows",
+      "clearTable": "Clear Table",
+      "info": "This page shows the application using OpenCPU. For more information please access ",
+      "table": "Table",
+      "graphic": "Chart",
+      "infouse": "Uses the control painel to select the options of origin of the timeseries and the map's tools to define a location or area used for obtaining the series."
+  }  
 }

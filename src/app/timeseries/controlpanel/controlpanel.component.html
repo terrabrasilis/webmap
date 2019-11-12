@@ -1,0 +1,165 @@
+<div class="control-panel">
+  <!-- Start General controls -->
+
+  <div class="display-controls" id="general-controls">
+    <div class="form-group">
+      <select class="form-control" id="services" required>
+        <option value="item0"
+          >-- {{ 'timeseries.service' | translate }} --</option
+        >
+        <option value="WTSS-INPE">WTSS-INPE</option>
+        <option value="SATVEG">SATVEG-EMBRAPA</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select class="form-control" id="coverages" required>
+        <option value="">-- {{ 'timeseries.coverage' | translate }} --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input
+        *ngIf="!isPolygon"
+        type="number"
+        class="form-control"
+        id="lat"
+        placeholder="Latitude"
+        name="latitude"
+        [(ngModel)]="latitude"
+        required
+      />
+
+      <input
+        *ngIf="!isPolygon"
+        type="number"
+        class="form-control"
+        id="long"
+        placeholder="Longitude"
+        name="longitude"
+        [(ngModel)]="longitude"
+        required
+      />
+
+      <input
+        *ngIf="isPolygon"
+        name="polygon"
+        [(ngModel)]="polygon"
+        type="text"
+        class="form-control"
+        id="openJSON"
+        placeholder="Paste here your json"
+      />
+    </div>
+    <div class="form-group">
+      <select *ngIf="!isPolygon" class="form-control" multiple id="band">
+        <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
+      </select>
+      <select *ngIf="isPolygon" class="form-control" id="band_shp">
+        <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pre_filter">{{ 'timeseries.preFilter' | translate }}: </label>
+      <select class="form-control" id="pre_filter" required>
+        <option value="">-- {{ 'timeseries.preFilter' | translate }} --</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="from">{{ 'timeseries.startDate' | translate }}: </label>
+      <input type="date" class="form-control" id="from" value="2008-05-04" />
+    </div>
+    <div class="form-group">
+      <label for="to">{{ 'timeseries.endDate' | translate }}: </label>
+      <input type="date" class="form-control" id="to" value="2016-04-13" />
+    </div>
+
+    <button type="button" (click)="sendDataToChart()" class="btn btn-success">
+      {{ 'timeseries.submit' | translate }}
+    </button>
+  </div>
+  <!-- End of general control -->
+
+  <!-- Stat Filter controls -->
+  <div class="hidden-controls" id="filter-controls">
+    <div id="title-chart-filter" class="all-charts-title boxtitlepanel">
+      {{ 'timeseries.filter' | translate }}
+    </div>
+
+    <div class="form-group" id="filter-group">
+      <label for="filter">{{ 'timeseries.filters' | translate }}: </label>
+      <select class="form-control" id="filter" required>
+        <option value="No-filter" selected="selected">
+          {{ 'timeseries.noFilter' | translate }}
+        </option>
+        <option value="Whittaker"> Whittaker </option>
+        <option value="Savitsky-Golay"> Savitsky-Golay </option>
+      </select>
+    </div>
+    <div class="form-group" id="filter-whit">
+      <label for="parameter-Whittaker">
+        {{ 'timeseries.whitParameters' | translate }}:
+      </label>
+      <label for="wh-lambda">
+        <input
+          type="number"
+          class="form-control"
+          id="wh-lambda"
+          required
+          placeholder="lambda"
+          step="0.01"
+          value="1.0"
+          disabled
+        />
+        lambda
+      </label>
+      <label for="wh-differences">
+        <input
+          type="number"
+          class="form-control"
+          id="wh-differences"
+          required
+          placeholder="differences"
+          value="3"
+          disabled
+        />
+        differences
+      </label>
+    </div>
+    <div class="form-group" id="filter-sg">
+      <label for="parameter-Savitsky-Golay"
+        >{{ 'timeseries.sgParameters' | translate }}:
+      </label>
+      <label for="sg-order">
+        <input
+          type="number"
+          class="form-control"
+          id="sg-order"
+          required
+          placeholder="order"
+          value="3"
+          disabled
+        />
+        order
+      </label>
+      <label for="sg-scale">
+        <input
+          type="number"
+          class="form-control"
+          id="sg-scale"
+          required
+          placeholder="scale"
+          value="1"
+          disabled
+        />
+        scale
+      </label>
+    </div>
+    <button
+      type="button"
+      id="submitbuttonfilter"
+      class="btn btn-success"
+      disabled
+    >
+      {{ 'timeseries.applyFilter' | translate }}
+    </button>
+  </div>
+</div>

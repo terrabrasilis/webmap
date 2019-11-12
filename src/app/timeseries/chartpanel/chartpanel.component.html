@@ -1,0 +1,12 @@
+<button
+  class="swapchartbtn"
+  id="swapchartbtn"
+  type="button"
+  (click)="swapChartAndTable()"
+>
+  Tabela
+</button>
+<div id="chart-panel" class="chart-panel">
+  <div id="plotdiv"></div>
+  <div *ngIf="!hasChart">{{ 'timeseries.infouse' | translate }}</div>
+</div>
