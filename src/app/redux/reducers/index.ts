@@ -4,7 +4,7 @@ import {
   Action,
   ActionReducerMap,
 } from '@ngrx/store';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 /**
  * Every reducer module's default export is the reducer function itself. In

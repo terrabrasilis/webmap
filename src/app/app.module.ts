@@ -70,9 +70,7 @@ import * as _ from 'lodash';
 import 'gridstack';
 
 import * as gridstack from 'gridstack';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
-
+import StoreModule from './redux/store'
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,13 +117,7 @@ import { reducers, metaReducers } from './reducers';
         SharedModule
       ]
     }),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
+    StoreModule
   ],
   providers: [
     UserProviderService,
