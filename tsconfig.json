@@ -11,8 +11,10 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es5",
+    "types": ["jest"],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "jest"
     ],
     "lib": [
       "es2018",
