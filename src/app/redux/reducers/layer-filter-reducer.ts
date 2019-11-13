@@ -1,9 +1,10 @@
 import { createReducer, createAction, on, props } from '@ngrx/store'
 
 /* ACTIONS / CREATORS */
-export const setInitialDate = createAction('[FILTER] set initial date', props<{initialDate: Date}>())
-export const setFinalDate = createAction('[FILTER] set final date', props<{finalDate: Date}>())
-
+export const actions = {
+  setInitialDate: createAction('[FILTER] set initial date', props<{initialDate: Date}>()),
+  setFinalDate: createAction('[FILTER] set final date', props<{finalDate: Date}>())
+}
 export const featureKey = 'layerFilter'
 
 export interface State {
@@ -20,8 +21,8 @@ const initialState: State = {
 export const reducer = createReducer(
   initialState,
   // Even thought the `state` is unused, it helps infer the return type
-  on(setFinalDate, (state, initialDate: any) => ({ ...state, initialDate })),
-  on(setInitialDate, (state, finalDate: any) => ({ ...state, finalDate }))
+  on(actions.setFinalDate, (state, initialDate: any) => ({ ...state, initialDate })),
+  on(actions.setInitialDate, (state, finalDate: any) => ({ ...state, finalDate }))
 )
 
 // SELECTOR
