@@ -1,0 +1,14 @@
+<mat-form-field>
+  <input
+    matInput
+    [min]="minDate"
+    [max]="maxDate"
+    [matDatepicker]="fullDatePicker"
+    placeholder="Choose a date"
+  />
+  <mat-datepicker-toggle
+    matSuffix
+    [for]="fullDatePicker"
+  ></mat-datepicker-toggle>
+  <mat-datepicker #fullDatePicker></mat-datepicker>
+</mat-form-field>

@@ -1,0 +1,20 @@
+<mat-form-field>
+  <input
+    matInput
+    [min]="minDate"
+    [max]="maxDate"
+    [matDatepicker]="yearDatePicker"
+    placeholder="Select the Year"
+    [formControl]="date"
+  />
+  <mat-datepicker-toggle
+    matSuffix
+    [for]="yearDatePicker"
+  ></mat-datepicker-toggle>
+  <mat-datepicker
+    #yearDatePicker
+    startView="multi-year"
+    (yearSelected)="chosenYearHandler($event)"
+  >
+  </mat-datepicker>
+</mat-form-field>

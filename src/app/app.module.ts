@@ -23,6 +23,14 @@ import { DynamicComponentModule } from './core-modules/dynamic-component';
 import { SharedModule } from './core-modules/shared.module';
 import { PipeSharedModule } from './core-modules/pipe-shared.module';
 
+
+/**
+ * Custom shared modules
+ */
+import { DatePickerYearComponent } from './shared-components/date-picker-year/date-picker-year.component';
+import { DatePickerMonthComponent } from './shared-components/date-picker-month/date-picker-month.component';
+import { DatePickerFullComponent } from './shared-components/date-picker-full/date-picker-full.component'
+
 /**
  * Custom component imports
  */
@@ -85,7 +93,10 @@ import * as gridstack from 'gridstack';
     LayerFilterComponent,
     WmsSearchComponent,
     ContactComponent,
-    TerrabrasilisApiComponent
+    TerrabrasilisApiComponent,
+    DatePickerYearComponent,
+    DatePickerMonthComponent,
+    DatePickerFullComponent
   ],
   imports: [
     PipeSharedModule,

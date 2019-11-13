@@ -63,10 +63,9 @@ export const MY_FORMATS = {
   ]
 })
 export class LayerFilterComponent implements OnInit {
-  initialDate = new FormControl(moment())
-  endDate = new FormControl(moment())
-  minDate = new Date(1900, 0, 1)
-  maxDate = new Date(2050, 0, 1)
+  dateValue = new Date(2016, 0, 1)
+  minDate = new Date(2016, 0, 1)
+  maxDate = new Date(2018, 0, 1)
 
   layer: Layer
 
@@ -88,38 +87,6 @@ export class LayerFilterComponent implements OnInit {
   )
 
   ngOnInit() {}
-
-  chosenYearHandlerInitialDate(normalizedYear: Moment) {
-    const ctrlValue = this.initialDate.value
-    ctrlValue.year(normalizedYear.year())
-    this.initialDate.setValue(ctrlValue)
-  }
-
-  chosenMonthHandlerInitialDate(
-    normalizedMonth: Moment,
-    datepicker: MatDatepicker<Moment>
-  ) {
-    const ctrlValue = this.initialDate.value
-    ctrlValue.month(normalizedMonth.month())
-    this.initialDate.setValue(ctrlValue)
-    datepicker.close()
-  }
-
-  chosenYearHandlerEndDate(normalizedYear: Moment) {
-    const ctrlValue = this.endDate.value
-    ctrlValue.year(normalizedYear.year())
-    this.endDate.setValue(ctrlValue)
-  }
-
-  chosenMonthHandlerEndDate(
-    normalizedMonth: Moment,
-    datepicker: MatDatepicker<Moment>
-  ) {
-    const ctrlValue = this.endDate.value
-    ctrlValue.month(normalizedMonth.month())
-    this.initialDate.setValue(ctrlValue)
-    datepicker.close()
-  }
 
   sendLayerFilter(value: any): void {
     this.dialogRef.close()
@@ -153,5 +120,9 @@ export class LayerFilterComponent implements OnInit {
 
   handleResult(results) {
     this.setRangeDate(results)
+  }
+
+  applyFilter() {
+    console.log('apply filter')
   }
 }

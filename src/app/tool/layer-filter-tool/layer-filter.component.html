@@ -13,56 +13,23 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{ 'filter.title' | translate }}</h5>
-      <button type="button" class="btn" (click)="getDimensions()"></button>
+      <h5 class="card-title">{{ "filter.title" | translate }}</h5>
 
-      <mat-form-field>
-        <input
-          matInput
-          [min]="minDate"
-          [max]="maxDate"
-          [matDatepicker]="initialDatePicker"
-          placeholder="Month and Year"
-          [formControl]="initialDate"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="initialDatePicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker
-          #initialDatePicker
-          startView="multi-year"
-          (yearSelected)="chosenYearHandlerInitialDate($event)"
-          (monthSelected)="
-            chosenMonthHandlerInitialDate($event, initialDatePicker)
-          "
-          panelClass="example-month-picker"
-        >
-        </mat-datepicker>
-      </mat-form-field>
+      <app-date-picker-full [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-full>
+      <app-date-picker-month [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-month>
+      <app-date-picker-year [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-year>
 
-      <mat-form-field>
-        <input
-          matInput
-          [min]="minDate"
-          [max]="maxDate"
-          [matDatepicker]="endDatePicker"
-          placeholder="Month and Year"
-          [formControl]="endDate"
-        />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="endDatePicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker
-          #endDatePicker
-          startView="multi-year"
-          (yearSelected)="chosenYearHandlerEndDate($event)"
-          (monthSelected)="chosenMonthHandlerEndDate($event, endDatePicker)"
-          panelClass="example-month-picker"
-        >
-        </mat-datepicker>
-      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <button mat-raised-button color="primary" (click)="getDimensions()">
+        Get Dimensions test
+      </button>
+
+      <mat-divider></mat-divider>
+
+      <button mat-raised-button color="primary" (click)="applyFilter()">
+        Filtrar
+      </button>
     </div>
   </div>
 </div>
