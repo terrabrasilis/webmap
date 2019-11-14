@@ -6,7 +6,8 @@
       "jquery",
       "jest",
       "node"
-    ]
+    ],
+    "module": "commonjs"
   },
   "files": [
     "src/polyfills.ts"
