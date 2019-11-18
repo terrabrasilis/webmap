@@ -1,6 +1,6 @@
 import { actions, featureKey, reducer } from './layer-filter-reducer'
 
-describe.only('LayerFilterReducer', () => {
+describe('LayerFilterReducer', () => {
   describe('ACTIONS:', () => {
     it('feature key should be "layerFilter"', () => {
       expect(featureKey).toBe('layerFilter')

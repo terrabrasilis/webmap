@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - v12
+  - v13
 
 deploy:
   provider: pages
@@ -16,8 +16,8 @@ before_script:
   - npm install -g @angular/cli
 
 script:
+  - yarn test:ci
   - yarn deploy-gh-pages
-  - yarn all_tests
 
 notifications:
   email: false

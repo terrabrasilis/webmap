@@ -26,7 +26,6 @@
     "start-production": "ng serve --open --configuration=production --port 3001",
     "start-staging": "ng serve --open --configuration=staging --port 3001",
     "test": "jest",
-    "test_headless": "ng test --watch false --browsers ChromeHeadless",
     "test:watch": "jest --watch",
     "test:ci": "jest --runInBand",
     "test:coverage": "jest --coverage"

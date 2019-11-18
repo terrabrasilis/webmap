@@ -15,11 +15,11 @@ export class LocalStorageServiceMock {
   }
 }
 
-fdescribe('storage meta reducer', () => {
+describe.only('storage meta reducer', () => {
   const localStorageKey = '__state__'
 
   let localStorageServiceMock: LocalStorageServiceMock
-  let setStateSpy: Spy
+  let setStateSpy: any
 
   let state
   let fakeReducer
