@@ -1,6 +1,6 @@
 # Terrabrasilis
 
-[![Build Status](https://travis-ci.org/Terrabrasilis/client_v2.svg?branch=master)](https://travis-ci.org/Terrabrasilis/client_v2) [![codecov.io](https://codecov.io/github/terrabrasilis/client_v2/coverage.svg?branch=master)](https://codecov.io/github/terrabrasilis/client_v2?branch=master)  [![Code Climate](https://codeclimate.com/github/terrabrasilis/client_v2/badges/gpa.svg)](https://codeclimate.com/github/terrabrasilis/client_v2)  [![Dependency Status](https://david-dm.org/terrabrasilis/client_v2/status.svg)](https://david-dm.org/terrabrasilis/client_v2)  [![devDependency Status](https://david-dm.org/terrabrasilis/client_v2/dev-status.svg)](https://david-dm.org/terrabrasilis/client_v2#info=devDependencies)
+[![Build Status](https://travis-ci.org/Terrabrasilis/webmap.svg?branch=master)](https://travis-ci.org/Terrabrasilis/webmap) [![codecov.io](https://codecov.io/github/terrabrasilis/webmap/coverage.svg?branch=master)](https://codecov.io/github/terrabrasilis/webmap?branch=master)  [![Code Climate](https://codeclimate.com/github/terrabrasilis/webmap/badges/gpa.svg)](https://codeclimate.com/github/terrabrasilis/webmap)  [![Dependency Status](https://david-dm.org/terrabrasilis/webmap/status.svg)](https://david-dm.org/terrabrasilis/webmap)  [![devDependency Status](https://david-dm.org/terrabrasilis/webmap/dev-status.svg)](https://david-dm.org/terrabrasilis/webmap#info=devDependencies)
 
 ## Configuring the environment variables
 
