@@ -119,7 +119,7 @@
     "about" : {
         "description": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet. ",
         "more": "Leia mais informações sobre o TerraBrasilis",
-        "coordinators": "EQUIPE DE COORDENADORES",
+        "coordinators": "EQUIPE DE COORDENADORES", 
         "team.ti": "EQUIPE de T.I",
         "occupation.male": "",
         "occupation.female": "Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE",
@@ -138,7 +138,7 @@
         "technology": "Tecnologias ",
         "technology.languages": "JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java",
         "technology.heterogeneous": "Docker Swarm (clusterização de contêineres), Redis MongoDB, PostgreSQL, Nginx HTTP Server (balanceamento de carga e proxy reverso). ",
-        "technology.services": "Servidor de compartilhamento de dados geoespaciais (Geoserver) e catálogo de busca de metadados (Geonetwork)."
+        "technology.services": "Servidor de compartilhamento de dados geoespaciais (Geoserver) e catálogo de busca de metadados (Geonetwork)."        
     },
     "dashboard": {
         "class": {
@@ -199,7 +199,7 @@
             "alertsMap": "Mapa de Avisos",
             "cerradoPage": "Home - Cerrado",
             "amazonPage": "Home - Amazônia"
-        },
+        },        
         "options": {
             "removefilter": "Remover Filtro",
             "restoreview": "Restaurar Visão",
@@ -241,6 +241,32 @@
             "rates": "As taxas de desmatamento são calculadas baseadas nas áreas de desmatamento maiores que 6.25 hectares",
             "incr": "Os incrementos de desmatamento são calculados baseados em todas as áreas de desmatamento disponíveis",
             "download": "Esta opção de download está disponível somente para os incrementos de desmatamento"
-        }
-    }
+        } 
+    },
+    "timeseries" : {
+        "title": "Série temporal usando funções do pacote SITS",
+        "service": "Serviço",
+        "coverage": "Cobertura",
+        "bands": "Bandas",
+        "preFilter": "Pré-filtro SATVEG",
+        "startDate": "Data Inicial",
+        "endDate": "Data Final",
+        "submit": "Consultar!",
+        "filter": "Filtro",
+        "filters": "Filtros",
+        "noFilter": "Sem-filtro",
+        "whitParameters": "Parâmetros do Whittaker",
+        "sgParameters": "Parâmetros do Savitsky-Golay",
+        "applyFilter": "Aplicar filtro!",
+        "point": "Ponto",
+        "polygon": "Polígono",
+        "timeSeries": "Série Temporal",
+        "points": "Pontos",
+        "deleteRows": "Remover Linhas",
+        "clearTable": "Limpar Tabela",
+        "info": "Esta página mostra uma aplicação usando OpenCPU. Para mais informações acesse ",
+        "table": "Tabela",
+        "graphic": "Gráfico",
+        "infouse": "Use o painel de controle para selecionar as opções de origem da série temporal e as ferramentas do mapa para definir uma localização ou área usada na obtenção das séries."
+    }    
 }

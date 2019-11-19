@@ -1,0 +1,320 @@
+<!-- close button -->
+<div class="modal-header fechar">
+  <!-- data-keyboard="false" data-backdrop="static" -->
+  <button
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    aria-hidden="true"
+    (click)="closeDialog()"
+  >
+    <i class="material-icons">clear</i>
+  </button>
+</div>
+<div></div>
+<!-- end -->
+
+<h2 mat-dialog-title mat-dialog-draggable>
+  <a href="https://github.com/e-sensing/sits" target="_blank">{{
+    'timeseries.title' | translate
+  }}</a
+  ><i class="material-icons md-dark">drag_indicator</i>
+</h2>
+
+<br />
+
+<!-- start ------------------------------------------------------- -->
+
+<!-- time series options -->
+<!-- <div id="title-chart" class="all-charts-title boxtitlepanel">Time series using <code>sits package</code> function </div> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- <div id="title-chart" class="all-charts-title boxtitlepanel"> Filter </div> -->
+
+    <div class="col-sm-3">
+      <div class="form-group">
+        <select class="form-control" id="services" required>
+          <option value="item0"
+            >-- {{ 'timeseries.service' | translate }} --</option
+          >
+          <option value="WTSS-INPE">WTSS-INPE</option>
+          <option value="SATVEG">SATVEG-EMBRAPA</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control" id="coverages" required>
+          <option value=""
+            >-- {{ 'timeseries.coverage' | translate }} --</option
+          >
+        </select>
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          class="form-control"
+          id="lat"
+          placeholder="Latitude"
+          [(ngModel)]="latitude"
+        />
+        <!-- value="-13.224772"-->
+      </div>
+      <div class="form-group">
+        <input
+          type="number"
+          class="form-control"
+          id="long"
+          placeholder="Longitude"
+          [(ngModel)]="longitude"
+        />
+        <!-- value="-56.245043"-->
+        <button type="button" id="showLatLong" class="btn btn-outline-success">
+          Show points!
+        </button>
+      </div>
+      <div class="form-group">
+        <select class="form-control" multiple id="band" required>
+          <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
+        </select>
+        <select
+          class="form-control"
+          id="band_shp"
+          required
+          style="display:none"
+        >
+          <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
+        </select>
+        <!-- open a external json -->
+        <input
+          type="text"
+          class="form-control"
+          id="openJSON"
+          placeholder="Paste here your json"
+          style="display:none"
+        />
+      </div>
+      <div class="form-group">
+        <label for="pre_filter"
+          >{{ 'timeseries.preFilter' | translate }}:
+        </label>
+        <select class="form-control" id="pre_filter" required>
+          <option value=""
+            >-- {{ 'timeseries.preFilter' | translate }} --</option
+          >
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="from">{{ 'timeseries.startDate' | translate }}: </label>
+        <input type="date" class="form-control" id="from" value="2008-05-04" />
+      </div>
+      <div class="form-group">
+        <label for="to">{{ 'timeseries.endDate' | translate }}: </label>
+        <input type="date" class="form-control" id="to" value="2016-04-13" />
+      </div>
+      <!-- <button type="button" id="submitbutton"> Submit to server! </button> -->
+      <button type="button" id="submitbutton" class="btn btn-success">
+        {{ 'timeseries.submit' | translate }}
+      </button>
+
+      <!-- <button id="changeColor">Rectangle -> Blue</button> -->
+
+      <!-- space between elements-->
+      <!-- <div style="width:100%; height:5%; background-color: none;"> </div>   -->
+
+      <!-- Filter -->
+      <!-- <div id="title-chart-filter" class="all-charts-title boxtitlepanel"> {{ 'timeseries.filter' | translate }} </div> -->
+      <div id="title-chart-filter" class="all-charts-title boxtitlepanel">
+        {{ 'timeseries.filter' | translate }}
+      </div>
+
+      <div class="form-group" id="filter-group">
+        <label for="filter">{{ 'timeseries.filters' | translate }}: </label>
+        <select class="form-control" id="filter" required>
+          <option value="No-filter" selected="selected">
+            {{ 'timeseries.noFilter' | translate }}
+          </option>
+          <option value="Whittaker"> Whittaker </option>
+          <option value="Savitsky-Golay"> Savitsky-Golay </option>
+        </select>
+      </div>
+      <div class="form-group" id="filter-whit">
+        <label for="parameter-Whittaker">
+          {{ 'timeseries.whitParameters' | translate }}:
+        </label>
+        <label for="wh-lambda">
+          <input
+            type="number"
+            class="form-control"
+            id="wh-lambda"
+            required
+            placeholder="lambda"
+            step="0.01"
+            value="1.0"
+            disabled
+          />
+          lambda
+        </label>
+        <label for="wh-differences">
+          <input
+            type="number"
+            class="form-control"
+            id="wh-differences"
+            required
+            placeholder="differences"
+            value="3"
+            disabled
+          />
+          differences
+        </label>
+      </div>
+      <div class="form-group" id="filter-sg">
+        <label for="parameter-Savitsky-Golay"
+          >{{ 'timeseries.sgParameters' | translate }}:
+        </label>
+        <label for="sg-order">
+          <input
+            type="number"
+            class="form-control"
+            id="sg-order"
+            required
+            placeholder="order"
+            value="3"
+            disabled
+          />
+          order
+        </label>
+        <label for="sg-scale">
+          <input
+            type="number"
+            class="form-control"
+            id="sg-scale"
+            required
+            placeholder="scale"
+            value="1"
+            disabled
+          />
+          scale
+        </label>
+      </div>
+      <button
+        type="button"
+        id="submitbuttonfilter"
+        class="btn btn-success"
+        disabled
+      >
+        {{ 'timeseries.applyFilter' | translate }}
+      </button>
+    </div>
+
+    <div class="col-sm-9">
+      <!-- place holder for map -->
+
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-success active">
+          <input
+            type="radio"
+            name="mode-options"
+            id="get-point"
+            value="point"
+            checked
+          />
+          {{ 'timeseries.point' | translate }}
+        </label>
+        <label class="btn btn-outline-success">
+          <input
+            type="radio"
+            name="mode-options"
+            id="get-polygon"
+            value="polygon"
+          />
+          {{ 'timeseries.polygon' | translate }}
+        </label>
+      </div>
+
+      <!-- <div id="map"></div> -->
+
+      <div class="pointer"></div>
+      <!-- for search -->
+      <p id="coord" style="color:black;"></p>
+      <p id="message" style="color:red;"></p>
+      <div id="title-chart" class="all-charts-title boxtitlepanel">
+        {{ 'timeseries.timeSeries' | translate }}
+      </div>
+      <!-- place holder for graphics -->
+
+      <!-- With tabs - does not work yet  -->
+      <!-- <div class="tab">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item"><a class="nav-link ripple" data-toggle="tab" href="#tab0">Tab 0</a></li>
+        </ul>
+        <div class="tab-content" id="contentTab">
+          <div class="tab-pane fade show active" id="tab0">Time series will be presented in others ...</div>
+        </div>
+     </div> -->
+
+      <!-- Without tabs - work  -->
+      <div id="plotdiv"></div>
+
+      <!-- place holder for table -->
+      <div id="title-chart" class="all-charts-title boxtitlepanel">
+        {{ 'timeseries.points' | translate }}
+      </div>
+      <div id="tabService">
+        <table id="tableSample" class="tableSample">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>longitude</th>
+              <th>latitude</th>
+              <th>start_date</th>
+              <th>end_date</th>
+              <th>label</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <br />
+      <div class="buttons-table">
+        <div class="action_btn">
+          <button
+            type="button"
+            id="saveCSV"
+            class="w3-large, btn btn-outline-success"
+          >
+            <i class="fa fa-save" aria-hidden="true"></i> Download CSV
+          </button>
+          <button
+            type="button"
+            id="deleteRow"
+            class="w3-large, btn btn-outline-success"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            {{ 'timeseries.deleteRows' | translate }}
+          </button>
+          <!-- </div> -->
+          <button
+            type="button"
+            id="clearTable"
+            class="w3-large, btn btn-outline-success"
+          >
+            <i class="fa fa-table" aria-hidden="true"></i>
+            {{ 'timeseries.clearTable' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        {{ 'timeseries.info' | translate }}
+        <a href="https://www.opencpu.org/" target="_blank">opencpu.org</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- end ------------------------------------------------------- -->

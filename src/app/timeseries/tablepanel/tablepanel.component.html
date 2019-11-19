@@ -1,0 +1,49 @@
+<div id="table-panel" class="table-panel disable">
+  <!-- place holder for table -->
+  <div class="all-charts-title boxtitlepanel">
+    {{ 'timeseries.points' | translate }}
+  </div>
+  <div id="tabService">
+    <table id="tableSample" class="tableSample">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>longitude</th>
+          <th>latitude</th>
+          <th>start_date</th>
+          <th>end_date</th>
+          <th>label</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <br />
+  <div class="buttons-table">
+    <div class="action_btn">
+      <button
+        type="button"
+        id="saveCSV"
+        class="w3-large, btn btn-outline-success"
+      >
+        <i class="fa fa-save" aria-hidden="true"></i> Download CSV
+      </button>
+      <button
+        type="button"
+        id="deleteRow"
+        class="w3-large, btn btn-outline-success"
+      >
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        {{ 'timeseries.deleteRows' | translate }}
+      </button>
+      <!-- </div> -->
+      <button
+        type="button"
+        id="clearTable"
+        class="w3-large, btn btn-outline-success"
+      >
+        <i class="fa fa-table" aria-hidden="true"></i>
+        {{ 'timeseries.clearTable' | translate }}
+      </button>
+    </div>
+  </div>
+</div>

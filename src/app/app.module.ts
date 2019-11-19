@@ -1,4 +1,4 @@
-/**
+/** 
  * Angular imports
  */
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -82,7 +82,7 @@ import * as _ from 'lodash';
 import 'gridstack';
 
 import * as gridstack from 'gridstack';
-
+import StoreModule from './redux/store'
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,25 +116,26 @@ import * as gridstack from 'gridstack';
      */
     TranslateModule.forRoot({
       loader: {
-         provide: TranslateLoader,
-         useFactory: HttpLoaderFactory,
-         deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
-   /**
-    * Enable local storage module
-    */
-   LocalStorageModule,
-   CommonModule,
-   SharedModule,
-   /**
-    * Enable DynamicComponentModule
-    */
-   DynamicComponentModule.forRoot({
+    /**
+     * Enable local storage module
+     */
+    LocalStorageModule,
+    CommonModule,
+    SharedModule,
+    /**
+     * Enable DynamicComponentModule
+     */
+    DynamicComponentModule.forRoot({
       imports: [
         SharedModule
       ]
-   }),
+    }),
+    StoreModule
   ],
   providers: [
     UserProviderService,
@@ -149,7 +150,7 @@ import * as gridstack from 'gridstack';
     VisionService,
     MatDatepickerModule,
     // {
-    //   provide: APP_BASE_HREF,
+    //   provide: APP_BASE_HREF, 
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */
     // }
   ],

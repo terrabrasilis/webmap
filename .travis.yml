@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - v12
+  - v13
 
 deploy:
   provider: pages
@@ -13,11 +13,14 @@ addons:
   chrome: stable
 
 before_script:
-  - npm install -g @angular/cli
+  - yarn add --global @angular/cli coveralls
 
 script:
+  - yarn test:ci
   - yarn deploy-gh-pages
-  - yarn all_tests
 
+after_success:
+  - cat ./coverage/lcov.info | coveralls
+  
 notifications:
   email: false

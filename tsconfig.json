@@ -12,8 +12,10 @@
     "importHelpers": true,
     "target": "es5",
     "allowSyntheticDefaultImports": true,
+    "types": ["jest"],
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "jest"
     ],
     "lib": [
       "es2018",

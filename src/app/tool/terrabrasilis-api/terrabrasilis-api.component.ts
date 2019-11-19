@@ -86,6 +86,14 @@ export class TerrabrasilisApiComponent implements OnInit {
     Terrabrasilis.redo();
   }
 
+  attachGeometryDrawingListener(listener:any) {
+    Terrabrasilis.enableDrawFeatureTool(listener);
+  }
+
+  detachGeometryDrawingListener() {
+    Terrabrasilis.disableDrawFeatureTool();
+  }
+
   getFeatureInfo(event: any) {
     Terrabrasilis.addGetLayerFeatureInfoEventToMap(event);
   }
