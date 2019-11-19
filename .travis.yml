@@ -13,14 +13,14 @@ addons:
   chrome: stable
 
 before_script:
-  - npm install -g @angular/cli codecov
+  - yarn add --global @angular/cli coveralls
 
 script:
   - yarn test:ci
   - yarn deploy-gh-pages
 
 after_success:
-  - codecov
+  - cat ./coverage/lcov.info | coveralls
   
 notifications:
   email: false

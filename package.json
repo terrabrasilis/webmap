@@ -27,8 +27,7 @@
     "start-staging": "ng serve --open --configuration=staging --port 3001",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:ci": "jest --runInBand",
-    "test:coverage": "jest --coverage"
+    "test:ci": "jest --runInBand --coverage"
   },
   "dependencies": {
     "@angular/animations": "^8.2.1",
