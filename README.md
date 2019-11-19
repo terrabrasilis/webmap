@@ -1,6 +1,5 @@
-# Terrabrasilis
-
-[![Build Status](https://travis-ci.org/Terrabrasilis/webmap.svg?branch=master)](https://travis-ci.org/Terrabrasilis/webmap) [![codecov.io](https://codecov.io/github/terrabrasilis/webmap/coverage.svg?branch=master)](https://codecov.io/github/terrabrasilis/webmap?branch=master)  [![Code Climate](https://codeclimate.com/github/terrabrasilis/webmap/badges/gpa.svg)](https://codeclimate.com/github/terrabrasilis/webmap)  [![Dependency Status](https://david-dm.org/terrabrasilis/webmap/status.svg)](https://david-dm.org/terrabrasilis/webmap)  [![devDependency Status](https://david-dm.org/terrabrasilis/webmap/dev-status.svg)](https://david-dm.org/terrabrasilis/webmap#info=devDependencies)
+# terrabrasilis
+[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![standard][standard-image]][standard-url] [![Code Climate][codeclimate-image]][codeclimate-url]
 
 ## Configuring the environment variables
 
@@ -43,3 +42,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+[travis-image]: https://img.shields.io/travis/terrabrasilis/webmap/master.svg?style=for-the-badge
+[travis-url]: https://travis-ci.com/terrabrasilis/file-delivery
+[daviddm-image]: https://img.shields.io/david/terrabrasilis/webmap.svg?style=for-the-badge
+[daviddm-url]: https://david-dm.org/terrabrasilis/file-delivery
+[coveralls-image]: http://img.shields.io/coveralls/terrabrasilis/webmap/master.svg?style=for-the-badge
+[coveralls-url]: https://coveralls.io/github/terrabrasilis/webmap?branch=master
+[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=for-the-badge
+[standard-url]: http://npm.im/standard
+[codeclimate-image]: https://codeclimate.com/github/terrabrasilis/webmap/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/terrabrasilis/webmap

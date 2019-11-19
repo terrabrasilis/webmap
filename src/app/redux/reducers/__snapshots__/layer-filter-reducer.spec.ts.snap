@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayerFilterReducer REDUCERS should return the default state 1`] = `
+Object {
+  "finalDate": null,
+  "initialDate": null,
+}
+`;

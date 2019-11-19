@@ -70,7 +70,7 @@ import * as _ from 'lodash';
 import 'gridstack';
 
 import * as gridstack from 'gridstack';
-
+import StoreModule from './redux/store'
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,6 +117,7 @@ import * as gridstack from 'gridstack';
         SharedModule
       ]
     }),
+    StoreModule
   ],
   providers: [
     UserProviderService,
