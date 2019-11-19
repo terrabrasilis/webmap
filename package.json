@@ -43,6 +43,7 @@
     "@angular/platform-browser-dynamic": "^8.2.1",
     "@angular/router": "^8.2.1",
     "@ecodev/fab-speed-dial": "4.0.0",
+    "@ngrx/effects": "^8.5.1",
     "@ngrx/store": "^8.5.1",
     "@ngrx/store-devtools": "^8.5.1",
     "@ngtools/webpack": "^8.2.1",
