@@ -13,11 +13,14 @@ addons:
   chrome: stable
 
 before_script:
-  - npm install -g @angular/cli
+  - npm install -g @angular/cli codecov
 
 script:
   - yarn test:ci
   - yarn deploy-gh-pages
 
+after_success:
+  - codecov
+  
 notifications:
   email: false
