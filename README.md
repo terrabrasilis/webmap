@@ -44,9 +44,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 [travis-image]: https://img.shields.io/travis/terrabrasilis/webmap/master.svg?style=for-the-badge
-[travis-url]: https://travis-ci.com/terrabrasilis/file-delivery
+[travis-url]: https://travis-ci.com/terrabrasilis/webmap
 [daviddm-image]: https://img.shields.io/david/terrabrasilis/webmap.svg?style=for-the-badge
-[daviddm-url]: https://david-dm.org/terrabrasilis/file-delivery
+[daviddm-url]: https://david-dm.org/terrabrasilis/webmap
 [coveralls-image]: http://img.shields.io/coveralls/terrabrasilis/webmap/master.svg?style=for-the-badge
 [coveralls-url]: https://coveralls.io/github/terrabrasilis/webmap?branch=master
 [standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=for-the-badge
