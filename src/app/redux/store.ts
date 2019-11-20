@@ -31,15 +31,15 @@ export function getMetaReducers(
       maxAge: 25,
       logOnly: environment.production
     })
-  ],
-  providers: [
-    { provide: ROOT_STORAGE_KEYS, useValue: ['layout.theme'] },
-    { provide: ROOT_LOCAL_STORAGE_KEY, useValue: '__app_storage__' },
-    {
-      provide: META_REDUCERS,
-      deps: [ROOT_STORAGE_KEYS, ROOT_LOCAL_STORAGE_KEY, LocalStorageService],
-      useFactory: getMetaReducers
-    }
   ]
+  // ,providers: [
+  //   { provide: ROOT_STORAGE_KEYS, useValue: ['layout.theme'] },
+  //   { provide: ROOT_LOCAL_STORAGE_KEY, useValue: '__app_storage__' },
+  //   {
+  //     provide: META_REDUCERS,
+  //     deps: [ROOT_STORAGE_KEYS, ROOT_LOCAL_STORAGE_KEY, LocalStorageService],
+  //     useFactory: getMetaReducers
+  //   }
+  // ]
 })
 export default class StoreModuleConfig {}
