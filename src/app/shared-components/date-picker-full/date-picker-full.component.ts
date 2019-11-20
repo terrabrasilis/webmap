@@ -1,20 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component } from "@angular/core";
 
+/** @title Datepicker with min & max validation */
 @Component({
-  selector: 'app-date-picker-full',
-  templateUrl: './date-picker-full.component.html',
-  styleUrls: ['./date-picker-full.component.css']
+  selector: "app-date-picker-full",
+  templateUrl: "./date-picker-full.component.html",
+  styleUrls: ["./date-picker-full.component.css"]
 })
-export class DatePickerFullComponent implements OnInit {
-  @Input() minDate: Date
-  @Input() maxDate: Date
-  @Input() dateValue: string
 
-  constructor () {}
-
-  ngOnInit () {
-    console.log('====================================')
-    console.log(this.minDate, this.maxDate, this.dateValue)
-    console.log('====================================')
-  }
+export class DatePickerFullComponent {
+  minDate = new Date(2000, 0, 1);
+  maxDate = new Date(2020, 0, 1);
 }

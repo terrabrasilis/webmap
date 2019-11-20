@@ -64,7 +64,7 @@ export class DatePickerYearComponent {
     const ctrlValue = this.date.value
     ctrlValue.year(normalizedYear.year())
     this.date.setValue(ctrlValue)
-    dateValue = ctrlValue
+    // dateValue = ctrlValue
   }
 
   chosenMonthHandler (
@@ -75,6 +75,6 @@ export class DatePickerYearComponent {
     ctrlValue.month(normalizedMonth.month())
     this.date.setValue(ctrlValue)
     datepicker.close()
-    dateValue = ctrlValue
+    // dateValue = ctrlValue
   }
 }
