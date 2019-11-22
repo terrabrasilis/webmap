@@ -1,11 +1,11 @@
-import { createReducer, createAction, on, props, Action } from "@ngrx/store";
+import { createReducer, createAction, on, props, Action, createSelector, createFeatureSelector } from "@ngrx/store";
 import { findIndex, size, merge } from "lodash";
 
 /* ACTIONS / CREATORS */
 export const actions = {
   setFilterPropsForObject: createAction(
     "[FILTER] set filter props for an specific Object",
-    props<{ filterObject: Filter }>()
+    props< Filter >()
   )
 };
 
@@ -16,8 +16,8 @@ export interface State {
 }
 export interface Filter {
   id: number;
-  initialDate: Date;
-  finalDate: Date;
+  initialDate?: Date;
+  finalDate?: Date;
 }
 
 const initialState: State = { filters: [] };

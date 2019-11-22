@@ -28,7 +28,7 @@ export class LayerFilterComponent implements OnInit {
 
   layer: Layer;
 
-  bindDate: Observable<Date>;
+  filters: Observable<fromLayerFilterReducer.Filter[]>;
   initialDate: Observable<Date>;
   finalDate: Observable<Date>;
 
@@ -37,11 +37,13 @@ export class LayerFilterComponent implements OnInit {
     private dom: DomSanitizer,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private store: Store<{ initialDate: Date }>,
+    private store: Store<fromLayerFilterReducer.State>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.layer = data.layer;
-    this.bindDate = this.store.pipe(select("initialDate"));
+    this.store.pipe(select((state: any) => state.layerFilter.filters)).subscribe((changedFilters) => {
+      this.filters = changedFilters;
+    });
   }
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -51,24 +53,24 @@ export class LayerFilterComponent implements OnInit {
     null
   );
 
-  ngOnInit() {}
+  ngOnInit () { }
 
-  sendLayerFilter(value: any): void {
+  sendLayerFilter (value: any): void {
     this.dialogRef.close();
   }
 
-  closeDialog() {
+  closeDialog () {
     this.dialogRef.close();
   }
 
-  showDialog(content: string): void {
+  showDialog (content: string): void {
     const dialogRef = this.dialog.open(DialogComponent, { width: "450px" });
     dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(
       content
     );
   }
 
-  getDimensions() {
+  getDimensions () {
     const self = this;
     this.terrabrasilisApi
       .getDimensions(this.layer)
@@ -78,20 +80,23 @@ export class LayerFilterComponent implements OnInit {
       .catch(console.error);
   }
 
-  setRangeDate(results) {
+  setRangeDate (results) {
     this.minDate = head(results);
     this.maxDate = last(results);
   }
 
-  handleResult(results) {
+  handleResult (results) {
     this.setRangeDate(results);
   }
 
-  applyFilter() {
+  applyFilter () {
     const obj = {
+      id: 123,
       initialDate: new Date(2016, 0, 1)
-    }
-    const setInitialDateAction = fromLayerFilterReducer.actions.setFilterPropsForObject(obj)
+    } as fromLayerFilterReducer.Filter;
+    const setInitialDateAction = fromLayerFilterReducer.actions.setFilterPropsForObject(
+      obj
+    );
     this.store.dispatch(setInitialDateAction);
   }
 }
