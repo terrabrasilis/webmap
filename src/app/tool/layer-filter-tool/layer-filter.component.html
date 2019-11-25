@@ -1,11 +1,5 @@
 <div class="modal-header fechar">
-  <button
-    type="button"
-    class="close"
-    data-dismiss="modal"
-    aria-hidden="true"
-    (click)="closeDialog()"
-  >
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeDialog()">
     <i class="material-icons">clear</i>
   </button>
 </div>
@@ -15,11 +9,20 @@
     <div class="card-body">
       <h5 class="card-title">{{ "filter.title" | translate }}</h5>
 
-      <app-date-picker-full [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-full>
-      <app-date-picker-month [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-month>
-      <app-date-picker-year [minDate]="minDate" [maxDate]="maxDate" [dateValue]="dateValue"></app-date-picker-year>
+      <div *ngIf="isOnlyYearDate">
+        <app-date-picker-year #startYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="startDateValue"></app-date-picker-year>
+        <app-date-picker-year #endYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="endDateValue"></app-date-picker-year>
+      </div>
 
-      <h1>Bind Date: {{filters}}</h1>
+      <div *ngIf="isOnlyMonthDate">
+        <app-date-picker-month #startMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="startDateValue"></app-date-picker-month>
+        <app-date-picker-month #endMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="endDateValue"></app-date-picker-month>
+      </div>
+
+      <div *ngIf="isFullDate">
+        <app-date-picker-full #startFullDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="startDateValue"></app-date-picker-full>
+        <app-date-picker-full #endFullDatePicker [minDate]="minDate" [maxDate]="maxDate" [(dateValue)]="endDateValue"></app-date-picker-full>
+      </div>
 
       <mat-divider></mat-divider>
 

@@ -15,7 +15,7 @@ export interface State {
   filters: Filter[];
 }
 export interface Filter {
-  id: number;
+  id: string;
   initialDate?: Date;
   finalDate?: Date;
 }

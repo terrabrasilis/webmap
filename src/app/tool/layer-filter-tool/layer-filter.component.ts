@@ -22,15 +22,18 @@ import { Observable } from "rxjs";
   styleUrls: ["./layer-filter.component.css"]
 })
 export class LayerFilterComponent implements OnInit {
-  dateValue = new Date(2016, 0, 1);
+  startDateValue = new Date(2016, 0, 1);
+  endDateValue = new Date(2016, 0, 1);
+
   minDate = new Date(2016, 0, 1);
   maxDate = new Date(2018, 0, 1);
 
   layer: Layer;
-
   filters: Observable<fromLayerFilterReducer.Filter[]>;
-  initialDate: Observable<Date>;
-  finalDate: Observable<Date>;
+
+  isOnlyYearDate: boolean = false;
+  isOnlyMonthDate: boolean = true;
+  isFullDate: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<LayerFilterComponent>,
@@ -41,9 +44,11 @@ export class LayerFilterComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.layer = data.layer;
-    this.store.pipe(select((state: any) => state.layerFilter.filters)).subscribe((changedFilters) => {
-      this.filters = changedFilters;
-    });
+    this.store
+      .pipe(select((state: any) => state.layerFilter.filters))
+      .subscribe((refreshedFilter) => {
+        this.filters = refreshedFilter;
+      });
   }
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -90,12 +95,13 @@ export class LayerFilterComponent implements OnInit {
   }
 
   applyFilter () {
-    const obj = {
-      id: 123,
-      initialDate: new Date(2016, 0, 1)
+    const currentLayerFilterObject = {
+      id: this.layer.id,
+      initialDate: this.startDateValue,
+      finalDate: this.endDateValue
     } as fromLayerFilterReducer.Filter;
     const setInitialDateAction = fromLayerFilterReducer.actions.setFilterPropsForObject(
-      obj
+      currentLayerFilterObject
     );
     this.store.dispatch(setInitialDateAction);
   }
