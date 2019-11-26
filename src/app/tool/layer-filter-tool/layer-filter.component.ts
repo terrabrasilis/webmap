@@ -95,6 +95,14 @@ export class LayerFilterComponent implements OnInit {
     this.setRangeDate(results);
   }
 
+  setStartDateValue(selectedStartDate) {
+    this.startDateValue = selectedStartDate
+  }
+
+  setEndDateValue(selectedEndDate) {
+    this.endDateValue = selectedEndDate
+  }
+
   applyFilter () {
     const currentLayerFilterObject = {
       id: this.layer.id,

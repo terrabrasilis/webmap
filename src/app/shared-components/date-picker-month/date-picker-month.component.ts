@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import {
   MomentDateAdapter,
@@ -55,6 +55,8 @@ export const MY_FORMATS = {
 })
 export class DatePickerMonthComponent {
   date = new FormControl(moment())
+  @Output() setDateOutput = new EventEmitter()
+  
   @Input() minDate: Date
   @Input() maxDate: Date
 
@@ -71,6 +73,7 @@ export class DatePickerMonthComponent {
     const ctrlValue = this.date.value
     ctrlValue.month(normalizedMonth.month())
     this.date.setValue(ctrlValue)
+    this.setDateOutput.emit(normalizedMonth.toDate())
     datepicker.close()
   }
 }
