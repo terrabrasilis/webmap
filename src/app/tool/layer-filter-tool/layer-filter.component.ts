@@ -44,6 +44,7 @@ export class LayerFilterComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.layer = data.layer;
+    this.getDimensions()
     this.store
       .pipe(select((state: any) => state.layerFilter.filters))
       .subscribe((refreshedFilter) => {
