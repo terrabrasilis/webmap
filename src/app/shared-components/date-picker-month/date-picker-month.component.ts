@@ -58,7 +58,7 @@ export class DatePickerMonthComponent {
   @Output() setDateOutput = new EventEmitter()
   
   @Input() minDate: Date
-  @Input() maxDate: Date
+  @Input() maxDate: Date  
 
   chosenYearHandler (normalizedYear: Moment) {
     const ctrlValue = this.date.value

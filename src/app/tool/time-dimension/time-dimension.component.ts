@@ -41,7 +41,7 @@ export class TimeDimensionComponent extends ToolComponent implements OnInit, OnM
   /**
    * TerraBrasilis
    */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, null);
 
   ngOnInit() {    
     this.layer = this.shared;

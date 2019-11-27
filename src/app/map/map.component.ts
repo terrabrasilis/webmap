@@ -42,6 +42,9 @@ import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasil
 import { Tool } from '../entity/tool';
 import { OpenUrl } from '../util/open-url';
 import * as _ from 'lodash'; // using the _.uniqueId() method
+import { Store } from "@ngrx/store";
+import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
+
 
 @Component({
   selector: 'app-map',
@@ -108,13 +111,14 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private activeRoute: ActivatedRoute
         , private _translate: TranslateService
         , private localStorageService: LocalStorageService
+        , private store: Store<fromLayerFilterReducer.State>
         , @Inject(NgZone) private zone: NgZone
     ) {}
 
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, null, this.store);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks

@@ -31,6 +31,8 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
     this.dialog,
     this.dom,
     this.cdRef,
+    null,
+    null,
     null
   )
 

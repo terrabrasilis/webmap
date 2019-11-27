@@ -13,6 +13,11 @@ import { Utils } from '../../util/utils';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { get } from 'lodash'
 
+import { Store, select } from "@ngrx/store";
+import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
+import { Observable } from "rxjs";
+
+
 @Component({
   selector: 'app-terrabrasilis-api',
   template: ``
@@ -22,6 +27,7 @@ export class TerrabrasilisApiComponent implements OnInit {
    * Terrabrasilis API module
    */
   private Terrabrasilis: any = Terrabrasilis;
+  filters: Observable<fromLayerFilterReducer.Filter[]>;
 
   constructor(
     private dialog: MatDialog
@@ -29,7 +35,18 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private cdRef: ChangeDetectorRef
     , private localStorageService: LocalStorageService
     , private _snackBar: MatSnackBar = null
-  ) { }
+    , private store: Store<fromLayerFilterReducer.State>
+  ) {
+    if(this.store) {
+      this.store
+      .pipe(select((state: any) => state.layerFilter.filters))
+      .subscribe((refreshedFilter) => {
+        this.filters = refreshedFilter;
+
+        console.log('[TERRA-API] filters: ', this.filters)
+      });
+    }
+  }
 
   ////////////////////////////////////////////////
   //// Angular life cycle hooks

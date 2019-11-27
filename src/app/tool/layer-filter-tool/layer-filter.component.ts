@@ -56,7 +56,9 @@ export class LayerFilterComponent implements OnInit {
     this.dialog,
     this.dom,
     this.cdRef,
-    null
+    null,
+    null,
+    this.store
   );
 
   ngOnInit () { }
@@ -95,11 +97,11 @@ export class LayerFilterComponent implements OnInit {
     this.setRangeDate(results);
   }
 
-  setStartDateValue(selectedStartDate) {
+  setStartDateValue (selectedStartDate) {
     this.startDateValue = selectedStartDate
   }
 
-  setEndDateValue(selectedEndDate) {
+  setEndDateValue (selectedEndDate) {
     this.endDateValue = selectedEndDate
   }
 
