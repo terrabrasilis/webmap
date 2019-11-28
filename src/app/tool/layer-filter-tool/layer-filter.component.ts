@@ -106,24 +106,35 @@ export class LayerFilterComponent implements OnInit {
     this.endDateValue = selectedEndDate
   }
 
-  applyFilter () {
+  buildTimeFilter () {
     const initialDate = this.startDateValue
     const finalDate = this.endDateValue
 
     // TODO: Verificar quando a data for null, ou se a data é só ano por exemplo...
     // Acho que o geoserver funciona de qualquer forma...
     const time = `${moment(initialDate).format('YYYY-MM-DD')}/${moment(finalDate).format('YYYY-MM-DD')}`
+    return { time, initialDate, finalDate }
+  }
 
-    const currentLayerFilterObject = {
-      id: this.layer.id,
-      name: this.layer.name,
-      initialDate: this.startDateValue,
-      finalDate: this.endDateValue,
-      time
-    } as fromLayerFilterReducer.Filter;
+  dispatchFilterActionToStore (currentLayerFilterObject) {
     const setInitialDateAction = fromLayerFilterReducer.actions.setFilterPropsForObject(
       currentLayerFilterObject
     );
     this.store.dispatch(setInitialDateAction);
+  }
+
+  applyFilter () {
+    const { time, initialDate, finalDate } = this.buildTimeFilter()
+
+    const currentLayerFilterObject = {
+      id: this.layer.id,
+      name: this.layer.name,
+      initialDate,
+      finalDate,
+      time
+    } as fromLayerFilterReducer.Filter;
+
+    this.dispatchFilterActionToStore(currentLayerFilterObject)
+    this.closeDialog()
   }
 }
