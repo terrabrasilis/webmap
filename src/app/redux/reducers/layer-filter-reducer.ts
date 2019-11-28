@@ -16,6 +16,8 @@ export interface State {
 }
 export interface Filter {
   id: string;
+  name: string;
+  time: string;
   initialDate?: Date;
   finalDate?: Date;
 }

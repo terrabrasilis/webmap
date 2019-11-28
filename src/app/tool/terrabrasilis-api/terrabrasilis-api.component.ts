@@ -42,10 +42,14 @@ export class TerrabrasilisApiComponent implements OnInit {
       .pipe(select((state: any) => state.layerFilter.filters))
       .subscribe((refreshedFilter) => {
         this.filters = refreshedFilter;
-
-        console.log('[TERRA-API] filters: ', this.filters)
+        this.applyFiltersOnLayer(this.filters)
       });
     }
+  }
+
+  applyFiltersOnLayer (filters) {
+    Terrabrasilis.filterLayers(filters)
+    console.log('[TERRA-API] filters: ', filters)
   }
 
   ////////////////////////////////////////////////
