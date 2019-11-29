@@ -7,6 +7,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MatSnackBarModule } from '@angular/material';
 
@@ -21,6 +23,14 @@ import { DynamicComponentModule } from './core-modules/dynamic-component';
 import { SharedModule } from './core-modules/shared.module';
 import { PipeSharedModule } from './core-modules/pipe-shared.module';
 
+
+/**
+ * Custom shared modules
+ */
+import { DatePickerYearComponent } from './shared-components/date-picker-year/date-picker-year.component';
+import { DatePickerMonthComponent } from './shared-components/date-picker-month/date-picker-month.component';
+import { DatePickerFullComponent } from './shared-components/date-picker-full/date-picker-full.component'
+
 /**
  * Custom component imports
  */
@@ -32,6 +42,8 @@ import { WmsSearchComponent } from './wms/wms-search/wms-search.component';
 import { ContactComponent } from './contact/contact.component';
 import { TerrabrasilisApiComponent } from './tool/terrabrasilis-api/terrabrasilis-api.component';
 import { MapComponent } from './map/map.component';
+import { LayerFilterComponent } from './tool/layer-filter-tool/layer-filter.component';
+
 
 /**
  * Services
@@ -78,9 +90,13 @@ import StoreModule from './redux/store'
     LoginComponent,
     UserComponent,
     DialogComponent,
+    LayerFilterComponent,
     WmsSearchComponent,
     ContactComponent,
-    TerrabrasilisApiComponent
+    TerrabrasilisApiComponent,
+    DatePickerYearComponent,
+    DatePickerMonthComponent,
+    DatePickerFullComponent
   ],
   imports: [
     PipeSharedModule,
@@ -93,6 +109,8 @@ import StoreModule from './redux/store'
     HttpModule,
     MatSnackBarModule,
     HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     /**
      * Active the translate tool for entire app
      */
@@ -130,6 +148,7 @@ import StoreModule from './redux/store'
     DatasourceService,
     LayerService,
     VisionService,
+    MatDatepickerModule,
     // {
     //   provide: APP_BASE_HREF, 
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */
@@ -140,6 +159,7 @@ import StoreModule from './redux/store'
   ],
   entryComponents: [
     DialogComponent,
+    LayerFilterComponent,
     ContactComponent,
     TerrabrasilisApiComponent
   ],

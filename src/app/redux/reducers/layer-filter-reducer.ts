@@ -1,30 +1,46 @@
-import { createReducer, createAction, on, props } from '@ngrx/store'
+import { createReducer, createAction, on, props, Action, createSelector, createFeatureSelector } from "@ngrx/store";
+import { findIndex, size, merge } from "lodash";
 
 /* ACTIONS / CREATORS */
 export const actions = {
-  setInitialDate: createAction('[FILTER] set initial date', props<{initialDate: Date}>()),
-  setFinalDate: createAction('[FILTER] set final date', props<{finalDate: Date}>())
-}
-export const featureKey = 'layerFilter'
+  setFilterPropsForObject: createAction(
+    "[FILTER] set filter props for an specific Object",
+    props< Filter >()
+  )
+};
+
+export const featureKey = "layerFilter";
 
 export interface State {
-  initialDate: Date;
-  finalDate: Date;
+  filters: Filter[];
+}
+export interface Filter {
+  id: string;
+  name: string;
+  time: string;
+  initialDate?: Date;
+  finalDate?: Date;
 }
 
-const initialState: State = {
-  initialDate: null,
-  finalDate: null
-}
+const initialState: State = { filters: [] };
+
+export const onSetFilterAction = (state = initialState, filterObject) => {
+  const FILTER_EXISTS =
+    findIndex(state.filters, ["id", filterObject.id]) !== -1;
+  if (FILTER_EXISTS) {
+    return {
+      filters: state.filters.map(filter =>
+        filter.id === filterObject.id ? { ...filter, ...filterObject } : filter
+      )
+    };
+  }
+
+  return { ...state, filters: [...state.filters, filterObject] };
+};
 
 /* REDUCER */
 export const reducer = createReducer(
   initialState,
   // Even thought the `state` is unused, it helps infer the return type
-  on(actions.setFinalDate, (state, initialDate: any) => ({ ...state, initialDate })),
-  on(actions.setInitialDate, (state, finalDate: any) => ({ ...state, finalDate }))
-)
-
-// SELECTOR
-export const selectInitialDate = (state: State) => state.initialDate
-export const selectFinalDate = (state: State) => state.finalDate
+  on(actions.setFilterPropsForObject, onSetFilterAction)
+);

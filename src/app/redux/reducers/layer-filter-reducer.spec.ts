@@ -1,37 +1,70 @@
-import { actions, featureKey, reducer } from './layer-filter-reducer'
+import {
+  actions,
+  featureKey,
+  reducer,
+  onSetFilterAction,
+  State
+} from "./layer-filter-reducer";
+import { log } from "util";
 
-describe('LayerFilterReducer', () => {
-  describe('ACTIONS:', () => {
+describe("LayerFilterReducer", () => {
+  describe("ACTIONS:", () => {
     it('feature key should be "layerFilter"', () => {
-      expect(featureKey).toBe('layerFilter')
-    })
+      expect(featureKey).toBe("layerFilter");
+    });
 
-    it('setInitialDate should be a function', () => {
-      expect(actions.setInitialDate).toBeInstanceOf(Function)
-    })
+    it("setInitialDate should be a function", () => {
+      expect(actions.setFilterPropsForObject).toBeInstanceOf(Function);
+    });
+  });
 
-    it('setFinalDate should be a function', () => {
-      expect(actions.setFinalDate).toBeInstanceOf(Function)
-    })
-  })
+  describe("REDUCERS", () => {
+    it("should return the default state", () => {
+      const result = reducer(undefined, {} as any);
+      expect(result).toMatchSnapshot();
+    });
 
-  describe('REDUCERS', () => {
-    it('should return the default state', () => {
-      const result = reducer(undefined, {} as any)
-      expect(result).toMatchSnapshot()
-    })
+    describe("onSetFilterAction", () => {
+      it("should push a new object into the array", () => {
+        const results = onSetFilterAction(undefined, { id: 1 });
+        expect(results).toStrictEqual({ filters: [{ id: 1 }] });
+      });
+      it("should merge with an existent object", () => {
+        const dateMock = new Date(2019, 6, 6);
+        const initialDate = new Date(2016, 0, 1);
+        const finalDate = new Date(2016, 0, 1);
+        const initialState: State = {
+          filters: [{ id: 1, initialDate, finalDate }]
+        };
+        const results = onSetFilterAction(initialState, {
+          id: 2,
+          initialDate: dateMock
+        });
+        expect(results).toStrictEqual({
+          filters: [
+            { id: 1, initialDate, finalDate },
+            { id: 2, initialDate: dateMock }
+          ]
+        });
+      });
 
-    // it('should dispatch the setInitialDate and return the merged object', () => {
-    //   const action = actions.setInitialDate({ date: new Date() })
-    //   const result = reducer(fromBooks.initialState, action)
-    //     console.log('====================================');
-    //     console.log({result});
-    //     console.log('====================================');
-    //   //   expect(result).toMatchSnapshot()
-    // })
+      it("should update an existent object", () => {
+        const dateMock = new Date(2019, 6, 6);
+        const initialDate = new Date(2016, 0, 1);
+        const finalDate = new Date(2016, 0, 1);
+        const initialState: State = {
+          filters: [{ id: 1, initialDate, finalDate }]
+        };
+        const results = onSetFilterAction(initialState, {
+          id: 1,
+          initialDate: dateMock
+        });
+        expect(results).toStrictEqual({
+          filters: [{ id: 1, initialDate: dateMock, finalDate }]
+        });
+      });
+    });
+  });
 
-    it('should dispatch the setFinalDate and return the merged object', () => {})
-  })
-
-  describe('SELECTORS', () => {})
-})
+  describe("SELECTORS", () => {});
+});
