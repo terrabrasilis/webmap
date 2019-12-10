@@ -262,7 +262,7 @@ export class TerrabrasilisApiComponent implements OnInit {
         self.openSnackBar('Ops, esta layer não tem os atributos necessários pra fazer o zoom', 'Aviso')
         self.disableLoading()
       })
-      .finally(this.disableLoading);
+      .finally(()=>{self.disableLoading();});
   }
 
   getDimensions(layer: Layer) {
