@@ -32,6 +32,9 @@
     }
   },
   "layerControl": {
+    "baselayer" : {
+        "warning" : "These images were not used for deforestation mapping"
+    },
     "control1": "Baselayers",
     "5c40fe3a0e9b2a14264e03a7": {
       "name": " Cerrado",

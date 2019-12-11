@@ -33,6 +33,9 @@
         }
     },
     "layerControl" : {
+        "baselayer" : {
+            "warning" : "Estas imagens não foram usadas para o mapeamento de desmatamento"
+        },
         "control1" : "Baselayers",
         "5c40fe3a0e9b2a14264e03a7" : {
             "name": " Cerrado",

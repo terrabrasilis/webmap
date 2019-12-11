@@ -173,7 +173,7 @@
                   (change)="layerBaseLayerChange(layer)">
                 <label for="{{layer.title}}"><span></span></label>              
                 <span class="text">{{layer.title}}<br *ngIf="layer.description" />
-                    <div *ngIf="layer.description" style="font-size: small;">{{layer.description}}</div>
+                    <div *ngIf="layer.description" style="font-size: small;">{{ 'layerControl.baselayer.warning' | translate }}</div>
                 </span>
             </li>                                      
         </ul>
