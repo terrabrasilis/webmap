@@ -626,11 +626,15 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     showWarning(layerObject: any) {
-        if (layerObject.name == 'accumulated_deforestation_up_to_2016' || layerObject.name == 'accumulated_deforestation_up_to_2016') {
-            const msg = '<b>Atenção, este é um dado preliminar.</b><br />' +
-            'Ele mostra o desmatamento acumulado até 2016 para o bioma.<br />' +
-            'O dado definitivo será consolidado após conclusão dos mapeamentos previstos para os anos que compõem a série histórica de 2004 a 2018.<br /><br />' +
-            '<a href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>Confira aqui o metadado da camada.</a>';
+        if (layerObject.workspace == 'prodes-pampa' || layerObject.workspace == 'prodes-pantanal' || layerObject.workspace == 'prodes-caatinga' || layerObject.workspace == 'prodes-mata-atlantica') {
+            
+            let disclaimer1 = this._translate.instant('dialog.disclaimer1');
+            let disclaimer2 = this._translate.instant('dialog.disclaimer2');
+            let disclaimer3 = this._translate.instant('dialog.disclaimer3');
+            let disclaimer4 = this._translate.instant('dialog.disclaimer4');
+
+            const msg = '<b>'+disclaimer1+'</b><br />'+disclaimer2+'<br /><br />'+disclaimer3+' '+
+            '<a href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>'+disclaimer4+'</a>.';
             this.showDialog(msg);
         }
     }
@@ -729,7 +733,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         let downloadBtn = this._translate.instant('dialog.downloadBtn');
         let metadataBtn = this._translate.instant('dialog.metadataBtn');
         const match = /terrabrasilis.dpi.inpe.br\/download/;
-        const lang = this.localStorageService.getValue(this.languageKey);
+        const lang = this._translate.currentLang;
 
         this.downloads.forEach(download => {
 

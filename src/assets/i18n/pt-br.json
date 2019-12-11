@@ -10,7 +10,11 @@
         "text": "Informações Gerais",
         "accessDataBtn" : "Acesso aos Dados",
         "downloadBtn" : "Download",
-        "metadataBtn" : "Metadado"
+        "metadataBtn" : "Metadado",
+        "disclaimer1" : "Atenção, este é um dado preliminar.",
+        "disclaimer2" : "O dado definitivo será consolidado após conclusão dos mapeamentos previstos para os anos que compõem a série histórica de 2004 a 2018.",
+        "disclaimer3" : "Atente para as informações descritas",
+        "disclaimer4" : "no metadado da camada"
     },
     "menu" : {
         "analyses": {

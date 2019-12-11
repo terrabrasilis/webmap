@@ -10,7 +10,11 @@
     "text": "General Informations",
     "accessDataBtn" : "Data access",
     "downloadBtn" : "Download",
-    "metadataBtn" : "Metadata"
+    "metadataBtn" : "Metadata",
+    "disclaimer1" : "Warning, this is a preliminary data.",
+    "disclaimer2" : "The final data will be consolidated after the completion of the mappings foreseen for the years that compose the historical series from 2004 to 2018.",
+    "disclaimer3" : "Pay attention to the information described",
+    "disclaimer4" : "in the layer metadata"
   },
   "menu": {
     "analyses": {
