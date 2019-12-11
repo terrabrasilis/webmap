@@ -626,7 +626,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     showWarning(layerObject: any) {
-        if (layerObject.name == 'pampa_accumulated_deforestation_up_to_2016' || layerObject.name == 'pantanal_accumulated_deforestation_up_to_2016') {
+        if (layerObject.name == 'accumulated_deforestation_up_to_2016' || layerObject.name == 'accumulated_deforestation_up_to_2016') {
             const msg = '<b>Atenção, este é um dado preliminar.</b><br />' +
             'Ele mostra o desmatamento acumulado até 2016 para o bioma.<br />' +
             'O dado definitivo será consolidado após conclusão dos mapeamentos previstos para os anos que compõem a série histórica de 2004 a 2018.<br /><br />' +
@@ -725,21 +725,29 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
     private getDownloadHtmlOptions(): string {
         let downloadHtml = '<div class="container">';
-
+        let accessDataBtn = this._translate.instant('dialog.accessDataBtn');
+        let downloadBtn = this._translate.instant('dialog.downloadBtn');
+        let metadataBtn = this._translate.instant('dialog.metadataBtn');
         const match = /terrabrasilis.dpi.inpe.br\/download/;
+        const lang = this.localStorageService.getValue(this.languageKey);
 
         this.downloads.forEach(download => {
-            const link =  match.test(download.link) == false ?
-                        '<a href=\'' + download.link + '\' target="_blank" class="btn btn-primary btn-success">Acesso aos Dados</a>' :
-                        '<a href=\'' + download.link + '\' class="btn btn-primary btn-success">Download</a>';
 
-            downloadHtml += '    <div class="card mt-3">' +
-                            '     <div class="card-body">' +
-                            '        <h5 class="card-title">' + download.description + '</h5>' +
-                            '        <p class="card-text">' + download.name + '</p>' + link +
-                            '     </div>' +
-                            '    </div>';
+            if(download.lang==lang) {
+                const link = match.test(download.link) == false ?
+                            '<a href=\'' + download.link + '\' target="_blank" class="btn btn-primary btn-success">'+accessDataBtn+'</a>' :
+                            '<a href=\'' + download.link + '\' class="btn btn-primary btn-success">'+downloadBtn+'</a>';
+
+                downloadHtml += '    <div class="card mt-3">' +
+                                '     <div class="card-body">' +
+                                '        <h5 class="card-title">' + download.category + '</h5>' +
+                                '        <p class="card-text">' + download.description + '</p>' + link +
+                                '        <a href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
+                                '     </div>' +
+                                '    </div>';
+            }
         });
+
         downloadHtml += '</div>';
         return downloadHtml;
     }

@@ -7,7 +7,10 @@
     "text": "TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs"
   },
   "dialog": {
-    "text": "General Informations"
+    "text": "General Informations",
+    "accessDataBtn" : "Data access",
+    "downloadBtn" : "Download",
+    "metadataBtn" : "Metadata"
   },
   "menu": {
     "analyses": {
