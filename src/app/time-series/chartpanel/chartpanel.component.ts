@@ -10,6 +10,8 @@ import turf_centroid from '@turf/centroid'
 import * as d3 from 'd3'
 import * as c3 from 'c3'
 import '../../../../node_modules/c3/c3.css'
+import { json } from 'd3';
+import { inflate } from 'zlib'
 
 @Component({
   selector: 'app-chartpanel',
@@ -24,18 +26,20 @@ export class ChartpanelComponent implements OnInit {
   ocpu: any
   c3chart: any
   jsonCoords: any
-
-  constructor (private shareData: TsComponentsDataShareService) {
+  
+  constructor (
+    private shareData: TsComponentsDataShareService) {
     //set page to communicate to with "ocpusits" on server
     // ocpu.seturl("https://terrabrasilis.ocpu.io/terrabrasilisTimeSeries/R");
     ocpu.seturl(
-      'http://terrabrasilis2.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
+      'https://terrabrasilis.ocpu.io/terrabrasilisTimeSeries/R'
+      // 'http://terrabrasilis2.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
     )
     this.mySession_point = {}
     this.enableChartPanel = true
     this.hasChart = false
   }
-
+  
   ngOnInit () {
     this.shareData.currentData.subscribe(data => {
       this.ctrlData = data
@@ -52,62 +56,18 @@ export class ChartpanelComponent implements OnInit {
         } else if (!this.ctrlData.isPolygon) {
           this.timeSeriesRaw(data)
         } else {
-          this.getPointsPolygon(data.polygon, -200)
-          this.timeSeriesShp(data)
+          this.jsonCoords = localStorage.getItem('jsonCoords');
+          if(this.jsonCoords !== ''){
+            this.timeSeriesShp(data)
+          } else {
+            alert("Please, draw a polygon with an area between 50 and 2000 ha.")
+            stop();
+          }
         }
       }
     })
   }
-
-  //----- get points from polygon using a grid
-  getPointsPolygon (layer: any, measure: any) {
-    console.log('layer: ', layer) //JSON.stringify(buffered));
-
-    // internal buffer to get MODIS pixel only within polygon
-    let buffered = turf_buffer(layer, measure, { units: 'meters' }) //layer.toGeoJSON()
-    //turfLayer.addData(buffered);
-    // console.log('buffered: ', buffered); //JSON.stringify(buffered));
-
-    // create bounding box of buffer layer
-    let bbox = turf_bbox_polygon(turf_bbox(buffered))
-    // console.log('bbox: ', bbox);
-
-    // pass to array type
-    let bbox_array = bbox.geometry.coordinates[0]
-    // console.log('bbox_array: ', JSON.stringify(bbox_array));
-    let array: any = []
-    array = bbox_array[0].concat(bbox_array[2])
-
-    // set options to squareGrid turf.js
-    let options: any = {
-      units: 'meters',
-      mask: buffered // use buffer as mask
-    }
-    let cellSide = 250
-
-    let squareGrid = turf_square_grid(array, cellSide, options)
-    // console.log('squareGrid: ', squareGrid);
-
-    // console.log('Amount of features: ', squareGrid.features.length);
-
-    // consider all squares and put a unique centroid for each one
-    let allFeatures: any = []
-    for (let i = 0; i <= squareGrid.features.length; i++) {
-      let feature: any = squareGrid.features[i]
-      if (typeof feature !== 'undefined') {
-        let polygon = turf_polygon(feature) //feature.geometry.coordinates
-        allFeatures[i] = turf_centroid(polygon)
-        //turfLayer.addData(allFeatures)
-      }
-    }
-    //console.log('all features: ', allFeatures);
-
-    //jsonCoords = JSON.parse(JSON.stringify(allFeatures));
-    this.jsonCoords = JSON.stringify(allFeatures)
-    //  console.log('GeoJSON coordinates from polygon: ', this.jsonCoords);
-    // test at https://utahemre.github.io/geojsontest.html
-  }
-
+  
   //----- define graphic properties D3.js C3
   prepareData (data: any) {
     let mySeries: any = []
@@ -295,7 +255,7 @@ export class ChartpanelComponent implements OnInit {
 
   timeSeriesShp (dataOptions: any) {
     let self = this
-
+ 
     let req = ocpu.call(
       'TSoperationSHP',
       {

@@ -2,21 +2,7 @@
   <!-- Start General controls -->
 
   <div class="display-controls" id="general-controls">
-    <div class="form-group">
-      <select class="form-control" id="services" required>
-        <option value="item0"
-          >-- {{ 'timeseries.service' | translate }} --</option
-        >
-        <option value="WTSS-INPE">WTSS-INPE</option>
-        <option value="SATVEG">SATVEG-EMBRAPA</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <select class="form-control" id="coverages" required>
-        <option value="">-- {{ 'timeseries.coverage' | translate }} --</option>
-      </select>
-    </div>
-    <div class="form-group">
+   <div class="form-group">
       <input
         *ngIf="!isPolygon"
         type="number"
@@ -27,7 +13,6 @@
         [(ngModel)]="latitude"
         required
       />
-
       <input
         *ngIf="!isPolygon"
         type="number"
@@ -37,8 +22,7 @@
         name="longitude"
         [(ngModel)]="longitude"
         required
-      />
-
+        />
       <input
         *ngIf="isPolygon"
         name="polygon"
@@ -51,16 +35,20 @@
     </div>
     <div class="form-group">
       <select *ngIf="!isPolygon" class="form-control" multiple id="band">
-        <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
+        <option selected='selected' value='evi'> evi </option>
+        <option value='ndvi'> ndvi </option>
+        <option value='mir'> mir </option>
+        <option value='nir'> nir </option>
+        <option value='red'> red </option>
+        <option value='blue'> blue </option>
       </select>
       <select *ngIf="isPolygon" class="form-control" id="band_shp">
-        <option value="">-- {{ 'timeseries.bands' | translate }} --</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="pre_filter">{{ 'timeseries.preFilter' | translate }}: </label>
-      <select class="form-control" id="pre_filter" required>
-        <option value="">-- {{ 'timeseries.preFilter' | translate }} --</option>
+        <option selected='selected' value='evi'> evi </option>
+        <option value='ndvi'> ndvi </option>
+        <option value='mir'> mir </option>
+        <option value='nir'> nir </option>
+        <option value='red'> red </option>
+        <option value='blue'> blue </option>
       </select>
     </div>
     <div class="form-group">
@@ -69,12 +57,11 @@
     </div>
     <div class="form-group">
       <label for="to">{{ 'timeseries.endDate' | translate }}: </label>
-      <input type="date" class="form-control" id="to" value="2016-04-13" />
+      <input type="date" class="form-control" id="to" value="2019-12-06" />
     </div>
 
-    <button type="button" (click)="sendDataToChart()" class="btn btn-success">
-      {{ 'timeseries.submit' | translate }}
-    </button>
+    <button type="submit" id="submitbutton" class="btn btn-success" (click)="sendDataToChart()" [disabled]="!latitude || !longitude"> {{ 'timeseries.submit' | translate }} </button> <!-- (click)="timeseries()" -->
+  
   </div>
   <!-- End of general control -->
 
@@ -161,5 +148,5 @@
     >
       {{ 'timeseries.applyFilter' | translate }}
     </button>
-  </div>
+  </div> 
 </div>

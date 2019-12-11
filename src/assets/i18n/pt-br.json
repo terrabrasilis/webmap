@@ -107,7 +107,8 @@
         "legend": "Legenda",
         "timeDimension": "Dimensão temporal",
         "fitBounds": "Zoom para Camada",
-        "layerFilter": "Filtrar"
+        "layerFilter": "Filtrar",
+        "timeseries": "Série Temporal"
     },
     "filter" : {
         "title":"Filtro",

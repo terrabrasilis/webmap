@@ -82,6 +82,9 @@
         <dfn attr.data-info="{{ 'tools.redo' | translate }}">
             <button type="button" class="btn" (click)="redo()"><i class="material-icons md-light">redo</i></button>
         </dfn>
+        <dfn attr.data-info="{{ 'tools.timeseries' | translate }}">
+            <button type="button" class="btn" (click)="showDialogTimeSeries()"><i class="material-icons md-light">timeline</i></button>
+        </dfn>
     </div>
     <!-- Overlayers -->
     <div *ngFor="let project of overlayers">
@@ -208,5 +211,17 @@
     </div>
     <a href class="btn btn-success btn-legend" data-toggle="sidebar">{{ 'tools.legend' | translate }}</a>
 </div>
+
+<!-- Timeseries display panel -->
+<div *ngIf="tsEnable" id="ts-control-panel">
+    <app-controlpanel></app-controlpanel>
+</div>
+
+<div *ngIf="tsEnable" id="ts-data-panel">
+    <app-chartpanel></app-chartpanel>
+    <app-tablepanel></app-tablepanel>
+</div>
+<!-- Timeseries control panel -->
+
 <!-- fim --> 
     

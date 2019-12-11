@@ -43,6 +43,9 @@ import { ContactComponent } from './contact/contact.component';
 import { TerrabrasilisApiComponent } from './tool/terrabrasilis-api/terrabrasilis-api.component';
 import { MapComponent } from './map/map.component';
 import { LayerFilterComponent } from './tool/layer-filter-tool/layer-filter.component';
+import { ControlpanelComponent } from './time-series/controlpanel/controlpanel.component';
+import { ChartpanelComponent } from './time-series/chartpanel/chartpanel.component';
+import { TablepanelComponent } from './time-series/tablepanel/tablepanel.component';
 
 
 /**
@@ -57,6 +60,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { DatasourceService } from './services/datasource.service';
 import { LayerService } from './services/layer.service';
 import { VisionService } from './services/vision.service';
+import { TsComponentsDataShareService } from './services/ts-components-data-share.service';
 
 /**
  * Providers
@@ -96,7 +100,10 @@ import StoreModule from './redux/store'
     TerrabrasilisApiComponent,
     DatePickerYearComponent,
     DatePickerMonthComponent,
-    DatePickerFullComponent
+    DatePickerFullComponent,
+    ControlpanelComponent,
+    ChartpanelComponent,
+    TablepanelComponent
   ],
   imports: [
     PipeSharedModule,
@@ -149,6 +156,7 @@ import StoreModule from './redux/store'
     LayerService,
     VisionService,
     MatDatepickerModule,
+    TsComponentsDataShareService,
     // {
     //   provide: APP_BASE_HREF, 
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */

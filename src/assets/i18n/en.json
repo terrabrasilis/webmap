@@ -105,7 +105,8 @@
     "removeLayer": "Remove Layer",
     "legend": "Legend",
     "timeDimension": "Time Dimension",
-    "fitBounds": "Fit Bounds"
+    "fitBounds": "Fit Bounds",
+    "timeseries": "Time Series"
   },
   "contact": {
     "title": "Send suggestions or questions to"
