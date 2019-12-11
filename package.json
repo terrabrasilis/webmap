@@ -1,6 +1,6 @@
 {
   "name": "webmap",
-  "version": "2.0.7",
+  "version": "2.0.9",
   "private": true,
   "license": "MIT",
   "browser": {
@@ -17,6 +17,7 @@
     "build-gh-pages": "ng build --configuration=staging --base-href 'https://terrabrasilis.github.io/webmap/'",
     "build-production": "ng build --configuration=production --base-href '/app/'",
     "build-staging": "ng build --configuration=staging  --base-href '/homologation/'",
+    "build-homologation": "ng build --configuration=staging  --base-href '/homologation/'",
     "deploy-gh-pages": "yarn build-gh-pages && ./node_modules/angular-cli-ghpages/angular-cli-ghpages --dir=dist/terrabrasilis --no-silent",
     "e2e": "ng e2e",
     "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
@@ -80,7 +81,7 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#caaa64d",
+    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#db71577",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
     "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#f3665cc",
     "tls": "0.0.1",

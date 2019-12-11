@@ -7,7 +7,10 @@
         "text": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental"
     },
     "dialog": {
-        "text": "Informações Gerais"
+        "text": "Informações Gerais",
+        "accessDataBtn" : "Acesso aos Dados",
+        "downloadBtn" : "Download",
+        "metadataBtn" : "Metadado"
     },
     "menu" : {
         "analyses": {
@@ -30,6 +33,9 @@
         }
     },
     "layerControl" : {
+        "baselayer" : {
+            "warning" : "Estas imagens não foram usadas para o mapeamento de desmatamento"
+        },
         "control1" : "Baselayers",
         "5c40fe3a0e9b2a14264e03a7" : {
             "name": " Cerrado",
@@ -58,20 +64,26 @@
             "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hidrografia",
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
             "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2018",
-            "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Bioma Amazônia",
+            "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Limite do Bioma",
             "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2018"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
-            "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
             "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma",
-            "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de imagens - 2016"
+            "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
+            "5cd4602daa127a00017de8615cd46155aa127a00017de863": "Hidrografia",
+            "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Nuvem - 2018",
+            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Desmatamento Anual - 2018",
+            "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de Imagens - 2016 e 2018"
         },
         "5cd460faaa127a00017de861" : {
             "name": " Pantanal",
-            "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2016",
             "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma",
-            "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de imagens - 2016"
+            "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2016",
+            "5d6d6661eaee2e0001436f665cd460faaa127a00017de861": "Hidrografia",
+            "5d6d6661eaee2e0001436f655cd460faaa127a00017de861": "Nuvem - 2018/2019",
+            "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Desmatamento Anual - 2018/2019",
+            "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de Imagens - 2016, 2018 e 2019"
         },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
