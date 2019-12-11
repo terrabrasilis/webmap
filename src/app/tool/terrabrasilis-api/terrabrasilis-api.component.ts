@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
 import { Utils } from '../../util/utils';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { TranslateService } from '@ngx-translate/core';
 import { get } from 'lodash'
 
 import { Store, select } from "@ngrx/store";
@@ -34,6 +35,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private dom: DomSanitizer
     , private cdRef: ChangeDetectorRef
     , private localStorageService: LocalStorageService
+    , private _translate: TranslateService
     , private _snackBar: MatSnackBar = null
     , private store: Store<fromLayerFilterReducer.State>
   ) {
@@ -128,10 +130,20 @@ export class TerrabrasilisApiComponent implements OnInit {
   ////////////////////////////////////////////////
   download(layer: Layer) {
     let download = '';
+    let downloadBtn = this._translate.instant('dialog.downloadBtn');
+    let metadataBtn = this._translate.instant('dialog.metadataBtn');
+    const lang = this._translate.currentLang;
+
     layer.downloads.forEach((d: any) => {
-      download += '<div><h5 class="card-title">Obter shapefile para ' + layer.title + '.</h5>' +
-        '            <p class="card-text">' + d.name + ': ' + d.description + '</p>' +
-        '            <a href="' + d.link + '" class="btn btn-primary btn-success">Download</a><div>';
+      if(d.lang==lang) {
+
+        download += '<div>' +
+                    '  <h5 class="card-title">' + d.category + '</h5>' +
+                    '  <p class="card-text">' + d.description + '</p>' +
+                    '  <a href="' + d.metadata + '" class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
+                    '  <a href="' + d.link + '" class="btn btn-primary btn-success">'+downloadBtn+'</a>'+
+                    '</div>';
+      }
     });
 
     const html =
