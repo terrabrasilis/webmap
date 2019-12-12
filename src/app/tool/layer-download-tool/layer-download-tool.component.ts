@@ -3,6 +3,7 @@ import { OnMount } from '../../core-modules/dynamic-html';
 import { ToolComponent } from '../tool-component-interface';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
 import { Layer } from '../../entity/layer';
 
@@ -28,14 +29,14 @@ export class LayerDownloadToolComponent extends ToolComponent implements OnInit,
     this.layer = this.shared;
   }
   
-  constructor(private dialog: MatDialog, private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { 
+  constructor(private dialog: MatDialog, private dom: DomSanitizer, private cdRef: ChangeDetectorRef, private _translate: TranslateService) { 
     super();        
   }
 
   /**
    * TerraBrasilis
    */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, null);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, this._translate, null, null);
 
   ngOnInit() {    
     this.layer = this.shared;

@@ -118,7 +118,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, null, this.store);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, this.store);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -621,6 +621,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /// Tools to use directly on map.component
     ///////////////////////////////////////////////////
     showDialog(content: string): void {
+        this.dialog.closeAll();// Useful when all layers are open at the same time.
         const dialogRef = this.dialog.open(DialogComponent, { width : '450px' });
         dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(content);
     }
@@ -634,7 +635,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             let disclaimer4 = this._translate.instant('dialog.disclaimer4');
 
             const msg = '<b>'+disclaimer1+'</b><br />'+disclaimer2+'<br /><br />'+disclaimer3+' '+
-            '<a href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>'+disclaimer4+'</a>.';
+            '<a target="_blank" href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>'+disclaimer4+'</a>.';
             this.showDialog(msg);
         }
     }
@@ -746,7 +747,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                                 '     <div class="card-body">' +
                                 '        <h5 class="card-title">' + download.category + '</h5>' +
                                 '        <p class="card-text">' + download.description + '</p>' + link +
-                                '        <a href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
+                                '        <a target="_blank" href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
                                 '     </div>' +
                                 '    </div>';
             }

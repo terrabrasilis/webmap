@@ -59,6 +59,7 @@ export class LayerFilterComponent implements OnInit {
     this.cdRef,
     null,
     null,
+    null,
     this.store
   );
 

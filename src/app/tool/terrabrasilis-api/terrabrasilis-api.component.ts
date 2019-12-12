@@ -35,7 +35,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private dom: DomSanitizer
     , private cdRef: ChangeDetectorRef
     , private localStorageService: LocalStorageService
-    , private _translate: TranslateService
+    , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
     , private store: Store<fromLayerFilterReducer.State>
   ) {
@@ -140,7 +140,7 @@ export class TerrabrasilisApiComponent implements OnInit {
         download += '<div>' +
                     '  <h5 class="card-title">' + d.category + '</h5>' +
                     '  <p class="card-text">' + d.description + '</p>' +
-                    '  <a href="' + d.metadata + '" class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
+                    '  <a target="_blank" href="' + d.metadata + '" class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
                     '  <a href="' + d.link + '" class="btn btn-primary btn-success">'+downloadBtn+'</a>'+
                     '</div>';
       }
