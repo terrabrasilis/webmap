@@ -6,6 +6,19 @@
         "alerts": "DETER (Avisos)",
         "text": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental"
     },
+    "capabilitydialog": {
+        "title": "Pesquisa em serviços WMS",
+        "capabilitiesFailure" : "A requisição falhou, revise a URL e tente novamente.",
+        "capabilitiesError" : "Falhou ao interpretar a resposta do servidor. Detalhe:",
+        "source" : "Fonte de dado",
+        "filter" : "Filtro",
+        "table" : {
+            "name":"Nome",
+            "title":"Título",
+            "metadata":"Metadado",
+            "addlayer":"Adicionar ao mapa"
+        }
+    },
     "dialog": {
         "text": "Informações Gerais",
         "accessDataBtn" : "Acesso aos Dados",
@@ -132,133 +145,6 @@
     "contact" : {
         "title":"Envie sugestões ou perguntas para"
     },
-    "about" : {
-        "description": "O TerraBrasilis é uma plataforma desenvolvida pelo INPE para organização, acesso e uso através de um portal web dos dados geográficos produzidos pelos seus programas de monitoramento ambiental. Em um primeiro momento visa atender principalmente ao Programa Amazônia, mas o conceito e os pacotes de software produzidos podem ser adaptados e customizados para atender a outros projetos que produzam dados geográficos e que pretendem que esses possam ser acessados no ambiente da internet. ",
-        "more": "Leia mais informações sobre o TerraBrasilis",
-        "coordinators": "EQUIPE DE COORDENADORES", 
-        "team.ti": "EQUIPE de T.I",
-        "occupation.male": "",
-        "occupation.female": "Pesquisadora da Divisão de Processamento de Imagens (DIDPI) do INPE",
-        "occupation.technologist.male": "Tecnologista Senior da Divisão de Processamento de Imagens (DIDPI) do INPE",
-        "ex.contributors": "Ex-Colaboradores",
-        "support": "Suporte",
-        "support.inpe": "Instituto Nacional de Pesquisas Espaciais (INPE)",
-        "support.funcate": "Fundação de Ciência Aplicações e Tecnologia Espaciais (FUNCATE)",
-        "support.fundep": "Fundação de Desenvolvimento da Pesquisa (FUNDEP)",
-        "support.worldbank": "Grupo Banco Mundial",
-        "support.bndes": "Banco Nacional de Desenvolvimento (BNDES)",
-        "developer": "Desenvolvedor de Software",
-        "research.fellow": "Bolsista de Pesquisa",
-        "dba": "Adminstrador de Banco de Dados",
-        "webdesigner": "Web Designer",
-        "technology": "Tecnologias ",
-        "technology.languages": "JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java",
-        "technology.heterogeneous": "Docker Swarm (clusterização de contêineres), Redis MongoDB, PostgreSQL, Nginx HTTP Server (balanceamento de carga e proxy reverso). ",
-        "technology.services": "Servidor de compartilhamento de dados geoespaciais (Geoserver) e catálogo de busca de metadados (Geonetwork)."        
-    },
-    "dashboard": {
-        "class": {
-            "title": "Classe:",
-            "deforestation": "Desmatamento"
-        },
-        "download": {
-            "munBystate": "Municípios por Estado",
-            "observation": "(Opcao apenas para incrementos)"
-        },
-        "graph": {
-            "amazon": "Amazônia",
-            "absoluteDataIncrements": "Incrementos de desmatamento acumulado",
-            "absoluteDataRates": "Taxas de desmatamento acumulados",
-            "aggregateSpatialIncrements": "Mapa de incrementos de desmatamento",
-            "aggregateSpatialRates": "Mapa de taxas de desmatamento",
-            "aggregateTemporalIncrements": "Incrementos de desmatamento",
-            "aggregateTemporalRates": "Taxas de desmatamento",
-            "cerrado": "Cerrado",
-            "label": {
-                "monitoring": "Período de monitoramento : {{minDate}} - {{maxDate}}",
-                "area": "Áreas (km²)",
-                "taxa": "Taxas (km²)",
-                "regularArea": "Área Regular",
-                "filteredArea": "Menor que 6ha"
-            },
-            "legal_amazon": "Amazônia Legal",
-            "timeSeriesIncrements": "Incrementos de desmatamento",
-            "timeSeriesRates": "Taxas de desmatamento",
-            "tableLois": {
-                "titleIncrements": "Incrementos de desmatamento acumulado por ano",
-                "titleRates": "Taxas de desmatamento acumulado por ano",
-                "year": "Ano",
-                "regular": "Área Regular (km²)",
-                "less": "Área (km²) menor que 6.25ha",
-                "total": "Área total"
-            }
-        },
-        "loi": {
-            "uf": "Estados",
-            "mun": "Municípios",
-            "consunit": "Unidades de Conservação",
-            "indi": "Áreas Indígenas"
-        },
-        "openOptions": {
-            "tools": "Ferramentas",
-            "increProdes": "Incrementos do Desmatamento",
-            "increLegalAmazon": "Amazônia Legal",
-            "increAmazon": "Amazônia",
-            "increCerrado": "Cerrado",
-            "ratesProdes": "Taxas de Desmatamento",
-            "alertsDeter": "Gráficos - Avisos",
-            "dailyCerradoDeter": "Avisos Diários do Cerrado",
-            "monthlyCerradoDeter": "Avisos Mensais Agregados do Cerrado",
-            "ratesAmazon": "Amazônia Legal",
-            "relatedPage": "Páginas Relacionadas",
-            "deforestationMap": "Mapa de Desmatamento",
-            "alertsMap": "Mapa de Avisos",
-            "cerradoPage": "Home - Cerrado",
-            "amazonPage": "Home - Amazônia"
-        },        
-        "options": {
-            "removefilter": "Remover Filtro",
-            "restoreview": "Restaurar Visão",
-            "searchloi": "Procurar",
-            "legend": "Legenda"
-        },
-        "search": {
-            "searchTitle": "Procure por local de interesse",
-            "searchDescription": "Digite um termo para pesquisa",
-            "close": "Fechar",
-            "title": {
-                "UF": "Estados",
-                "MUN": "Municípios",
-                "ConsUnit": "Unidades de Conservação",
-                "Indi": "Áreas Indígenas",
-                "Pathrow": "Órbita/Ponto"
-            }
-        },
-        "on-demand": {
-            "download": "Download",
-            "close": "Fechar",
-            "title": {
-                "cerrado": "Escolha os estados do Cerrado",
-                "legal_amazon": "Escolha os estados da Amazônia Legal",
-                "amazon": "Escolha os estados da Amazônia"
-            }
-        },
-        "title": {
-            "analysis": "Análise - ",
-            "increments": "PRODES (Desmatamento)",
-            "rates": "PRODES (Desmatamento)",
-            "legal_amazon": "Amazônia Legal",
-            "amazon": "Amazônia",
-            "cerrado": "Cerrado",
-            "time": "Ano",
-            "update": "Atualizado em: 29/07/2019"
-        },
-        "tooltip": {
-            "rates": "As taxas de desmatamento são calculadas baseadas nas áreas de desmatamento maiores que 6.25 hectares",
-            "incr": "Os incrementos de desmatamento são calculados baseados em todas as áreas de desmatamento disponíveis",
-            "download": "Esta opção de download está disponível somente para os incrementos de desmatamento"
-        } 
-    },
     "timeseries" : {
         "title": "Série temporal usando funções do pacote SITS",
         "service": "Serviço",
@@ -284,5 +170,13 @@
         "table": "Tabela",
         "graphic": "Gráfico",
         "infouse": "Use o painel de controle para selecionar as opções de origem da série temporal e as ferramentas do mapa para definir uma localização ou área usada na obtenção das séries."
-    }    
+    },
+    "matPaginatorIntl": {
+        "itemsPerPage":"Itens por página:",
+        "nextPage":"Proxima página",
+        "prevPage":"Página anterior",
+        "firstPage":"Primeira página",
+        "lastPage":"Última página",
+        "of" : "de"
+    }
 }

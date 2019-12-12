@@ -6,14 +6,14 @@
 <div></div>
 <!-- end -->
 
-<h2 mat-dialog-title>WMS Capabilities search</h2>
+<h2 mat-dialog-title>{{ 'capabilitydialog.title' | translate }}</h2>
 
 <label *ngIf="capabilitiesFailure" style="color: deeppink;">{{ capabilitiesFailure }}</label>
 <br/>
 <mat-dialog-content class="capabilities-container mat-elevation-z8">
     
     <mat-form-field>
-        <mat-select placeholder="Data Source" [(ngModel)]="selectedValue" name="source">
+        <mat-select placeholder="{{ 'capabilitydialog.source' | translate }}" [(ngModel)]="selectedValue" name="source">
             <mat-option *ngFor="let source of sources" [value]="source.host" (click)="loadCapabilities()">
                 {{source.name}}
             </mat-option>
@@ -32,24 +32,24 @@
 
     <div class="filter-header">
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'capabilitydialog.filter' | translate }}">
         </mat-form-field>
     </div>
     
     <mat-table #table [dataSource]="dataSource" matSort>
 
         <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{ 'capabilitydialog.table.name' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="title">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'capabilitydialog.table.title' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="metadata">
-            <mat-header-cell *matHeaderCellDef> Metadata </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{ 'capabilitydialog.table.metadata' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <button mat-button *ngIf="element.metadata" matSuffix mat-icon-button aria-label="Display metadata" (click)="displayMetadata(element.metadata)">
                     <mat-icon>information</mat-icon>
@@ -58,7 +58,7 @@
         </ng-container>
     
         <ng-container matColumnDef="url">
-            <mat-header-cell *matHeaderCellDef> Add layer </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> {{ 'capabilitydialog.table.addlayer' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element">
                 <button mat-button *ngIf="element" matSuffix mat-icon-button aria-label="Add layer to map" (click)="addlayerToMap(element)">
                     <mat-icon>layers</mat-icon>

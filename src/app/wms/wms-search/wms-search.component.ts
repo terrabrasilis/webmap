@@ -4,6 +4,7 @@ import { MatDialogRef, MatPaginator, MatSort, MatTableDataSource, MAT_DIALOG_DAT
 /**
  * services
  */
+import { TranslateService } from '@ngx-translate/core';
 import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
 import { MapWmsSearchDialogService } from '../../services/map-wms-search-dialog.service';
 import { DatasourceService } from '../../services/datasource.service';
@@ -45,6 +46,7 @@ export class WmsSearchComponent implements OnInit {
     private mapWmsSearchDialogService: MapWmsSearchDialogService,
     private dialogRef: MatDialogRef<WmsSearchComponent>,
     private datasourceService: DatasourceService,
+    private _translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   /**
@@ -161,7 +163,8 @@ export class WmsSearchComponent implements OnInit {
         } else {
           this.progressBarMode = 'determinate';
           this.progressBarValue = '0';
-          this.capabilitiesFailure = 'Failure on request, review your URL and try again.';
+          // Failure on request, review your URL and try again.
+          this.capabilitiesFailure = this._translate.instant('capabilitydialog.capabilitiesFailure');
         }
       }
     );
@@ -252,7 +255,8 @@ export class WmsSearchComponent implements OnInit {
     } catch (error) {
       this.progressBarMode = 'determinate';
       this.progressBarValue = '0';
-      this.capabilitiesFailure = 'Failure on parse the server response. ' + error;
+      // Failure on parse the server response.
+      this.capabilitiesFailure = this._translate.instant('capabilitydialog.capabilitiesError') + ' ' + error;
     }
   }
 

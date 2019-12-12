@@ -6,6 +6,19 @@
     "alerts": "DETER (Notices)",
     "text": "TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs"
   },
+  "capabilitydialog": {
+      "title": "WMS Capabilities search",
+      "capabilitiesFailure" : "Failure on request, review your URL and try again.",
+      "capabilitiesError" : "Failure on parse the server response. Detail:",
+      "source" : "Data Source",
+      "filter" : "Filter",
+      "table" : {
+          "name":"Name",
+          "title":"Title",
+          "metadata":"Metadata",
+          "addlayer":"Add to map"
+      }
+  },
   "dialog": {
     "text": "General Informations",
     "accessDataBtn" : "Data access",
@@ -126,126 +139,6 @@
   "contact": {
     "title": "Send suggestions or questions to"
   },
-  "about": {
-    "description": "TerraBrasilis is a platform developed by INPE to organize, access and use spatial data produced by its environmental monitoring programs. Throughout a web portal, it focuses mainly on the Amazon Program, but the concept and software packages produced can be adapted and customized to meet other projects that produce spatial data and aim to be accessible in the internet environment.",
-    "more": "More information about TerraBrasilis",
-    "coordinators": "TEAM OF COORDINATORS",
-    "team.ti": "IT TEAM",
-    "occupation.male": "Researcher of the Division of Image Processing (DIDPI) at INPE",
-    "occupation.female": "Researcher of the Division of Image Processing (DIDPI) at INPE",
-    "occupation.technologist.male": "Senior Technologist of the Division of Image Processing (DIDPI) at INPE",
-    "ex.contributors": "Contributors and former members",
-    "support": "Support",
-    "support.inpe": "National Institute for Space Research (INPE)",
-    "support.funcate": "Foundation for Space Science, Technology and Applications (FUNCATE)",
-    "support.fundep": "Research Development Foundation (FUNDEP)",
-    "support.worldbank": "World Bank Group",
-    "support.bndes": " Brazilian Development Bank (BNDES)",
-    "developer": "Software Developer",
-    "research.fellow": "Research Fellow",
-    "dba": "Database Administrator",
-    "webdesigner": "Web Designer",
-    "technology": "Technologies ",
-    "technology.languages": "JavaScript (D3, DC, CrossFilter, Leaflet, Angular 5), Python, PHP, Java",
-    "technology.heterogeneous": "Docker Swarm (containers cluster), Redis MongoDB, PostgreSQL, Nginx HTTP Server (load balancer and reverse proxy). ",
-    "technology.services": "Server for sharing geospatial data (Geoserver) and metadata search and catalogue (Geonetwork)."
-  },
-  "dashboard": {
-    "class": {
-      "title": "Class:",
-      "deforestation": "Deforestation"
-    },
-    "download": {
-      "munBystate": "Municipalities by State",
-      "observation": "(Option only for increments)"
-    },
-    "graph": {
-      "amazon": "Amazon Biome",
-      "absoluteDataIncrements": "Accumulated deforestation increments",
-      "absoluteDataRates": "Accumulated deforestation rates",
-      "aggregateSpatialIncrements": "Accumulated deforestation increments map",
-      "aggregateSpatialRates": "Accumulated deforestation rates map",
-      "aggregateTemporalIncrements": "Deforestation increments",
-      "aggregateTemporalRates": "Deforestation rates",
-      "cerrado": "Cerrado Biome",
-      "label": {
-        "monitoring": "Monitoring Period : {{minDate}} - {{maxDate}}",
-        "area": "Areas (km²)",
-        "taxa": "Rates (km²)",
-        "regularArea": "Regular Area",
-        "filteredArea": "Less than 6.25ha"
-      },
-      "legal_amazon": "Legal Amazon",
-      "timeSeriesIncrements": "Deforestation increments",
-      "timeSeriesRates": "Deforestation rates",
-      "tableLois": {
-        "titleIncrements": "Accumulated deforestation increments per year",
-        "titleRates": "Accumulated deforestation rates per year",
-        "year": "Year",
-        "regular": "Regular area (km²)",
-        "less": "Area (km²) less than 6.25ha",
-        "total": "Total area (km²)"
-      }
-    },
-    "loi": {
-      "uf": "States",
-      "mun": "Municipalities",
-      "consunit": "Conservation Units",
-      "indi": "Indigeneous Areas"
-    },
-    "openOptions": {
-      "tools": "Tools",
-      "increProdes": "Deforestation Increments",
-      "increLegalAmazon": "Legal Amazon",
-      "increAmazon": "Amazon",
-      "increCerrado": "Cerrado",
-      "ratesProdes": "Deforestation Rates",
-      "alertsDeter": "Chart - Notices",
-      "dailyCerradoDeter": "Cerrado Daily Notices",
-      "monthlyCerradoDeter": "Cerrado Monthly Notices",
-      "ratesAmazon": "Legal Amazon",
-      "relatedPage": "Related Page",
-      "deforestationMap": "Deforestation Map",
-      "alertsMap": "Notices Map",
-      "cerradoPage": "Home - Cerrado",
-      "amazonPage": "Home - Amazon"
-    },
-    "options": {
-      "removefilter": "Remove Filter",
-      "restoreview": "Restore View",
-      "searchloi": "Search",
-      "legend": "Legend"
-    },
-    "search": {
-      "searchTitle": "Search by local of interest",
-      "searchDescription": "Type one term to search",
-      "close": "Close"
-    },
-    "on-demand": {
-      "download": "Download",
-      "close": "Close",
-      "title": {
-        "cerrado": "Choose the Cerrado states",
-        "legal_amazon": "Choose the Legal Amazon states",
-        "amazon": "Choose the Amazon states"
-      }
-    },
-    "title": {
-      "analysis": "Analyses - ",
-      "increments": "PRODES (Deforestation)",
-      "rates": "PRODES (Deforestation)",
-      "legal_amazon": "Legal Amazon",
-      "amazon": "Amazon",
-      "cerrado": "Cerrado",
-      "time": "Year",
-      "update": "Updated at: 07/29/2019"
-    },
-    "tooltip": {
-      "rates": "Deforestation rates are calculated based on deforestation areas greater than 6.25 hectares",
-      "incr": "Deforestation increments are calculated based on all deforestation data available",
-      "download": "This download option is only available for deforestation increments"
-    }
-  },
   "timeseries" : {
       "title": "Time series using SITS package functions",
       "service": "Service",
@@ -271,5 +164,13 @@
       "table": "Table",
       "graphic": "Chart",
       "infouse": "Uses the control painel to select the options of origin of the timeseries and the map's tools to define a location or area used for obtaining the series."
-  }  
+  },
+  "matPaginatorIntl": {
+    "itemsPerPage":"Itens per page:",
+    "nextPage":"Next page",
+    "prevPage":"Previous page",
+    "firstPage":"First page",
+    "lastPage":"Last page",
+    "of" : "of"
+  }
 }
