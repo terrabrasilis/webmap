@@ -109,6 +109,14 @@
             "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Municípios",
             "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Avisos de Desmatamento à partir de 2018"
         },
+        "5dfa348ffc7ea6096c1bce18" : {
+            "name": " Caatinga",
+            "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma"
+        },
+        "5dfa348ffc7ea6096c1bce19" : {
+            "name": " Mata Atlântica",
+            "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma"
+        },
         "5c810c820cf423000144ebda" : {
             "name": " Amazônia Legal",
             "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Avisos de Desmatamento à partir de 2015",

@@ -108,6 +108,14 @@
       "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Counties",
       "5c8105e60cf423000144ebd75c8107880cf423000144ebd8": "Deforestation Notices since 2018"
     },
+    "5dfa348ffc7ea6096c1bce18" : {
+      "name": " Caatinga",
+      "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Biome Border"
+    },
+    "5dfa348ffc7ea6096c1bce19" : {
+        "name": " Mata Atlântica",
+        "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Biome Border"
+    },
     "5c810c820cf423000144ebda": {
       "name": " Legal Amazon",
       "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Deforestation Notices since 2015",
