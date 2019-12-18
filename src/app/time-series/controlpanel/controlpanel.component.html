@@ -57,7 +57,7 @@
     </div>
     <div class="form-group">
       <label for="to">{{ 'timeseries.endDate' | translate }}: </label>
-      <input type="date" class="form-control" id="to" value="2019-12-06" />
+      <input type="date" class="form-control" id="to" value= "{{currentDate | date:'yyyy-MM-dd'}}" />
     </div>
 
     <button type="submit" id="submitbutton" class="btn btn-success" (click)="sendDataToChart()" [disabled]="!latitude || !longitude"> {{ 'timeseries.submit' | translate }} </button> <!-- (click)="timeseries()" -->

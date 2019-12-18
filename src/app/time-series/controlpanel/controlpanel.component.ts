@@ -20,6 +20,7 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
   //polygon: Array<any>
   polygon: string
   chartLoadingSubscription: Subscription
+  currentDate = new Date();
    
   constructor (
     private shareData: TsComponentsDataShareService,
@@ -158,32 +159,32 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
 
       // this.enableButton();
 
-      if (!this.isPolygon) {
-        //if ($('#get-point').is(':checked')) {
-        // https://stackoverflow.com/questions/9240854/jquery-function-executed-more-than-once
-        $('#submitbutton')
-          // .unbind('click')
-          .click(function (e: any) {
-            console.log('Test ...');
-            e.preventDefault();
-            //timeSeriesRaw();
-            this.sendDataToChart()
-          })
-      } else {
-        $('#submitbutton')
-          // .unbind('click')
-          .click(function (e: any) {
-            e.preventDefault();
-            this.sendDataToChart()
-          })
-      }
-    })
+    //   if (!this.isPolygon) {
+    //     //if ($('#get-point').is(':checked')) {
+    //     // https://stackoverflow.com/questions/9240854/jquery-function-executed-more-than-once
+    //     $('#submitbutton')
+    //       // .unbind('click')
+    //       .click(function (e: any) {
+    //         console.log('Test ...');
+    //         e.preventDefault();
+    //         //timeSeriesRaw();
+    //         this.sendDataToChart()
+    //       })
+    //   } else {
+    //     $('#submitbutton')
+    //       // .unbind('click')
+    //       .click(function (e: any) {
+    //         e.preventDefault();
+    //         this.sendDataToChart()
+    //       })
+    //   }
+     })
 
-    //button handler
-    $('#submitbuttonfilter').on('click', function (e: any) {
-      e.preventDefault()
-      this.sendDataToChart()
-    })
+    // //button handler
+    // $('#submitbuttonfilter').on('click', function (e: any) {
+    //   e.preventDefault()
+    //   this.sendDataToChart()
+    // })
   }
 
   sendDataToChart(){

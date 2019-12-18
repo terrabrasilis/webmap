@@ -60,7 +60,7 @@ export class ChartpanelComponent implements OnInit {
           if(this.jsonCoords !== ''){
             this.timeSeriesShp(data)
           } else {
-            alert("Please, draw a polygon with an area between 50 and 2000 ha.")
+            alert("Please, draw a polygon with an area between 50 and 2000 ha.") // Put in data
             stop();
           }
         }
@@ -199,9 +199,8 @@ export class ChartpanelComponent implements OnInit {
         self.mySession_point = session
 
         session.getObject(function (data: any) {
-          // console.log('DATA: ', data);
           var myData = data[0].time_series
-          console.log('MyData: ', myData)
+          // console.log('MyData: ', myData)
           var series = self.prepareData(myData)
           self.plotChart(series)
 
