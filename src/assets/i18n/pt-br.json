@@ -111,11 +111,17 @@
         },
         "5dfa348ffc7ea6096c1bce18" : {
             "name": " Caatinga",
-            "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma"
+            "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma",
+            "5dfa3729fc7ea6096c1bce265dfa348ffc7ea6096c1bce18": "Hidrografia",
+            "5dfa3729fc7ea6096c1bce275dfa348ffc7ea6096c1bce18": "Nuvem - 2016",
+            "5dfa3729fc7ea6096c1bce285dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2016"
         },
         "5dfa348ffc7ea6096c1bce19" : {
             "name": " Mata Atlântica",
-            "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma"
+            "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma",
+            "5dfa3729fc7ea6096c1bce235dfa348ffc7ea6096c1bce19": "Hidrografia",
+            "5dfa3729fc7ea6096c1bce245dfa348ffc7ea6096c1bce19": "Nuvem - 2016",
+            "5dfa3729fc7ea6096c1bce255dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2016"
         },
         "5c810c820cf423000144ebda" : {
             "name": " Amazônia Legal",
