@@ -17,7 +17,6 @@
     "build-gh-pages": "ng build --configuration=staging --base-href 'https://terrabrasilis.github.io/webmap/'",
     "build-production": "ng build --configuration=production --base-href '/app/'",
     "build-staging": "ng build --configuration=staging  --base-href '/homologation/'",
-    "build-homologation": "ng build --configuration=staging  --base-href '/homologation/'",
     "deploy-gh-pages": "yarn build-gh-pages && ./node_modules/angular-cli-ghpages/angular-cli-ghpages --dir=dist/terrabrasilis --no-silent",
     "e2e": "ng e2e",
     "e2e_headless": "ng e2e --protractor-config='e2e/ci.protractor.conf.js'",
