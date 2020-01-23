@@ -18,7 +18,7 @@ export class Constants {
 
         if(environment.BUILD_TYPE && environment.ENV == 'production') {
             // confirm the 13111 port in docker-stacks/api/business-api-homologation.yaml
-            if(environment.BUILD_TYPE == 'homologation') url = 'http://terrabrasilis2.dpi.inpe.br:13222/api/v1/';
+            if(environment.BUILD_TYPE == 'homologation') url = 'http://terrabrasilis2.dpi.inpe.br:13111/api/v1/';
             
             // confirm the 2222 port in docker-stacks/demo/docker-compose.yaml
             if(environment.BUILD_TYPE == 'compose') url = 'http://localhost:2222/api/v1/';
