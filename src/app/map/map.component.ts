@@ -818,29 +818,31 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             const layers: Array<any> = [];
             const isVisionEnabled: boolean = v.enabled;
             v.layers.forEach((l: any) => {
-                // replaces if exists, the workspace of the datasource host string
-                l.datasource.host = l.datasource.host.replace('/' + l.workspace + '/', '/');
+                if(l.enabled) {
+                    // replaces if exists, the workspace of the datasource host string
+                    l.datasource.host = l.datasource.host.replace('/' + l.workspace + '/', '/');
 
-                const layer = new Layer(l.id + v.id)
-                    .addName(l.name)
-                    .addTitle(l.title)
-                    .addWorkspace(l.workspace)
-                    .addCapabilitiesUrl(l.capabilitiesUrl)
-                    .addOpacity(l.opacity)
-                    .addDatasource(l.datasource)
-                    .addTools(l.tools)
-                    .addDownloads(l.downloads)
-                    .addMetadata(l.metadata)
-                    .isBaselayer(l.baselayer)
-                    .isActive( isVisionEnabled ? l.active : isVisionEnabled )
-                    .isEnable(l.enabled)
-                    .isTranslatable(true)
-                    .isTimeDimension(l.timeDimension)
-                    .typeOfData(l.aggregatable)
-                    .addStackOrder(l.stackOrder)
-                    .addDashboardUrl(l.dashboard);
+                    const layer = new Layer(l.id + v.id)
+                        .addName(l.name)
+                        .addTitle(l.title)
+                        .addWorkspace(l.workspace)
+                        .addCapabilitiesUrl(l.capabilitiesUrl)
+                        .addOpacity(l.opacity)
+                        .addDatasource(l.datasource)
+                        .addTools(l.tools)
+                        .addDownloads(l.downloads)
+                        .addMetadata(l.metadata)
+                        .isBaselayer(l.baselayer)
+                        .isActive( isVisionEnabled ? l.active : isVisionEnabled )
+                        .isEnable(l.enabled)
+                        .isTranslatable(true)
+                        .isTimeDimension(l.timeDimension)
+                        .typeOfData(l.aggregatable)
+                        .addStackOrder(l.stackOrder)
+                        .addDashboardUrl(l.dashboard);
 
-                layers.push(layer);
+                    layers.push(layer);
+                }
             });
             this.overlayers.unshift(new Vision(v.id, v.name, v.description, isVisionEnabled, v.created, v.tools, layers, v.downloads, true, v.stackOrder));
         });
