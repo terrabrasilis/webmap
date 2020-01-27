@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from './services/local-storage.service';
+import { version } from '../../package.json';
 
 /**
  * To use localStorage with angular:
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   
   imgPath:string=( process.env.ENV === 'production' )?('/app/'):('');
 
+  public version: string = version;// the project version loaded from package.json
   public title:string = '';
   public type:string = '';
   private languageKey: string = "translate";
