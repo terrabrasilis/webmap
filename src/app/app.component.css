@@ -12,3 +12,11 @@
     max-width: 100%;
     margin: 0;
 }
+
+.version_style{
+    position: absolute;
+    bottom: 1px;
+    right: 5px;
+    color: white;
+    font-size: small;
+}

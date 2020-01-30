@@ -35,7 +35,7 @@ export class LayerLegendToolComponent extends ToolComponent implements OnInit, O
   /**
    * TerraBrasilis
    */
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, null);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, null, null);
 
   ngOnInit() {
     this.layer = this.shared;

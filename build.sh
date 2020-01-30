@@ -21,18 +21,21 @@ echo "Building terrabrasilis/webmap:$VERSION"
 echo "...................................................."
 
 # environment to staging or production build
+ENV="production"
+BUILD_TYPE="production"
 # to staging use staging
 if [[ "$2" = "" ]]; then
-    ENV="production"
-    BUILD_TYPE="production"
     read -p "I will build on production mode by default. May i continue? If yes, type yes or Ctrl+C to exit. " -d'y' -d'e' -d's' RESPONSE; echo
 else
 
+    #if [[ "$2" = "staging" ]]; then
+    #    ENV="dev"
+    #    BUILD_TYPE="$2"
+    #fi
+
     if [[ "$2" = "staging" ]]; then
-        ENV="dev"
         BUILD_TYPE="$2"
     else
-        ENV="production"
         BUILD_TYPE="production"
     fi
 fi

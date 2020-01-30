@@ -123,7 +123,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, null, this.store);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, this.store);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -289,7 +289,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             vision.enabled = (layer.active && !vision.enabled) ? (true) : (vision.enabled);
 
             layer.tools.push(new Tool().addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>"))
-            layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
+            //layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
 
             rLayers.push(
                 new Layer(layer.id)
@@ -630,6 +630,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /// Tools to use directly on map.component
     ///////////////////////////////////////////////////
     showDialog(content: string): void {
+        this.dialog.closeAll();// Useful when all layers are open at the same time.
         const dialogRef = this.dialog.open(DialogComponent, { width : '450px' });
         dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(content);
     }
@@ -643,7 +644,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             let disclaimer4 = this._translate.instant('dialog.disclaimer4');
 
             const msg = '<b>'+disclaimer1+'</b><br />'+disclaimer2+'<br /><br />'+disclaimer3+' '+
-            '<a href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>'+disclaimer4+'</a>.';
+            '<a target="_blank" href=\'' + layerObject.metadata + '\' style=\'color:#007bff;text-decoration: underline;\'>'+disclaimer4+'</a>.';
             this.showDialog(msg);
         }
     }
@@ -755,7 +756,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                                 '     <div class="card-body">' +
                                 '        <h5 class="card-title">' + download.category + '</h5>' +
                                 '        <p class="card-text">' + download.description + '</p>' + link +
-                                '        <a href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
+                                '        <a target="_blank" href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
                                 '     </div>' +
                                 '    </div>';
             }
@@ -826,29 +827,31 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             const layers: Array<any> = [];
             const isVisionEnabled: boolean = v.enabled;
             v.layers.forEach((l: any) => {
-                // replaces if exists, the workspace of the datasource host string
-                l.datasource.host = l.datasource.host.replace('/' + l.workspace + '/', '/');
+                if(l.enabled) {
+                    // replaces if exists, the workspace of the datasource host string
+                    l.datasource.host = l.datasource.host.replace('/' + l.workspace + '/', '/');
 
-                const layer = new Layer(l.id + v.id)
-                    .addName(l.name)
-                    .addTitle(l.title)
-                    .addWorkspace(l.workspace)
-                    .addCapabilitiesUrl(l.capabilitiesUrl)
-                    .addOpacity(l.opacity)
-                    .addDatasource(l.datasource)
-                    .addTools(l.tools)
-                    .addDownloads(l.downloads)
-                    .addMetadata(l.metadata)
-                    .isBaselayer(l.baselayer)
-                    .isActive( isVisionEnabled ? l.active : isVisionEnabled )
-                    .isEnable(l.enabled)
-                    .isTranslatable(true)
-                    .isTimeDimension(l.timeDimension)
-                    .typeOfData(l.aggregatable)
-                    .addStackOrder(l.stackOrder)
-                    .addDashboardUrl(l.dashboard);
+                    const layer = new Layer(l.id + v.id)
+                        .addName(l.name)
+                        .addTitle(l.title)
+                        .addWorkspace(l.workspace)
+                        .addCapabilitiesUrl(l.capabilitiesUrl)
+                        .addOpacity(l.opacity)
+                        .addDatasource(l.datasource)
+                        .addTools(l.tools)
+                        .addDownloads(l.downloads)
+                        .addMetadata(l.metadata)
+                        .isBaselayer(l.baselayer)
+                        .isActive( isVisionEnabled ? l.active : isVisionEnabled )
+                        .isEnable(l.enabled)
+                        .isTranslatable(true)
+                        .isTimeDimension(l.timeDimension)
+                        .typeOfData(l.aggregatable)
+                        .addStackOrder(l.stackOrder)
+                        .addDashboardUrl(l.dashboard);
 
-                layers.push(layer);
+                    layers.push(layer);
+                }
             });
             this.overlayers.unshift(new Vision(v.id, v.name, v.description, isVisionEnabled, v.created, v.tools, layers, v.downloads, true, v.stackOrder));
         });

@@ -255,7 +255,7 @@ dfn::after {
   pointer-events: none;
   transition: opacity 250ms, top 250ms;
   border-radius: 5px;
-  z-index: 99999;
+  z-index: 99999 !important;
 }
 
 dfn::before {
@@ -273,12 +273,13 @@ dfn::before {
 }
 
 dfn:hover {
-  z-index: 2;
+  z-index: 99999 !important;
 }
 
 dfn:hover::after,
 dfn:hover::before {
   opacity: 1;
+  z-index: 99999 !important;
 }
 
 dfn:hover::after {

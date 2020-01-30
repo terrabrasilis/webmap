@@ -10,7 +10,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { MatSnackBarModule } from '@angular/material';
+import { MatSnackBarModule, MatPaginatorIntl } from '@angular/material';
 
 /**
  * Custom module created imports
@@ -22,7 +22,6 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import { DynamicComponentModule } from './core-modules/dynamic-component';
 import { SharedModule } from './core-modules/shared.module';
 import { PipeSharedModule } from './core-modules/pipe-shared.module';
-
 
 /**
  * Custom shared modules
@@ -61,6 +60,8 @@ import { DatasourceService } from './services/datasource.service';
 import { LayerService } from './services/layer.service';
 import { VisionService } from './services/vision.service';
 import { TsComponentsDataShareService } from './services/ts-components-data-share.service';
+import { TranslateService } from '@ngx-translate/core';
+import { MatPaginatorI18nService } from './services/mat-paginator-i18n.service';
 
 /**
  * Providers
@@ -157,6 +158,15 @@ import StoreModule from './redux/store'
     VisionService,
     MatDatepickerModule,
     TsComponentsDataShareService,
+    {
+      provide: MatPaginatorIntl,
+      useFactory: (translate) => {
+        const service = new MatPaginatorI18nService();
+        service.injectTranslateService(translate);
+        return service;
+      },
+      deps: [TranslateService]
+    }
     // {
     //   provide: APP_BASE_HREF, 
     //   useValue: '/map' /**https://angular.io/api/common/APP_BASE_HREF */

@@ -35,6 +35,7 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
     this.cdRef,
     null,
     null,
+    null,
     null
     )
 
