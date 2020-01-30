@@ -102,6 +102,14 @@
             "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Desmatamento Anual - 2018/2019",
             "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de Imagens - 2016, 2018 e 2019"
         },
+        "5dfa348ffc7ea6096c1bce18" : {
+            "name": " Caatinga",
+            "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma"
+        },
+        "5dfa348ffc7ea6096c1bce19" : {
+            "name": " Mata Atlântica",
+            "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma"
+        },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
             "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "Estados",
@@ -150,7 +158,8 @@
         "legend": "Legenda",
         "timeDimension": "Dimensão temporal",
         "fitBounds": "Zoom para Camada",
-        "layerFilter": "Filtrar"
+        "layerFilter": "Filtrar",
+        "timeseries": "Série Temporal"
     },
     "filter" : {
         "title":"Filtro",

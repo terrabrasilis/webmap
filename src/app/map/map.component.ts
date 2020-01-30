@@ -91,6 +91,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     public step = 0.1;
 
     /**
+     * Timeseries
+     */
+    private tsEnable: boolean = false;
+
+    /**
      * privates
      */
     public languageKey = 'translate';
@@ -416,6 +421,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.terrabrasilisApi.redo();
     }
 
+    showDialogTimeSeries() {
+        this.tsEnable=!this.tsEnable;
+    }
+    
     getSingleLayerFeatureInfo(layer: any) {
         console.log('getSingleLayerFeatureInfo');
         console.log(layer);

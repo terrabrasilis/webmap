@@ -41,7 +41,9 @@
               "src/assets/css/jquery-ui/jquery.loading.css",
               "src/assets/css/jquery-scrolling/jquery.scrolling-tabs.min.css",
               "src/styles.scss",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/c3/c3.min.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": []
           },

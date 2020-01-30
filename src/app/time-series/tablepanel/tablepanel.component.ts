@@ -5,8 +5,6 @@ import * as jQuery from 'jquery' // para DataTable
 import 'datatables.net'
 import 'datatables.net-dt'
 
-import '../../../../node_modules/datatables.net-dt/css/jquery.dataTables.css'
-
 declare var $: any
 
 @Component({

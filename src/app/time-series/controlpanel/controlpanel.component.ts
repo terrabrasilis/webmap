@@ -17,9 +17,11 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
   isPolygon: boolean
   latitude: number
   longitude: number
-  polygon: Array<any>
+  //polygon: Array<any>
+  polygon: string
   chartLoadingSubscription: Subscription
-
+  currentDate = new Date();
+   
   constructor (
     private shareData: TsComponentsDataShareService,
     private dialog: MatDialog,
@@ -35,7 +37,7 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
     null,
     null,
     null
-  )
+    )
 
   ngOnInit () {
     this.enableMapListener()
@@ -65,7 +67,8 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       this.latitude = this.aGeoJSONGeomtry.geometry.coordinates[1]
     } else {
       this.isPolygon = true
-      this.polygon = this.aGeoJSONGeomtry.geometry.coordinates
+      this.polygon =  localStorage.getItem('jsonCoords') //this.aGeoJSONGeomtry.geometry.coordinates
+      console.log("polygon", this.polygon)
     }
     this.cdRef.detectChanges()
   }
@@ -82,7 +85,7 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       this.latitude = this.aGeoJSONGeomtry.geometry.coordinates[1]
     } else {
       this.isPolygon = true
-      this.polygon = this.aGeoJSONGeomtry.geometry.coordinates
+      this.polygon = localStorage.getItem('jsonCoords') //this.aGeoJSONGeomtry.geometry.coordinates
     }
     this.cdRef.detectChanges()
   }
@@ -99,7 +102,7 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       this.latitude = 0
     } else {
       this.isPolygon = true
-      this.polygon = []
+      this.polygon = "" //[]
     }
     this.cdRef.detectChanges()
   }
@@ -112,52 +115,8 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
     this.terrabrasilisApi.detachGeometryDrawingListener()
   }
 
-  timeseries () {
+  timeseries(){
     //----- define values of the input
-    $('#services').change(function () {
-      switch ($(this).val()) {
-        case 'WTSS-INPE':
-          $('#coverages').html("<option value='MOD13Q1'> MOD13Q1 </option>")
-          $('#band').html(
-            "<option selected='selected' value='evi'> evi </option><option value='ndvi'> ndvi </option><option value='mir'> mir </option><option value='nir'> nir </option><option value='red'> red </option><option value='blue'> blue </option>"
-          )
-          $('#band_shp').html(
-            "<option selected='selected' value='evi'> evi </option><option value='ndvi'> ndvi </option><option value='mir'> mir </option><option value='nir'> nir </option><option value='red'> red </option><option value='blue'> blue </option>"
-          )
-          $('#pre_filter')
-            .find('option')
-            .each(function () {
-              $(this).attr('disabled', 'disabled')
-            })
-          break
-        case 'SATVEG':
-          $('#coverages').html(
-            "<option value='terra'>Terra</option><option value='aqua'>Aqua</option><option value='comb'>Combination</option>"
-          )
-          //$("#band").html("<option value='evi'> evi </option><option value='ndvi'> ndvi</option>");
-          $('#pre_filter').html(
-            "<option value='0'> 0 - none </option><option selected='selected' value='1'> 1 - no data correction </option><option value='2'> 2 - cloud correction </option><option value='3'> 3 - no data and cloud correction </option>"
-          )
-          $('#band')
-            .find('option')
-            .each(function () {
-              $(this).attr('disabled', 'disabled')
-            })
-          $('#from')
-            .find('input')
-            .each(function () {
-              $(this).attr('disabled', 'disabled')
-            })
-          $('#to')
-            .find('input')
-            .each(function () {
-              $(this).attr('disabled', 'disabled')
-            })
-          break
-        default:
-          $('#coverages').html("<option value=''>-- Coverage --</option>")
-      }
-    })
 
     $('#filter').change(function () {
       switch ($(this).val()) {
@@ -199,44 +158,46 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       $('#butOpenJSON').toggle(this.value !== 'point')
       $('#openJSON').toggle(this.value !== 'point')
 
-      if (!this.isPolygon) {
-        //if ($('#get-point').is(':checked')) {
+      // this.enableButton();
 
-        // https://stackoverflow.com/questions/9240854/jquery-function-executed-more-than-once
-        $('#submitbutton')
-          .unbind('click')
-          .click(function (e: any) {
-            console.log('Test ...')
-            e.preventDefault()
-            //timeSeriesRaw();
-            this.sendDataToChart()
-          })
-      } else {
-        $('#submitbutton')
-          .unbind('click')
-          .click(function (e: any) {
-            e.preventDefault()
-            this.sendDataToChart()
-          })
-      }
-    })
+    //   if (!this.isPolygon) {
+    //     //if ($('#get-point').is(':checked')) {
+    //     // https://stackoverflow.com/questions/9240854/jquery-function-executed-more-than-once
+    //     $('#submitbutton')
+    //       // .unbind('click')
+    //       .click(function (e: any) {
+    //         console.log('Test ...');
+    //         e.preventDefault();
+    //         //timeSeriesRaw();
+    //         this.sendDataToChart()
+    //       })
+    //   } else {
+    //     $('#submitbutton')
+    //       // .unbind('click')
+    //       .click(function (e: any) {
+    //         e.preventDefault();
+    //         this.sendDataToChart()
+    //       })
+    //   }
+     })
 
-    //button handler
-    $('#submitbuttonfilter').on('click', function (e: any) {
-      e.preventDefault()
-      this.sendDataToChart()
-    })
+    // //button handler
+    // $('#submitbuttonfilter').on('click', function (e: any) {
+    //   e.preventDefault()
+    //   this.sendDataToChart()
+    // })
   }
 
-  sendDataToChart () {
+  sendDataToChart(){
+
     this.terrabrasilisApi.enableLoading()
 
     let crtlData = {
-      service_selected: $('#services option:selected').val(),
-      coverage_selected: $('#coverages option:selected').val(),
+      service_selected: 'WTSS-INPE',
+      coverage_selected: 'MOD13Q1',
       band_selected: $('#band').val(),
       band_selected_shp: $('#band_shp').val(),
-      pre_filter_selected: $('#pre_filter').val(),
+      pre_filter_selected: '0 - none',
       start_date: $('#from').val(),
       end_date: $('#to').val(),
       filter_selected: $('#filter option:selected').val(),
@@ -253,4 +214,15 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
 
     this.shareData.changeData(crtlData)
   }
+
+  // enableButton(){
+  //   $("input[type='text']", "input[type='number']").on("keyup", function(){
+  //     if(($('#lat').val() !== '' && $('#long').val() !== '') || $('#openJSON').val() !== ''){
+  //       $('#submitbutton').removeAttr("disabled");
+  //       this.sendDataToChart();
+  //     } else {
+  //       $('#submitbutton').attr("disabled", "disabled");
+  //         }  
+  //   });
+  // }
 }

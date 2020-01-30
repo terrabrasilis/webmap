@@ -19,3 +19,27 @@
 .disable {
   display: none;
 }
+
+.buttons-table {
+  margin: 0 auto;
+}
+  
+.action_btn {
+  margin: 0 auto;
+}
+
+#tableSample {
+    background-color: #ffffff;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tableSample th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+#tableSample th {
+    background-color: #017a6b; /*#4CAF50;*/
+    color: white;
+}

@@ -70,7 +70,7 @@ export class TerrabrasilisApiComponent implements OnInit {
       // .addOverLayers(JSON.parse(JSON.stringify(this.overlayers)))
       // .enableLegendAndToolToLayers()
       .enableZoomBox()
-      .enableDrawFeatureTool()
+      // .enableDrawFeatureTool()
       .enableLayersControlTool()
       .enableScaleControlTool()
       .enableDisplayMouseCoordinates()
