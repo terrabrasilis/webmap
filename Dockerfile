@@ -14,9 +14,9 @@ COPY ./src /app/src/
 COPY ./ts*.json /app/
 COPY ./angular.json /app/
 COPY ./browserslist /app/
-COPY ./nginx-custom.conf /app/nginx-custom.conf
+COPY ./nginx-${BUILD_TYPE}.conf /app/nginx-custom.conf
 
-RUN npm run build-$BUILD_TYPE && rm -rf /app/node_modules
+RUN npm run build-${BUILD_TYPE} && rm -rf /app/node_modules
 
 FROM nginx:1.13
 
