@@ -3,17 +3,28 @@
 echo "Help"
 echo "Call with parameters to customize the build: ./build.sh <VERSION> <BUILD_TYPE>"
 echo "VERSION parameter allows (ex.: v1.1 or v1.2-beta among others)"
-echo "BUILD_TYPE parameter allows (ex.: staging or production)"
+echo "VERSION is optional. If no provided, the script will trying load from package.json"
+echo "BUILD_TYPE is optional and allows (ex.: staging or production)."
 echo ""
 
+ver=$1
+btype=$2
+
 # get version number to build image
-if [[ ! "$1" = "" ]]; then
-    VERSION=$1
+if [[ ! "$ver" = "" && ! "$ver" = "staging" && ! "$ver" = "production" ]]; then
+    VERSION=$ver
 else
-    echo "Need one number to versioning this image. Enter one:" ; read VERSION
-    if [[ "$VERSION" = "" ]]; then
-        echo "Read fail! Aborting...."
-        exit
+    
+    PACKAGE_VERSION=$(cat package.json | grep -oP '(?<="version": ")[^"]*')
+    if [[ ! "$PACKAGE_VERSION" = "" ]]; then
+        echo "Auto detect the project version from package.json file and we'll use the version number: v$PACKAGE_VERSION"
+        VERSION="v$PACKAGE_VERSION"
+    else
+        echo "Need one number to versioning this image. Enter one:" ; read VERSION
+        if [[ "$VERSION" = "" ]]; then
+            echo "Read fail! Aborting...."
+            exit
+        fi
     fi
 fi
 
@@ -23,20 +34,22 @@ echo "...................................................."
 # environment to staging or production build
 ENV="production"
 BUILD_TYPE="production"
-# to staging use staging
-if [[ "$2" = "" ]]; then
+
+if [[ ! "$ver" = "" && "$ver" = "staging" || "$ver" = "production" ]]; then
+    btype=$ver
+fi
+
+if [[ "$btype" = "" ]]; then
     read -p "I will build on production mode by default. May i continue? If yes, type yes or Ctrl+C to exit. " -d'y' -d'e' -d's' RESPONSE; echo
 else
 
-    #if [[ "$2" = "staging" ]]; then
+    #if [[ "$btype" = "staging" ]]; then
     #    ENV="dev"
-    #    BUILD_TYPE="$2"
+    #    BUILD_TYPE="$btype"
     #fi
 
-    if [[ "$2" = "staging" ]]; then
-        BUILD_TYPE="$2"
-    else
-        BUILD_TYPE="production"
+    if [[ "$btype" = "staging" ]]; then
+        BUILD_TYPE="$btype"
     fi
 fi
 
