@@ -11,10 +11,11 @@
     matSuffix
     [for]="yearDatePicker"
   ></mat-datepicker-toggle>
+  
   <mat-datepicker
     #yearDatePicker
     startView="multi-year"
-    (yearSelected)="chosenYearHandler($event)"
+    (yearSelected)="chosenYearHandler($event,yearDatePicker)"
   >
   </mat-datepicker>
 </mat-form-field>

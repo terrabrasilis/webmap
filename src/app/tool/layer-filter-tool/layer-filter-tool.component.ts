@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
 import { LayerFilterComponent } from './layer-filter.component'
 
+
+
 /**
  * LayerFilterToolComponent
  * <layer-filter-tool  [shared]="layer"></layer-filter-tool>
@@ -39,6 +41,8 @@ export class LayerFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
   layer: Layer
 
+  
+
   @Input() shared: any
   @ViewChild('innerContent', { static: true }) innerContent: ElementRef
 
@@ -51,7 +55,7 @@ export class LayerFilterToolComponent extends ToolComponent
     private dialog: MatDialog,
     private dom: DomSanitizer,
     private cdRef: ChangeDetectorRef
-  ) {
+    ) {
     super()
   }
 
@@ -61,6 +65,7 @@ export class LayerFilterToolComponent extends ToolComponent
 
   ngOnInit() {
     this.layer = this.shared
+    
   }
 
   showDialog() {
@@ -68,6 +73,8 @@ export class LayerFilterToolComponent extends ToolComponent
     this.dialog.open(LayerFilterComponent, {
       width: '450px',
       data: { layer: this.layer }
-    })
+    });
+    
   }
+
 }

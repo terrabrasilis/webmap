@@ -289,7 +289,13 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             vision.enabled = (layer.active && !vision.enabled) ? (true) : (vision.enabled);
 
             layer.tools.push(new Tool().addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>"))
-            //layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
+            
+            //Check Just for now, because the layer filter contains only the time dimensions filter.
+            if(layer.timeDimension)
+            {
+                layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
+            }
+            
 
             rLayers.push(
                 new Layer(layer.id)

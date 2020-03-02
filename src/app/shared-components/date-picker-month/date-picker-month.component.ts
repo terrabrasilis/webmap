@@ -56,24 +56,37 @@ export const MY_FORMATS = {
 export class DatePickerMonthComponent {
   date = new FormControl(moment())
   @Output() setDateOutput = new EventEmitter()
-  
   @Input() minDate: Date
   @Input() maxDate: Date  
+  @Input() initialDate: Date
 
-  chosenYearHandler (normalizedYear: Moment) {
-    const ctrlValue = this.date.value
-    ctrlValue.year(normalizedYear.year())
-    this.date.setValue(ctrlValue)
+  ngOnInit()
+  {
+    this.setYear(moment(this.initialDate));
+    this.setMonth(moment(this.initialDate));
   }
 
-  chosenMonthHandler (
-    normalizedMonth: Moment,
-    datepicker: MatDatepicker<Moment>
-  ) {
-    const ctrlValue = this.date.value
-    ctrlValue.month(normalizedMonth.month())
-    this.date.setValue(ctrlValue)
-    this.setDateOutput.emit(normalizedMonth.toDate())
-    datepicker.close()
+  chosenYearHandler (normalizedYear: Moment) {
+    this.setYear(normalizedYear);
+  }
+
+  chosenMonthHandler (normalizedMonth: Moment,
+    datepicker: MatDatepicker<Moment>)
+  {
+    this.setMonth(normalizedMonth);
+    datepicker.close();
+    this.setDateOutput.emit(normalizedMonth.toDate());
+  }
+  setMonth(normalizedMonth: Moment)
+  {
+    const ctrlValue = this.date.value;
+    ctrlValue.month(normalizedMonth.month());
+    this.date.setValue(ctrlValue);
+  }
+  setYear(normalizedYear: Moment)
+  {
+    const ctrlValue = this.date.value;
+    ctrlValue.year(normalizedYear.year());
+    this.date.setValue(ctrlValue);
   }
 }
