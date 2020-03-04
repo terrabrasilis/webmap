@@ -229,6 +229,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 .addTools(tools)
                 .addStackOrder(0)
                 .addDatasource(datasource);
+                
+            nLayer.timeDimension = l.hasTimeDimension;
 
             wmsVision.addLayer(
                 nLayer

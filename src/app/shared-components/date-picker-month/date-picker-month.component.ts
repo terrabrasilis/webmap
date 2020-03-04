@@ -64,6 +64,7 @@ export class DatePickerMonthComponent {
   {
     this.setYear(moment(this.initialDate));
     this.setMonth(moment(this.initialDate));
+   
   }
 
   chosenYearHandler (normalizedYear: Moment) {
@@ -75,13 +76,13 @@ export class DatePickerMonthComponent {
   {
     this.setMonth(normalizedMonth);
     datepicker.close();
-    this.setDateOutput.emit(normalizedMonth.toDate());
   }
   setMonth(normalizedMonth: Moment)
   {
     const ctrlValue = this.date.value;
     ctrlValue.month(normalizedMonth.month());
     this.date.setValue(ctrlValue);
+    this.setDateOutput.emit(normalizedMonth.toDate());
   }
   setYear(normalizedYear: Moment)
   {

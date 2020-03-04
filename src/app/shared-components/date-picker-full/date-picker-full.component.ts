@@ -60,42 +60,21 @@ export class DatePickerFullComponent {
 
   ngOnInit()
   {
-    this.setYear(moment(this.initialDate));
-    this.setMonth(moment(this.initialDate));
     this.setDate(moment(this.initialDate));
+    this.onChanges();
   }
 
-  chosenYearHandler (normalizedYear: Moment) {
-    this.setYear(normalizedYear);
-  }
-
-  chosenMonthHandler (normalizedMonth: Moment)
-  {
-    this.setMonth(normalizedMonth);
-  }
-
-  chosenDateHandler (normalizedDate: Moment)
-  {
-    this.setDate(normalizedDate);
-  }
-
-  setYear(normalizedYear: Moment)
-  {
-    const ctrlValue = this.date.value;
-    ctrlValue.year(normalizedYear.year());
-    this.date.setValue(ctrlValue);
-  }
-
-  setMonth(normalizedMonth: Moment)
-  {
-    const ctrlValue = this.date.value;
-    ctrlValue.month(normalizedMonth.month());
-    this.date.setValue(ctrlValue);
+  onChanges(): void {
+    this.date.valueChanges.subscribe(val => {
+     this.setDate(val);
+    });
   }
 
   setDate(normalizedDate: Moment)
   {
     const ctrlValue = this.date.value;
+    ctrlValue.year(normalizedDate.year());
+    ctrlValue.month(normalizedDate.month());
     ctrlValue.date(normalizedDate.date());
     this.date.setValue(ctrlValue);
     this.setDateOutput.emit(normalizedDate.toDate())    

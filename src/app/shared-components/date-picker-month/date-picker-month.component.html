@@ -14,8 +14,8 @@
   <mat-datepicker
     #monthDatePicker
     startView="multi-year"
-    (yearSelected)="chosenYearHandler($event)"
     (monthSelected)="chosenMonthHandler($event, monthDatePicker)"
+    (yearSelected)="chosenYearHandler($event)"
   >
   </mat-datepicker>
 </mat-form-field>

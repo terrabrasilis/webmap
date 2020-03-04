@@ -32,8 +32,8 @@ export class LayerFilterComponent implements OnInit {
   isYearlyGranularity = false;
   
   dateRange: any;
-  startDateValue = new Date(2016, 0, 1);
-  endDateValue = new Date(2016, 0, 1);
+  startDateValue: any;
+  endDateValue: any;
 
   minDate = new Date(2016, 0, 1);
   maxDate = new Date(2018, 0, 1);
@@ -52,11 +52,8 @@ export class LayerFilterComponent implements OnInit {
   ) {
     this.layer = data.layer;
     this.publishDialogData();
-    this.store
-      .pipe(select((state: any) => state.layerFilter.filters))
-      .subscribe((refreshedFilter) => {
-        this.filters = refreshedFilter;
-      });
+
+   this.loadFilterFromStore();
   }
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -95,6 +92,41 @@ export class LayerFilterComponent implements OnInit {
   setEndDateValue (selectedEndDate) {
     this.endDateValue = selectedEndDate
   }
+/**
+ * Check for previous filter for the current layer on redux store 
+ */
+  loadFilterFromStore()
+  {
+    this.store
+    .pipe(
+      select((state: any) => state.layerFilter.filters))
+    .subscribe((refreshedFilter) => {
+      let layerFullName = this.layer.workspace + ":" + this.layer.name;
+      
+      let existingLayerFilters = refreshedFilter.filter((filter: fromLayerFilterReducer.Filter) => (
+        filter.workspace + ":" + filter.name) === layerFullName); 
+      
+      this.filters = existingLayerFilters;
+
+      if(existingLayerFilters && existingLayerFilters.length>0)
+      {
+        this.restoreFilter(existingLayerFilters[0]);
+      }
+    });
+  }
+
+  restoreFilter(filter: fromLayerFilterReducer.Filter)
+  {
+    if(filter.initialDate)
+    {
+      this.startDateValue = new Date(filter.initialDate);
+    }
+    if(filter.finalDate)
+    {
+      this.endDateValue = new Date(filter.finalDate);
+    }
+    
+  }
 
   buildTimeFilter () {
     const initialDate = this.startDateValue
@@ -119,9 +151,23 @@ export class LayerFilterComponent implements OnInit {
     const currentLayerFilterObject = {
       id: this.layer.id,
       name: this.layer.name,
+      workspace: this.layer.workspace,
       initialDate,
       finalDate,
       time
+    } as fromLayerFilterReducer.Filter;
+
+    this.dispatchFilterActionToStore(currentLayerFilterObject)
+    this.closeDialog()
+  }
+  clearFilter () {
+    const currentLayerFilterObject = {
+      id: this.layer.id,
+      name: this.layer.name,
+      workspace: this.layer.workspace,
+      initialDate: undefined,
+      finalDate: undefined,
+      time: ""
     } as fromLayerFilterReducer.Filter;
 
     this.dispatchFilterActionToStore(currentLayerFilterObject)
@@ -146,8 +192,15 @@ export class LayerFilterComponent implements OnInit {
           
           this.minDate = new Date(this.dateRange.startDate);
           this.maxDate = new Date(this.dateRange.endDate);
-          this.startDateValue= new Date(this.dateRange.startDate);
-          this.endDateValue= new Date(this.dateRange.endDate);
+          
+          if(!this.startDateValue)
+          {
+            this.startDateValue= new Date(this.dateRange.startDate);
+          }          
+          if(!this.endDateValue)
+          {
+            this.endDateValue= new Date(this.dateRange.endDate);
+          }
 
           if(granularity==Constants.Granularity.Daily)
           {
@@ -171,4 +224,5 @@ export class LayerFilterComponent implements OnInit {
       }
     );
   }
+
 }

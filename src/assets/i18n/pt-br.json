@@ -163,7 +163,9 @@
     },
     "filter" : {
         "title":"Filtro",
-        "placeholder": "Escolha uma data"
+        "placeholder": "Escolha uma data",
+        "btfilter":"Filtrar",
+        "btclear":"Limpar"
     },
     "contact" : {
         "title":"Envie sugestões ou perguntas para"

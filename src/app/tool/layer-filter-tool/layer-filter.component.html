@@ -26,8 +26,12 @@
 
       <mat-divider></mat-divider>
 
-      <button mat-raised-button color="primary" (click)="applyFilter()">
-        Filtrar
+      <button mat-raised-button color="primary" (click)="applyFilter()" class="float-left">
+        {{ "filter.btfilter" | translate }}
+      </button>
+
+      <button mat-raised-button color="primary" (click)="clearFilter()" class="float-right">
+        {{ "filter.btclear" | translate }}
       </button>
 
     </div>

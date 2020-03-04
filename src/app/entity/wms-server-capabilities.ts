@@ -7,6 +7,7 @@ export class Layer2View {
     metadata: string;
     url: string;
     namespace: string;
+    hasTimeDimension: boolean;
     constructor() {}
 }
 

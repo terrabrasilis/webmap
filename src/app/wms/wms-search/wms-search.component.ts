@@ -173,6 +173,7 @@ export class WmsSearchComponent implements OnInit {
       workspace:      layer.namespace,
       name:           layer.name,
       title:          layer.title,
+      hasTimeDimension: layer.hasTimeDimension,
       active:         true,
       baselayer:      false
     };
@@ -213,6 +214,15 @@ export class WmsSearchComponent implements OnInit {
         lv.metadata = l.metadataURL.href_get;
         lv.url = serverMapUrl;
         lv.namespace = l.namespace;
+        if(l.dimension && l.dimension.length>0)
+        {
+          lv.hasTimeDimension = true;
+        } 
+        else
+        {
+          lv.hasTimeDimension = false;
+        }
+        
         layers.push(lv);
       }
     );

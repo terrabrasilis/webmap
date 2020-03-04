@@ -39,9 +39,8 @@ import { LayerFilterComponent } from './layer-filter.component'
 @RegisterComponent
 export class LayerFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
-  layer: Layer
-
-  
+  layer: Layer;
+    
 
   @Input() shared: any
   @ViewChild('innerContent', { static: true }) innerContent: ElementRef
@@ -49,6 +48,7 @@ export class LayerFilterToolComponent extends ToolComponent
   dynamicOnMount(attr: Map<string, any>, innerHTML: string, el: any) {
     this.innerContent.nativeElement.innerHTML = innerHTML
     this.layer = this.shared
+    
   }
 
   constructor(
@@ -69,10 +69,11 @@ export class LayerFilterToolComponent extends ToolComponent
   }
 
   showDialog() {
+    
     this.cdRef.detectChanges()
     this.dialog.open(LayerFilterComponent, {
       width: '450px',
-      data: { layer: this.layer }
+      data: { layer: this.layer}
     });
     
   }

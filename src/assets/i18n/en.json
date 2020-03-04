@@ -159,6 +159,12 @@
     "fitBounds": "Fit Bounds",
     "timeseries": "Time Series"
   },
+  "filter" : {
+    "title":"Filter",
+    "placeholder": "Pick a date",
+    "btfilter":"Filter",
+    "btclear":"Clear"
+},
   "contact": {
     "title": "Send suggestions or questions to"
   },
