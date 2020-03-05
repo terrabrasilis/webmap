@@ -24,10 +24,7 @@ import { Datasource } from '../../entity/datasource';
 import { DatasourceType } from '../../util/datasouce-type';
 
 // import terrabrasilis api from node_modules
-import * as Jsonix from 'terrabrasilis-jsonix';
 import * as Terrabrasilis from 'terrabrasilis-api';
-import * as ogcSchemas from 'ogc-schemas';
-import * as w3cSchemas from 'w3c-schemas';
 
 export interface Source {
   value: string;
@@ -78,7 +75,7 @@ export class WmsSearchComponent implements OnInit {
   /**
    * privates
    */
-  private jsonix: any;
+  
   private Terrabrasilis: any;
 
   /**
@@ -94,7 +91,6 @@ export class WmsSearchComponent implements OnInit {
     this.Terrabrasilis = Terrabrasilis;
     this.defaultUrl = 'http://terrabrasilis.dpi.inpe.br/geoserver/ows';
     this.selectedValue = this.defaultUrl;
-    this.jsonix = Jsonix.Jsonix;
 
     this.datasourceService
           .getAllDatasourceByType(DatasourceType.OWS)
@@ -159,7 +155,8 @@ export class WmsSearchComponent implements OnInit {
       data => { // defaultUrl
         // console.log(data);
         if (data.ok) {
-          this.xmlToJson(data.body);
+          let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
+          this.mapCapabilities(parsedCapabilities); 
         } else {
           this.progressBarMode = 'determinate';
           this.progressBarValue = '0';
@@ -176,6 +173,7 @@ export class WmsSearchComponent implements OnInit {
       workspace:      layer.namespace,
       name:           layer.name,
       title:          layer.title,
+      hasTimeDimension: layer.hasTimeDimension,
       active:         true,
       baselayer:      false
     };
@@ -216,6 +214,15 @@ export class WmsSearchComponent implements OnInit {
         lv.metadata = l.metadataURL.href_get;
         lv.url = serverMapUrl;
         lv.namespace = l.namespace;
+        if(l.dimension && l.dimension.length>0)
+        {
+          lv.hasTimeDimension = true;
+        } 
+        else
+        {
+          lv.hasTimeDimension = false;
+        }
+        
         layers.push(lv);
       }
     );
@@ -223,33 +230,10 @@ export class WmsSearchComponent implements OnInit {
     this.dataSource.data = layers;
   }
 
-  private xmlToJson(xml: string) {
+  private mapCapabilities(json: string) {
     try {
-      const wmsContext = new this.jsonix.Context([
-          w3cSchemas.XLink_1_0,
-          ogcSchemas.OWS_1_0_0,
-          ogcSchemas.SLD_1_1_0,
-          ogcSchemas.SE_1_1_0,
-          ogcSchemas.Filter_1_1_0,
-          ogcSchemas.GML_3_1_1,
-          ogcSchemas.SMIL_2_0_Language,
-          ogcSchemas.SMIL_2_0,
-          ogcSchemas.WMS_1_3_0
-        ],
-        {
-            namespacePrefixes : {
-                'http://www.opengis.net/wms' : '',
-                'http://www.w3.org/1999/xlink' : 'xlink'
-            },
-            mappingStyle : 'simplified'
-        });
 
-      // Create an unmarshaller (parser)
-      const unmarshaller = wmsContext.createUnmarshaller();
-
-      // Unmarshal from URL
-      this.capabilities = unmarshaller.unmarshalString(xml);
-      this.mappingCapabilities(this.capabilities);
+      this.mappingCapabilities(json);
       this.progressBarMode = 'determinate';
       this.progressBarValue = '100';
     } catch (error) {

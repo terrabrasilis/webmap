@@ -9,26 +9,31 @@
     <div class="card-body">
       <h5 class="card-title">{{ "filter.title" | translate }}</h5>
 
-      <div *ngIf="isOnlyYearDate">
-        <app-date-picker-year #startYearDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setStartDateValue($event)"></app-date-picker-year>
-        <app-date-picker-year #endYearDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setEndDateValue($event)"></app-date-picker-year>
+      <div *ngIf="isYearlyGranularity">
+        <app-date-picker-year #startYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-year>
+        <app-date-picker-year #endYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-year>
       </div>
 
-      <div *ngIf="isOnlyMonthDate">
-        <app-date-picker-month #startMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setStartDateValue($event)"></app-date-picker-month>
-        <app-date-picker-month #endMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setEndDateValue($event)"></app-date-picker-month>
+      <div *ngIf="isMonthlyGranularity">
+        <app-date-picker-month #startMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-month>
+        <app-date-picker-month #endMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-month>
       </div>
 
-      <div *ngIf="isFullDate">
-        <app-date-picker-full #startFullDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setStartDateValue($event)"></app-date-picker-full>
-        <app-date-picker-full #endFullDatePicker [minDate]="minDate" [maxDate]="maxDate" (setDateOutput)="setEndDateValue($event)"></app-date-picker-full>
+      <div *ngIf="isDailyGranularity">
+        <app-date-picker-full #startFullDatePicker  [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-full>
+        <app-date-picker-full #endFullDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-full>
       </div>
 
       <mat-divider></mat-divider>
 
-      <button mat-raised-button color="primary" (click)="applyFilter()">
-        Filtrar
+      <button mat-raised-button color="primary" (click)="applyFilter()" class="float-left">
+        {{ "filter.btfilter" | translate }}
       </button>
+
+      <button mat-raised-button color="primary" (click)="clearFilter()" class="float-right">
+        {{ "filter.btclear" | translate }}
+      </button>
+
     </div>
   </div>
 </div>

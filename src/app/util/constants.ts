@@ -25,4 +25,9 @@ export class Constants {
         
         return url;
     };
+    /**
+     *  Defines an enum to store types of time dimension granularity
+     */
+    public static Granularity = { Daily: 'Daily', Monthly: 'Montly', Yearly: 'Yearly' }; 
+
 }

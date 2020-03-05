@@ -33,5 +33,13 @@ export const Utils = {
 
   isInpeUrl (url) {
     return includes(url, 'dpi.inpe')
+  },
+
+  removeURLParameters (url: string) {
+    if(url.includes('?')==true)
+    {
+      return url.split('?')[0];
+    }
+    return url;
   }
 }

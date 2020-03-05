@@ -16,6 +16,10 @@ import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 import { Observable } from "rxjs";
 import moment from 'moment'
+import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
+import { LayerService } from '../../services/layer.service';
+import { Constants } from '../../util/constants';
+import { TimeDimensionService } from '../../services/time-dimension.service'
 
 @Component({
   selector: "layer-filter",
@@ -23,18 +27,19 @@ import moment from 'moment'
   styleUrls: ["./layer-filter.component.css"]
 })
 export class LayerFilterComponent implements OnInit {
-  startDateValue = new Date(2016, 0, 1);
-  endDateValue = new Date(2016, 0, 1);
+  isDailyGranularity = false;
+  isMonthlyGranularity = false;
+  isYearlyGranularity = false;
+  
+  dateRange: any;
+  startDateValue: any;
+  endDateValue: any;
 
   minDate = new Date(2016, 0, 1);
   maxDate = new Date(2018, 0, 1);
-
+  
   layer: Layer;
   filters: Observable<fromLayerFilterReducer.Filter[]>;
-
-  isOnlyYearDate: boolean = false;
-  isOnlyMonthDate: boolean = true;
-  isFullDate: boolean = false;
 
   constructor(
     private dialogRef: MatDialogRef<LayerFilterComponent>,
@@ -42,15 +47,13 @@ export class LayerFilterComponent implements OnInit {
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private store: Store<fromLayerFilterReducer.State>,
+    private wmsCapabilitiesProviderService: WmsCapabilitiesProviderService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.layer = data.layer;
-    this.getDimensions()
-    this.store
-      .pipe(select((state: any) => state.layerFilter.filters))
-      .subscribe((refreshedFilter) => {
-        this.filters = refreshedFilter;
-      });
+    this.publishDialogData();
+
+   this.loadFilterFromStore();
   }
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -63,7 +66,9 @@ export class LayerFilterComponent implements OnInit {
     this.store
   );
 
-  ngOnInit () { }
+  ngOnInit () { 
+
+  }
 
   sendLayerFilter (value: any): void {
     this.dialogRef.close();
@@ -74,37 +79,53 @@ export class LayerFilterComponent implements OnInit {
   }
 
   showDialog (content: string): void {
+    
     const dialogRef = this.dialog.open(DialogComponent, { width: "450px" });
     dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(
       content
     );
   }
-
-  getDimensions () {
-    const self = this;
-    this.terrabrasilisApi
-      .getDimensions(this.layer)
-      .then(results => {
-        self.handleResult(results);
-      })
-      .catch(console.error);
-  }
-
-  setRangeDate (results) {
-    this.minDate = head(results);
-    this.maxDate = last(results);
-  }
-
-  handleResult (results) {
-    this.setRangeDate(results);
-  }
-
   setStartDateValue (selectedStartDate) {
     this.startDateValue = selectedStartDate
   }
 
   setEndDateValue (selectedEndDate) {
     this.endDateValue = selectedEndDate
+  }
+/**
+ * Check for previous filter for the current layer on redux store 
+ */
+  loadFilterFromStore()
+  {
+    this.store
+    .pipe(
+      select((state: any) => state.layerFilter.filters))
+    .subscribe((refreshedFilter) => {
+      let layerFullName = this.layer.workspace + ":" + this.layer.name;
+      
+      let existingLayerFilters = refreshedFilter.filter((filter: fromLayerFilterReducer.Filter) => (
+        filter.workspace + ":" + filter.name) === layerFullName); 
+      
+      this.filters = existingLayerFilters;
+
+      if(existingLayerFilters && existingLayerFilters.length>0)
+      {
+        this.restoreFilter(existingLayerFilters[0]);
+      }
+    });
+  }
+
+  restoreFilter(filter: fromLayerFilterReducer.Filter)
+  {
+    if(filter.initialDate)
+    {
+      this.startDateValue = new Date(filter.initialDate);
+    }
+    if(filter.finalDate)
+    {
+      this.endDateValue = new Date(filter.finalDate);
+    }
+    
   }
 
   buildTimeFilter () {
@@ -130,6 +151,7 @@ export class LayerFilterComponent implements OnInit {
     const currentLayerFilterObject = {
       id: this.layer.id,
       name: this.layer.name,
+      workspace: this.layer.workspace,
       initialDate,
       finalDate,
       time
@@ -138,4 +160,69 @@ export class LayerFilterComponent implements OnInit {
     this.dispatchFilterActionToStore(currentLayerFilterObject)
     this.closeDialog()
   }
+  clearFilter () {
+    const currentLayerFilterObject = {
+      id: this.layer.id,
+      name: this.layer.name,
+      workspace: this.layer.workspace,
+      initialDate: undefined,
+      finalDate: undefined,
+      time: ""
+    } as fromLayerFilterReducer.Filter;
+
+    this.dispatchFilterActionToStore(currentLayerFilterObject)
+    this.closeDialog()
+  }
+
+  publishDialogData()
+  {
+    let capabilitiesURL = LayerService.getLayerBaseURL(this.layer);
+   
+    this.wmsCapabilitiesProviderService.getCapabilities(capabilitiesURL).subscribe(
+      data => { 
+        if (data.ok) {
+         
+          let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
+         
+          let dimensionList = WmsCapabilitiesProviderService.getDimensionsFromLayer(parsedCapabilities);
+
+          let granularity = TimeDimensionService.getLayerTimeDimensionGranularity(dimensionList);
+
+          this.dateRange = TimeDimensionService.getStartAndEndDate(dimensionList);
+          
+          this.minDate = new Date(this.dateRange.startDate);
+          this.maxDate = new Date(this.dateRange.endDate);
+          
+          if(!this.startDateValue)
+          {
+            this.startDateValue= new Date(this.dateRange.startDate);
+          }          
+          if(!this.endDateValue)
+          {
+            this.endDateValue= new Date(this.dateRange.endDate);
+          }
+
+          if(granularity==Constants.Granularity.Daily)
+          {
+            this.isDailyGranularity = true;
+          }
+
+          if(granularity==Constants.Granularity.Monthly)
+          {
+            this.isMonthlyGranularity = true;
+          }
+
+          if(granularity==Constants.Granularity.Yearly)
+          {
+            this.isYearlyGranularity = true;
+          }
+
+          console.log(dimensionList);
+        } else {
+          console.error("Failed to get capabilities data. Erro message: \n "+data.body);
+        }
+      }
+    );
+  }
+
 }

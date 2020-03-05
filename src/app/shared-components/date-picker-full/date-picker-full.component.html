@@ -5,10 +5,15 @@
     [max]="maxDate"
     [matDatepicker]="fullDatePicker"
     placeholder="Choose a date"
+    [formControl]="date"
   />
   <mat-datepicker-toggle
     matSuffix
     [for]="fullDatePicker"
   ></mat-datepicker-toggle>
-  <mat-datepicker #fullDatePicker></mat-datepicker>
+  
+  <mat-datepicker #fullDatePicker 
+    startView="multi-year"
+    >
+  </mat-datepicker>
 </mat-form-field>

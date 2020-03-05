@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, Output, EventEmitter  } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import {
   MomentDateAdapter,
@@ -54,27 +54,32 @@ export const MY_FORMATS = {
   ]
 })
 export class DatePickerYearComponent {
+  @Output() setDateOutput = new EventEmitter()
   @Input() minDate: Date
   @Input() maxDate: Date
   @Input() dateValue: string
+  @Input() initialDate: Date
 
   date = new FormControl(moment())
 
-  chosenYearHandler (normalizedYear: Moment) {
+  ngOnInit()
+  {
+    this.setYear(moment(this.initialDate));
+  }
+
+  chosenYearHandler (normalizedYear: Moment,
+    datepicker: MatDatepicker<Moment>)
+   {
+    this.setYear(normalizedYear);
+    datepicker.close();    
+  }
+
+  setYear(normalizedYear: Moment)
+  {
     const ctrlValue = this.date.value
     ctrlValue.year(normalizedYear.year())
     this.date.setValue(ctrlValue)
-    // dateValue = ctrlValue
+    this.setDateOutput.emit(normalizedYear.toDate());
   }
 
-  chosenMonthHandler (
-    normalizedMonth: Moment,
-    datepicker: MatDatepicker<Moment>
-  ) {
-    const ctrlValue = this.date.value
-    ctrlValue.month(normalizedMonth.month())
-    this.date.setValue(ctrlValue)
-    datepicker.close()
-    // dateValue = ctrlValue
-  }
 }

@@ -58,4 +58,11 @@ export class LayerService {
   private getVisionAndAllRelationshipmentByName(name:string): Observable<any> {
     return this.visionService.getVisionAndAllRelationshipmentByName(name);      
   }
+
+  public static getLayerBaseURL(layer:Layer)
+  {
+    let url = layer.datasource.host.replace('ows', layer.workspace + '/' + layer.name + '/ows');
+    return url;
+  }
+
 }
