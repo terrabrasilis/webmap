@@ -77,4 +77,16 @@ $(document).ready(function () {
     window.setTimeout(function() {
         $('body').loading('stop');
     }, 5000);
+
+    /**
+     * Setting up authentication api
+     */
+    Authentication.init('pt-br', function(){
+    });
+
 });
+
+function notifyLanguageChanged(language)
+{
+    AuthenticationTranslation.changeLanguage(language);
+}
