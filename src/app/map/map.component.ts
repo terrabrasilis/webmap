@@ -45,12 +45,15 @@ import * as _ from 'lodash'; // using the _.uniqueId() method
 import { Store } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
 
+//Declaring a JS function to be invoked after changed the language. This is authentication api requirement
+declare var notifyLanguageChanged: Function;
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
+
 export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
     imgPath: string = ( process.env.ENV === 'production' ) ? ('/app/') : ('');
@@ -667,6 +670,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this._translate.use(value);
         this.changeAboutURL(value);
         this.updateOverlayerLegends();
+        //Invoke JS code to notify authentication api
+        notifyLanguageChanged(value);    
     }
 
     changeAboutURL(value: string) {
