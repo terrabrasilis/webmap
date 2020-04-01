@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { catchError, map } from 'rxjs/operators';
@@ -15,7 +15,10 @@ import * as Jsonix from 'terrabrasilis-jsonix';
 //import * as Terrabrasilis from 'terrabrasilis-api';
 import * as ogcSchemas from 'ogc-schemas';
 import * as w3cSchemas from 'w3c-schemas';
+
 import { text } from 'd3';
+import { AuthenticationService } from './authentication.service';
+//import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class WmsCapabilitiesProviderService {
@@ -24,18 +27,28 @@ export class WmsCapabilitiesProviderService {
   private jsonix: any;
 
   constructor(private http: HttpClient) {
-    this.proxy = Constants.PROXY_OGC;
+    this.proxy = Constants.PROXY_OGC;    
   }
 
   getCapabilities(base_url: string) {
+    
+    let httpOptions = {
+      headers: new HttpHeaders({}),
+      observe: 'response' as 'response' ,
+      responseType: 'text' as 'text'
+    };
+
+    if(AuthenticationService.isAuthenticated())
+    {
+     let authorizationValue = 'Bearer ' + AuthenticationService.getToken();
+     httpOptions.headers = new HttpHeaders({ 'Authorization': authorizationValue });
+    }
+
     base_url = Utils.removeURLParameters(base_url);
     let url = base_url + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0';
     url = this.proxy + encodeURIComponent(url);
 
-    return this.http.get(url, {
-      observe: 'response',
-      responseType: 'text'
-     }).pipe(
+    return this.http.get(url, httpOptions).pipe(
         map(response => response),
         catchError(this.handleError())
       );
@@ -68,6 +81,30 @@ export class WmsCapabilitiesProviderService {
 
     // Unmarshal from response
     return unmarshaller.unmarshalString(xml);
+  }
+
+  
+  public static removeAccessTokenFromURL(url: any)
+  {
+    let urlWithoutAccessToken = '';
+    let token='';
+    if(url.includes('access_token='))
+    {
+      let urlSplitParamsList = url.split('?');
+      
+      let urlParamsList = urlSplitParamsList[1].split('&');
+      for (let i = 0; i < urlParamsList.length; i++) {
+        let param = urlParamsList[i];
+        if(param.includes('access_token='))
+        {
+          token=param;
+          break;
+        }
+      }
+      urlWithoutAccessToken=url.replace(token,'');
+    }
+    return urlWithoutAccessToken;
+    
   }
 
   public static getDimensionsFromLayer(parsedCapabilities: any)
@@ -117,5 +154,6 @@ export class WmsCapabilitiesProviderService {
       return of(error as any);
     };
   }
+  
 
 }
