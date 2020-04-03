@@ -37,6 +37,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from '../services/local-storage.service';
+import { AuthenticationService } from '../services/authentication.service';
 import { Download, Datasource } from '../entity/datasource';
 import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
 import { Tool } from '../entity/tool';
@@ -219,6 +220,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             const datasource = new Datasource().addHost(l.geospatialHost);
             const nLayer = new Layer(Date.now().toString() + _.uniqueId())
                 .addName(l.name)
+                .addNameAuthenticated(l.nameAuthenticated)
                 .addTitle(l.title)
                 .addWorkspace(l.workspace)
                 .addOpacity(0.9)
@@ -305,6 +307,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             rLayers.push(
                 new Layer(layer.id)
                     .addName(layer.name)
+                    .addNameAuthenticated(layer.nameAuthenticated)
                     .addTitle(layer.title)
                     .addWorkspace(layer.workspace)
                     .addCapabilitiesUrl(layer.capabilitiesUrl)
@@ -819,6 +822,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
             const layer = new Layer(l.id)
                 .addName(l.name)
+                .addNameAuthenticated(l.nameAuthenticated)
                 .addTitle(l.title)
                 .addDescription(l.description)
                 .addAttribution(l.attribution)
@@ -846,6 +850,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
                     const layer = new Layer(l.id + v.id)
                         .addName(l.name)
+                        .addNameAuthenticated(l.nameAuthenticated)
                         .addTitle(l.title)
                         .addWorkspace(l.workspace)
                         .addCapabilitiesUrl(l.capabilitiesUrl)
@@ -868,5 +873,17 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             });
             this.overlayers.unshift(new Vision(v.id, v.name, v.description, isVisionEnabled, v.created, v.tools, layers, v.downloads, true, v.stackOrder));
         });
+    }
+    /**
+     * Notify authentication service about login changes to update the components
+     */
+    notifyAuthenticationChanged() {
+         
+        let layersToMap = new Array();
+        this.overlayers.forEach(vision => {
+            layersToMap = layersToMap.concat(this.gridStackInstance(vision));
+        });
+
+        this.terrabrasilisApi.updateLayers(layersToMap);
     }
 }

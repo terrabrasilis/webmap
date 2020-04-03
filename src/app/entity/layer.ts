@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { Subdomain } from './subdomain';
 import { Tool } from './tool';
 import { Datasource, Download } from './datasource';
+import { AuthenticationService } from '../services/authentication.service';
 
 /**
  * Layer define the parameters to mount automatically the layers (Baselayer and Overlayer)
@@ -13,6 +14,7 @@ export class Layer {
     }
     id = '';
     name = '';
+    nameAuthenticated = '';
     title = '';
     description = '';
     attribution = '';
@@ -47,6 +49,7 @@ export class Layer {
     public static of(l: any): Layer {
         return new Layer(l.id)
                     .addName(l.name)
+                    .addNameAuthenticated(l.nameAuthenticated)
                     .addTitle(l.title)
                     .addWorkspace(l.workspace)
                     .addCapabilitiesUrl(l.capabilitiesUrl)
@@ -80,6 +83,11 @@ export class Layer {
 
     addName(name: string) {
         this.name = name;
+        return this;
+    }
+
+    addNameAuthenticated(nameAuthenticated: string) {
+        this.nameAuthenticated = nameAuthenticated;
         return this;
     }
 
@@ -191,5 +199,39 @@ export class Layer {
 
     convertToJson(layer: Layer): string {
         return JSON.stringify(layer);
+    }
+
+    hasAuthenticatedData(): boolean {
+        if(this.nameAuthenticated &&
+            this.nameAuthenticated!='')
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    getLayerName(): string {
+        if(this.nameAuthenticated &&
+            this.nameAuthenticated!='')
+        {
+            if(AuthenticationService.isAuthenticated())
+            {
+                return this.nameAuthenticated;
+            }
+            else
+            {
+                return this.name;
+            }
+            
+        }
+        else
+        {
+            return this.name;
+        }
+
     }
 }
