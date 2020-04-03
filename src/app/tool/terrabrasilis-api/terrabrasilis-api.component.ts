@@ -281,6 +281,12 @@ export class TerrabrasilisApiComponent implements OnInit {
     return Terrabrasilis.getDimensions(layer)
   }
 
+
+  updateLayers(appLayers)
+  {
+    Terrabrasilis.updateLayers(JSON.parse(JSON.stringify(appLayers)));
+  }
+
   ////////////////////////////////////////////////
   //// Private methods
   ////////////////////////////////////////////////
