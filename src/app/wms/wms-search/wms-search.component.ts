@@ -206,7 +206,7 @@ export class WmsSearchComponent implements OnInit {
     const layers = new Array();
     let serverMapUrl = this.wmsServerCapabilities.request.getmap.href_get;
 
-    serverMapUrl = WmsCapabilitiesProviderService.removeAccessTokenFromURL(serverMapUrl);
+   // serverMapUrl = WmsCapabilitiesProviderService.removeAccessTokenFromURL(serverMapUrl);
 
     this.wmsServerCapabilities.layers.layers.forEach(
       function(l) {
