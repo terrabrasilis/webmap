@@ -277,6 +277,26 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
     ngDoCheck() {}
 
+    addCustomToolsToLayer(layer: Layer)
+    {
+       if(layer.getToolByTag("FitBoundTool")==null)
+       {
+            let tool = new Tool();
+            tool.setTag("FitBoundTool");
+            tool.addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>");
+            layer.tools.push(tool);
+       }
+                   
+        //Check Just for now, because the layer filter contains only the time dimensions filter.
+        if(layer.getToolByTag("LayerFilterTool")==null 
+                    && layer.timeDimension)
+        {
+            let tool = new Tool();
+            tool.setTag("LayerFilterTool");
+            tool.addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>");
+            layer.tools.push(tool);
+        }
+    }
     ///////////////////////////////////////////////////////////////
     /// GridStack interactions
     ///////////////////////////////////////////////////////////////
@@ -295,15 +315,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             // Define the initial state of the toggle button for layers group.
             vision.enabled = (layer.active && !vision.enabled) ? (true) : (vision.enabled);
 
-            layer.tools.push(new Tool().addTarget("<fit-bounds-tool [shared]=\"layer\"></fit-bounds-tool>"))
+            this.addCustomToolsToLayer(layer);
             
-            //Check Just for now, because the layer filter contains only the time dimensions filter.
-            if(layer.timeDimension)
-            {
-                layer.tools.push(new Tool().addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>"))
-            }
-            
-
             rLayers.push(
                 new Layer(layer.id)
                     .addName(layer.name)

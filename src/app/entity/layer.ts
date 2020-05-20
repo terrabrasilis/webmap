@@ -234,4 +234,15 @@ export class Layer {
         }
 
     }
+
+    getToolByTag(tag: string) : Tool {
+        for (let i = 0; i < this.tools.length; i++)
+        {
+            if(this.tools[i].tag==tag)
+            {
+                return this.tools[i]
+            }
+        }
+        return null;
+    }
 }

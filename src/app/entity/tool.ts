@@ -16,6 +16,11 @@ export class Tool {
         return this;
     }
 
+    setTag(tag: string) {
+        this.tag = tag;
+        return this;
+    }
+
     // createComponent(layer:Layer): void {
     //     //console.log(this.vc);
     //     const factory = this.resolver.resolveComponentFactory(ReturnComponentByName(this.tag));
