@@ -25,6 +25,8 @@
         env: { DEBUG: undefined },
         version: []
     };
+
+
   </script>
 </head>
 
@@ -54,7 +56,12 @@
   <script src="assets/js/map/rangeslider.min.js"></script>
   <script src="assets/js/map/scripts.js"></script>
   <script src="assets/js/opencpu/opencpu-0.5.js"></script>
-  <script type="text/javascript" src="http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs"></script>
+  <script src="assets/js/opencpu/opencpu-0.5.js"></script>
+ <script type="text/javascript">
+      var randomNumber = Math.floor((Math.random() * 1000000) + 1);
+      var oauthURL = "http://terrabrasilis.dpi.inpe.br/oauth-api/getoauthjs?"+randomNumber;
+      document.writeln("<script type='text/javascript' src='"+oauthURL+"'><\/script>");
+  </script>
 </body>
 
 </html>
