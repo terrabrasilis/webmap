@@ -54,11 +54,13 @@ export class AppComponent implements OnInit {
       if(toUse === null) {      
         this._translate.setDefaultLang('pt-br');
         this._translate.use('pt-br');
+        this.localStorageService.setValue(this.languageKey, 'pt-br');
         return;
       } 
       
       this._translate.setDefaultLang(toUse.value);
       this._translate.use(toUse.value);
+      this.localStorageService.setValue(this.languageKey, toUse.value);
     });              
   }
 }

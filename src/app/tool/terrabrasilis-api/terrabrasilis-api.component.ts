@@ -156,14 +156,21 @@ export class TerrabrasilisApiComponent implements OnInit {
     this.showDialog(html);
   }
 
+  
+
   getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): Promise<any> {
+
     return this.localStorageService.getValue('translate').toPromise()
       .then((item: any) => {
-        let language = get(JSON.parse(item), 'value', 'en')
+        let language = 'pt-br';
+        if(JSON.parse(item)!=null)
+        {
+          language = get(JSON.parse(item), 'value')
+        }
+        
         return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language)
       });
   }
-
 
   getBasicLayerInfo(layerObject: any) {
     this.cdRef.detectChanges();
