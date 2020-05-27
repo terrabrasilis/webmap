@@ -78,19 +78,6 @@ $(document).ready(function () {
         $('body').loading('stop');
     }, 5000);
 
-    /**
-     * Setting up authentication api
-     */
-    Authentication.init('pt-br', function()
-    {
-        /**
-         * Notify authentication handler about login changes
-         */
-       if($('#notifyAuthenticationChanged').length!=0)
-       {
-        $('#notifyAuthenticationChanged').click();
-       }
-    });
 
 });
 

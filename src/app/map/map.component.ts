@@ -49,6 +49,10 @@ import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer"
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
 declare var notifyLanguageChanged: Function;
 
+declare var Authentication: any;
+
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -262,6 +266,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             this.updateOverlayerLegends();
         });
         this.cdRef.detectChanges();
+
+        this.initAuthentication();
     }
 
     ngOnDestroy() {
@@ -688,6 +694,36 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.updateOverlayerLegends();
         //Invoke JS code to notify authentication api
         notifyLanguageChanged(value);    
+    }
+
+    initAuthentication()
+    {
+
+        this.localStorageService.getValue(this.languageKey)
+        .subscribe((item:any) => {
+            let toUse = JSON.parse(item);
+            var lang='pt-br';
+            if(toUse!=null)
+            {
+                lang = toUse.value;
+            }
+                        
+            /**
+             * Setting up authentication api
+             */
+            Authentication.init(lang, function()
+            {
+                /**
+                 * Notify authentication handler about login changes
+                 */
+            if($('#notifyAuthenticationChanged').length!=0)
+            {
+                $('#notifyAuthenticationChanged').click();
+            }
+            });
+
+        });
+        
     }
 
     changeAboutURL(value: string) {
