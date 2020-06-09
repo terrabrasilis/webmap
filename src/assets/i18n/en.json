@@ -59,7 +59,9 @@
       "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Biome Border",
       "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Counties",
       "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Image Mosaic - 2000/2019",
-      "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Yearly Deforestation - 2000/2018"
+      "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Yearly Deforestation - 2002/2019",
+      "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Deforestation Mask up to 2000",
+      "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hydrography"
     },
     "5c40fdce0e9b2a14264e03a6": {
       "name": " Legal Amazon",
