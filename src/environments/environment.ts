@@ -7,5 +7,6 @@ import { get, merge } from 'lodash';
 import { common } from './common'
 	
 export const environment = merge({}, common, {
-	production: false
+	production: false,
+	BUILD_TYPE: 'development'
 });
