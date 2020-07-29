@@ -257,7 +257,7 @@ export class TerrabrasilisApiComponent implements OnInit {
    */
   onOffTimeDimension(layer: Layer) {
     // verify if layer is raster or vector type and use it to set aggregate times value.
-    Terrabrasilis.onOffTimeDimension(layer.name, layer.isAggregatable /*aggregateTimes*/);
+    Terrabrasilis.onOffTimeDimension(layer.workspace +":"+ layer.name, layer.isAggregatable /*aggregateTimes*/);
   }
 
   openSnackBar(message: string, action: string) {
