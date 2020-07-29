@@ -91,8 +91,8 @@
             "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma",
             "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
             "5cd4602daa127a00017de8615cd46155aa127a00017de863": "Hidrografia",
-            "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Nuvem - 2018",
-            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Desmatamento Anual - 2018",
+            "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Nuvem - 2008/2019",
+            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Desmatamento Anual - 2008/2019",
             "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de Imagens - 2016 e 2018"
         },
         "5cd460faaa127a00017de861" : {
@@ -114,16 +114,18 @@
         "5dfa348ffc7ea6096c1bce18" : {
             "name": " Caatinga",
             "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma",
-            "5dfa3729fc7ea6096c1bce265dfa348ffc7ea6096c1bce18": "Hidrografia",
-            "5dfa3729fc7ea6096c1bce275dfa348ffc7ea6096c1bce18": "Nuvem - 2016",
-            "5dfa3729fc7ea6096c1bce285dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2016"
+            "5f218e0e4882c228007413c45dfa348ffc7ea6096c1bce18": "Hidrografia",
+            "5f218e364882c228007413c55dfa348ffc7ea6096c1bce18": "Nuvem - 2016",
+            "5f218dde4882c228007413c35dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2016",
+            "5f218e8f4882c228007413c65dfa348ffc7ea6096c1bce18": "Mosaico de Imagens - 2016"
         },
         "5dfa348ffc7ea6096c1bce19" : {
             "name": " Mata Atlântica",
             "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma",
-            "5dfa3729fc7ea6096c1bce235dfa348ffc7ea6096c1bce19": "Hidrografia",
-            "5dfa3729fc7ea6096c1bce245dfa348ffc7ea6096c1bce19": "Nuvem - 2016",
-            "5dfa3729fc7ea6096c1bce255dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2016"
+            "5f2190194882c228007413c85dfa348ffc7ea6096c1bce19": "Hidrografia",
+            "5f2190314882c228007413c95dfa348ffc7ea6096c1bce19": "Nuvem - 2016",
+            "5f218ffb4882c228007413c75dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2016",
+            "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Mosaico de Imagens - 2016"
         },
         "5c810c820cf423000144ebda" : {
             "name": " Amazônia Legal",
