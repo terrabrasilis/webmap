@@ -6,6 +6,7 @@ import { OnMount } from '../../core-modules/dynamic-html';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { MatSnackBar } from '@angular/material';
 
 /**
  * TimeDimensionComponent
@@ -34,14 +35,18 @@ export class TimeDimensionComponent extends ToolComponent implements OnInit, OnM
     this.layer = this.shared;
   }
   
-  constructor(private dialog: MatDialog, private dom: DomSanitizer, private cdRef: ChangeDetectorRef) { 
+  constructor(private dialog: MatDialog,
+    private dom: DomSanitizer,
+    private cdRef: ChangeDetectorRef,
+    private _snackBar: MatSnackBar
+    ) { 
     super();        
   }
 
   /**
    * TerraBrasilis
    */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, null, null);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, null, this._snackBar, null);
 
   ngOnInit() {    
     this.layer = this.shared;
