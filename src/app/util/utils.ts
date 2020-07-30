@@ -26,7 +26,7 @@ export const Utils = {
     let url = host + params
 
     const IS_INPE_HOST = this.isInpeUrl(host)
-    if(IS_INPE_HOST) { url += `&style=${layer.name}_${language}` }
+    if(IS_INPE_HOST) { url += `&style=${layer.workspace}:${layer.name}_${language}` }
 
     return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url
   },
