@@ -81,7 +81,7 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#db71577",
+    "terrabrasilis-api": "terrabrasilis/terrabrasilis-api#v0.5.1",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
     "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#f3665cc",
     "tls": "0.0.1",
