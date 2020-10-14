@@ -264,12 +264,16 @@ export class TerrabrasilisApiComponent implements OnInit {
    */
   onOffTimeDimension(layer: Layer) {
     // verify if layer is raster or vector type and use it to set aggregate times value.
-    Terrabrasilis.onOffTimeDimension(layer.workspace+':'+layer.name, layer.isAggregatable /*aggregateTimes*/);
+    try {
+      Terrabrasilis.onOffTimeDimension(layer.workspace+':'+layer.name, layer.isAggregatable /*aggregateTimes*/); 
+    } catch (error) {
+      this.openSnackBar('Falhou ao habilitar a ferramenta de navegação temporal.','Aviso');
+    }
   }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
