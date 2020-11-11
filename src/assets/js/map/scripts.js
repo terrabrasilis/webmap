@@ -85,3 +85,22 @@ function notifyLanguageChanged(language)
 {
     AuthenticationTranslation.changeLanguage(language);
 }
+
+function downloadFileDeliveryFiles(url, ahrefId)
+{   
+    var startDownloadCallback = function()
+    {
+        $('#'+ahrefId).removeClass('btn-primary');
+        $('#'+ahrefId).addClass('btndisabled');
+        $('#'+ahrefId).attr('href', "javascript: void(0);");
+    };
+
+    var doneDownloadCallback = function()
+    {
+        $('#'+ahrefId).removeClass('btndisabled');
+        $('#'+ahrefId).addClass('btn-primary');
+        $('#'+ahrefId).attr('href', "javascript: download('" + url + "','"+ahrefId+"')");
+    };
+
+    AuthenticationService.downloadFile(url, startDownloadCallback, doneDownloadCallback)
+}

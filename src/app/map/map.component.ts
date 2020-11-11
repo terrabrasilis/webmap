@@ -810,12 +810,24 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         const match = /terrabrasilis.dpi.inpe.br\/download/;
         const lang = this._translate.currentLang;
 
-        this.downloads.forEach(download => {
+        var index=0;
 
+        this.downloads.forEach(download => {
+            index++;
             if(download.lang==lang) {
+
+                var downloadLink = download.link;
+                var target = 'target="blank"';
+
+                if(download.link.includes("file-delivery"))
+                {
+                    downloadLink="javascript: downloadFileDeliveryFiles('" + download.link + "','download"+ index +"');";
+                    target=""
+                }
+
                 const link = match.test(download.link) == false ?
-                            '<a href=\'' + download.link + '\' target="_blank" class="btn btn-primary btn-success">'+accessDataBtn+'</a>' :
-                            '<a href=\'' + download.link + '\' class="btn btn-primary btn-success">'+downloadBtn+'</a>';
+                            '<a href="' + downloadLink + '" id="download'+index+'" '+target+' class="btn btn-primary btn-success">'+accessDataBtn+'</a>' :
+                            '<a href=\'' + download.link + '\'  class="btn btn-primary btn-success">'+downloadBtn+'</a>';
 
                 downloadHtml += '    <div class="card mt-3">' +
                                 '     <div class="card-body">' +
@@ -824,6 +836,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                                 '        <a target="_blank" href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
                                 '     </div>' +
                                 '    </div>';
+
             }
         });
 
