@@ -99,7 +99,7 @@ function downloadFileDeliveryFiles(url, ahrefId)
     {
         $('#'+ahrefId).removeClass('btndisabled');
         $('#'+ahrefId).addClass('btn-primary');
-        $('#'+ahrefId).attr('href', "javascript: download('" + url + "','"+ahrefId+"')");
+        $('#'+ahrefId).attr('href', "javascript: downloadFileDeliveryFiles('" + url + "','"+ahrefId+"')");
     };
 
     AuthenticationService.downloadFile(url, startDownloadCallback, doneDownloadCallback)
