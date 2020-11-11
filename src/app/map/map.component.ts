@@ -716,10 +716,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 /**
                  * Notify authentication handler about login changes
                  */
-            if($('#notifyAuthenticationChanged').length!=0)
-            {
-                $('#notifyAuthenticationChanged').click();
-            }
+                if($('#notifyAuthenticationChanged').length!=0)
+                {
+                    $('#notifyAuthenticationChanged').click();
+                }
             });
 
         });
@@ -928,11 +928,13 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
      */
     notifyAuthenticationChanged() {
          
+        this.terrabrasilisApi.resetTimeDimension();
+        
         let layersToMap = new Array();
         this.overlayers.forEach(vision => {
             layersToMap = layersToMap.concat(this.gridStackInstance(vision));
         });
-
+        
         this.terrabrasilisApi.updateLayers(layersToMap);
     }
 }

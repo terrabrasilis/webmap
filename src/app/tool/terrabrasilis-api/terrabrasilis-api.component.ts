@@ -17,6 +17,7 @@ import { get } from 'lodash'
 import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 import { Observable } from "rxjs";
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -265,7 +266,9 @@ export class TerrabrasilisApiComponent implements OnInit {
   onOffTimeDimension(layer: Layer) {
     // verify if layer is raster or vector type and use it to set aggregate times value.
     try {
-      Terrabrasilis.onOffTimeDimension(layer.workspace+':'+layer.name, layer.isAggregatable /*aggregateTimes*/); 
+      var layerName = layer.workspace+':'+layer.getLayerName();
+
+      Terrabrasilis.onOffTimeDimension(layerName, layer.isAggregatable /*aggregateTimes*/); 
     } catch (error) {
       this.openSnackBar('Falhou ao habilitar a ferramenta de navegação temporal.','Aviso');
     }
@@ -296,6 +299,11 @@ export class TerrabrasilisApiComponent implements OnInit {
   updateLayers(appLayers)
   {
     Terrabrasilis.updateLayers(JSON.parse(JSON.stringify(appLayers)));
+  }
+
+  resetTimeDimension()
+  {
+    Terrabrasilis.removeAllTimerControl();
   }
 
   ////////////////////////////////////////////////
