@@ -28,6 +28,7 @@ import { LayerFilterComponent } from './layer-filter.component'
         type="button"
         class="btn"
         *ngIf="layer !== null"
+        id="filter-button-{{ layer.id }}"
         (click)="showDialog(layer)"
       >
         <i class="material-icons md-dark ">filter_list</i>
