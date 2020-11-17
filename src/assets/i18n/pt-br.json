@@ -32,11 +32,9 @@
     "menu" : {
         "analyses": {
             "name": "Gráficos",
-            "option1" : "PRODES (Desmatamento)",
+            "option1" : "Desmatamento",
             "option2" : "DETER (Avisos)",
-            "option3" : "Uso e cobertura da terra",
-            "option4" : "Desmatamento Amazônia",
-            "option5" : "Avisos Amazônia"
+            "option3" : "Focos (Queimada)"
         },
         "about": "Sobre",
         "contact": "Contato",
@@ -44,7 +42,7 @@
         "login": "Acesso",
         "map": {
             "name": "Mapas",
-            "option1" : "PRODES (Desmatamento)",
+            "option1" : "Desmatamento",
             "option2" : "DETER (Avisos)"
 
         }

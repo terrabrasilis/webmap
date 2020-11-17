@@ -32,11 +32,9 @@
   "menu": {
     "analyses": {
       "name": "Graphs",
-      "option1": "PRODES (Deforestation)",
+      "option1": "Deforestation",
       "option2": "DETER (Notices)",
-      "option3": "Land User and Land Cover",
-      "option4": "Amazon Desforestation",
-      "option5": "Amazon Notices"
+      "option3": "Active fires"
     },
     "about": "About",
     "contact": "Contact",
@@ -44,7 +42,7 @@
     "login": "Login",
     "map": {
       "name": "Maps",
-      "option1": "PRODES (Deforestation)",
+      "option1": "Deforestation",
       "option2": "DETER (Notices)"
     }
   },
