@@ -93,7 +93,8 @@
         <div *ngIf="project.layers.length > 0" class="project-group-closed" id="{{ (project.id | cleanWhiteSpace) + '_group' }}">
             <div *ngIf="project.hasTranslate; else templateTitle" class="group-title-closed" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
                 <span class="badge badge-light badge-pill">{{ project.layers.length }}</span>
-                {{ 'layerControl.' + project.id + '.name' | translate }}
+                <span>{{ 'layerControl.' + project.id + '.name' | translate }}</span>
+
             </div>
             <ng-template #templateTitle>
                 <div class="group-title-closed" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
@@ -101,9 +102,22 @@
                     {{ project.name }}
                 </div>
             </ng-template>
+            
             <div class="material-switch grp-prj pull-right">
                 <input id="{{(project.id | cleanWhiteSpace) + '_grp-crtl' }}" name="someSwitchOption002" type="checkbox" (change)="projectGroupOnOff($event.srcElement, project)" checked="{{ (project.enabled) ? 'checked' : null }}"/>
                 <label for="{{(project.id | cleanWhiteSpace)  + '_grp-crtl' }}" class="bg-white"></label>
+            </div>
+
+            <div class="" id="group-filter">
+                <dfn attr.data-info="{{ 'tools.layerFilter' | translate }}">
+                    <button
+                      type="button"
+                      class=""
+                      id="filter-button-{{ project.id }}"
+                      (click)="showGroupFilterDialog(project.id)">
+                      <i class="material-icons md-dark group-filter">filter_list</i>
+                    </button>
+                  </dfn>
             </div>
 
             <div class="grid-stack" id="{{ 'grid-stack-' + project.id }}">
