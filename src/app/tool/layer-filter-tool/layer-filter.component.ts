@@ -151,10 +151,13 @@ export class LayerFilterComponent implements OnInit {
     this.store.dispatch(setInitialDateAction);
   }
 
-  applyFilter () {
+  applyFilter () 
+  {
+    this.terrabrasilisApi.enableLoading();
+
     const { time, initialDate, finalDate } = this.buildTimeFilter()
 
-  this.layers.forEach(layer => {
+    this.layers.forEach(layer => {
     const currentLayerFilterObject = {
       id: layer.id,
       name: layer.name,
@@ -167,6 +170,7 @@ export class LayerFilterComponent implements OnInit {
     this.dispatchFilterActionToStore(currentLayerFilterObject)
   });
 
+    this.terrabrasilisApi.disableLoading();
     this.closeDialog()
   }
   clearFilter () {
@@ -189,7 +193,7 @@ export class LayerFilterComponent implements OnInit {
 
   publishDialogData()
   {
-
+    this.terrabrasilisApi.enableLoading();
     let timeDimensonLayers = LayerService.getLayersWithTimeDimension(this.layers);
 
     let tempMinDate: any;
@@ -298,6 +302,8 @@ export class LayerFilterComponent implements OnInit {
                 this.minDate = new Date(tempStartDateValue);
                 this.maxDate = new Date(tempEndDateValue); 
 
+                this.terrabrasilisApi.disableLoading();
+
               }
 
 
@@ -307,17 +313,10 @@ export class LayerFilterComponent implements OnInit {
           }
         );
 
-
-
-
       }
       
     }
 
-    timeDimensonLayers.forEach(layer => {
-      
-      
-    });
   }
 
 }
