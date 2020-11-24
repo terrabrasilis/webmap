@@ -20,6 +20,7 @@ import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-
 import { LayerService } from '../../services/layer.service';
 import { Constants } from '../../util/constants';
 import { TimeDimensionService } from '../../services/time-dimension.service'
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: "layer-filter",
@@ -31,14 +32,14 @@ export class LayerFilterComponent implements OnInit {
   isMonthlyGranularity = false;
   isYearlyGranularity = false;
   
-  dateRange: any;
   startDateValue: any;
   endDateValue: any;
+
 
   minDate = new Date(2016, 0, 1);
   maxDate = new Date(2018, 0, 1);
   
-  layer: Layer;
+  layers: Array<Layer>;
   filters: Observable<fromLayerFilterReducer.Filter[]>;
 
   constructor(
@@ -50,7 +51,7 @@ export class LayerFilterComponent implements OnInit {
     private wmsCapabilitiesProviderService: WmsCapabilitiesProviderService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.layer = data.layer;
+    this.layers = data.layers;
     this.publishDialogData();
 
    this.loadFilterFromStore();
@@ -101,17 +102,22 @@ export class LayerFilterComponent implements OnInit {
     .pipe(
       select((state: any) => state.layerFilter.filters))
     .subscribe((refreshedFilter) => {
-      let layerFullName = this.layer.workspace + ":" + this.layer.name;
-      
-      let existingLayerFilters = refreshedFilter.filter((filter: fromLayerFilterReducer.Filter) => (
-        filter.workspace + ":" + filter.name) === layerFullName); 
-      
-      this.filters = existingLayerFilters;
 
-      if(existingLayerFilters && existingLayerFilters.length>0)
+      if(this.layers.length==1)
       {
-        this.restoreFilter(existingLayerFilters[0]);
+        let layerFullName = this.layers[0].workspace + ":" + this.layers[0].name;
+      
+        let existingLayerFilters = refreshedFilter.filter((filter: fromLayerFilterReducer.Filter) => (
+          filter.workspace + ":" + filter.name) === layerFullName); 
+        
+        this.filters = existingLayerFilters;
+  
+        if(existingLayerFilters && existingLayerFilters.length>0)
+        {
+          this.restoreFilter(existingLayerFilters[0]);
+        }
       }
+
     });
   }
 
@@ -148,81 +154,170 @@ export class LayerFilterComponent implements OnInit {
   applyFilter () {
     const { time, initialDate, finalDate } = this.buildTimeFilter()
 
+  this.layers.forEach(layer => {
     const currentLayerFilterObject = {
-      id: this.layer.id,
-      name: this.layer.name,
-      workspace: this.layer.workspace,
+      id: layer.id,
+      name: layer.name,
+      workspace: layer.workspace,
       initialDate,
       finalDate,
       time
     } as fromLayerFilterReducer.Filter;
 
     this.dispatchFilterActionToStore(currentLayerFilterObject)
+  });
+
     this.closeDialog()
   }
   clearFilter () {
-    const currentLayerFilterObject = {
-      id: this.layer.id,
-      name: this.layer.name,
-      workspace: this.layer.workspace,
-      initialDate: undefined,
-      finalDate: undefined,
-      time: ""
-    } as fromLayerFilterReducer.Filter;
 
-    this.dispatchFilterActionToStore(currentLayerFilterObject)
+    this.layers.forEach(layer => {
+      const currentLayerFilterObject = {
+        id: layer.id,
+        name: layer.name,
+        workspace: layer.workspace,
+        initialDate: undefined,
+        finalDate: undefined,
+        time: ""
+      } as fromLayerFilterReducer.Filter;
+  
+      this.dispatchFilterActionToStore(currentLayerFilterObject)
+    });
+    
     this.closeDialog()
   }
 
   publishDialogData()
   {
-    let capabilitiesURL = LayerService.getLayerBaseURL(this.layer);
+
+    let timeDimensonLayers = LayerService.getLayersWithTimeDimension(this.layers);
+
+    let tempMinDate: any;
+    let tempMaxDate: any;
+    let tempStartDateValue: any;
+    let tempEndDateValue: any;
+    let tempGranularity: any;
+
+    for (let i = 0; i < timeDimensonLayers.length; i++) 
+    {
+      const layer = timeDimensonLayers[i];
+      
+      //Only for layer that contains timeDimension
+      if(layer.timeDimension)
+      {
+        let capabilitiesURL = LayerService.getLayerBaseURL(layer);
    
-    this.wmsCapabilitiesProviderService.getCapabilities(capabilitiesURL).subscribe(
-      data => { 
-        if (data.ok) {
-         
-          let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
-         
-          let dimensionList = WmsCapabilitiesProviderService.getDimensionsFromLayer(parsedCapabilities);
+        this.wmsCapabilitiesProviderService.getCapabilities(capabilitiesURL).subscribe(
+          data => { 
+            if (data.ok) {
+             
+              let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
+             
+              let dimensionList = WmsCapabilitiesProviderService.getDimensionsFromLayer(parsedCapabilities);
+    
+              let granularity = TimeDimensionService.getLayerTimeDimensionGranularity(dimensionList);
+    
+              let dateRange = TimeDimensionService.getStartAndEndDate(dimensionList);
 
-          let granularity = TimeDimensionService.getLayerTimeDimensionGranularity(dimensionList);
+              //If temp start date not defined use current date and looking for the layer with the first date.
+              if(!tempStartDateValue)
+              {
+                tempStartDateValue = new Date(dateRange.startDate);
+              }
+              else
+              {
+                if(DateService.isGreater(tempStartDateValue,dateRange.startDate))
+                {
+                  tempStartDateValue=new Date(dateRange.startDate);
+                }
+              }              
 
-          this.dateRange = TimeDimensionService.getStartAndEndDate(dimensionList);
-          
-          this.minDate = new Date(this.dateRange.startDate);
-          this.maxDate = new Date(this.dateRange.endDate);
-          
-          if(!this.startDateValue)
-          {
-            this.startDateValue= new Date(this.dateRange.startDate);
-          }          
-          if(!this.endDateValue)
-          {
-            this.endDateValue= new Date(this.dateRange.endDate);
+              //If temp end date not defined use current date and looking for the layer with the last date.
+              if(!tempEndDateValue)
+              {
+              
+                tempEndDateValue = new Date(dateRange.endDate);
+
+              }
+              else
+              {
+                if(DateService.isLess(tempEndDateValue,dateRange.endDate))
+                {
+                  tempEndDateValue = new Date(dateRange.endDate);
+                }
+              } 
+              
+              if(tempGranularity!=Constants.Granularity.Daily)
+              {
+                if(granularity==Constants.Granularity.Daily)
+                {
+                  tempGranularity = Constants.Granularity.Daily;
+                }
+              }
+              
+              if(tempGranularity!=Constants.Granularity.Daily &&
+                  tempGranularity!=Constants.Granularity.Monthly)
+              {
+                if(granularity==Constants.Granularity.Monthly)
+                {
+                  tempGranularity = Constants.Granularity.Monthly;
+                }
+                else
+                {
+                  tempGranularity = Constants.Granularity.Yearly;
+                }
+              }
+    
+              //If it is the last set final values 
+              if(i==(timeDimensonLayers.length-1))
+              {
+                if(!this.endDateValue)
+                {
+                  this.endDateValue= tempEndDateValue;
+                }
+                if(!this.startDateValue)
+                {
+                  this.startDateValue = tempStartDateValue;
+                }
+
+                if(tempGranularity==Constants.Granularity.Daily)
+                {
+                  this.isDailyGranularity = true;
+                }
+      
+                if(tempGranularity==Constants.Granularity.Monthly)
+                {
+                  this.isMonthlyGranularity = true;
+                }
+      
+                if(granularity==Constants.Granularity.Yearly)
+                {
+                  this.isYearlyGranularity = true;
+                }
+
+                this.minDate = new Date(tempStartDateValue);
+                this.maxDate = new Date(tempEndDateValue); 
+
+              }
+
+
+            } else {
+              console.error("Failed to get capabilities data. Erro message: \n "+data.body);
+            }
           }
+        );
 
-          if(granularity==Constants.Granularity.Daily)
-          {
-            this.isDailyGranularity = true;
-          }
 
-          if(granularity==Constants.Granularity.Monthly)
-          {
-            this.isMonthlyGranularity = true;
-          }
 
-          if(granularity==Constants.Granularity.Yearly)
-          {
-            this.isYearlyGranularity = true;
-          }
 
-          console.log(dimensionList);
-        } else {
-          console.error("Failed to get capabilities data. Erro message: \n "+data.body);
-        }
       }
-    );
+      
+    }
+
+    timeDimensonLayers.forEach(layer => {
+      
+      
+    });
   }
 
 }

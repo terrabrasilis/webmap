@@ -65,4 +65,18 @@ export class LayerService {
     return url;
   }
 
+    /**
+   * Get only layers with time dimension
+   */
+  public static getLayersWithTimeDimension(layers: Array<Layer>): Array<Layer> {
+    let dimensionLayers = new Array<Layer>();
+    layers.forEach(layer => {
+      if(layer.timeDimension)
+      {
+        dimensionLayers.push(layer);
+      }
+    });
+    return dimensionLayers;
+  }
+
 }

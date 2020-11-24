@@ -13,43 +13,38 @@ import { OnMount } from '../../core-modules/dynamic-html'
 import { MatDialog } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
 import { LayerFilterComponent } from './layer-filter.component'
+import { Vision } from 'src/app/entity/vision'
 
 
 
 /**
- * LayerFilterToolComponent
- * <layer-filter-tool  [shared]="layer"></layer-filter-tool>
+ * LayersGroupFilterToolComponent
+ * <layer-group-filter-tool  [shared]="project"></layer-filter-tool>
  */
 @Component({
-  selector: 'layer-filter-tool',
+  selector: 'layers-group-filter-tool',
   template: `
-    <dfn attr.data-info="{{ 'tools.layerFilter' | translate }}" #innerContent>
-      <button
-        type="button"
-        class="btn"
-        *ngIf="layer !== null"
-        id="filter-button-{{ layer.id }}"
-        (click)="showLayerFilterDialog()"
-      >
-        <i class="material-icons md-dark ">filter_list</i>
-      </button>
-      <ng-content></ng-content>
-    </dfn>
+  <dfn attr.data-info="{{ 'tools.layersGroupFilter' | translate }}">
+    <button
+      type="button"
+      class="group-filter-button"
+      id="filter-button-{{ project.id }}"
+      (click)="showGroupFilterDialog()">
+      <i class="material-icons md-white group-filter">filter_list</i>
+    </button>
+  </dfn>
   `
 })
 @RegisterComponent
-export class LayerFilterToolComponent extends ToolComponent
+export class LayersGroupFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
-  layer: Layer;
     
 
-  @Input() shared: any
+  @Input() project: Vision
   @ViewChild('innerContent', { static: true }) innerContent: ElementRef
 
   dynamicOnMount(attr: Map<string, any>, innerHTML: string, el: any) {
     this.innerContent.nativeElement.innerHTML = innerHTML
-    this.layer = this.shared
-    
   }
 
   constructor(
@@ -65,18 +60,15 @@ export class LayerFilterToolComponent extends ToolComponent
    */
 
   ngOnInit() {
-    this.layer = this.shared
     
   }
 
-  showLayerFilterDialog() {
-
-    let layers = new Array<Layer>();
-    layers.push(this.layer);
+  showGroupFilterDialog() {
+    
     this.cdRef.detectChanges()
     this.dialog.open(LayerFilterComponent, {
       width: '450px',
-      data: { layers: layers }
+      data: { layers: this.project.layers }
     });
     
   }

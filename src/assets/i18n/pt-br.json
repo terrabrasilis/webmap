@@ -152,7 +152,8 @@
         "legend": "Legenda",
         "timeDimension": "Dimensão temporal",
         "fitBounds": "Zoom para Camada",
-        "layerFilter": "Filtrar",
+        "layerFilter": "Filtrar dados da camada",
+        "layersGroupFilter": "Filtrar dados das camadas",
         "timeseries": "Série Temporal"
     },
     "filter" : {

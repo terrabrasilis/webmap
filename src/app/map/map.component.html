@@ -109,15 +109,7 @@
             </div>
 
             <div class="" id="group-filter">
-                <dfn attr.data-info="{{ 'tools.layerFilter' | translate }}">
-                    <button
-                      type="button"
-                      class=""
-                      id="filter-button-{{ project.id }}"
-                      (click)="showGroupFilterDialog(project.id)">
-                      <i class="material-icons md-dark group-filter">filter_list</i>
-                    </button>
-                  </dfn>
+                <layers-group-filter-tool [project]="project"></layers-group-filter-tool>
             </div>
 
             <div class="grid-stack" id="{{ 'grid-stack-' + project.id }}">

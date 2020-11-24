@@ -21,6 +21,7 @@ import { LayerFitBoundsToolComponent } from '../tool/fit-bounds-tool/layer-fit-b
 import { LayerFilterToolComponent } from '../tool/layer-filter-tool/layer-filter-tool.component';
 import { LayerMetadataToolComponent } from '../tool/layer-metadata-tool/layer-metadata-tool.component';
 import { LayerRemoveToolComponent } from '../tool/layer-remove-tool/layer-remove-tool.component';
+import { LayersGroupFilterToolComponent } from '../tool/layer-filter-tool/layers-group-filter-tool.component';
 
 @NgModule({
   imports: [
@@ -40,11 +41,11 @@ import { LayerRemoveToolComponent } from '../tool/layer-remove-tool/layer-remove
   ],
   declarations: [
     /** Components */
-    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent, LayerFilterToolComponent,
+    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent, LayerFilterToolComponent, LayersGroupFilterToolComponent
   ],
   exports: [
     /** Components */
-    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent, LayerFilterToolComponent,
+    ToolComponent, TransparencyToolComponent, BasicInfoToolComponent, TimeDimensionComponent, LayerDownloadToolComponent, LayerLegendToolComponent, LayerDashboardToolComponent, LayerMetadataToolComponent, LayerRemoveToolComponent, LayerFitBoundsToolComponent, LayerFilterToolComponent, LayersGroupFilterToolComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
