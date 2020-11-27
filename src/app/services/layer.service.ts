@@ -9,6 +9,10 @@ import { VisionService } from '../services/vision.service';
 import { Layer } from '../entity/layer';
 import { Vision } from '../entity/vision';
 
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { LocalStorageService } from './local-storage.service';
+import { Filter } from '../entity/filter';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -21,7 +25,8 @@ export class LayerService {
 
   constructor(
     private http:HttpClient,
-    private visionService: VisionService  
+    private visionService: VisionService,
+    private localStorageService: LocalStorageService
   ) { }
 
   /**
@@ -78,5 +83,7 @@ export class LayerService {
     });
     return dimensionLayers;
   }
+
+
 
 }

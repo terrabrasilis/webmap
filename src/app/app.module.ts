@@ -58,6 +58,7 @@ import { ContactService } from './services/contact.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { DatasourceService } from './services/datasource.service';
 import { LayerService } from './services/layer.service';
+import { FilterService } from './services/filter.service';
 import { TimeDimensionService } from './services/time-dimension.service';
 import { VisionService } from './services/vision.service';
 import { TsComponentsDataShareService } from './services/ts-components-data-share.service';
@@ -156,6 +157,7 @@ import StoreModule from './redux/store'
     localStorageProviders({ prefix: 'TBV01_' }),
     DatasourceService,
     LayerService,
+    FilterService,
     TimeDimensionService,
     VisionService,
     MatDatepickerModule,

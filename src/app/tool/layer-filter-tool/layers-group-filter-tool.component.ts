@@ -68,7 +68,11 @@ export class LayersGroupFilterToolComponent extends ToolComponent
     this.cdRef.detectChanges()
     this.dialog.open(LayerFilterComponent, {
       width: '450px',
-      data: { layers: this.project.layers }
+      data: 
+      {
+         layers: this.project.layers,
+         project: this.project
+      }
     });
     
   }

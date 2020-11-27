@@ -13,6 +13,7 @@ import { OnMount } from '../../core-modules/dynamic-html'
 import { MatDialog } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
 import { LayerFilterComponent } from './layer-filter.component'
+import { Vision } from 'src/app/entity/vision'
 
 
 
@@ -42,7 +43,7 @@ export class LayerFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
   layer: Layer;
     
-
+  @Input() project: Vision
   @Input() shared: any
   @ViewChild('innerContent', { static: true }) innerContent: ElementRef
 
@@ -76,7 +77,11 @@ export class LayerFilterToolComponent extends ToolComponent
     this.cdRef.detectChanges()
     this.dialog.open(LayerFilterComponent, {
       width: '450px',
-      data: { layers: layers }
+      data: 
+      {
+        layers: layers,
+        project: this.project
+      }
     });
     
   }

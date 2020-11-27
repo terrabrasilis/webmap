@@ -125,36 +125,15 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private activeRoute: ActivatedRoute
         , private _translate: TranslateService
         , private localStorageService: LocalStorageService
-        , private store: Store<fromLayerFilterReducer.State>
         , @Inject(NgZone) private zone: NgZone
     ) {
-        if(this.store) {
-            this.store
-            .pipe(select((state: any) => state.layerFilter.filters))
-            .subscribe((refreshedFilter) => {
-                refreshedFilter.forEach(filter => {
-                    
-                    var enabled=false;
-                    if(filter &&
-                        filter.time)
-                    {
-                        enabled = true;
-                    }
-                    else
-                    {
-                        enabled = false;
-                    }
-                    this.updateFilterState(filter.id, enabled);
-                });
-            });
-          }
-
+        
     }
 
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
     ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, this.store);
+    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null);
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -322,7 +301,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         {
             let tool = new Tool();
             tool.setTag("LayerFilterTool");
-            tool.addTarget("<layer-filter-tool [shared]=\"layer\"></layer-filter-tool>");
+            tool.addTarget("<layer-filter-tool [shared]=\"layer\" [project]=\"project\"></layer-filter-tool>");
             layer.tools.push(tool);
         }
     }
@@ -792,21 +771,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         });
 
         return hasElement;
-    }
-
-    public updateFilterState(layerId: string, enable: boolean) 
-    {
-        var filterButtonId = "#filter-button-"+layerId;
-
-        if(enable==true)
-        {
-            $(filterButtonId).addClass("filtered-data");
-        }
-        else
-        {
-            $(filterButtonId).removeClass("filtered-data");
-        }
-
     }
 
     /**

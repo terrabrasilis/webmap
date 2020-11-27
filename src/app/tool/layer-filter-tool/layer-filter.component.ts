@@ -10,17 +10,15 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { DialogComponent } from "../../dialog/dialog.component";
 import { TerrabrasilisApiComponent } from "../terrabrasilis-api/terrabrasilis-api.component";
 import { Layer } from "../../entity/layer";
-import { head, last } from "lodash";
-
-import { Store, select } from "@ngrx/store";
-import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
-import { Observable } from "rxjs";
 import moment from 'moment'
 import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
 import { LayerService } from '../../services/layer.service';
 import { Constants } from '../../util/constants';
 import { TimeDimensionService } from '../../services/time-dimension.service'
 import { DateService } from 'src/app/services/date.service';
+import { Filter } from 'src/app/entity/filter';
+import { FilterService } from 'src/app/services/filter.service';
+import { Vision } from 'src/app/entity/vision';
 
 @Component({
   selector: "layer-filter",
@@ -34,27 +32,29 @@ export class LayerFilterComponent implements OnInit {
   
   startDateValue: any;
   endDateValue: any;
+  private project: Vision;
 
 
   minDate = new Date(2016, 0, 1);
   maxDate = new Date(2018, 0, 1);
   
   layers: Array<Layer>;
-  filters: Observable<fromLayerFilterReducer.Filter[]>;
-
+  
   constructor(
     private dialogRef: MatDialogRef<LayerFilterComponent>,
     private dom: DomSanitizer,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private store: Store<fromLayerFilterReducer.State>,
+    
     private wmsCapabilitiesProviderService: WmsCapabilitiesProviderService,
+    private filterService: FilterService,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.layers = data.layers;
+    this.project = data.project;
     this.publishDialogData();
 
-   this.loadFilterFromStore();
+    this.loadFilterFromStore();
   }
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -63,8 +63,7 @@ export class LayerFilterComponent implements OnInit {
     this.cdRef,
     null,
     null,
-    null,
-    this.store
+    null
   );
 
   ngOnInit () { 
@@ -76,6 +75,7 @@ export class LayerFilterComponent implements OnInit {
   }
 
   closeDialog () {
+    this.updateFilterState();
     this.dialogRef.close();
   }
 
@@ -86,6 +86,29 @@ export class LayerFilterComponent implements OnInit {
       content
     );
   }
+
+  public updateFilterState() 
+  {
+    this.filterService.getLayersFilters(this.project.id).toPromise().then((existingFiltersJson: any) => 
+    {
+      let existingFilterList = this.filterService.getFilterListFromJSON(existingFiltersJson);
+
+      existingFilterList.forEach(filter => {
+        var filterButtonId = "#filter-button-"+filter.layerId;
+    
+        if(filter &&  filter.time)
+        {
+          $(filterButtonId).addClass("filtered-data");
+        }
+        else
+        {
+          $(filterButtonId).removeClass("filtered-data");
+        }
+      });
+    });
+      
+  }
+
   setStartDateValue (selectedStartDate) {
     this.startDateValue = selectedStartDate
   }
@@ -98,30 +121,30 @@ export class LayerFilterComponent implements OnInit {
  */
   loadFilterFromStore()
   {
-    this.store
-    .pipe(
-      select((state: any) => state.layerFilter.filters))
-    .subscribe((refreshedFilter) => {
-
-      if(this.layers.length==1)
+    this.filterService.getLayersFilters(this.project.id).toPromise().then((existingFiltersJson: any) => 
+    {
+      if(existingFiltersJson)
       {
-        let layerFullName = this.layers[0].workspace + ":" + this.layers[0].name;
-      
-        let existingLayerFilters = refreshedFilter.filter((filter: fromLayerFilterReducer.Filter) => (
-          filter.workspace + ":" + filter.name) === layerFullName); 
-        
-        this.filters = existingLayerFilters;
-  
-        if(existingLayerFilters && existingLayerFilters.length>0)
+        let existingFilterList = this.filterService.getFilterListFromJSON(existingFiltersJson);
+
+        if(this.layers.length==1)
         {
-          this.restoreFilter(existingLayerFilters[0]);
+          let layerFullName = this.layers[0].workspace + ":" + this.layers[0].name;
+        
+          let existingLayerFilters = existingFilterList.filter((filter: Filter) => (
+            filter.workspace + ":" + filter.layerName) === layerFullName); 
+          
+          if(existingLayerFilters && existingLayerFilters.length>0)
+          {
+            this.restoreFilter(existingLayerFilters[0]);
+          }
         }
-      }
+      }      
 
     });
   }
 
-  restoreFilter(filter: fromLayerFilterReducer.Filter)
+  restoreFilter(filter: Filter)
   {
     if(filter.initialDate)
     {
@@ -144,51 +167,83 @@ export class LayerFilterComponent implements OnInit {
     return { time, initialDate, finalDate }
   }
 
-  dispatchFilterActionToStore (currentLayerFilterObject) {
-    const setInitialDateAction = fromLayerFilterReducer.actions.setFilterPropsForObject(
-      currentLayerFilterObject
-    );
-    this.store.dispatch(setInitialDateAction);
-  }
-
   applyFilter () 
   {
     this.terrabrasilisApi.enableLoading();
 
     const { time, initialDate, finalDate } = this.buildTimeFilter()
 
-    this.layers.forEach(layer => {
-    const currentLayerFilterObject = {
-      id: layer.id,
-      name: layer.name,
-      workspace: layer.workspace,
-      initialDate,
-      finalDate,
-      time
-    } as fromLayerFilterReducer.Filter;
+    let filterList = new Array<Filter>();
 
-    this.dispatchFilterActionToStore(currentLayerFilterObject)
-  });
+    this.layers.forEach(layer => 
+    {
+      if(layer.timeDimension)
+      {
+        const layerFilter = {
+          layerId: layer.id,
+          layerName: layer.name,
+          workspace: layer.workspace,
+          initialDate,
+          finalDate,
+          time
+        } as Filter;
 
-    this.terrabrasilisApi.disableLoading();
-    this.closeDialog()
-  }
-  clearFilter () {
+        filterList.push(layerFilter);
+      }
 
-    this.layers.forEach(layer => {
-      const currentLayerFilterObject = {
-        id: layer.id,
-        name: layer.name,
-        workspace: layer.workspace,
-        initialDate: undefined,
-        finalDate: undefined,
-        time: ""
-      } as fromLayerFilterReducer.Filter;
-  
-      this.dispatchFilterActionToStore(currentLayerFilterObject)
     });
+
+    this.filterService.saveLayersFilters(this.project.id, filterList).toPromise().then(() => 
+    {
+      this.terrabrasilisApi.applyFiltersOnLayer(filterList);
+
+      this.terrabrasilisApi.disableLoading();
+  
+      this.closeDialog()
+    });
+  }
+  clearFilters()
+  {
+
+    this.filterService.getLayersFilters(this.project.id).toPromise().then((existingFiltersJson: any) => 
+    {
+      let existingFilterList = this.filterService.getFilterListFromJSON(existingFiltersJson);
+
+      this.layers.forEach(layer => 
+        {
+          for (let i = 0; i < existingFilterList.length; i++) {
+            const filter = existingFilterList[i];
+            if(filter.layerId==layer.id)
+            {
+              if(layer.timeDimension)
+              {
+                const layerFilter = {
+                  layerId: layer.id,
+                  layerName: layer.name,
+                  workspace: layer.workspace,
+                  initialDate: undefined,
+                  finalDate: undefined,
+                  time: ""
+                } as Filter;
+  
+                existingFilterList[i]=layerFilter;
+              }
+            }
+          }
+          
+      });
+
+      this.filterService.saveLayersFilters(this.project.id, existingFilterList).toPromise().then(() => 
+      {
+        this.terrabrasilisApi.applyFiltersOnLayer(existingFilterList);
+  
+        this.terrabrasilisApi.disableLoading();
     
-    this.closeDialog()
+        this.closeDialog()
+      });
+  
+    });
+
   }
 
   publishDialogData()
@@ -196,8 +251,6 @@ export class LayerFilterComponent implements OnInit {
     this.terrabrasilisApi.enableLoading();
     let timeDimensonLayers = LayerService.getLayersWithTimeDimension(this.layers);
 
-    let tempMinDate: any;
-    let tempMaxDate: any;
     let tempStartDateValue: any;
     let tempEndDateValue: any;
     let tempGranularity: any;

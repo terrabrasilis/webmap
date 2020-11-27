@@ -38,16 +38,8 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private localStorageService: LocalStorageService
     , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
-    , private store: Store<fromLayerFilterReducer.State>
   ) {
-    if(this.store) {
-      this.store
-      .pipe(select((state: any) => state.layerFilter.filters))
-      .subscribe((refreshedFilter) => {
-        this.filters = refreshedFilter;
-        this.applyFiltersOnLayer(this.filters)
-      });
-    }
+   
   }
 
   applyFiltersOnLayer (filters) {

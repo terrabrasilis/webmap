@@ -15,6 +15,8 @@ export class Constants {
 
     public static get TERRABRASILIS_BUSINESS_API_HOST(): string {
       
+       // let url = 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
+       // return url;
 
         if(environment.BUILD_TYPE)
         {
