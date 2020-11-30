@@ -301,7 +301,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         {
             let tool = new Tool();
             tool.setTag("LayerFilterTool");
-            tool.addTarget("<layer-filter-tool [shared]=\"layer\" [project]=\"project\"></layer-filter-tool>");
+            tool.addTarget("<layer-filter-tool [shared]=\"layer\" [layerProject]=\"project\"></layer-filter-tool>");
             layer.tools.push(tool);
         }
     }

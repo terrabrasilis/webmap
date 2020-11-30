@@ -42,14 +42,16 @@ import { Vision } from 'src/app/entity/vision'
 export class LayerFilterToolComponent extends ToolComponent
   implements OnInit, OnMount {
   layer: Layer;
+  project: Vision;
     
-  @Input() project: Vision
+  @Input() layerProject: any
   @Input() shared: any
   @ViewChild('innerContent', { static: true }) innerContent: ElementRef
 
   dynamicOnMount(attr: Map<string, any>, innerHTML: string, el: any) {
     this.innerContent.nativeElement.innerHTML = innerHTML
-    this.layer = this.shared
+    this.layer = this.shared;
+    this.project = this.layerProject;
     
   }
 
@@ -67,6 +69,7 @@ export class LayerFilterToolComponent extends ToolComponent
 
   ngOnInit() {
     this.layer = this.shared
+    this.project = this.layerProject
     
   }
 

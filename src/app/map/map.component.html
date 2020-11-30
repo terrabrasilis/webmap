@@ -147,7 +147,7 @@
                                     <li style="width:100%;">
                                         <div class="fe-camadas">  
                                             <div *ngFor="let tool of layer.tools">
-                                                <div *dynamicComponent="tool.target; context: { layer: layer };"></div>
+                                                <div *dynamicComponent="tool.target; context: { layer: layer, project: project };"></div>
                                             </div>
                                             <dfn attr.data-info="{{ 'tools.removeLayer' | translate }}">
                                                 <button type="button" class="btn" *ngIf="layer.isRemovable" 
