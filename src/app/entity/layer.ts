@@ -3,6 +3,7 @@ import { Subdomain } from './subdomain';
 import { Tool } from './tool';
 import { Datasource, Download } from './datasource';
 import { AuthenticationService } from '../services/authentication.service';
+import { Filter } from './filter';
 
 /**
  * Layer define the parameters to mount automatically the layers (Baselayer and Overlayer)
@@ -36,6 +37,7 @@ export class Layer {
     metadata: string = null;
     dashboard: string = null;
     thirdHost = '';
+    private filter: Filter;
 
     /**
      * UI Controllers
@@ -244,5 +246,13 @@ export class Layer {
             }
         }
         return null;
+    }
+
+    getFilter() : Filter {
+        return this.filter;
+    }
+
+    setFilter(filter: Filter) {
+        this.filter = filter;
     }
 }

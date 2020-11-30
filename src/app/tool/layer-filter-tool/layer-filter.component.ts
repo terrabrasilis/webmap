@@ -137,6 +137,7 @@ export class LayerFilterComponent implements OnInit {
           if(existingLayerFilters && existingLayerFilters.length>0)
           {
             this.restoreFilter(existingLayerFilters[0]);
+            this.layers[0].setFilter(existingLayerFilters[0]);
           }
         }
       }      
@@ -189,6 +190,7 @@ export class LayerFilterComponent implements OnInit {
         } as Filter;
 
         filterList.push(layerFilter);
+        layer.setFilter(layerFilter);
       }
 
     });
@@ -228,6 +230,7 @@ export class LayerFilterComponent implements OnInit {
   
                 existingFilterList[i]=layerFilter;
               }
+              layer.setFilter(null);
             }
           }
           
