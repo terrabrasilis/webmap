@@ -30,9 +30,9 @@ export class ChartpanelComponent implements OnInit {
   constructor (
     private shareData: TsComponentsDataShareService) {
     //set page to communicate to with "ocpusits" on server
-    // ocpu.seturl("https://terrabrasilis.ocpu.io/terrabrasilisTimeSeries/R");
+    // ocpu.seturl("https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R");
     ocpu.seturl(
-      'https://terrabrasilis.ocpu.io/terrabrasilisTimeSeries/R'
+      'https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R'
       // 'http://terrabrasilis2.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
     )
     this.mySession_point = {}
