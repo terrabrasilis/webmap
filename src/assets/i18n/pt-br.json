@@ -57,8 +57,8 @@
             "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
             "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",
-            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens - 2000/2019",
-            "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Incrementos no Desmatamento - 2002/2019",
+            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens - 2000/2020",
+            "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Incrementos no Desmatamento - 2002/2020",
             "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Máscara de Desmatamento até 2000",
             "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hidrografia"
         },
@@ -71,7 +71,7 @@
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
             "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2019",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Amazonia Legal",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico de Imagens - 2000/2019"
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico de Imagens - 2000/2020"
         },
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazônia",
@@ -82,7 +82,7 @@
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
             "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2019",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Limite do Bioma",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2019"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2020"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
