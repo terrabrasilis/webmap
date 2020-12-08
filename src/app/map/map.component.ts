@@ -54,6 +54,8 @@ declare var Authentication: any;
 
 
 
+
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -116,6 +118,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     public _subscription: Array<ISubscription> = new Array();
     @HostBinding() public thirdlayers: Array<Layer> = new Array();
 
+    ///////////////////////////////////////////////////////////////
+    /// Terrabrasilis component
+    ///////////////////////////////////////////////////////////////
+    private terrabrasilisApi: TerrabrasilisApiComponent;
+
     constructor(
         private dialog: MatDialog
         , private dom: DomSanitizer
@@ -127,13 +134,18 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private localStorageService: LocalStorageService
         , @Inject(NgZone) private zone: NgZone
     ) {
-        
-    }
 
-    ///////////////////////////////////////////////////////////////
-    /// Terrabrasilis component
-    ///////////////////////////////////////////////////////////////
-    private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null);
+        //Function to callback from Leaflet Map, when map was updated (This function invokes this MapComponent::notifyMapChanged() )
+        let mapStateChanged = function()
+        {
+          if($('#notifyMapChanged').length!=0)
+          {
+              $('#notifyMapChanged').click();
+          }
+        }
+
+        this.terrabrasilisApi = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, mapStateChanged);
+    }
 
     ///////////////////////////////////////////////////////////////
     /// Angular lifeCycle hooks
@@ -742,14 +754,19 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
     processLegendForLayers(layers: any): Promise<any> {
         const promises = layers.map((layer) => {
-          return this.terrabrasilisApi.getLegend(layer, false)
-            .then((url) => {
-              layer.addLegendURL(url)
-              return layer
-            })
+          return this.processLegendForLayer(layer);
         });
 
         return Promise.all(promises)
+    }
+
+    processLegendForLayer(layer: any): Promise<any> {
+        this.showLegendLoading(layer.id);
+        return this.terrabrasilisApi.getLegend(layer, false)
+        .then((url) => {
+          layer.addLegendURL(url)
+          return layer
+        });
     }
 
     ///////////////////////////////////////////////////
@@ -776,7 +793,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * Used to update state of legend...
      */
-    private updateOverlayerLegends() {
+    public updateOverlayerLegends() {
         let self = this
         this.cdRef.detectChanges();
         this.layersToLegend = [];
@@ -952,4 +969,31 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         
         this.terrabrasilisApi.updateLayers(layersToMap);
     }
+
+    notifyMapChanged() 
+    {   
+        this.updateOverlayerLegends();
+    }
+
+    legendLoaded(event)
+    {
+        if (event && event.target) 
+        {
+            var layerId = event.target.id.split('-')[1];
+            this.hideLegendLoading(layerId);
+        }
+    }
+
+    hideLegendLoading(layerId)
+    {
+        $('#legendLoading-'+layerId).addClass('hideLegendLoading');
+        $('#legendLoading-'+layerId).removeClass('legendLoading');
+    }
+    showLegendLoading(layerId)
+    {
+        $('#legendLoading-'+layerId).addClass('legendLoading');
+        $('#legendLoading-'+layerId).removeClass('hideLegendLoading');
+    }
+
+
 }

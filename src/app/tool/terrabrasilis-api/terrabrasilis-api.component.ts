@@ -38,14 +38,16 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private localStorageService: LocalStorageService
     , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
+    , private mapStateChanged: Function = null
   ) {
-   
+    
   }
 
   applyFiltersOnLayer (filters) {
     Terrabrasilis.filterLayers(filters)
     console.log('[TERRA-API] filters: ', filters)
   }
+
 
   ////////////////////////////////////////////////
   //// Angular life cycle hooks
@@ -56,7 +58,7 @@ export class TerrabrasilisApiComponent implements OnInit {
   //// MapBuilder
   ////////////////////////////////////////////////
   public map(points: any, baselayers: any, overlayers: any): void {
-    Terrabrasilis.map(points.longitude, points.latitude)
+    Terrabrasilis.map(points.longitude, points.latitude, this.mapStateChanged)
       .addCustomizedBaseLayers(JSON.parse(JSON.stringify(baselayers)))
       .addCustomizedOverLayers(JSON.parse(JSON.stringify(overlayers)))
       // .addBaseLayers(JSON.parse(JSON.stringify(this.baselayers)))
@@ -160,10 +162,43 @@ export class TerrabrasilisApiComponent implements OnInit {
         {
           language = get(JSON.parse(item), 'value')
         }
-        
-        return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language)
+        let bounds = this.getCurentMapBox();
+
+        let crs = this.getCRS();
+
+        let bboxString: string;
+        if(bounds)
+        {
+          bboxString = bounds.toBBoxString();
+        }
+
+        let crsCode: string;
+        if(crs)
+        {
+          crsCode = crs.code;
+        }
+        crsCode='EPSG:4674';
+
+
+        return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode)
       });
   }
+
+
+  getCurentMapBox()
+  {
+     let mapBounds = Terrabrasilis.getBounds();
+      return mapBounds;
+  }
+
+
+  getCRS()
+  {
+    let crs = Terrabrasilis.getCRS();
+    return crs;
+  }
+
+  
 
   getBasicLayerInfo(layerObject: any) {
     this.cdRef.detectChanges();

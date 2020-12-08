@@ -210,7 +210,8 @@
                         <ng-template #templateTitle>
                             <div title="{{ layer.title }}"><h2>{{ layer.title | slice:0:21 }}{{ (layer.title.length>21)?('...'):('') }}</h2></div>
                         </ng-template>
-                        <img [src]="layer.legendURL" alt="{{layer.title}}">
+                        <img id="legend-{{ layer.id }}" [src]="layer.legendURL" alt="{{layer.title}}" (load)="legendLoaded($event)">
+                        <img id="legendLoading-{{ layer.id }}" class="legendLoading" src="http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/biomes/cerrado/daily/img/loader.svg">
                     </div>
                 </div>
             </div>
@@ -231,6 +232,7 @@
 <!-- Timeseries control panel -->
 
 <div id="notifyAuthenticationChanged" ng-controller="notifyAuthenticationChanged" (click)="notifyAuthenticationChanged()"></div>
+<div id="notifyMapChanged" ng-controller="notifyMapChanged" (click)="notifyMapChanged()"></div>
 
 <!-- fim --> 
     

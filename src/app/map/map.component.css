@@ -155,3 +155,15 @@
 {
   color: #f9c069;
 }
+.legendLoading
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30px;
+}
+
+.hideLegendLoading
+{
+  display: none;
+}
