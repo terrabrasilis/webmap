@@ -32,6 +32,14 @@ export const Utils = {
       params+='&legend_options=hideEmptyRules:true'
     }
 
+    if(layer.getFilter())
+    {
+      if(layer.getFilter().time)
+      {
+        params+='&time=' +layer.getFilter().time;
+      }
+    }
+
     let url = host + params
 
     const IS_INPE_HOST = this.isInpeUrl(host)
