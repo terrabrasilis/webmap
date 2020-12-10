@@ -761,7 +761,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     processLegendForLayer(layer: any): Promise<any> {
-        this.showLegendLoading(layer.id);
+        this.showLegendLoading(layer);
         return this.terrabrasilisApi.getLegend(layer, false)
         .then((url) => {
           layer.addLegendURL(url)
@@ -793,7 +793,9 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * Used to update state of legend...
      */
-    public updateOverlayerLegends() {
+    public updateOverlayerLegends() 
+    {
+        //this.showLegendsLoading();
         let self = this
         this.cdRef.detectChanges();
         this.layersToLegend = [];
@@ -975,25 +977,12 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.updateOverlayerLegends();
     }
 
-    legendLoaded(event)
+    hideLegendLoading(layer)
     {
-        if (event && event.target) 
-        {
-            var layerId = event.target.id.split('-')[1];
-            this.hideLegendLoading(layerId);
-        }
+        layer.setLegendLoadingClass("hideLegendLoading");
     }
-
-    hideLegendLoading(layerId)
+    showLegendLoading(layer: Layer)
     {
-        $('#legendLoading-'+layerId).addClass('hideLegendLoading');
-        $('#legendLoading-'+layerId).removeClass('legendLoading');
+        layer.setLegendLoadingClass("legendLoading");
     }
-    showLegendLoading(layerId)
-    {
-        $('#legendLoading-'+layerId).addClass('legendLoading');
-        $('#legendLoading-'+layerId).removeClass('hideLegendLoading');
-    }
-
-
 }

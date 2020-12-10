@@ -28,6 +28,7 @@ export class Layer {
     created = '';
     timeDimension = false;
     legendURL = '';
+    private legendLoadingClass : string = 'legendLoading';
 
     datasource: Datasource = null;
     tools: Tool[] = [];
@@ -254,5 +255,13 @@ export class Layer {
 
     setFilter(filter: Filter) {
         this.filter = filter;
+    }
+
+    getLegendLoadingClass() : string {
+        return this.legendLoadingClass;
+    }
+
+    setLegendLoadingClass(legendLoadingClass: string) {
+        this.legendLoadingClass = legendLoadingClass;
     }
 }
