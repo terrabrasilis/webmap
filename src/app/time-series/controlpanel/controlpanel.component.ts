@@ -150,42 +150,12 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       $('#band').toggle(this.value !== 'polygon')
       $('#band_shp').toggle(this.value !== 'point')
       $('#title-chart-filter').toggle(this.value !== 'polygon')
-      $('#filter').toggle(this.value !== 'polygon')
-      $('#filter-group').toggle(this.value !== 'polygon')
-      $('#filter-whit').toggle(this.value !== 'polygon')
-      $('#filter-sg').toggle(this.value !== 'polygon')
-      $('#submitbuttonfilter').toggle(this.value !== 'polygon')
       $('#butOpenJSON').toggle(this.value !== 'point')
       $('#openJSON').toggle(this.value !== 'point')
 
-      // this.enableButton();
-
-    //   if (!this.isPolygon) {
-    //     //if ($('#get-point').is(':checked')) {
-    //     // https://stackoverflow.com/questions/9240854/jquery-function-executed-more-than-once
-    //     $('#submitbutton')
-    //       // .unbind('click')
-    //       .click(function (e: any) {
-    //         console.log('Test ...');
-    //         e.preventDefault();
-    //         //timeSeriesRaw();
-    //         this.sendDataToChart()
-    //       })
-    //   } else {
-    //     $('#submitbutton')
-    //       // .unbind('click')
-    //       .click(function (e: any) {
-    //         e.preventDefault();
-    //         this.sendDataToChart()
-    //       })
-    //   }
      })
 
-    // //button handler
-    // $('#submitbuttonfilter').on('click', function (e: any) {
-    //   e.preventDefault()
-    //   this.sendDataToChart()
-    // })
+   
   }
 
   sendDataToChart(){
@@ -197,32 +167,16 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       coverage_selected: 'MOD13Q1',
       band_selected: $('#band').val(),
       band_selected_shp: $('#band_shp').val(),
-      pre_filter_selected: '0 - none',
       start_date: $('#from').val(),
       end_date: $('#to').val(),
-      filter_selected: $('#filter option:selected').val(),
-      wh_lambda_selected: $('#wh-lambda').val(),
-      wh_diff_selected: $('#wh-differences').val(),
-      sg_order_selected: $('#sg-order').val(),
-      sg_scale_selected: $('#sg-scale').val(),
       latitude: this.latitude,
       longitude: this.longitude,
       isPolygon: this.isPolygon,
-      polygon: this.aGeoJSONGeomtry, //this.polygon,
-      enableFilter: false
+      polygon: this.aGeoJSONGeomtry //this.polygon,
     }
 
     this.shareData.changeData(crtlData)
   }
 
-  // enableButton(){
-  //   $("input[type='text']", "input[type='number']").on("keyup", function(){
-  //     if(($('#lat').val() !== '' && $('#long').val() !== '') || $('#openJSON').val() !== ''){
-  //       $('#submitbutton').removeAttr("disabled");
-  //       this.sendDataToChart();
-  //     } else {
-  //       $('#submitbutton').attr("disabled", "disabled");
-  //         }  
-  //   });
-  // }
+
 }

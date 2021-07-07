@@ -32,7 +32,9 @@ export class ChartpanelComponent implements OnInit {
     //set page to communicate to with "ocpusits" on server
     // ocpu.seturl("https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R");
     ocpu.seturl(
-      'https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R'
+      'http://terrabrasilis.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
+      //'http://150.163.2.75:8004/ocpu/library/terrabrasilisTimeSeries/R'
+      //'https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R'
       // 'http://terrabrasilis2.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
     )
     this.mySession_point = {}
@@ -51,9 +53,7 @@ export class ChartpanelComponent implements OnInit {
         // exit
         return
       } else {
-        if (this.ctrlData.enableFilter) {
-          this.timeSeriesFilter(data)
-        } else if (!this.ctrlData.isPolygon) {
+        if (!this.ctrlData.isPolygon) {
           this.timeSeriesRaw(data)
         } else {
           this.jsonCoords = localStorage.getItem('jsonCoords');
@@ -192,8 +192,7 @@ export class ChartpanelComponent implements OnInit {
         latitude: dataOptions.latitude,
         bands: dataOptions.band_selected,
         start_date: dataOptions.start_date,
-        end_date: dataOptions.end_date,
-        pre_filter: dataOptions.pre_filter_selected
+        end_date: dataOptions.end_date
       },
       function (session: any) {
         self.mySession_point = session
@@ -215,44 +214,7 @@ export class ChartpanelComponent implements OnInit {
     )
   }
 
-  // filters
-  timeSeriesFilter (data: any) {
-    let self = this
-
-    let req = ocpu.call(
-      'TSfilter',
-      {
-        //rpc
-        ts_data: self.mySession_point,
-        type_filter: data.filter_selected,
-        wh_lambda: data.wh_lambda_selected,
-        wh_differences: data.wh_diff_selected,
-        sg_order: data.sg_order_selected,
-        sg_scale: data.sg_scale_selected
-      },
-      function (session: any) {
-        session.getObject(function (data: any) {
-          var myData = data[0].time_series
-          //console.log('MyData filter: ', myData);
-          var series = self.prepareData(myData)
-          //console.log('series: ', series);
-
-          var str = JSON.stringify(series).replace(/.whit/g, '_whit') //convert to JSON string
-          str = str.replace(/.sg/g, '_sg')
-          var series2 = JSON.parse(str) //convert back to array
-          console.log('series filter: ', series2)
-
-          self.plotChart(series2)
-
-          // end of loading propagation
-          self.shareData.changeLoading(true)
-          self.hasChart = true
-        })
-      }
-    )
-  }
-
-  timeSeriesShp (dataOptions: any) {
+   timeSeriesShp (dataOptions: any) {
     let self = this
  
     let req = ocpu.call(
@@ -264,7 +226,6 @@ export class ChartpanelComponent implements OnInit {
         bands: dataOptions.band_selected_shp,
         start_date: dataOptions.start_date,
         end_date: dataOptions.end_date,
-        pre_filter: dataOptions.pre_filter_selected,
         geojson_points: this.jsonCoords
       },
       function (session: any) {
@@ -285,17 +246,17 @@ export class ChartpanelComponent implements OnInit {
             for (let i = 0; i < Object.keys(obj).length; i++) {
               lng[i] = obj[i].geometry.coordinates[0]
               lat[i] = obj[i].geometry.coordinates[1]
-            }
+            //}
             // add each line in a datatable
-            for (let i = 0; i < lng.length; i++) {
+           // for (let i = 0; i < lng.length; i++) {
               dataOptions.longitude = lng[i]
               dataOptions.latitude = lat[i]
               console.log('lat: ', lat[i], 'long: ', lng[i])
 
               dataOptions['has_chart'] = true
-
               self.shareData.changeTable(dataOptions)
-              console.log()
+              console.log('dataOptions: ', dataOptions)
+              //console.log()
             }
           })
         })
