@@ -173,6 +173,7 @@
       "service": "Service",
       "coverage": "Coverage",
       "bands": "Bands",
+      "produto": "MOD13Q1 product (MODIS) using WTSS service",
       "preFilter": "Pre-filter SATVEG",
       "startDate": "Start Date",
       "endDate": "End Date",

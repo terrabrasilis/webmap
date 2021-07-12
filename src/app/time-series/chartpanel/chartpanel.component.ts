@@ -30,12 +30,8 @@ export class ChartpanelComponent implements OnInit {
   constructor (
     private shareData: TsComponentsDataShareService) {
     //set page to communicate to with "ocpusits" on server
-    // ocpu.seturl("https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R");
     ocpu.seturl(
-      'http://terrabrasilis.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
-      //'http://150.163.2.75:8004/ocpu/library/terrabrasilisTimeSeries/R'
-      //'https://terrabrasilis.ocpu.io/terrabrasilis-timeseries/R'
-      // 'http://terrabrasilis2.dpi.inpe.br:8004/ocpu/library/terrabrasilisTimeSeries/R'
+      'http://terrabrasilis.dpi.inpe.br/ocpu/library/terrabrasilisTimeSeries/R'
     )
     this.mySession_point = {}
     this.enableChartPanel = true
