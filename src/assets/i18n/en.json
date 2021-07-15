@@ -173,7 +173,9 @@
       "service": "Service",
       "coverage": "Coverage",
       "bands": "Bands",
-      "produto": "MOD13Q1 product (MODIS) using WTSS service",
+      "produto": "MOD13Q1 product (MODIS) using ",
+      "infotimeseries": "1. Select a point on the map with marker tool and click 'Execute!', then, 2. Draw a polygon with an area between 50 and 2000 hectares (ha).",
+      "infopolygon": "Please, draw a polygon with an area between 50 and 2000 hectares (ha).",
       "preFilter": "Pre-filter SATVEG",
       "startDate": "Start Date",
       "endDate": "End Date",
@@ -193,7 +195,10 @@
       "info": "This page shows the application using OpenCPU. For more information please access ",
       "table": "Table",
       "graphic": "Chart",
-      "infouse": "Uses the control painel to select the options of origin of the timeseries and the map's tools to define a location or area used for obtaining the series."
+      "infouse": "Uses the control painel to select the options of origin of the timeseries and the map's tools to define a location or area used for obtaining the series.",
+      "sdinfe": "standard deviation inferior",
+      "sdsupe": "standard deviation superior",
+      "mean": "mean"
   },
   "matPaginatorIntl": {
     "itemsPerPage":"Itens per page:",

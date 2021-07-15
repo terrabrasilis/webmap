@@ -175,7 +175,9 @@
         "service": "Serviço",
         "coverage": "Cobertura",
         "bands": "Bandas",
-        "produto": "Produto MOD13Q1 (MODIS) usando serviço WTSS",
+        "produto": "Produto MOD13Q1 (MODIS) usando ",
+        "infotimeseries": "1. Selecione um ponto no mapa com a ferramenta marker e clique em 'Consultar!', então, 2. Desenhe um polígono com área entre 50 e 2000 hectares (ha).",
+        "infopolygon": "Por favor, desenhe um polígono com área entre 50 e 2000 hectares (ha).",
         "preFilter": "Pré-filtro SATVEG",
         "startDate": "Data Inicial",
         "endDate": "Data Final",
@@ -195,7 +197,10 @@
         "info": "Esta página mostra uma aplicação usando OpenCPU. Para mais informações acesse ",
         "table": "Tabela",
         "graphic": "Gráfico",
-        "infouse": "Use o painel de controle para selecionar as opções de origem da série temporal e as ferramentas do mapa para definir uma localização ou área usada na obtenção das séries."
+        "infouse": "Use o painel de controle para selecionar as opções de origem da série temporal e as ferramentas do mapa para definir uma localização ou área usada na obtenção das séries.",
+        "sdinfe": "desvio padrão inferior",
+        "sdsupe": "desvio padrão superior",
+        "mean": "média"
     },
     "matPaginatorIntl": {
         "itemsPerPage":"Itens por página:",

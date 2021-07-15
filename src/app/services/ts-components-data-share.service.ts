@@ -22,6 +22,12 @@ export class TsComponentsDataShareService {
 
   changeTable(data: any) {
     this.tableSource.next(data);
+    //console.log('changeTableShared: ', data)
+  }
+
+  changeTableShp(data: any) {
+    this.tableSource.next({...data});
+    //console.log('changeTableSharedComplete: ', data)
   }
 
   changeLoading(endLoading: boolean) {

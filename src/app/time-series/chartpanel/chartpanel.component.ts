@@ -12,6 +12,7 @@ import * as c3 from 'c3'
 import '../../../../node_modules/c3/c3.css'
 import { json } from 'd3';
 import { inflate } from 'zlib'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chartpanel',
@@ -28,7 +29,8 @@ export class ChartpanelComponent implements OnInit {
   jsonCoords: any
   
   constructor (
-    private shareData: TsComponentsDataShareService) {
+    private shareData: TsComponentsDataShareService, 
+    private _translate: TranslateService = null) {
     //set page to communicate to with "ocpusits" on server
     ocpu.seturl(
       'http://terrabrasilis.dpi.inpe.br/ocpu/library/terrabrasilisTimeSeries/R'
@@ -41,10 +43,9 @@ export class ChartpanelComponent implements OnInit {
   ngOnInit () {
     this.shareData.currentData.subscribe(data => {
       this.ctrlData = data
-
+     
       if (
-        this.ctrlData.isPolygon == undefined &&
-        this.ctrlData.enableFilter == undefined
+        this.ctrlData.isPolygon == undefined
       ) {
         // exit
         return
@@ -53,10 +54,9 @@ export class ChartpanelComponent implements OnInit {
           this.timeSeriesRaw(data)
         } else {
           this.jsonCoords = localStorage.getItem('jsonCoords');
-          if(this.jsonCoords !== ''){
+          if(this.jsonCoords !== null){
             this.timeSeriesShp(data)
           } else {
-            alert("Please, draw a polygon with an area between 50 and 2000 ha.") // Put in data
             stop();
           }
         }
@@ -150,9 +150,9 @@ export class ChartpanelComponent implements OnInit {
         },
         //labels: true,
         names: {
-          ymin_sd: 'standard deviation inferior',
-          ymax_sd: 'standard deviation superior',
-          mean: 'mean'
+          ymin_sd: this._translate.instant("timeseries.sdinfe"),
+          ymax_sd: this._translate.instant("timeseries.sdsupe"),
+          mean: this._translate.instant("timeseries.mean")
         }
       },
       axis: {
@@ -242,17 +242,18 @@ export class ChartpanelComponent implements OnInit {
             for (let i = 0; i < Object.keys(obj).length; i++) {
               lng[i] = obj[i].geometry.coordinates[0]
               lat[i] = obj[i].geometry.coordinates[1]
-            //}
-            // add each line in a datatable
-           // for (let i = 0; i < lng.length; i++) {
-              dataOptions.longitude = lng[i]
-              dataOptions.latitude = lat[i]
-              console.log('lat: ', lat[i], 'long: ', lng[i])
+              
+              dataOptions.longitude = parseFloat(lng[i]).toFixed(6)
+              dataOptions.latitude = parseFloat(lat[i]).toFixed(6)
+              console.log('long: ', lng[i], 'lat: ', lat[i])
+              //console.log('long.data: ', dataOptions.longitude, 'lat.data: ', dataOptions.latitude)
 
               dataOptions['has_chart'] = true
-              self.shareData.changeTable(dataOptions)
-              console.log('dataOptions: ', dataOptions)
-              //console.log()
+
+              self.shareData.changeTableShp(dataOptions)
+              //console.log('dataOptions: ', dataOptions)
+                           
+              //console.log('------')
             }
           })
         })
@@ -264,7 +265,7 @@ export class ChartpanelComponent implements OnInit {
     this.enableChartPanel = !this.enableChartPanel
     $('#chart-panel').toggleClass('disable')
     $('#table-panel').toggleClass('disable')
-    $('#swapchartbtn').text(this.enableChartPanel ? 'Tabela' : 'Gráfico')
+    $('#swapchartbtn').text(this.enableChartPanel ? this._translate.instant("timeseries.table") : this._translate.instant("timeseries.graphic"))
     if (this.enableChartPanel) {
       // force resize the chart after redraw when the div is hidden.
       this.c3chart.show()

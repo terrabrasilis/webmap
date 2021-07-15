@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
 import { TsComponentsDataShareService } from '../../services/ts-components-data-share.service'
 import { Subscription } from 'rxjs'
+import { TranslateService } from '@ngx-translate/core';
 
 declare var $: any
 
@@ -26,7 +27,8 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
     private shareData: TsComponentsDataShareService,
     private dialog: MatDialog,
     private dom: DomSanitizer,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private _translate: TranslateService = null
   ) {}
 
   private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(
@@ -118,29 +120,6 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
   timeseries(){
     //----- define values of the input
 
-    $('#filter').change(function () {
-      switch ($(this).val()) {
-        case 'No-filter':
-          $('#wh-lambda').prop('disabled', true)
-          $('#wh-differences').prop('disabled', true)
-          $('#sg-order').prop('disabled', true)
-          $('#sg-scale').prop('disabled', true)
-          break
-        case 'Whittaker':
-          $('#wh-lambda').prop('disabled', false)
-          $('#wh-differences').prop('disabled', false)
-          $('#sg-order').prop('disabled', true)
-          $('#sg-scale').prop('disabled', true)
-          break
-        case 'Savitsky-Golay':
-          $('#wh-lambda').prop('disabled', true)
-          $('#wh-differences').prop('disabled', true)
-          $('#sg-order').prop('disabled', false)
-          $('#sg-scale').prop('disabled', false)
-          break
-      }
-    })
-
     //----- change the input mode, if point or polygon
     $('[name=mode-options]').change(function () {
       // hide inputs, divs ... for each mode-options
@@ -149,20 +128,21 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       $('#showLatLong').toggle(this.value !== 'polygon')
       $('#band').toggle(this.value !== 'polygon')
       $('#band_shp').toggle(this.value !== 'point')
-      $('#title-chart-filter').toggle(this.value !== 'polygon')
       $('#butOpenJSON').toggle(this.value !== 'point')
       $('#openJSON').toggle(this.value !== 'point')
 
      })
-
    
+  }
+
+  messageAlert(){
+    let alertMessage = this._translate.instant('timeseries.infopolygon');
+    window.alert(alertMessage)
   }
 
   sendDataToChart(){
 
-    this.terrabrasilisApi.enableLoading()
-
-    let crtlData = {
+   let crtlData = {
       service_selected: 'WTSS-INPE',
       coverage_selected: 'MOD13Q1',
       band_selected: $('#band').val(),
@@ -174,8 +154,41 @@ export class ControlpanelComponent implements OnInit, OnDestroy {
       isPolygon: this.isPolygon,
       polygon: this.aGeoJSONGeomtry //this.polygon,
     }
-
-    this.shareData.changeData(crtlData)
+    
+    // RWTSS has dates from 2000-02-18 to 2019-09-30 by url e-sensing
+    let fixedStartDate = "2000-02-18"
+    let fixedEndDate = "2019-09-30"
+    
+    if (this.isPolygon === true && this.polygon.length === 0){
+        this.messageAlert()
+    } else {
+      if (new Date(crtlData.start_date) >= new Date(fixedStartDate) && new Date(crtlData.end_date) <= new Date(fixedEndDate)){
+        //console.log("date_start <= fixedStartDate - ok: ", crtlData.start_date, fixedStartDate)
+        //console.log("date_end <= fixedEndDate - ok: ", crtlData.end_date, fixedEndDate)
+        this.terrabrasilisApi.enableLoading()
+        this.shareData.changeData(crtlData)
+      } else if (new Date(crtlData.start_date) < new Date(fixedStartDate) && new Date(crtlData.end_date) <= new Date(fixedEndDate)){
+        //console.log("date_start < fixedStartDate - no: ", crtlData.start_date, fixedStartDate)
+        //console.log("date_end <= fixedEndDate - ok: ", crtlData.end_date, fixedEndDate)
+        crtlData.start_date=fixedStartDate
+        this.terrabrasilisApi.enableLoading()
+        this.shareData.changeData(crtlData)
+      } else if (new Date(crtlData.start_date) >= new Date(fixedStartDate) && new Date(crtlData.end_date) > new Date(fixedEndDate)){
+        //console.log("date_start >= fixedStartDate - ok: ", crtlData.start_date, fixedStartDate)
+        //console.log("date_end > fixedEndDate - no: ", crtlData.end_date, fixedEndDate)
+        crtlData.end_date=fixedEndDate
+        this.terrabrasilisApi.enableLoading()
+        this.shareData.changeData(crtlData)
+      } else {
+        //console.log("date_start < fixedStartDate - no: ", crtlData.start_date, fixedStartDate)
+        //console.log("date_end > fixedEndDate - no: ", crtlData.end_date, fixedEndDate)
+        crtlData.start_date=fixedStartDate
+        crtlData.end_date=fixedEndDate
+        this.terrabrasilisApi.enableLoading()
+        this.shareData.changeData(crtlData)
+      }
+    }
+  
   }
 
 
