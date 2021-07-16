@@ -17,6 +17,7 @@ import { get } from 'lodash'
 import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 import { Observable } from "rxjs";
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 
 @Component({
@@ -175,26 +176,17 @@ export class TerrabrasilisApiComponent implements OnInit {
   getBasicLayerInfo(layerObject: any) {
     this.cdRef.detectChanges();
 
-    console.log(layerObject);
-
-    const match = /gwc\/service\/wms/;
+    const match = /geoserver\/ows/;
 
     const source = layerObject.datasource != null ?
       (match.test(layerObject.datasource.host) == true ?
-        layerObject.datasource.host.replace('gwc/service/wms', 'ows') : layerObject.datasource.host) :
+        layerObject.datasource.host.replace('geoserver/ows', 'geoserver/'+layerObject.workspace+'/'+layerObject.name+'/ows') : layerObject.datasource.host) :
       layerObject.thirdHost;
 
-    const layerBasicInfo = {
-      title: layerObject.title,
-      layer: layerObject.name,
-      workspace: layerObject.workspace,
-      source
-    };
-
-    const infoTable = '<table class="table-responsive table "><tr class="table-active"><th colspan="3">' + layerBasicInfo.title + '</th></tr>'
-      + ' <tr> <td><b>Layer</b></td><td colspan="2">' + layerBasicInfo.layer + '</td></tr>'
-      + '<tr><td><b>Workspace</b></td><td colspan="2">' + layerBasicInfo.workspace + '</td></tr>'
-      + '<tr><td><b>Source</b></td><td colspan="2">' + layerBasicInfo.source + '</td></tr></table>';
+    const infoTable = '<table class="table-responsive table "><tr class="table-active"><th colspan="3">' + layerObject.title + '</th></tr>'
+      + ' <tr> <td><b>Layer</b></td><td colspan="2">' + layerObject.name + '</td></tr>'
+      + '<tr><td><b>Workspace</b></td><td colspan="2">' + layerObject.workspace + '</td></tr>'
+      + '<tr><td><b>URL</b></td><td colspan="2">' + source + '</td></tr></table>';
 
     this.showDialog(infoTable);
   }
@@ -254,7 +246,7 @@ export class TerrabrasilisApiComponent implements OnInit {
   //// General use dialog
   ////////////////////////////////////////////////
   showDialog(content: string): void {
-    const dialogRef = this.dialog.open(DialogComponent, { width: '450px' });
+    const dialogRef = this.dialog.open(DialogComponent, { width: '550px' });
     dialogRef.componentInstance.content = this.dom.bypassSecurityTrustHtml(content);
   }
 
@@ -264,12 +256,18 @@ export class TerrabrasilisApiComponent implements OnInit {
    */
   onOffTimeDimension(layer: Layer) {
     // verify if layer is raster or vector type and use it to set aggregate times value.
-    Terrabrasilis.onOffTimeDimension(layer.workspace+':'+layer.name, layer.isAggregatable /*aggregateTimes*/);
+    try {
+      var layerName = layer.workspace+':'+layer.getLayerName();
+
+      Terrabrasilis.onOffTimeDimension(layerName, layer.isAggregatable /*aggregateTimes*/); 
+    } catch (error) {
+      this.openSnackBar('Falhou ao habilitar a ferramenta de navegação temporal.','Aviso');
+    }
   }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -292,6 +290,11 @@ export class TerrabrasilisApiComponent implements OnInit {
   updateLayers(appLayers)
   {
     Terrabrasilis.updateLayers(JSON.parse(JSON.stringify(appLayers)));
+  }
+
+  resetTimeDimension()
+  {
+    Terrabrasilis.removeAllTimerControl();
   }
 
   ////////////////////////////////////////////////

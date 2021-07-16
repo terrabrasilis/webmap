@@ -14,16 +14,28 @@ export class Constants {
     };
 
     public static get TERRABRASILIS_BUSINESS_API_HOST(): string {
-        let url = 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
+      
 
-        // confirm the 13111 port in docker-stacks/api/business-api-homologation.yaml
-        // or use the homologation url to acess from outside (internet): http://terrabrasilis.dpi.inpe.br/homologation/api/v1/
-        if(environment.BUILD_TYPE == 'staging') url = 'http://terrabrasilis.dpi.inpe.br/homologation/api/v1/';
-        
-        // confirm the 2222 port in docker-stacks/demo/docker-compose.yaml
-        if(environment.BUILD_TYPE == 'compose') url = 'http://localhost:2222/api/v1/';
-        
-        return url;
+        if(environment.BUILD_TYPE)
+        {
+            if(environment.BUILD_TYPE == 'production')
+            {
+                let url = 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
+                return url;
+            }
+            if(environment.BUILD_TYPE == 'staging')
+            {
+                let url = 'http://terrabrasilis.dpi.inpe.br/homologation/api/v1/';
+                return url;
+            }
+            if(environment.BUILD_TYPE == 'development')
+            {
+                let url = 'http://localhost:8090/api/v1/';
+                return url;
+            }
+        }
+        throw new Error(`Invalid project BUILD_TYPE configuration: ${environment.BUILD_TYPE}`); 
+
     };
     /**
      *  Defines an enum to store types of time dimension granularity

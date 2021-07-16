@@ -162,7 +162,7 @@ a:focus {
 
 .fe-camadas {
   padding: 10px 0px 10px 0px;
-  width: fit-content;
+  /* width: fit-content; */
   display: -webkit-box;
 }
 
@@ -1229,3 +1229,23 @@ footer {
   left: 350px;
   width: calc(100% - 350px);
 }
+.btndisabled
+{
+  background-color: grey;
+  color: white !important;
+  cursor: wait !important;
+  background-image: url(http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/biomes/cerrado/daily/img/loader.svg) !important;
+  background-repeat: no-repeat !important;
+  background-position: right !important;
+  background-size: 16% !important;
+  background-position-x: 50% !important;
+  background-position-y: 50% !important;
+  text-decoration: none !important;
+}
+
+.btndisabled:hover
+{
+  background-color: grey;
+  color: white;
+}
+.filtered-data i { color: #f9c069 !important}

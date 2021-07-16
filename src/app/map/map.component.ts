@@ -43,8 +43,9 @@ import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasil
 import { Tool } from '../entity/tool';
 import { OpenUrl } from '../util/open-url';
 import * as _ from 'lodash'; // using the _.uniqueId() method
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
+
 
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
 declare var notifyLanguageChanged: Function;
@@ -126,7 +127,29 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private localStorageService: LocalStorageService
         , private store: Store<fromLayerFilterReducer.State>
         , @Inject(NgZone) private zone: NgZone
-    ) {}
+    ) {
+        if(this.store) {
+            this.store
+            .pipe(select((state: any) => state.layerFilter.filters))
+            .subscribe((refreshedFilter) => {
+                refreshedFilter.forEach(filter => {
+                    
+                    var enabled=false;
+                    if(filter &&
+                        filter.time)
+                    {
+                        enabled = true;
+                    }
+                    else
+                    {
+                        enabled = false;
+                    }
+                    this.updateFilterState(filter.id, enabled);
+                });
+            });
+          }
+
+    }
 
     ///////////////////////////////////////////////////////////////
     /// Terrabrasilis component
@@ -716,10 +739,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 /**
                  * Notify authentication handler about login changes
                  */
-            if($('#notifyAuthenticationChanged').length!=0)
-            {
-                $('#notifyAuthenticationChanged').click();
-            }
+                if($('#notifyAuthenticationChanged').length!=0)
+                {
+                    $('#notifyAuthenticationChanged').click();
+                }
             });
 
         });
@@ -771,6 +794,21 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         return hasElement;
     }
 
+    public updateFilterState(layerId: string, enable: boolean) 
+    {
+        var filterButtonId = "#filter-button-"+layerId;
+
+        if(enable==true)
+        {
+            $(filterButtonId).addClass("filtered-data");
+        }
+        else
+        {
+            $(filterButtonId).removeClass("filtered-data");
+        }
+
+    }
+
     /**
      * Used to update state of legend...
      */
@@ -810,12 +848,24 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         const match = /terrabrasilis.dpi.inpe.br\/download/;
         const lang = this._translate.currentLang;
 
-        this.downloads.forEach(download => {
+        var index=0;
 
+        this.downloads.forEach(download => {
+            index++;
             if(download.lang==lang) {
+
+                var downloadLink = download.link;
+                var target = 'target="blank"';
+
+                if(download.link.includes("file-delivery"))
+                {
+                    downloadLink="javascript: downloadFileDeliveryFiles('" + download.link + "','download"+ index +"');";
+                    target=""
+                }
+
                 const link = match.test(download.link) == false ?
-                            '<a href=\'' + download.link + '\' target="_blank" class="btn btn-primary btn-success">'+accessDataBtn+'</a>' :
-                            '<a href=\'' + download.link + '\' class="btn btn-primary btn-success">'+downloadBtn+'</a>';
+                            '<a href="' + downloadLink + '" id="download'+index+'" '+target+' class="btn btn-primary btn-success">'+accessDataBtn+'</a>' :
+                            '<a href=\'' + download.link + '\'  class="btn btn-primary btn-success">'+downloadBtn+'</a>';
 
                 downloadHtml += '    <div class="card mt-3">' +
                                 '     <div class="card-body">' +
@@ -824,6 +874,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                                 '        <a target="_blank" href=\'' + download.metadata + '\' class="btn btn-primary btn-success">'+metadataBtn+'</a>'+
                                 '     </div>' +
                                 '    </div>';
+
             }
         });
 
@@ -928,11 +979,13 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
      */
     notifyAuthenticationChanged() {
          
+        this.terrabrasilisApi.resetTimeDimension();
+        
         let layersToMap = new Array();
         this.overlayers.forEach(vision => {
             layersToMap = layersToMap.concat(this.gridStackInstance(vision));
         });
-
+        
         this.terrabrasilisApi.updateLayers(layersToMap);
     }
 }

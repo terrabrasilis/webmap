@@ -32,11 +32,9 @@
     "menu" : {
         "analyses": {
             "name": "Gráficos",
-            "option1" : "PRODES (Desmatamento)",
+            "option1" : "Desmatamento",
             "option2" : "DETER (Avisos)",
-            "option3" : "Uso e cobertura da terra",
-            "option4" : "Desmatamento Amazônia",
-            "option5" : "Avisos Amazônia"
+            "option3" : "Focos (Queimada)"
         },
         "about": "Sobre",
         "contact": "Contato",
@@ -44,7 +42,7 @@
         "login": "Acesso",
         "map": {
             "name": "Mapas",
-            "option1" : "PRODES (Desmatamento)",
+            "option1" : "Desmatamento",
             "option2" : "DETER (Avisos)"
 
         }
@@ -59,38 +57,40 @@
             "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "Estados",
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
             "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Municípios",
-            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens - 2000/2019",
-            "5c65c03fc4267d00012843255c40fe3a0e9b2a14264e03a7": "Desmatamento Anual - 2000/2018"
+            "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens - 2000/2020",
+            "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Incrementos no Desmatamento - 2002/2020",
+            "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Máscara de Desmatamento até 2000",
+            "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hidrografia"
         },
         "5c40fdce0e9b2a14264e03a6" : {
             "name": " Amazônia Legal",
-            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta - 2016/2018",
-            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Desmatamento Anual - 2008/2018",
+            "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta - 2016/2019",
+            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Incrementos no Desmatamento - 2008/2020",
             "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Máscara de Desmatamento - 1988/2007",
             "5c49f61b1a21020001cd663a5c40fdce0e9b2a14264e03a6": "Hidrografia",
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
-            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2018",
+            "5c49f6a51a21020001cd663c5c40fdce0e9b2a14264e03a6": "Nuvem - 2016/2020",
             "5c49f6ba1a21020001cd663d5c40fdce0e9b2a14264e03a6": "Amazonia Legal",
-            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico de Imagens - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c40fdce0e9b2a14264e03a6": "Mosaico de Imagens - 2000/2020"
         },
         "5c9bd04ae2e106099a3fd5ee" : {
             "name": " Amazônia",
-            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta - 2016/2018",
+            "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta - 2016/2019",
             "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Máscara de Desmatamento - 1988/2007",
-            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Desmatamento Anual - 2008/2018",
+            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Incrementos no Desmatamento - 2008/2020",
             "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hidrografia",
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
-            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2018",
+            "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem - 2016/2020",
             "5c9bcd576d9f9d00010068c15c9bd04ae2e106099a3fd5ee": "Limite do Bioma",
-            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2018"
+            "5c9a55b1c88eaf000187b0435c9bd04ae2e106099a3fd5ee": "Mosaico de Imagens - 2000/2020"
         },
         "5cd46155aa127a00017de863" : {
             "name": " Pampa",
             "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma",
             "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2016",
             "5cd4602daa127a00017de8615cd46155aa127a00017de863": "Hidrografia",
-            "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Nuvem - 2018",
-            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Desmatamento Anual - 2018",
+            "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Nuvem - 2018 e 2019",
+            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Incrementos no Desmatamento - 2018 e 2019",
             "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de Imagens - 2016 e 2018"
         },
         "5cd460faaa127a00017de861" : {
@@ -98,17 +98,9 @@
             "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma",
             "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2016",
             "5d6d6661eaee2e0001436f665cd460faaa127a00017de861": "Hidrografia",
-            "5d6d6661eaee2e0001436f655cd460faaa127a00017de861": "Nuvem - 2018/2019",
-            "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Desmatamento Anual - 2018/2019",
+            "5d6d6661eaee2e0001436f655cd460faaa127a00017de861": "Nuvem - 2018 e 2019",
+            "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Incrementos no Desmatamento - 2018 e 2019",
             "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de Imagens - 2016, 2018 e 2019"
-        },
-        "5dfa348ffc7ea6096c1bce18" : {
-            "name": " Caatinga",
-            "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma"
-        },
-        "5dfa348ffc7ea6096c1bce19" : {
-            "name": " Mata Atlântica",
-            "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma"
         },
         "5c8107880cf423000144ebd8" : {
             "name": " Cerrado",
@@ -120,20 +112,22 @@
         "5dfa348ffc7ea6096c1bce18" : {
             "name": " Caatinga",
             "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma",
-            "5dfa3729fc7ea6096c1bce265dfa348ffc7ea6096c1bce18": "Hidrografia",
-            "5dfa3729fc7ea6096c1bce275dfa348ffc7ea6096c1bce18": "Nuvem - 2016",
-            "5dfa3729fc7ea6096c1bce285dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2016"
+            "5f218e0e4882c228007413c45dfa348ffc7ea6096c1bce18": "Hidrografia",
+            "5f218e364882c228007413c55dfa348ffc7ea6096c1bce18": "Nuvem - 2016",
+            "5f218dde4882c228007413c35dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2016",
+            "5f218e8f4882c228007413c65dfa348ffc7ea6096c1bce18": "Mosaico de Imagens - 2016"
         },
         "5dfa348ffc7ea6096c1bce19" : {
             "name": " Mata Atlântica",
             "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma",
-            "5dfa3729fc7ea6096c1bce235dfa348ffc7ea6096c1bce19": "Hidrografia",
-            "5dfa3729fc7ea6096c1bce245dfa348ffc7ea6096c1bce19": "Nuvem - 2016",
-            "5dfa3729fc7ea6096c1bce255dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2016"
+            "5f2190194882c228007413c85dfa348ffc7ea6096c1bce19": "Hidrografia",
+            "5f2190314882c228007413c95dfa348ffc7ea6096c1bce19": "Nuvem - 2016",
+            "5f218ffb4882c228007413c75dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2016",
+            "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Mosaico de Imagens - 2016"
         },
         "5c810c820cf423000144ebda" : {
             "name": " Amazônia Legal",
-            "5c810a980cf423000144ebd85c810c820cf423000144ebda": "Avisos de Desmatamento à partir de 2015",
+            "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Avisos de Desmatamento à partir de 2016",
             "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Amazonia Legal"
         },
         "control3" : "Outras Camadas",
