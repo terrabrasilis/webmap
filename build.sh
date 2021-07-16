@@ -56,6 +56,10 @@ fi
 echo "Building $BUILD_TYPE mode..."
 echo "........................"
 
+if [[ "$BUILD_TYPE" = "production" ]]; then
+    VERSION="prod_$VERSION"
+fi
+
 # --no-cache
 docker build --no-cache --build-arg ENV=$ENV --build-arg BUILD_TYPE=$BUILD_TYPE -t terrabrasilis/webmap:$VERSION -f Dockerfile .
 
