@@ -179,7 +179,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         urlParams.subscribe(routeParams => {
             this.type = routeParams.type;
             this.language = routeParams.hl !== 'undefined' ? routeParams.hl : null;
-            this.terraBrasilisAboutURL="http://terrabrasilis.dpi.inpe.br/sobre/";
+            this.terraBrasilisAboutURL="/sobre/";
 
             this.visionService.getVisionAndAllRelationshipmentByName(this.type)
                 .subscribe(visions => {
@@ -750,7 +750,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     changeAboutURL(value: string) {
-        this.terraBrasilisAboutURL=(value=='en')?("http://terrabrasilis.dpi.inpe.br/en/about/"):("http://terrabrasilis.dpi.inpe.br/sobre/");
+        this.terraBrasilisAboutURL=(value=='en')?("/en/about/"):("/sobre/");
     }
 
     goTo(url: string) {

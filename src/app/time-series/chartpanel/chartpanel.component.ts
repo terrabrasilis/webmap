@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { TsComponentsDataShareService } from '../../services/ts-components-data-share.service'
+import { Constants } from '../../util/constants';
 
 import turf_buffer from '@turf/buffer'
 import turf_bbox_polygon from '@turf/bbox-polygon'
@@ -33,7 +34,7 @@ export class ChartpanelComponent implements OnInit {
     private _translate: TranslateService = null) {
     //set page to communicate to with "ocpusits" on server
     ocpu.seturl(
-      'http://terrabrasilis.dpi.inpe.br/ocpu/library/terrabrasilisTimeSeries/R'
+      Constants.BASE_URL+'/ocpu/library/terrabrasilisTimeSeries/R'
     )
     this.mySession_point = {}
     this.enableChartPanel = true

@@ -51,7 +51,6 @@ import { TablepanelComponent } from './time-series/tablepanel/tablepanel.compone
  * Services
  */
 import { UserProviderService } from './services/user-provider.service';
-import { LayerInfoProviderService } from './services/layer-info-provider.service';
 import { WmsCapabilitiesProviderService } from './services/wms-capabilities-provider.service';
 import { MapWmsSearchDialogService } from './services/map-wms-search-dialog.service';
 import { ContactService } from './services/contact.service';
@@ -148,7 +147,6 @@ import StoreModule from './redux/store'
   ],
   providers: [
     UserProviderService,
-    LayerInfoProviderService,
     WmsCapabilitiesProviderService,
     MapWmsSearchDialogService,
     ContactService,

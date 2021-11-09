@@ -3,7 +3,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-@import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
+@import "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -1234,7 +1234,7 @@ footer {
   background-color: grey;
   color: white !important;
   cursor: wait !important;
-  background-image: url(http://terrabrasilis.dpi.inpe.br/app/dashboard/alerts/biomes/cerrado/daily/img/loader.svg) !important;
+  background-image: url(../../img/map/loader.svg) !important;
   background-repeat: no-repeat !important;
   background-position: right !important;
   background-size: 16% !important;

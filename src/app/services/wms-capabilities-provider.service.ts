@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
@@ -10,15 +9,12 @@ import { Utils } from '../util/utils';
 import { Constants } from '../util/constants';
 
 
-// import terrabrasilis api from node_modules
 import * as Jsonix from 'terrabrasilis-jsonix';
-//import * as Terrabrasilis from 'terrabrasilis-api';
 import * as ogcSchemas from 'ogc-schemas';
 import * as w3cSchemas from 'w3c-schemas';
 
 import { text } from 'd3';
 import { AuthenticationService } from './authentication.service';
-//import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class WmsCapabilitiesProviderService {

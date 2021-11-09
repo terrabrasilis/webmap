@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, Inject, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { MatDialogRef, MatPaginator, MatSort, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
 
 /**
@@ -44,11 +45,17 @@ export class WmsSearchComponent implements OnInit {
     private dialogRef: MatDialogRef<WmsSearchComponent>,
     private datasourceService: DatasourceService,
     private _translate: TranslateService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(DOCUMENT) private document: Document) {
+      this.envUrlShema=document.location.protocol;
+      this.envUrlHost=document.location.hostname;
+    }
 
   /**
    * publics
    */
+  envUrlShema: string;
+  envUrlHost: string;
   defaultUrl: string;
   capabilities: string;
 
@@ -89,7 +96,7 @@ export class WmsSearchComponent implements OnInit {
 
   ngOnInit() {
     this.Terrabrasilis = Terrabrasilis;
-    this.defaultUrl = 'http://terrabrasilis.dpi.inpe.br/geoserver/ows';
+    this.defaultUrl = this.envUrlShema+'//'+this.envUrlHost+'/geoserver/ows';
     this.selectedValue = this.defaultUrl;
 
     this.datasourceService
@@ -113,7 +120,7 @@ export class WmsSearchComponent implements OnInit {
                 datasources.forEach(
                   (dtElement) => {
                     let h = dtElement.host;
-                    h = h.replace('http://', '').split('/')[0];
+                    h = h.replace(this.envUrlShema+'//', '').split('/')[0];
                     if (dtCtrl[h] === undefined) {
                       dsGroup.push(h);
                       dtCtrl[h] = [];
