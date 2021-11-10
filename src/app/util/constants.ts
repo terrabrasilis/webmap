@@ -7,21 +7,18 @@ import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 export class Constants {
-    constructor(@Inject(DOCUMENT) private document: Document) {
-        environment.BASE_SCHEMA=document.location.protocol;
-        environment.BASE_HOST=document.location.hostname;
-    }
+    constructor(@Inject(DOCUMENT) private document: Document) { }
 
     public static get BASE_URL(): string {
-        return environment.BASE_SCHEMA+'//'+environment.BASE_HOST;
+        return document.location.protocol+'//'+document.location.hostname;
     };
 
     public static get PROXY_OGC(): string {
-        return environment.BASE_SCHEMA+'//'+environment.BASE_HOST+environment.PROXY_OGC;
+        return Constants.BASE_URL+environment.PROXY_OGC;
     };
 
     public static get TERRABRASILIS_API_HOST(): string {
-        return environment.BASE_SCHEMA+'//'+environment.BASE_HOST+environment.TERRABRASILIS_API_HOST;
+        return Constants.BASE_URL+environment.TERRABRASILIS_API_HOST;
     };
 
     public static get TERRABRASILIS_BUSINESS_API_HOST(): string {
