@@ -120,7 +120,7 @@ export class WmsSearchComponent implements OnInit {
 
                 datasources.forEach(
                   (dtElement) => {
-                    let h = (dtElement.host.includes('://')?dtElement.host:base_url+dtElement.host);
+                    let h = dtElement.host = (dtElement.host.includes('://')?dtElement.host:base_url+dtElement.host);
                     h = h.replace(this.envUrlShema+'//', '').split('/')[0];
                     if (dtCtrl[h] === undefined) {
                       dsGroup.push(h);

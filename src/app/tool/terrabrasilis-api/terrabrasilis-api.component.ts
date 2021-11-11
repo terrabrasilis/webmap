@@ -3,6 +3,8 @@ import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
 /**
  *  import terrabrasilis api from node_modules
  */
+// the AuthenticationService component is imported here and used inside terrabrasilis-api
+import { AuthenticationService } from '../../services/authentication.service';
 import * as Terrabrasilis from 'terrabrasilis-api';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
@@ -17,8 +19,6 @@ import { get } from 'lodash'
 import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 import { Observable } from "rxjs";
-import { AuthenticationService } from 'src/app/services/authentication.service';
-
 
 @Component({
   selector: 'app-terrabrasilis-api',

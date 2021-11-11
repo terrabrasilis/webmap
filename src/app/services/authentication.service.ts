@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-declare var Authentication: any;
+declare var Authentication: any;// from componet loaded dinamically when app is loaded on browser
 
 @Injectable()
 export class AuthenticationService {
@@ -8,11 +8,11 @@ export class AuthenticationService {
   ) { }
 
   public static isAuthenticated() {
-    return Authentication.hasToken();
+    return ((typeof Authentication != 'undefined')?(Authentication.hasToken()):(false));
   }
 
   public static getToken() {
-    return Authentication.getToken();
+    return ((typeof Authentication != 'undefined')?(Authentication.getToken()):(false));
   }
 
 }
