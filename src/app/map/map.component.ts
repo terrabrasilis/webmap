@@ -734,16 +734,19 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             /**
              * Setting up authentication api
              */
-            Authentication.init(lang, function()
-            {
-                /**
-                 * Notify authentication handler about login changes
-                 */
-                if($('#notifyAuthenticationChanged').length!=0)
+            if(typeof Authentication != 'undefined')
+                Authentication.init(lang,
+                function()
                 {
-                    $('#notifyAuthenticationChanged').click();
+                    /**
+                     * Notify authentication handler about login changes
+                     */
+                    if($('#notifyAuthenticationChanged').length!=0)
+                    {
+                        $('#notifyAuthenticationChanged').click();
+                    }
                 }
-            });
+            );
 
         });
         
