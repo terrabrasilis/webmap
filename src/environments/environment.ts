@@ -8,5 +8,6 @@ import { common } from './common'
 	
 export const environment = merge({}, common, {
 	production: false,
-	BUILD_TYPE: 'development'
+	BUILD_TYPE: 'development',
+	FORCE_API: 'yes'
 });

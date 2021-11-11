@@ -40,7 +40,11 @@ export class Constants {
             if(environment.BUILD_TYPE == 'development')
             {
                 let url = base_url+':8090/api/v1/';
-                return url;
+                
+                if(environment.FORCE_API && environment.FORCE_API == 'yes')
+                    return 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
+                else
+                    return url;
             }
         }
         throw new Error(`Invalid project BUILD_TYPE configuration: ${environment.BUILD_TYPE}`); 
