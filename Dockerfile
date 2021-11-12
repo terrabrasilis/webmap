@@ -1,6 +1,11 @@
 # Run to test image
-# docker run -d --rm --name terrabrasilis_webmap terrabrasilis/webmap:v2.0.7
+# docker run --rm --name terrabrasilis_webmap terrabrasilis/webmap:<version>
 FROM node:12.8.1 as node
+
+# to monitor the health of the running service based on this container
+RUN apt-get update \
+  && apt-get install -y curl \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -18,7 +23,7 @@ COPY ./nginx-${BUILD_TYPE}.conf /app/nginx-custom.conf
 
 RUN npm run build-${BUILD_TYPE} && rm -rf /app/node_modules
 
-FROM nginx:1.13
+FROM nginx:1.21-alpine
 
 RUN rm -rf /usr/share/nginx/html/*
 
