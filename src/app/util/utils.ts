@@ -20,9 +20,26 @@ export const Utils = {
     return kebabCase(word.toLowerCase()).split('-').join(' ')
   },
 
-  getLegend (layer, urlOrCompleteSrcImgElement, language) {
+  getLegend (layer, urlOrCompleteSrcImgElement, language, bbox, crs) {
     const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host
-    const params = (host.split('?')[1] ? '&':'?') + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
+    
+    let params = (host.split('?')[1] ? '&':'?') + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
+
+    if(bbox && crs)
+    {
+      params+='&bbox=' +bbox;
+      params+='&srs=' +crs;
+      params+='&legend_options=hideEmptyRules:true'
+    }
+
+    if(layer.getFilter())
+    {
+      if(layer.getFilter().time)
+      {
+        params+='&time=' +layer.getFilter().time;
+      }
+    }
+
     let url = host + params
 
     const IS_INPE_HOST = this.isInpeUrl(host)

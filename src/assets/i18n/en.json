@@ -151,7 +151,9 @@
     "legend": "Legend",
     "timeDimension": "Time Dimension",
     "fitBounds": "Fit Bounds",
-    "timeseries": "Time Series"
+    "timeseries": "Time Series",
+    "layersGroupFilter": "Filter data of layers",
+    "layerFilter": "Filter data of layer"
   },
   "filter" : {
     "title":"Filter",

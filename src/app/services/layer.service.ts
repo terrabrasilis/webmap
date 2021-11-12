@@ -9,6 +9,10 @@ import { VisionService } from '../services/vision.service';
 import { Layer } from '../entity/layer';
 import { Vision } from '../entity/vision';
 
+import { LocalStorage } from '@ngx-pwa/local-storage';
+import { LocalStorageService } from './local-storage.service';
+import { Filter } from '../entity/filter';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -21,7 +25,8 @@ export class LayerService {
 
   constructor(
     private http:HttpClient,
-    private visionService: VisionService  
+    private visionService: VisionService,
+    private localStorageService: LocalStorageService
   ) { }
 
   /**
@@ -64,5 +69,21 @@ export class LayerService {
     let url = layer.datasource.host.replace('ows', layer.workspace + '/' + layer.name + '/ows');
     return url;
   }
+
+    /**
+   * Get only layers with time dimension
+   */
+  public static getLayersWithTimeDimension(layers: Array<Layer>): Array<Layer> {
+    let dimensionLayers = new Array<Layer>();
+    layers.forEach(layer => {
+      if(layer.timeDimension)
+      {
+        dimensionLayers.push(layer);
+      }
+    });
+    return dimensionLayers;
+  }
+
+
 
 }

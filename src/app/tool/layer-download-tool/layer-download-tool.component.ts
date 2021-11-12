@@ -36,7 +36,7 @@ export class LayerDownloadToolComponent extends ToolComponent implements OnInit,
   /**
    * TerraBrasilis
    */    
-  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, this._translate, null, null);
+  private terrabrasilisApi: TerrabrasilisApiComponent = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, null, this._translate, null);
 
   ngOnInit() {    
     this.layer = this.shared;

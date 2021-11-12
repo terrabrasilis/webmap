@@ -40,6 +40,7 @@ export class AppComponent implements OnInit {
       //this.title = translated;
       //console.log(translated);
     });   
+    this.localStorageService.clearAll();
   }
 
   callLogin() {

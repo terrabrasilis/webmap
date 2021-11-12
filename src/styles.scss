@@ -115,3 +115,42 @@ mat-toolbar-row {
     cursor: auto;
     cursor: url('assets/img/map/cursor-info.png') 2 1, auto;
 }
+.h1, h1 {
+    font-size: 1.2rem;
+}
+
+#group-filter 
+{
+  cursor: pointer;
+  height: 10px;
+  position: relative;
+  width: 40px;
+  top: -33px;
+  float: right;
+  right: 15px;
+  cursor: pointer;
+}
+#group-filter button
+{
+  padding: 0px;
+  margin: 0px;
+  background: none;
+  border: 0px;
+  cursor: pointer;
+}
+
+.group-filter
+{
+  color: white;
+}
+
+.group-filter-on
+{
+  color: #f9c069;
+}
+
+.group-filter-button:focus {
+  outline: none !important;
+  box-shadow: none;
+  
+}
