@@ -4,6 +4,7 @@
     "label": "Cerrado",
     "deforestation": "PRODES (Deforestation)",
     "alerts": "DETER (Notices)",
+    "vegetation": "Vegetation",
     "text": "TerraBrasilis is a platform developed by INPE for the organization, access and use through a web portal of the geographic data produced by its environmental monitoring programs"
   },
   "capabilitydialog": {
@@ -43,7 +44,8 @@
     "map": {
       "name": "Maps",
       "option1": "Deforestation",
-      "option2": "DETER (Notices)"
+      "option2": "DETER (Notices)",
+      "option3": "Vegetation"
     }
   },
   "layerControl": {
@@ -128,6 +130,16 @@
       "name": " Legal Amazon",
       "5c810a980cf423000144ebd95c810c820cf423000144ebda": "Deforestation Notices since 2016",
       "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Legal Amazon"
+    },
+    "61aa3428ee79cd565c8c2a0f" : {
+      "name": " Cerrado",
+      "5c49f7391a21020001cd663e61aa3428ee79cd565c8c2a0f": "States",
+      "5c49f7791a21020001cd664061aa3428ee79cd565c8c2a0f": "Biome Border",
+      "5c49f78e1a21020001cd664161aa3428ee79cd565c8c2a0f": "Counties",
+      "5c5dc500c4267d000128432461aa3428ee79cd565c8c2a0f": "Image Mosaic - 2000/2020",
+      "5edfdc0dd30cf51d5ab75e4361aa3428ee79cd565c8c2a0f": "Deforestation Increments - 2002/2020",
+      "5edfdc0dd30cf51d5ab75e4461aa3428ee79cd565c8c2a0f": "Deforestation Mask up to 2000",
+      "5edfdc0dd30cf51d5ab75e4561aa3428ee79cd565c8c2a0f": "Hydrography"
     },
     "control3": "Others Layers",
     "noLegend": "To see legends, you should enable layers."
