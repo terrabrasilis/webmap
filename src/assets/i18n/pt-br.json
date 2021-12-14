@@ -132,14 +132,14 @@
             "5c49f6ba1a21020001cd663d5c810c820cf423000144ebda": "Amazonia Legal"
         },
         "61aa3428ee79cd565c8c2a0f" : {
-            "name": " Cerrado",
+            "name": " Vegetação Cerrado",
             "5c49f7391a21020001cd663e61aa3428ee79cd565c8c2a0f": "Estados",
             "5c49f7791a21020001cd664061aa3428ee79cd565c8c2a0f": "Limite do Bioma",
             "5c49f78e1a21020001cd664161aa3428ee79cd565c8c2a0f": "Municípios",
-            "5c5dc500c4267d000128432461aa3428ee79cd565c8c2a0f": "Mosaico de Imagens - 2000/2020",
-            "5edfdc0dd30cf51d5ab75e4361aa3428ee79cd565c8c2a0f": "Incrementos no Desmatamento - 2002/2020",
-            "5edfdc0dd30cf51d5ab75e4461aa3428ee79cd565c8c2a0f": "Máscara de Desmatamento até 2000",
-            "5edfdc0dd30cf51d5ab75e4561aa3428ee79cd565c8c2a0f": "Hidrografia"
+            "5edfdc0dd30cf51d5ab96e9661aa3428ee79cd565c8c2a0f": "Tipos de Vegetação",
+            "5edfdc0dd30cf51d5ab96e9761aa3428ee79cd565c8c2a0f": "Hidrografia",
+            "5edfdc0dd30cf51d5ab96e9861aa3428ee79cd565c8c2a0f": "Ecorregiões",
+            "5edfdc0dd30cf51d5ab96e9961aa3428ee79cd565c8c2a0f": "Relevo Sombreado - SRTM"
         },
         "control3" : "Outras Camadas",
         "noLegend" : "Para ver legendas, você deve ativar camadas."
