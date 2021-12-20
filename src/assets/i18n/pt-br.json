@@ -45,7 +45,7 @@
             "name": "Mapas",
             "option1" : "Desmatamento",
             "option2" : "DETER (Avisos)",
-            "option3": "Vegetação"
+            "option3" : "Vegetação"
         }
     },
     "layerControl" : {
