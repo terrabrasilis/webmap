@@ -29,7 +29,6 @@ export const Utils = {
     {
       params+='&bbox=' +bbox;
       params+='&srs=' +crs;
-      params+='&legend_options=hideEmptyRules:true'
     }
 
     if(layer.getFilter())
@@ -37,6 +36,7 @@ export const Utils = {
       if(layer.getFilter().time)
       {
         params+='&time=' +layer.getFilter().time;
+        params+='&legend_options=hideEmptyRules:true'
       }
     }
 
