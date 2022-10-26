@@ -36,7 +36,7 @@ export const Utils = {
       if(layer.getFilter().time)
       {
         params+='&time=' +layer.getFilter().time;
-        params+='&legend_options=hideEmptyRules:true'
+        params+='&legend_options=hideEmptyRules:true;forceLabels:on'
       }
     }
 
