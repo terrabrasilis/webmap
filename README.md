@@ -36,6 +36,20 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Build Docker image
+
+Run `./build.sh staging` to generate homologation image and use the automatically collected version of package.json
+
+Run `./build.sh vx.y.z staging` to generate the homologation image and your desired version.
+
+Run `./build.sh vx.y.z` to generate the production image and your desired version.
+
+Run `./build.sh` to generate the production image and use the automatically collected version of package.json
+
+Change the package.json version before creating a new image to avoid overwriting the old one.
+
+ > Run `npm version minor` to change minor number version (use the semantic versioning https://semver.org/);
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
