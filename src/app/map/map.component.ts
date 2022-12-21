@@ -524,7 +524,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
      */
     private mapLayerOnOff(layerObject: any) {
         if (layerObject.active) {
-            this.showWarning(layerObject); // TODO: it's a hard coded information for Pampa and Pantanal. Will be disabled in the future!
+            // this.showWarning(layerObject); // TODO: it's a hard coded information for Pampa and Pantanal. Will be disabled in the future!
             this.terrabrasilisApi.activeLayer(layerObject);
         } else if (this.terrabrasilisApi.isLayerActived(layerObject)) {
             this.terrabrasilisApi.deactiveLayer(layerObject);
