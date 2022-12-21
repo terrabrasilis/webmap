@@ -53,16 +53,6 @@
         "warning" : "These images were not used for deforestation mapping"
     },
     "control1": "Baselayers",
-    "5c40fe3a0e9b2a14264e03a7": {
-      "name": " Cerrado",
-      "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "States",
-      "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Biome Border",
-      "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Counties",
-      "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Image Mosaic since 2000",
-      "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Deforestation Increments since 2002",
-      "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Deforestation Mask until 2000",
-      "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hydrography"
-    },
     "5c40fdce0e9b2a14264e03a6": {
       "name": " Legal Amazon",
       "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Forest since 2016",
@@ -88,23 +78,55 @@
       "62b20ca1761f6333c0c0f4305c9bd04ae2e106099a3fd5ee": "States"
 
     },
+    "5c40fe3a0e9b2a14264e03a7" : {
+      "name": " Cerrado",
+      "5c49f7391a21020001cd663e5c40fe3a0e9b2a14264e03a7": "States",
+      "5c49f78e1a21020001cd66415c40fe3a0e9b2a14264e03a7": "Counties",
+      "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Biome Border",
+      "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Deforestation Mask until 2000",
+      "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hydrography",
+      "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Deforestation Increments since 2002",
+      "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Image Mosaic since 2000"
+    },
     "5cd46155aa127a00017de863" : {
       "name": " Pampa",
+      "63a3618f937065c19af619ea5cd46155aa127a00017de863": "States",
+      "63a3618f937065c19af619eb5cd46155aa127a00017de863": "Counties",
       "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Biome Border",
-      "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Deforestation Mask until 2016",
+      "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Deforestation Mask until 2000",
       "5cd4602daa127a00017de8615cd46155aa127a00017de863": "Hydrography",
-      "5cd4602daa127a00017de8625cd46155aa127a00017de863": "Cloud - 2018 and 2019",
-      "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Deforestation Increments - 2018 and 2019",
-      "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Image Mosaic - 2016 e 2018"
+      "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Deforestation Increments since 2004",
+      "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Image Mosaic since 2000"
     },
     "5cd460faaa127a00017de861" : {
-        "name": " Pantanal",
-        "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Biome Border",
-        "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Deforestation Mask until 2016",
-        "5d6d6661eaee2e0001436f665cd460faaa127a00017de861": "Hydrography",
-        "5d6d6661eaee2e0001436f655cd460faaa127a00017de861": "Cloud - 2018 and 2019",
-        "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Deforestation Increments - 2018 and 2019",
-        "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Image Mosaic - 2016, 2018 and 2019"
+      "name": " Pantanal",
+      "63a37ee7937065c19af619ed5cd460faaa127a00017de861": "States",
+      "63a37ee7937065c19af619ee5cd460faaa127a00017de861": "Counties",
+      "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Biome Border",
+      "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Deforestation Mask until 2000",
+      "5d6d6661eaee2e0001436f665cd460faaa127a00017de861": "Hydrography",
+      "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Deforestation Increments since 2004",
+      "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Image Mosaic since 2000"
+    },
+    "5dfa348ffc7ea6096c1bce18" : {
+      "name": " Caatinga",
+      "63a3881f937065c19af619f25dfa348ffc7ea6096c1bce18": "States",
+      "63a3881f937065c19af619f35dfa348ffc7ea6096c1bce18": "Counties",
+      "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Biome Border",
+      "5f218dde4882c228007413c35dfa348ffc7ea6096c1bce18": "Deforestation Mask until 2000",
+      "5f218e0e4882c228007413c45dfa348ffc7ea6096c1bce18": "Hydrography",
+      "63a3881f937065c19af619f45dfa348ffc7ea6096c1bce18": "Deforestation Increments since 2004",
+      "5f218e8f4882c228007413c65dfa348ffc7ea6096c1bce18": "Image Mosaic since 2000"
+    },
+    "5dfa348ffc7ea6096c1bce19" : {
+      "name": " Mata Atlântica",
+      "63a38b6b937065c19af619f55dfa348ffc7ea6096c1bce19": "States",
+      "63a38b6b937065c19af619f65dfa348ffc7ea6096c1bce19": "Counties",
+      "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Biome Border",
+      "5f218ffb4882c228007413c75dfa348ffc7ea6096c1bce19": "Deforestation Mask until 2000",
+      "5f2190194882c228007413c85dfa348ffc7ea6096c1bce19": "Hydrography",
+      "63a38b6b937065c19af619f75dfa348ffc7ea6096c1bce19": "Deforestation Increments since 2004",
+      "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Image Mosaic since 2000"
     },
     "5c8107880cf423000144ebd8": {
       "name": " Cerrado",
@@ -112,22 +134,6 @@
       "5c49f7791a21020001cd66405c8107880cf423000144ebd8": "Biome Border",
       "5c49f78e1a21020001cd66415c8107880cf423000144ebd8": "Counties",
       "622f5a8975933c70112b71e95c8107880cf423000144ebd8": "Deforestation Notices since 2018"
-    },
-    "5dfa348ffc7ea6096c1bce18" : {
-      "name": " Caatinga",
-      "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Biome Border",
-      "5f218e0e4882c228007413c45dfa348ffc7ea6096c1bce18": "Hydrography",
-      "5f218e364882c228007413c55dfa348ffc7ea6096c1bce18": "Cloud - 2016",
-      "5f218dde4882c228007413c35dfa348ffc7ea6096c1bce18": "Deforestation Mask until 2016",
-      "5f218e8f4882c228007413c65dfa348ffc7ea6096c1bce18": "Image Mosaic - 2016"
-    },
-    "5dfa348ffc7ea6096c1bce19" : {
-        "name": " Mata Atlântica",
-        "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Biome Border",
-        "5f2190194882c228007413c85dfa348ffc7ea6096c1bce19": "Hydrography",
-        "5f2190314882c228007413c95dfa348ffc7ea6096c1bce19": "Cloud - 2016",
-        "5f218ffb4882c228007413c75dfa348ffc7ea6096c1bce19": "Deforestation Mask until 2016",
-        "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Image Mosaic - 2016"
     },
     "5c810c820cf423000144ebda": {
       "name": " Legal Amazon",
