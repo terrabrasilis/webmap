@@ -58,6 +58,8 @@ echo "........................"
 
 if [[ "$BUILD_TYPE" = "production" ]]; then
     VERSION="prod_$VERSION"
+else
+    VERSION="hom_$VERSION"
 fi
 
 # --no-cache
