@@ -128,6 +128,11 @@
       "63a38b6b937065c19af619f75dfa348ffc7ea6096c1bce19": "Deforestation Increments since 2004",
       "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Image Mosaic since 2000"
     },
+    "63a46341dab105809e3060c6": {
+      "name": " Brazil",
+      "63a48e7bdab105809e3060cc63a46341dab105809e3060c6": "Biome border",
+      "63a46240dab105809e3060c363a46341dab105809e3060c6": "Raster PRODES"
+    },
     "5c8107880cf423000144ebd8": {
       "name": " Cerrado",
       "5c49f7391a21020001cd663e5c8107880cf423000144ebd8": "States",
