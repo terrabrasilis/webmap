@@ -45,6 +45,7 @@ import { OpenUrl } from '../util/open-url';
 import * as _ from 'lodash'; // using the _.uniqueId() method
 import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
+import { environment } from '../../environments/environment';
 
 
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
@@ -721,6 +722,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             {
                 lang = toUse.value;
             }
+
+            // to force the URL when in devel environment
+            let base_url='';
+            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+                base_url='http://terrabrasilis.dpi.inpe.br/oauth-api/';
                         
             /**
              * Setting up authentication api
@@ -736,9 +742,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     {
                         $('#notifyAuthenticationChanged').click();
                     }
-                }
+                },
+                base_url
             );
-
+            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+                Authentication.internalValidationOauthApiURL=base_url;
         });
         
     }
