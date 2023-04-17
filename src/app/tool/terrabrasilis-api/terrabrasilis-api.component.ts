@@ -40,7 +40,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private _snackBar: MatSnackBar = null
     , private mapStateChanged: Function = null
   ) {
-    
+
   }
 
   applyFiltersOnLayer (filters) {
@@ -151,7 +151,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     this.showDialog(html);
   }
 
-  
+
 
   getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): Promise<any> {
 
@@ -198,20 +198,22 @@ export class TerrabrasilisApiComponent implements OnInit {
     return crs;
   }
 
-  
+
 
   getBasicLayerInfo(layerObject: any) {
+
     this.cdRef.detectChanges();
 
     const match = /geoserver\/ows/;
-
+    const layerName = AuthenticationService.isAuthenticated() ? layerObject.nameAuthenticated : layerObject.name;
     const source = layerObject.datasource != null ?
+
       (match.test(layerObject.datasource.host) == true ?
-        layerObject.datasource.host.replace('geoserver/ows', 'geoserver/'+layerObject.workspace+'/'+layerObject.name+'/ows') : layerObject.datasource.host) :
+        layerObject.datasource.host.replace('geoserver/ows', 'geoserver/'+layerObject.workspace+'/'+layerName+'/ows') : layerObject.datasource.host) :
       layerObject.thirdHost;
 
     const infoTable = '<table class="table-responsive table "><tr class="table-active"><th colspan="3">' + layerObject.title + '</th></tr>'
-      + ' <tr> <td><b>Layer</b></td><td colspan="2">' + layerObject.name + '</td></tr>'
+      + ' <tr> <td><b>Layer</b></td><td colspan="2">' + layerName + '</td></tr>'
       + '<tr><td><b>Workspace</b></td><td colspan="2">' + layerObject.workspace + '</td></tr>'
       + '<tr><td><b>URL</b></td><td colspan="2">' + source + '</td></tr></table>';
 
@@ -286,7 +288,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     try {
       var layerName = layer.workspace+':'+layer.getLayerName();
 
-      Terrabrasilis.onOffTimeDimension(layerName, layer.isAggregatable /*aggregateTimes*/); 
+      Terrabrasilis.onOffTimeDimension(layerName, layer.isAggregatable /*aggregateTimes*/);
     } catch (error) {
       this.openSnackBar('Falhou ao habilitar a ferramenta de navegação temporal.','Aviso');
     }
