@@ -2,6 +2,12 @@
 # docker run --rm --name terrabrasilis_webmap terrabrasilis/webmap:<version>
 FROM node:12.8.1 as node
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list 
+RUN echo "deb-src http://archive.debian.org/debian stretch main" >> /etc/apt/sources.list 
+RUN echo "deb http://archive.debian.org/debian stretch-backports main" >> /etc/apt/sources.list 
+RUN echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list 
+RUN echo "deb-src http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list
+
 # to monitor the health of the running service based on this container
 RUN apt-get update \
   && apt-get install -y curl \
