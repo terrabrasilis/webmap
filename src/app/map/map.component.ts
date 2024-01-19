@@ -46,6 +46,8 @@ import * as _ from 'lodash'; // using the _.uniqueId() method
 import { Store, select } from "@ngrx/store";
 import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
 import { environment } from '../../environments/environment';
+import { Constants } from '../util/constants';
+import { GenericService } from '../services/generic.service';
 
 
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
@@ -939,8 +941,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             const isVisionEnabled: boolean = v.enabled;
             v.layers.forEach((l: any) => {
                 if(l.enabled) {
+
+                    let host = GenericService.completeRelativeURLWithBaseURL(l.datasource.host);
                     // replaces if exists, the workspace of the datasource host string
-                    l.datasource.host = l.datasource.host.replace('/' + l.workspace + '/', '/');
+                    l.datasource.host = host.replace('/' + host + '/', '/');
 
                     const layer = new Layer(l.id + v.id)
                         .addName(l.name)
@@ -968,6 +972,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             this.overlayers.unshift(new Vision(v.id, v.name, v.description, isVisionEnabled, v.created, v.tools, layers, v.downloads, true, v.stackOrder));
         });
     }
+
+
     /**
      * Notify authentication service about login changes to update the components
      */

@@ -39,7 +39,7 @@ export class Constants {
             }
             if(environment.BUILD_TYPE == 'development')
             {
-                let url = base_url+':8090/api/v1/';
+                let url = base_url+'/business/api/v1/';
                 
                 if(environment.FORCE_API && environment.FORCE_API == 'yes')
                     return 'http://terrabrasilis.dpi.inpe.br/business/api/v1/';
@@ -54,5 +54,8 @@ export class Constants {
      *  Defines an enum to store types of time dimension granularity
      */
     public static Granularity = { Daily: 'Daily', Monthly: 'Montly', Yearly: 'Yearly' }; 
+
+
+
 
 }

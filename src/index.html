@@ -59,10 +59,9 @@
     /**
      * Loading Oauth authentication component
      */
-    let dl=document.location;
-    let base_url=(dl.hostname!='localhost')?(dl.protocol+'//'+dl.hostname):(dl.protocol+'//terrabrasilis.dpi.inpe.br');
+    
     let randomNumber = Math.floor((Math.random() * 1000000) + 1);
-    let oauthURL = base_url+"/oauth-api/getoauthjs?"+randomNumber;
+    var oauthURL = $(location).attr('origin') + "/oauth-api/getoauthjs?" + randomNumber;
     document.writeln("<script type='text/javascript' src='"+oauthURL+"'><\/script>");
   </script>
 </body>
