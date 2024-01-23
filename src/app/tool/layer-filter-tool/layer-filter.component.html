@@ -6,7 +6,7 @@
 <div></div>
 <div class="container">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body" *ngIf="foundTimeDimension==true">
       <h5 class="card-title">{{ "filter.title" | translate }}</h5>
 
       <div *ngIf="isYearlyGranularity">
@@ -34,6 +34,10 @@
         {{ "filter.btclear" | translate }}
       </button>
 
+    </div>
+    <div class="card-body not-found-dimension" *ngIf="foundTimeDimension==false">
+      <h5 class="card-title">{{ "filter.title" | translate }}</h5>
+      {{ "filter.notFoundDimension" | translate }}
     </div>
   </div>
 </div>

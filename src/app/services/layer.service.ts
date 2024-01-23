@@ -66,8 +66,16 @@ export class LayerService {
 
   public static getLayerBaseURL(layer:Layer)
   {
-    let url = layer.datasource.host.replace('ows', layer.workspace + '/' + layer.name + '/ows');
-    return url;
+    //Fill with workspace on URL
+    if(layer.datasource.host.includes(layer.workspace))
+    {
+      return layer.datasource.host;
+    }
+    else
+    {
+      let url = layer.datasource.host.replace('ows', layer.workspace + '/' + layer.name + '/ows');
+      return url;
+    }
   }
 
     /**
