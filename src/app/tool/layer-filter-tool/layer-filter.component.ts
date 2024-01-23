@@ -26,9 +26,12 @@ import { Vision } from 'src/app/entity/vision';
   styleUrls: ["./layer-filter.component.css"]
 })
 export class LayerFilterComponent implements OnInit {
+  foundTimeDimension = false;
   isDailyGranularity = false;
   isMonthlyGranularity = false;
   isYearlyGranularity = false;
+  layerPublishCount = 0;
+  layerCount = 0;
   
   startDateValue: any;
   endDateValue: any;
@@ -251,8 +254,12 @@ export class LayerFilterComponent implements OnInit {
 
   publishDialogData()
   {
+    this.layerPublishCount = 0;
+    this.layerCount = 0;
     this.terrabrasilisApi.enableLoading();
     let timeDimensonLayers = LayerService.getLayersWithTimeDimension(this.layers);
+
+    this.foundTimeDimension = false;
 
     let tempStartDateValue: any;
     let tempEndDateValue: any;
@@ -269,101 +276,109 @@ export class LayerFilterComponent implements OnInit {
    
         this.wmsCapabilitiesProviderService.getCapabilities(capabilitiesURL).subscribe(
           data => { 
-            if (data.ok) {
+            if (data.ok) 
+            {
+              try
+              {
+                let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
              
-              let parsedCapabilities = this.wmsCapabilitiesProviderService.parseCapabilitiesToJsonFormat(data.body);
-             
-              let dimensionList = WmsCapabilitiesProviderService.getDimensionsFromLayer(parsedCapabilities);
-    
-              let granularity = TimeDimensionService.getLayerTimeDimensionGranularity(dimensionList);
-    
-              let dateRange = TimeDimensionService.getStartAndEndDate(dimensionList);
-
-              //If temp start date not defined use current date and looking for the layer with the first date.
-              if(!tempStartDateValue)
-              {
-                tempStartDateValue = new Date(dateRange.startDate);
-              }
-              else
-              {
-                if(DateService.isGreater(tempStartDateValue,dateRange.startDate))
+                let dimensionList = WmsCapabilitiesProviderService.getDimensionsFromLayer(parsedCapabilities);
+      
+                let granularity = TimeDimensionService.getLayerTimeDimensionGranularity(dimensionList);
+      
+                let dateRange = TimeDimensionService.getStartAndEndDate(dimensionList);
+  
+                //If temp start date not defined use current date and looking for the layer with the first date.
+                if(!tempStartDateValue)
                 {
-                  tempStartDateValue=new Date(dateRange.startDate);
-                }
-              }              
-
-              //If temp end date not defined use current date and looking for the layer with the last date.
-              if(!tempEndDateValue)
-              {
-              
-                tempEndDateValue = new Date(dateRange.endDate);
-
-              }
-              else
-              {
-                if(DateService.isLess(tempEndDateValue,dateRange.endDate))
-                {
-                  tempEndDateValue = new Date(dateRange.endDate);
-                }
-              } 
-              
-              if(tempGranularity!=Constants.Granularity.Daily)
-              {
-                if(granularity==Constants.Granularity.Daily)
-                {
-                  tempGranularity = Constants.Granularity.Daily;
-                }
-              }
-              
-              if(tempGranularity!=Constants.Granularity.Daily &&
-                  tempGranularity!=Constants.Granularity.Monthly)
-              {
-                if(granularity==Constants.Granularity.Monthly)
-                {
-                  tempGranularity = Constants.Granularity.Monthly;
+                  tempStartDateValue = new Date(dateRange.startDate);
                 }
                 else
                 {
-                  tempGranularity = Constants.Granularity.Yearly;
+                  if(DateService.isGreater(tempStartDateValue,dateRange.startDate))
+                  {
+                    tempStartDateValue=new Date(dateRange.startDate);
+                  }
+                }              
+  
+                //If temp end date not defined use current date and looking for the layer with the last date.
+                if(!tempEndDateValue)
+                {
+                
+                  tempEndDateValue = new Date(dateRange.endDate);
+  
                 }
-              }
-    
-              //If it is the last set final values 
-              if(i==(timeDimensonLayers.length-1))
+                else
+                {
+                  if(DateService.isLess(tempEndDateValue,dateRange.endDate))
+                  {
+                    tempEndDateValue = new Date(dateRange.endDate);
+                  }
+                } 
+                
+                if(tempGranularity!=Constants.Granularity.Daily)
+                {
+                  if(granularity==Constants.Granularity.Daily)
+                  {
+                    tempGranularity = Constants.Granularity.Daily;
+                  }
+                }
+                
+                if(tempGranularity!=Constants.Granularity.Daily &&
+                    tempGranularity!=Constants.Granularity.Monthly)
+                {
+                  if(granularity==Constants.Granularity.Monthly)
+                  {
+                    tempGranularity = Constants.Granularity.Monthly;
+                  }
+                  else
+                  {
+                    tempGranularity = Constants.Granularity.Yearly;
+                  }
+                }
+      
+                //If it is the last set final values 
+                if(i==(timeDimensonLayers.length-1))
+                {
+                  if(!this.endDateValue)
+                  {
+                    this.endDateValue= tempEndDateValue;
+                  }
+                  if(!this.startDateValue)
+                  {
+                    this.startDateValue = tempStartDateValue;
+                  }
+  
+                  if(tempGranularity==Constants.Granularity.Daily)
+                  {
+                    this.isDailyGranularity = true;
+                  }
+        
+                  if(tempGranularity==Constants.Granularity.Monthly)
+                  {
+                    this.isMonthlyGranularity = true;
+                  }
+        
+                  if(granularity==Constants.Granularity.Yearly)
+                  {
+                    this.isYearlyGranularity = true;
+                  }
+  
+                  this.minDate = new Date(tempStartDateValue);
+                  this.maxDate = new Date(tempEndDateValue); 
+  
+                }
+                this.finishPublish(timeDimensonLayers, true);
+  
+              } catch(e)
               {
-                if(!this.endDateValue)
-                {
-                  this.endDateValue= tempEndDateValue;
-                }
-                if(!this.startDateValue)
-                {
-                  this.startDateValue = tempStartDateValue;
-                }
-
-                if(tempGranularity==Constants.Granularity.Daily)
-                {
-                  this.isDailyGranularity = true;
-                }
-      
-                if(tempGranularity==Constants.Granularity.Monthly)
-                {
-                  this.isMonthlyGranularity = true;
-                }
-      
-                if(granularity==Constants.Granularity.Yearly)
-                {
-                  this.isYearlyGranularity = true;
-                }
-
-                this.minDate = new Date(tempStartDateValue);
-                this.maxDate = new Date(tempEndDateValue); 
-
-                this.terrabrasilisApi.disableLoading();
-
+                this.finishPublish(timeDimensonLayers, false);
+                console.error("Failed to get capabilities data. Erro message: \n "+e);
               }
 
-
-            } else {
+            } else 
+            {              
+              this.finishPublish(timeDimensonLayers, false);
               console.error("Failed to get capabilities data. Erro message: \n "+data.body);
             }
           }
@@ -373,6 +388,26 @@ export class LayerFilterComponent implements OnInit {
       
     }
 
+  }
+  finishPublish(timeDimensonLayers: Layer[], foundDimension: boolean)
+  {
+    if(foundDimension)
+    {
+      this.layerPublishCount++;
+      this.layerCount++;
+    }
+    else
+    {
+      this.layerCount++;
+      if(timeDimensonLayers.length==this.layerCount)
+      {        
+        this.terrabrasilisApi.disableLoading();
+        if(this.layerPublishCount>0)
+        {
+          this.foundTimeDimension = true;
+        }
+      }
+    } 
   }
 
 }

@@ -14,3 +14,7 @@
 .date-month-picker .mat-calendar-arrow {
   display: none;
 }
+.not-found-dimension
+{
+  padding: 20px;
+}
