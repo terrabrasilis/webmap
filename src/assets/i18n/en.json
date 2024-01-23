@@ -185,7 +185,8 @@
     "title":"Filter",
     "placeholder": "Pick a date",
     "btfilter":"Filter",
-    "btclear":"Clear"
+    "btclear":"Clear",
+    "notFoundDimension":"There are no layers with a temporal dimension."
 },
   "contact": {
     "title": "Send suggestions or questions to"
