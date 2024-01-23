@@ -184,7 +184,8 @@
         "title":"Filtro",
         "placeholder": "Escolha uma data",
         "btfilter":"Filtrar",
-        "btclear":"Limpar"
+        "btclear":"Limpar",
+        "notFoundDimension":"Não há camadas com dimensão temporal."
     },
     "contact" : {
         "title":"Envie sugestões ou perguntas para"

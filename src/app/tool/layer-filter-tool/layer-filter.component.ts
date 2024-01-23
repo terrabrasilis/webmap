@@ -398,8 +398,9 @@ export class LayerFilterComponent implements OnInit {
     }
     else
     {
-      this.layerCount++;
-      if(timeDimensonLayers.length==this.layerCount)
+      this.layerCount++;      
+    } 
+    if(timeDimensonLayers.length==this.layerCount)
       {        
         this.terrabrasilisApi.disableLoading();
         if(this.layerPublishCount>0)
@@ -407,7 +408,6 @@ export class LayerFilterComponent implements OnInit {
           this.foundTimeDimension = true;
         }
       }
-    } 
   }
 
 }
