@@ -50,6 +50,10 @@ export class Constants {
         throw new Error(`Invalid project BUILD_TYPE configuration: ${environment.BUILD_TYPE}`); 
 
     };
+    public static get AUTHENTICATION_PROXY_HOST(): string 
+    {
+        return environment.AUTHENTICATION_PROXY_HOST;         
+    };
     /**
      *  Defines an enum to store types of time dimension granularity
      */

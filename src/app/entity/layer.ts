@@ -204,19 +204,6 @@ export class Layer {
         return JSON.stringify(layer);
     }
 
-    hasAuthenticatedData(): boolean {
-        if(this.nameAuthenticated &&
-            this.nameAuthenticated!='')
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-    }
-
     getLayerName(): string {
         if(this.nameAuthenticated &&
             this.nameAuthenticated!='')

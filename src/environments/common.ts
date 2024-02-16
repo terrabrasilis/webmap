@@ -7,5 +7,6 @@ export const common = {
   BUILD_TYPE: get(process, 'env.BUILD_TYPE', 'production'),
   PROXY_OGC: get(process, 'env.PROXY_OGC', '/proxy?url='),
   TERRABRASILIS_API_HOST: get(process, 'env.TERRABRASILIS_API_HOST', '/terrabrasilis/api/v1/'),
-  TERRABRASILIS_BUSINESS_API_HOST: get(process, 'env.TERRABRASILIS_BUSINESS_API_HOST', '/business/api/v1/')
+  TERRABRASILIS_BUSINESS_API_HOST: get(process, 'env.TERRABRASILIS_BUSINESS_API_HOST', '/business/api/v1/'),
+  AUTHENTICATION_PROXY_HOST: get(process, 'env.AUTHENTICATION_PROXY_HOST', '/oauth-api/proxy?url=')
 }
