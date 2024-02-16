@@ -6,6 +6,7 @@ export class Datasource {
     public metadata: string;
     public enabled: boolean;
     public created: string;
+    public authenticationProxyUrl: string;
     /**
      * the link list of downloads to download data
      */
@@ -27,6 +28,9 @@ export class Datasource {
     addHost(host: string) {
         this.host = host;
         return this;
+    }
+    setAutheticationProxyUrl(proxyURL: string) {
+        this.authenticationProxyUrl = proxyURL;
     }
 }
 

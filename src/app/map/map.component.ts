@@ -238,7 +238,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     new Tool().addTarget('<app-basic-info-tool [shared]="layer"></app-basic-info-tool>')
                 );
 
-            const datasource = new Datasource().addHost(l.geospatialHost);
+            const datasource = new Datasource().addHost(l.geospatialHost);      
+
             const nLayer = new Layer(Date.now().toString() + _.uniqueId())
                 .addName(l.name)
                 .addNameAuthenticated(l.nameAuthenticated)
@@ -927,6 +928,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 .isBaselayer(l.baselayer)
                 .isActive(l.active)
                 .isEnable(l.enabled);
+            
+            if(Constants.AUTHENTICATION_PROXY_HOST)
+            {
+                layer.datasource.authenticationProxyUrl = Constants.AUTHENTICATION_PROXY_HOST;
+            }    
 
             this.baselayers.push(layer);
         });
@@ -965,6 +971,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         .typeOfData(l.aggregatable)
                         .addStackOrder(l.stackOrder)
                         .addDashboardUrl(l.dashboard);
+
+                    if(Constants.AUTHENTICATION_PROXY_HOST)
+                    {
+                        layer.datasource.authenticationProxyUrl = Constants.AUTHENTICATION_PROXY_HOST;
+                    }                
 
                     layers.push(layer);
                 }
