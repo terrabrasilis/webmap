@@ -59,6 +59,7 @@ export class TerrabrasilisApiComponent implements OnInit {
   ////////////////////////////////////////////////
   public map(points: any, baselayers: any, overlayers: any): void {
     Terrabrasilis.map(points.longitude, points.latitude, this.mapStateChanged)
+      .configureWMSHeaderLayerType()
       .addCustomizedBaseLayers(JSON.parse(JSON.stringify(baselayers)))
       .addCustomizedOverLayers(JSON.parse(JSON.stringify(overlayers)))
       // .addBaseLayers(JSON.parse(JSON.stringify(this.baselayers)))
