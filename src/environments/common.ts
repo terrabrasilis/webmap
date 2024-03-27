@@ -8,5 +8,5 @@ export const common = {
   PROXY_OGC: get(process, 'env.PROXY_OGC', '/proxy?url='),
   TERRABRASILIS_API_HOST: get(process, 'env.TERRABRASILIS_API_HOST', '/terrabrasilis/api/v1/'),
   TERRABRASILIS_BUSINESS_API_HOST: get(process, 'env.TERRABRASILIS_BUSINESS_API_HOST', '/business/api/v1/'),
-  AUTHENTICATION_PROXY_HOST: get(process, 'env.AUTHENTICATION_PROXY_HOST', 'https://pve9.dpi.inpe.br/oauth-api/proxy?url=')
+  AUTHENTICATION_PROXY_HOST: get(process, 'env.AUTHENTICATION_PROXY_HOST', '/oauth-api/proxy?url=')
 }
