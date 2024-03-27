@@ -931,7 +931,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
             
             if(Constants.AUTHENTICATION_PROXY_HOST)
             {
-                layer.datasource.authenticationProxyUrl = Constants.AUTHENTICATION_PROXY_HOST;
+                let baseURL = Constants.BASE_URL;
+                let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
+
+                layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
             }    
 
             this.baselayers.push(layer);
@@ -974,7 +977,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
                     if(Constants.AUTHENTICATION_PROXY_HOST)
                     {
-                        layer.datasource.authenticationProxyUrl = Constants.AUTHENTICATION_PROXY_HOST;
+                        let baseURL = Constants.BASE_URL;
+                        let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
+
+                        layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
                     }                
 
                     layers.push(layer);
