@@ -206,7 +206,15 @@ export class TerrabrasilisApiComponent implements OnInit {
     this.cdRef.detectChanges();
 
     const match = /geoserver\/ows/;
-    const layerName = AuthenticationService.isAuthenticated() ? layerObject.nameAuthenticated : layerObject.name;
+    let layerName = layerObject.name;
+    if(AuthenticationService.isAuthenticated())
+    {
+      if( layerObject.nameAuthenticated )
+      {
+        layerName = layerObject.nameAuthenticated;
+      }
+    }
+    
     const source = layerObject.datasource != null ?
 
       (match.test(layerObject.datasource.host) == true ?

@@ -385,9 +385,16 @@ export class LayerFilterComponent implements OnInit {
         );
 
       }
+      else
+      {
+        this.finishPublish(timeDimensonLayers, false);
+      }
       
     }
-
+    if(timeDimensonLayers.length==0)
+    {
+      this.terrabrasilisApi.disableLoading();
+    }
   }
   finishPublish(timeDimensonLayers: Layer[], foundDimension: boolean)
   {
