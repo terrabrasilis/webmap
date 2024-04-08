@@ -107,7 +107,7 @@ export class WmsCapabilitiesProviderService {
   {
     if(parsedCapabilities)
     {
-      if(parsedCapabilities.WMS_Capabilities.capability.layer.layer.length>0)
+      if(parsedCapabilities.WMS_Capabilities.capability.layer.layer && parsedCapabilities.WMS_Capabilities.capability.layer.layer.length>0)
       {
         if(parsedCapabilities.WMS_Capabilities.capability.layer.layer[0].dimension)
         {
