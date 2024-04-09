@@ -592,7 +592,8 @@
                 handle: (opts.handleClass ? '.' + opts.handleClass : (opts.handle ? opts.handle : '')) ||
                     '.grid-stack-item-content',
                 scroll: false,
-                appendTo: 'body'
+                appendTo: 'body',
+                cancel: '.no-drag-handle'
             }),
             disableDrag: opts.disableDrag || false,
             disableResize: opts.disableResize || false,
@@ -1191,7 +1192,6 @@
                 stop: onEndMoving,
                 resize: dragOrResize
             });
-
         if (node.noMove || this._isOneColumnMode() || this.opts.disableDrag) {
             this.dd.draggable(el, 'disable');
         }
