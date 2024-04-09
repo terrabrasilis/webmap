@@ -22,7 +22,7 @@ import { OnMount } from '../../core-modules/dynamic-html';
                 </button>
             </dfn>             
             <!-- opacity -->          
-            <div class="collapse" id="{{(layer.name | cleanWhiteSpace) + '_opacity'}}">                    
+            <div class="collapse transparency-div-container no-drag-handle ui-draggable-disabled" id="{{(layer.name | cleanWhiteSpace) + '_opacity'}}">                    
                 <div class="card card-body card-opacity">
                     <div class="budget-wrap">                        
                         <mat-slider color="primary" pressed thumbLabel tickInterval="0.1" [max]="max" [min]="min" [step]="step" value="{{layer.opacity}}" (input)="layerOpacity(layer, $event)"></mat-slider>
@@ -64,7 +64,7 @@ export class TransparencyToolComponent extends ToolComponent implements OnInit, 
 
     ngOnInit() {
         this.layer = this.shared;
-        //console.log("TransparencyToolComponent OnInit", this.layer);
+        //console.log("TransparencyToolComponent OnInit", this.layer);        
     }
 
     layerOpacity(layerObject:any, event:any) {        

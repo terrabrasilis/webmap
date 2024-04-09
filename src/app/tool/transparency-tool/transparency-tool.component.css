@@ -1,0 +1,8 @@
+.transparency-div-container
+{
+    display: fixed;
+}
+.transparency-div-container div
+{
+    border: 0px;
+}

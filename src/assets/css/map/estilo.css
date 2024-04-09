@@ -1249,3 +1249,18 @@ footer {
   color: white;
 }
 .filtered-data i { color: #f9c069 !important}
+.transparency-div-container
+{
+    position: absolute;
+    width: 290px;
+    left: 0px;
+    margin-top: 10px;
+}
+.transparency-div-container div
+{
+    border: 0px;
+}
+.transparency-div-container div mat-slider
+{
+  width: 100%;
+}
