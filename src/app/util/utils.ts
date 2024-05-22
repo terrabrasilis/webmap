@@ -20,7 +20,8 @@ export const Utils = {
     return kebabCase(word.toLowerCase()).split('-').join(' ')
   },
 
-  getLegend (layer, urlOrCompleteSrcImgElement, language, bbox, crs) {
+  getLegend (layer, urlOrCompleteSrcImgElement, language, bbox, crs, applyStyle=true) 
+  {
     const host = layer.datasource == null ? layer.thirdHost : layer.datasource.host
     
     let params = (host.split('?')[1] ? '&':'?') + 'request=GetLegendGraphic&format=image/png&width=20&height=20&layer=' + layer.workspace + ':' + layer.name + '&service=WMS'
@@ -42,9 +43,13 @@ export const Utils = {
 
     let url = host + params
 
-    const IS_INPE_HOST = this.isInpeUrl(host)
-    if(IS_INPE_HOST) { url += `&style=${layer.workspace}:${layer.name}_${language}` }
-
+    if(applyStyle==true)
+    {
+      if(layer.isExternal()==false && layer.getStyleName()) 
+      {
+        url += `&style=${layer.workspace}:${layer.getStyleName()}_${language}` 
+      }  
+    }
     return urlOrCompleteSrcImgElement == true ? '<img src=\'' + url + '\' />' : url
   },
 

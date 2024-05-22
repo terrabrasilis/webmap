@@ -39,6 +39,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
     , private mapStateChanged: Function = null
+    , private sanitizer:DomSanitizer
   ) {
 
   }
@@ -154,7 +155,7 @@ export class TerrabrasilisApiComponent implements OnInit {
 
 
 
-  getLegend(layer: any, urlOrCompleteSrcImgElement: boolean): Promise<any> {
+  getLegend(layer: any, urlOrCompleteSrcImgElement: boolean, applyStyle: boolean = true): Promise<any> {
 
     return this.localStorageService.getValue('translate').toPromise()
       .then((item: any) => {
@@ -180,9 +181,74 @@ export class TerrabrasilisApiComponent implements OnInit {
         }
         crsCode='EPSG:4674';
 
-
-        return Utils.getLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode)
+        this.processLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode, applyStyle);       
+        
       });
+  }
+  /**
+   * Fetch legend from geoserver, testing if style exists. If not uses de default style.
+   * @param layer Current Layer
+   * @param urlOrCompleteSrcImgElement  Bring URL or IMG Element
+   * @param language Current Translation Language
+   * @param bboxString Current BBox
+   * @param crsCode BBox CRS
+   * @param applyStyle Use or not layer defined style (If false, uses layer default style)
+   */
+  processLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode, applyStyle)
+  {
+    let url = Utils.getLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode, applyStyle);
+
+    this.fetchLegendImage(url, null, null).then((response)=>{
+      if(response)
+      {           
+        let contentType = response.headers.get("Content-Type");
+        if(contentType.includes('png') || contentType.includes('jpg'))
+        {
+          response.blob().then((blob)=>
+          {
+            const imageObjectURL = URL.createObjectURL(blob);
+            let safeURL = this.sanitizer.bypassSecurityTrustUrl(imageObjectURL);
+            layer.addLegendURL(safeURL);
+          });
+        }
+        else
+        {
+          console.error("Wrong response while getting legend for layer: " + layer.name + " - Layer Style:" + layer.getStyleName());
+          //Recursive call when wrong response content type while getting legend image, try one more time without style parameter
+          if(applyStyle==true)
+          {
+            this.processLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode, false);
+          }          
+        }    
+      }      
+    });
+    
+  }
+
+  fetchLegendImage(url, headers, abort) 
+  {
+        let _headers = {};
+        if (headers) {
+          headers.forEach(h => {
+            _headers[h.header] = h.value;
+          });
+        }
+        const controller = new AbortController();
+        const signal = controller.signal;
+        if (abort) {
+          abort.subscribe(() => {
+            controller.abort();
+          });
+        }
+        return fetch(url, {
+          method: "GET",
+          headers: _headers,
+          mode: "cors",
+          signal: signal,
+          credentials: 'omit',
+          cache: 'no-cache'
+        });
+        
   }
 
 

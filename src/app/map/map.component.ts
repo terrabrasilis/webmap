@@ -26,7 +26,7 @@ import { VisionService } from '../services/vision.service';
 /**
  * entity
  */
-import { Layer } from '../entity/layer';
+import { Layer, LayerType } from '../entity/layer';
 import { Vision } from '../entity/vision';
 
 /**
@@ -54,10 +54,6 @@ import { GenericService } from '../services/generic.service';
 declare var notifyLanguageChanged: Function;
 
 declare var Authentication: any;
-
-
-
-
 
 @Component({
   selector: 'app-map',
@@ -135,6 +131,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private activeRoute: ActivatedRoute
         , private _translate: TranslateService
         , private localStorageService: LocalStorageService
+        , private sanitizer:DomSanitizer
         , @Inject(NgZone) private zone: NgZone
     ) {
 
@@ -147,7 +144,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
           }
         }
 
-        this.terrabrasilisApi = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, mapStateChanged);
+        this.terrabrasilisApi = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, mapStateChanged, this.sanitizer);
     }
 
     ///////////////////////////////////////////////////////////////
@@ -255,7 +252,8 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 .addThirdHost(l.geospatialHost)
                 .addTools(tools)
                 .addStackOrder(0)
-                .addDatasource(datasource);
+                .addDatasource(datasource)
+                .setExternal(true);
                 
             nLayer.timeDimension = l.hasTimeDimension;
 
@@ -361,6 +359,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     .isTimeDimension(layer.timeDimension)
                     .typeOfData(layer.isAggregatable)
                     .addStackOrder(layer.stackOrder)
+                    .setStyleName(layer.getStyleName())
+                    .setStyleNameAuthenticated(layer.getStyleNameAuthenticated())
+                    .setType(layer.getType())
+                    .setExternal(layer.isExternal())
             );
             // rLayers.push(layer);
         });
@@ -776,13 +778,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
 
     processLegendForLayer(layer: any): Promise<any> {
         this.showLegendLoading(layer);
-        return this.terrabrasilisApi.getLegend(layer, false)
-        .then((url) => {
-          layer.addLegendURL(url)
-          return layer
-        });
+        return this.terrabrasilisApi.getLegend(layer, false).then(()=>{
+            return layer;
+        });       
     }
-
+    
     ///////////////////////////////////////////////////
     /// Private methods
     ///////////////////////////////////////////////////
@@ -973,7 +973,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         .isTimeDimension(l.timeDimension)
                         .typeOfData(l.aggregatable)
                         .addStackOrder(l.stackOrder)
-                        .addDashboardUrl(l.dashboard);
+                        .addDashboardUrl(l.dashboard)
+                        .setStyleName(l.styleName)
+                        .setStyleNameAuthenticated(l.styleNameAuthenticated)
+                        .setType(l.type)
+                        .setExternal(l.external);
 
                     if(Constants.AUTHENTICATION_PROXY_HOST)
                     {

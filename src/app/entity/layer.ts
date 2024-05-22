@@ -5,10 +5,16 @@ import { Datasource, Download } from './datasource';
 import { AuthenticationService } from '../services/authentication.service';
 import { Filter } from './filter';
 
+export enum LayerType {
+    VECTOR,
+    MATRIX,
+    UNKNOWN    
+}
+
 /**
  * Layer define the parameters to mount automatically the layers (Baselayer and Overlayer)
  */
-export class Layer {
+export class Layer {    
 
     constructor(id: string) {
         this.id = id;
@@ -27,7 +33,7 @@ export class Layer {
     enable = false;
     created = '';
     timeDimension = false;
-    legendURL = '';
+    legendURL = '';    
     private legendLoadingClass : string = 'legendLoading';
 
     datasource: Datasource = null;
@@ -48,6 +54,14 @@ export class Layer {
     isRemovable = false;
     hasTranslate = false;
     isAggregatable = false;
+    
+    private styleName: string = null;    
+    private styleNameAuthenticated: string = null;
+    private external: boolean = false;
+    private type: LayerType = LayerType.UNKNOWN;
+
+
+    
 
     public static of(l: any): Layer {
         return new Layer(l.id)
@@ -66,7 +80,11 @@ export class Layer {
                     .isTimeDimension(l.timeDimension)
                     .typeOfData(l.aggregatable)
                     .addStackOrder(l.stackOrder)
-                    .isTranslatable(l.hasTranslate);
+                    .isTranslatable(l.hasTranslate)
+                    .setStyleName(l.styleName)
+                    .setStyleNameAuthenticated(l.styleNameAuthenticated)
+                    .setType(l.type)
+                    .setExternal(l.external);
     }
 
     // addId(id:string) {
@@ -250,5 +268,37 @@ export class Layer {
 
     setLegendLoadingClass(legendLoadingClass: string) {
         this.legendLoadingClass = legendLoadingClass;
+    }
+    public isExternal(): boolean 
+    {
+        return this.external;
+    }
+    public setExternal(value: boolean) 
+    {
+        this.external = value;
+        return this;
+    }
+    public getType(): LayerType {
+        return this.type;
+    }
+    public setType(value: LayerType) {
+        this.type = value;
+        return this;
+    }
+    public getStyleName(): string {
+        return this.styleName;
+    }
+    public setStyleName(value: string) {
+        this.styleName = value;
+        return this;
+    }
+    public getStyleNameAuthenticated(): string 
+    {
+        return this.styleNameAuthenticated;
+    }
+    public setStyleNameAuthenticated(value: string) 
+    {
+        this.styleNameAuthenticated = value;
+        return this;
     }
 }
