@@ -9,7 +9,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
 import { DialogComponent } from "../../dialog/dialog.component";
 import { TerrabrasilisApiComponent } from "../terrabrasilis-api/terrabrasilis-api.component";
-import { Layer } from "../../entity/layer";
+import { Layer, LayerType } from "../../entity/layer";
 import moment from 'moment'
 import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
 import { LayerService } from '../../services/layer.service';
@@ -161,26 +161,37 @@ export class LayerFilterComponent implements OnInit {
     
   }
 
-  buildTimeFilter () {
+  buildTimeFilter (layer: Layer) 
+  {
     const initialDate = this.startDateValue
     const finalDate = this.endDateValue
 
     // TODO: Verificar quando a data for null, ou se a data é só ano por exemplo...
     // Acho que o geoserver funciona de qualquer forma...
-    const time = `${moment(initialDate).format('YYYY-MM-DD')}/${moment(finalDate).format('YYYY-MM-DD')}`
+
+    let time;
+    if(this.isRasterLayerFilter(layer))
+    {
+      time = `${moment(finalDate).format('YYYY-MM-DD')}`
+    }
+    else
+    {
+      time = `${moment(initialDate).format('YYYY-MM-DD')}/${moment(finalDate).format('YYYY-MM-DD')}`
+    }
+    
     return { time, initialDate, finalDate }
   }
 
   applyFilter () 
   {
-    this.terrabrasilisApi.enableLoading();
-
-    const { time, initialDate, finalDate } = this.buildTimeFilter()
+    this.terrabrasilisApi.enableLoading();   
 
     let filterList = new Array<Filter>();
 
     this.layers.forEach(layer => 
     {
+      const { time, initialDate, finalDate } = this.buildTimeFilter(layer);
+
       if(layer.timeDimension)
       {
         const layerFilter = {
@@ -415,6 +426,29 @@ export class LayerFilterComponent implements OnInit {
           this.foundTimeDimension = true;
         }
       }
+  }
+  /**
+   * 
+   * @returns Check if there is only raster layers to be able to select one date, not a range.
+   */
+  isRasterLayersFilter()
+  {    
+    for (let i = 0; i < this.layers.length; i++) 
+    {      
+      if(this.isRasterLayerFilter(this.layers[i])==false)
+      {
+        return false;
+      }
+    }
+    return true;    
+  }
+  private isRasterLayerFilter(layer: Layer)
+  {    
+      if(layer.getType()!=LayerType.MATRIX)
+      {
+        return false;
+      }
+      return true;      
   }
 
 }

@@ -954,6 +954,17 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     // replaces if exists, the workspace of the datasource host string
                     l.datasource.host = host.replace('/' + host + '/', '/');
 
+                    
+                    let type = LayerType.UNKNOWN;
+                    if(l.type=="raster")
+                    {
+                        type = LayerType.MATRIX;
+                    } else if (l.type=="vector")
+                    {
+                        type = LayerType.VECTOR;
+                    }
+                
+
                     const layer = new Layer(l.id + v.id)
                         .addName(l.name)
                         .addNameAuthenticated(l.nameAuthenticated)
@@ -975,7 +986,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         .addDashboardUrl(l.dashboard)
                         .setStyleName(l.styleName)
                         .setStyleNameAuthenticated(l.styleNameAuthenticated)
-                        .setType(l.type)
+                        .setType(type)
                         .setExternal(l.external);
 
                     if(Constants.AUTHENTICATION_PROXY_HOST)

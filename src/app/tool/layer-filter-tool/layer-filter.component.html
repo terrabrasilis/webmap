@@ -10,17 +10,17 @@
       <h5 class="card-title">{{ "filter.title" | translate }}</h5>
 
       <div *ngIf="isYearlyGranularity">
-        <app-date-picker-year #startYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-year>
+        <app-date-picker-year #startYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)" *ngIf="isRasterLayersFilter()==false"></app-date-picker-year>
         <app-date-picker-year #endYearDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-year>
       </div>
 
       <div *ngIf="isMonthlyGranularity">
-        <app-date-picker-month #startMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-month>
+        <app-date-picker-month #startMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"  *ngIf="isRasterLayersFilter()==false"></app-date-picker-month>
         <app-date-picker-month #endMonthDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-month>
       </div>
 
       <div *ngIf="isDailyGranularity">
-        <app-date-picker-full #startFullDatePicker  [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"></app-date-picker-full>
+        <app-date-picker-full #startFullDatePicker  [minDate]="minDate" [maxDate]="maxDate" [initialDate]="startDateValue" (setDateOutput)="setStartDateValue($event)"  *ngIf="isRasterLayersFilter()==false"></app-date-picker-full>
         <app-date-picker-full #endFullDatePicker [minDate]="minDate" [maxDate]="maxDate" [initialDate]="endDateValue" (setDateOutput)="setEndDateValue($event)"></app-date-picker-full>
       </div>
 
