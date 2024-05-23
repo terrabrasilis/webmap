@@ -39,7 +39,6 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
     , private mapStateChanged: Function = null
-    , private sanitizer:DomSanitizer
   ) {
 
   }
@@ -207,7 +206,7 @@ export class TerrabrasilisApiComponent implements OnInit {
           response.blob().then((blob)=>
           {
             const imageObjectURL = URL.createObjectURL(blob);
-            let safeURL = this.sanitizer.bypassSecurityTrustUrl(imageObjectURL);
+            let safeURL = this.dom.bypassSecurityTrustUrl(imageObjectURL);
             layer.addLegendURL(safeURL);
           });
         }

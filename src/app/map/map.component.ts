@@ -131,7 +131,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         , private activeRoute: ActivatedRoute
         , private _translate: TranslateService
         , private localStorageService: LocalStorageService
-        , private sanitizer:DomSanitizer
         , @Inject(NgZone) private zone: NgZone
     ) {
 
@@ -144,7 +143,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
           }
         }
 
-        this.terrabrasilisApi = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, mapStateChanged, this.sanitizer);
+        this.terrabrasilisApi = new TerrabrasilisApiComponent(this.dialog, this.dom, this.cdRef, this.localStorageService, this._translate, null, mapStateChanged);
     }
 
     ///////////////////////////////////////////////////////////////
