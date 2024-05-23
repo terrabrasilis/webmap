@@ -21,9 +21,18 @@ export class WmsCapabilitiesProviderService {
 
   private proxy: string;
   private jsonix: any;
+  private authProxyURL: string;
 
   constructor(private http: HttpClient) {
-    this.proxy = Constants.PROXY_OGC;    
+    this.proxy = Constants.PROXY_OGC; 
+    if(Constants.AUTHENTICATION_PROXY_HOST)
+    {
+      
+      let baseURL = Constants.BASE_URL;
+
+      let authProxyHost = Constants.AUTHENTICATION_PROXY_HOST;
+      this.authProxyURL = new URL(authProxyHost, baseURL).href;
+    }     
   }
 
   getCapabilities(base_url: string) {
@@ -34,15 +43,20 @@ export class WmsCapabilitiesProviderService {
       responseType: 'text' as 'text'
     };
 
-    if(AuthenticationService.isAuthenticated())
-    {
-     let authorizationValue = 'Bearer ' + AuthenticationService.getToken();
-     httpOptions.headers = new HttpHeaders({ 'Authorization': authorizationValue });
-    }
-
     base_url = Utils.removeURLParameters(base_url);
     let url = base_url + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0';
-    url = this.proxy + encodeURIComponent(url);
+    
+        
+    if(AuthenticationService.isAuthenticated())
+    {  
+      let authorizationValue = 'Bearer ' + AuthenticationService.getToken();
+      httpOptions.headers = new HttpHeaders({ 'Authorization': authorizationValue });
+      url = this.authProxyURL + url;
+    }
+    else
+    {
+      url = this.proxy + encodeURIComponent(url);
+    }
 
     return this.http.get(url, httpOptions).pipe(
         map(response => response),
