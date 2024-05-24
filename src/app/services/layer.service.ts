@@ -12,6 +12,7 @@ import { Vision } from '../entity/vision';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 import { LocalStorageService } from './local-storage.service';
 import { Filter } from '../entity/filter';
+import { AuthenticationService } from './authentication.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -66,19 +67,21 @@ export class LayerService {
 
   public static getLayerBaseURL(layer:Layer)
   {
+    let name = layer.getLayerName();
+    
     //Fill with workspace on URL
     let url = layer.datasource.host;
     if(layer.datasource.host.includes(layer.workspace))
     {
       url = url.replace(layer.workspace+"/", "");
     }    
-    if(layer.datasource.host.includes(layer.name))
+    if(layer.datasource.host.includes(name))
     {      
-      url = url.replace(layer.name+"/", "");
+      url = url.replace(name+"/", "");
     }
     else
     {
-      url = url.replace('ows', layer.workspace + '/' + layer.name + '/ows');
+      url = url.replace('ows', layer.workspace + '/' + name + '/ows');
       return url;
     }
   }
