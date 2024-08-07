@@ -1,24 +1,24 @@
 import {
+  ChangeDetectorRef,
   Component,
-  OnInit,
-  Optional,
   Inject,
-  ChangeDetectorRef
+  OnInit,
+  Optional
 } from "@angular/core";
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material";
 import { DomSanitizer } from "@angular/platform-browser";
-import { DialogComponent } from "../../dialog/dialog.component";
-import { TerrabrasilisApiComponent } from "../terrabrasilis-api/terrabrasilis-api.component";
-import { Layer, LayerType } from "../../entity/layer";
-import moment from 'moment'
-import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
-import { LayerService } from '../../services/layer.service';
-import { Constants } from '../../util/constants';
-import { TimeDimensionService } from '../../services/time-dimension.service'
-import { DateService } from 'src/app/services/date.service';
+import moment from 'moment';
 import { Filter } from 'src/app/entity/filter';
-import { FilterService } from 'src/app/services/filter.service';
 import { Vision } from 'src/app/entity/vision';
+import { DateService } from 'src/app/services/date.service';
+import { FilterService } from 'src/app/services/filter.service';
+import { DialogComponent } from "../../dialog/dialog.component";
+import { Layer, LayerType } from "../../entity/layer";
+import { LayerService } from '../../services/layer.service';
+import { TimeDimensionService } from '../../services/time-dimension.service';
+import { WmsCapabilitiesProviderService } from '../../services/wms-capabilities-provider.service';
+import { Constants } from '../../util/constants';
+import { TerrabrasilisApiComponent } from "../terrabrasilis-api/terrabrasilis-api.component";
 
 @Component({
   selector: "layer-filter",
@@ -194,9 +194,11 @@ export class LayerFilterComponent implements OnInit {
 
       if(layer.timeDimension)
       {
+        
+
         const layerFilter = {
           layerId: layer.id,
-          layerName: layer.name,
+          layerName: layer.getLayerName(),
           workspace: layer.workspace,
           initialDate,
           finalDate,
