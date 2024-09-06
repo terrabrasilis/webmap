@@ -2,9 +2,9 @@
  * This class is responsible to store all global variables to use in entire application and not duplicate code
  */
 
-import { environment } from '../../environments/environment';
-import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 export class Constants {
     constructor(@Inject(DOCUMENT) private document: Document) { }
@@ -13,8 +13,8 @@ export class Constants {
         return document.location.protocol+'//'+document.location.hostname;
     };
 
-    public static get PROXY_OGC(): string {
-        return Constants.BASE_URL+environment.PROXY_OGC;
+    public static get PROXY_GETCAPABILITIES(): string {
+        return Constants.BASE_URL+environment.PROXY_GETCAPABILITIES;
     };
 
     public static get TERRABRASILIS_API_HOST(): string {

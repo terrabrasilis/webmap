@@ -1,30 +1,29 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Observable ,  of } from 'rxjs';
 
-import { Utils } from '../util/utils';
 import { Constants } from '../util/constants';
+import { Utils } from '../util/utils';
 
 
-import * as Jsonix from 'terrabrasilis-jsonix';
 import * as ogcSchemas from 'ogc-schemas';
+import * as Jsonix from 'terrabrasilis-jsonix';
 import * as w3cSchemas from 'w3c-schemas';
 
-import { text } from 'd3';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class WmsCapabilitiesProviderService {
 
-  private proxy: string;
+  private proxyCapabilities: string;
   private jsonix: any;
   private authProxyURL: string;
 
   constructor(private http: HttpClient) {
-    this.proxy = Constants.PROXY_OGC; 
+    this.proxyCapabilities = Constants.PROXY_GETCAPABILITIES; 
     if(Constants.AUTHENTICATION_PROXY_HOST)
     {
       
@@ -55,7 +54,7 @@ export class WmsCapabilitiesProviderService {
     }
     else
     {
-      url = this.proxy + encodeURIComponent(url);
+      url = this.proxyCapabilities + encodeURIComponent(url);
     }
 
     return this.http.get(url, httpOptions).pipe(
