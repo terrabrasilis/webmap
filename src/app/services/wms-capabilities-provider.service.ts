@@ -18,12 +18,12 @@ import { AuthenticationService } from './authentication.service';
 @Injectable()
 export class WmsCapabilitiesProviderService {
 
-  private proxyCapabilities: string;
+  private publicProxy: string;
   private jsonix: any;
   private authProxyURL: string;
 
   constructor(private http: HttpClient) {
-    this.proxyCapabilities = Constants.PROXY_GETCAPABILITIES; 
+    this.publicProxy = Constants.PUBLIC_PROXY; 
     if(Constants.AUTHENTICATION_PROXY_HOST)
     {
       
@@ -54,7 +54,7 @@ export class WmsCapabilitiesProviderService {
     }
     else
     {
-      url = this.proxyCapabilities + encodeURIComponent(url);
+      url = this.publicProxy + encodeURIComponent(url);
     }
 
     return this.http.get(url, httpOptions).pipe(

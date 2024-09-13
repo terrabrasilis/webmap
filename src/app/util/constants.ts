@@ -13,8 +13,8 @@ export class Constants {
         return document.location.protocol+'//'+document.location.hostname;
     };
 
-    public static get PROXY_GETCAPABILITIES(): string {
-        return Constants.BASE_URL+environment.PROXY_GETCAPABILITIES;
+    public static get PUBLIC_PROXY(): string {
+        return Constants.BASE_URL+environment.PUBLIC_PROXY;
     };
 
     public static get TERRABRASILIS_API_HOST(): string {

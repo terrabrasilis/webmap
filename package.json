@@ -1,6 +1,6 @@
 {
   "name": "webmap",
-  "version": "2.6.0",
+  "version": "2.6.1",
   "private": true,
   "license": "MIT",
   "browser": {
@@ -81,7 +81,7 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "github:terrabrasilis/terrabrasilis-api#v1.0.14",
+    "terrabrasilis-api": "github:terrabrasilis/terrabrasilis-api#v1.0.15",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
     "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#v1.0.0",
     "tls": "0.0.1",
