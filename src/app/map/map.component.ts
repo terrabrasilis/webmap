@@ -1,21 +1,21 @@
 import {
-    Component
-    , OnInit
-    , Inject
-    , NgZone
-    , ChangeDetectorRef
-    , OnDestroy
-    , HostBinding
-    , DoCheck
+    ChangeDetectorRef,
+    Component,
+    DoCheck,
+    HostBinding,
+    Inject,
+    NgZone,
+    OnDestroy,
+    OnInit
 } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 /**
  * components
  */
+import { ContactComponent } from '../contact/contact.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { WmsSearchComponent } from '../wms/wms-search/wms-search.component';
-import { ContactComponent } from '../contact/contact.component';
 
 /**
  * services
@@ -32,22 +32,19 @@ import { Vision } from '../entity/vision';
 /**
  * general
  */
-import { SubscriptionLike as ISubscription, combineLatest } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from '../services/local-storage.service';
-import { AuthenticationService } from '../services/authentication.service';
-import { Download, Datasource } from '../entity/datasource';
-import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
-import { Tool } from '../entity/tool';
-import { OpenUrl } from '../util/open-url';
 import * as _ from 'lodash'; // using the _.uniqueId() method
-import { Store, select } from "@ngrx/store";
-import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
+import { SubscriptionLike as ISubscription, combineLatest } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Constants } from '../util/constants';
+import { Datasource, Download } from '../entity/datasource';
+import { Tool } from '../entity/tool';
 import { GenericService } from '../services/generic.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
+import { Constants } from '../util/constants';
+import { OpenUrl } from '../util/open-url';
 
 
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
@@ -747,7 +744,9 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         $('#notifyAuthenticationChanged').click();
                     }
                 },
-                base_url
+                base_url,
+                Constants.AUTHENTICATION_CLIENT_ID,
+                Constants.AUTHENTICATION_RESOURCE_ROLE
             );
             if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
                 Authentication.internalValidationOauthApiURL=base_url;
@@ -927,14 +926,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 .isBaselayer(l.baselayer)
                 .isActive(l.active)
                 .isEnable(l.enabled);
-            
-            if(Constants.AUTHENTICATION_PROXY_HOST)
-            {
-                let baseURL = Constants.BASE_URL;
-                let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
-
-                layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
-            }    
 
             this.baselayers.push(layer);
         });
@@ -988,14 +979,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         .setStyleNameAuthenticated(l.styleNameAuthenticated)
                         .setType(type)
                         .setExternal(l.external);
-
-                    if(Constants.AUTHENTICATION_PROXY_HOST)
-                    {
-                        let baseURL = Constants.BASE_URL;
-                        let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
-
-                        layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
-                    }                
+          
 
                     layers.push(layer);
                 }

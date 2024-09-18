@@ -20,18 +20,10 @@ export class WmsCapabilitiesProviderService {
 
   private publicProxy: string;
   private jsonix: any;
-  private authProxyURL: string;
+
 
   constructor(private http: HttpClient) {
-    this.publicProxy = Constants.PUBLIC_PROXY; 
-    if(Constants.AUTHENTICATION_PROXY_HOST)
-    {
-      
-      let baseURL = Constants.BASE_URL;
-
-      let authProxyHost = Constants.AUTHENTICATION_PROXY_HOST;
-      this.authProxyURL = new URL(authProxyHost, baseURL).href;
-    }     
+    this.publicProxy = Constants.PUBLIC_PROXY;
   }
 
   getCapabilities(base_url: string) {
@@ -44,13 +36,22 @@ export class WmsCapabilitiesProviderService {
 
     base_url = Utils.removeURLParameters(base_url);
     let url = base_url + '?REQUEST=GetCapabilities&SERVICE=WMS&VERSION=1.3.0';
+
+    let host = document.location.protocol+'//'+document.location.hostname;
+
+    let isSameHost = false;
+
+    if(base_url.includes(host))
+    {
+      isSameHost = true;
+    }
     
-        
-    if(AuthenticationService.isAuthenticated())
+    //Authentication for terrabrasilis service.    
+    if(AuthenticationService.isAuthenticated() && isSameHost)
     {  
       let authorizationValue = 'Bearer ' + AuthenticationService.getToken();
       httpOptions.headers = new HttpHeaders({ 'Authorization': authorizationValue });
-      url = this.authProxyURL + url;
+      url = AuthenticationService.getOAuthProxyUrl(url, Constants.AUTHENTICATION_CLIENT_ID, Constants.AUTHENTICATION_RESOURCE_ROLE);
     }
     else
     {

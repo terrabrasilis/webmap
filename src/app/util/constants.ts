@@ -50,16 +50,18 @@ export class Constants {
         throw new Error(`Invalid project BUILD_TYPE configuration: ${environment.BUILD_TYPE}`); 
 
     };
-    public static get AUTHENTICATION_PROXY_HOST(): string 
+    public static get AUTHENTICATION_RESOURCE_ROLE(): string 
     {
-        return environment.AUTHENTICATION_PROXY_HOST;         
+        return environment.AUTHENTICATION_RESOURCE_ROLE;         
+    };
+
+    public static get AUTHENTICATION_CLIENT_ID(): string 
+    {
+        return environment.AUTHENTICATION_CLIENT_ID;         
     };
     /**
      *  Defines an enum to store types of time dimension granularity
      */
     public static Granularity = { Daily: 'Daily', Monthly: 'Montly', Yearly: 'Yearly' }; 
-
-
-
 
 }
