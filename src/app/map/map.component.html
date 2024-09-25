@@ -195,7 +195,7 @@
 <div id="map" class="container-fluid mapa" style="background-color: #fff !important;"></div>
 
 <!-- Sidebar Legendas -->
-<div id="legend" class="toggled">
+<div id="legend" class="toggled" (click)="updateLegend()">
     <div id="sidebar-legend">
         <div *ngFor="let project of layersToLegend" style="margin-bottom: 1px;">
             <div class="legend-title">{{ project.name }}</div>
@@ -204,7 +204,7 @@
                     <h2>{{ 'layerControl.noLegend' | translate }}</h2>
                 </div>
                 <div *ngFor="let layer of project.layers">
-                    <div *ngIf="layer.active" class="card-legend">
+                    <div *ngIf="layer && layer.active" class="card-legend">
                        <div *ngIf="layer.hasTranslate; else templateTitle" title="{{ 'layerControl.' + project.id + '.' + layer.id | translate }}">
                             <h2>{{ 'layerControl.' + project.id + '.' + layer.id | translate }}</h2>
                         </div>
@@ -218,7 +218,7 @@
             </div>
         </div>
     </div>
-    <a href class="btn btn-success btn-legend" data-toggle="sidebar">{{ 'tools.legend' | translate }}</a>
+    <a id="legend-button" href class="btn btn-success btn-legend" data-toggle="sidebar">{{ 'tools.legend' | translate }}</a>
 </div>
 
 <!-- Timeseries display panel -->

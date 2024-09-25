@@ -6,7 +6,8 @@ $(document).ready(function () {
      */
     $('[data-toggle="sidebar"]').click(function(e) {
         e.preventDefault();
-        $("#legend, .btn-legend").toggleClass("toggled");
+        $("#legend, .btn-legend").toggleClass("toggled");        
+        $("#legend").click();
     });
     
     /**

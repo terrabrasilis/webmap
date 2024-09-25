@@ -767,8 +767,16 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     processLegendForLayers(layers: any): Promise<any> {
-        const promises = layers.map((layer) => {
-          return this.processLegendForLayer(layer);
+        const promises = layers.map((layer) => 
+        {
+            if(layer && layer.active==true)
+            {
+                return this.processLegendForLayer(layer);
+            }
+            else
+            {
+                return layer;
+            }          
         });
 
         return Promise.all(promises)
@@ -802,29 +810,47 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         return hasElement;
     }
 
+    public isLegendVisible() : boolean
+    {
+        return $('#legend').hasClass('toggled')==false;
+    }
+
     /**
      * Used to update state of legend...
      */
     public updateOverlayerLegends() 
     {
-        //this.showLegendsLoading();
-        let self = this
-        this.cdRef.detectChanges();
-        this.layersToLegend = [];
+        if(this.isLegendVisible())
+        {
+            //this.showLegendsLoading();
+            let self = this
+            this.cdRef.detectChanges();
+            this.layersToLegend = [];
 
-        this.overlayers.forEach(vision => {
-          const l = vision.layers.slice();
-          const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
+            this.overlayers.forEach(vision => {
+            const l = vision.layers.slice();
+            const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
 
-          self.processLegendForLayers(p.layers)
-            .then((layers) => {
-              p.layers = layers.sort(function(a, b) {
-                if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
-              });
-            })
+            self.processLegendForLayers(p.layers)
+                .then((layers) => 
+                {
+                    p.layers = layers.sort(function(a, b) {
+                        if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
+                    });
+                })
 
-          self.layersToLegend.push(p);
-        });
+            self.layersToLegend.push(p);
+            });
+        }       
+    }
+
+    public updateLegend()
+    {
+        if(this.isLegendVisible())
+        {
+            console.log("Updating legend");
+            this.updateOverlayerLegends();
+        }
     }
 
     private removeFromArray(listToRemoveObject: any, elementWillBeRemoved: any): void {

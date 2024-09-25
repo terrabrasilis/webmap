@@ -1,6 +1,6 @@
 {
   "name": "webmap",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "private": true,
   "license": "MIT",
   "browser": {
@@ -81,9 +81,9 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "rxjs-compat": "6",
-    "terrabrasilis-api": "github:terrabrasilis/terrabrasilis-api#v1.0.16",
+    "terrabrasilis-api": "github:terrabrasilis/terrabrasilis-api#v1.0.17",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
-    "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#v1.0.0",
+    "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#v1.0.1",
     "tls": "0.0.1",
     "w3c-schemas": "^1.4.0",
     "workerpool": "^6.2.1",
