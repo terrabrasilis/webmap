@@ -83,7 +83,7 @@
     "rxjs-compat": "6",
     "terrabrasilis-api": "github:terrabrasilis/terrabrasilis-api#v1.0.17",
     "terrabrasilis-jsonix": "terrabrasilis/terrabrasilis-jsonix#96080e1",
-    "terrabrasilis-util": "terrabrasilis/terrabrasilis-util#v1.0.1",
+    "terrabrasilis-util": "github:terrabrasilis/terrabrasilis-util#v1.0.1",
     "tls": "0.0.1",
     "w3c-schemas": "^1.4.0",
     "workerpool": "^6.2.1",
