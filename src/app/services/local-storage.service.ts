@@ -1,14 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LocalStorage, JSONSchema } from '@ngx-pwa/local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { Observable } from 'rxjs';
-
-const schema: JSONSchema = {
-  properties: {
-    key: { type: 'string' },
-    value: { type: 'string' }
-  },
-  required: ['key', 'value']
-};
 
 @Injectable()
 export class LocalStorageService {

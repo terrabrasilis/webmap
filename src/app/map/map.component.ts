@@ -41,6 +41,7 @@ import { environment } from '../../environments/environment';
 import { Datasource, Download } from '../entity/datasource';
 import { Tool } from '../entity/tool';
 import { GenericService } from '../services/generic.service';
+import { LanguageService } from '../services/language.service';
 import { LocalStorageService } from '../services/local-storage.service';
 import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
 import { Constants } from '../util/constants';
@@ -105,7 +106,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * privates
      */
-    public languageKey = 'translate';
+    public languageKey = 'language';
     public baselayers: Array<Layer> = new Array();
     public overlayers: Array<Vision> = new Array();
     public downloads: Array<Download> = new Array();
@@ -193,11 +194,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                     if (this.language != null) { this.changeLanguage(this.language); }
                 });
 
-            this.localStorageService.getValue(this.languageKey)
-                .subscribe((item:any) => {
-                    let toUse = JSON.parse(item);
-                    this.changeAboutURL((toUse === null)?('pt-br'):(toUse.value));
-                });
+            let lang = LanguageService.getCurrentLang()
+            
+            this.changeAboutURL((lang === null)?('pt-br'):(lang));
+            
         });
 
         /**
@@ -703,8 +703,9 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.dialog.open(ContactComponent, { width : '450px' });
     }
 
-    changeLanguage(value: string) {
-        this.localStorageService.setValue(this.languageKey, value);
+    changeLanguage(value: string) 
+    {
+        LanguageService.setCurrentLang(value);
         this._translate.use(value);
         this.changeAboutURL(value);
         this.updateOverlayerLegends();
@@ -715,42 +716,35 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     initAuthentication()
     {
 
-        this.localStorageService.getValue(this.languageKey)
-        .subscribe((item:any) => {
-            let toUse = JSON.parse(item);
-            var lang='pt-br';
-            if(toUse!=null)
+        let lang = LanguageService.getCurrentLang();
+        
+        // to force the URL when in devel environment
+        let base_url='';
+        if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+            base_url='http://terrabrasilis.dpi.inpe.br/oauth-api/';
+                    
+        /**
+         * Setting up authentication api
+         */
+        if(typeof Authentication != 'undefined')
+            Authentication.init(lang,
+            function()
             {
-                lang = toUse.value;
-            }
-
-            // to force the URL when in devel environment
-            let base_url='';
-            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
-                base_url='http://terrabrasilis.dpi.inpe.br/oauth-api/';
-                        
-            /**
-             * Setting up authentication api
-             */
-            if(typeof Authentication != 'undefined')
-                Authentication.init(lang,
-                function()
+                /**
+                 * Notify authentication handler about login changes
+                 */
+                if($('#notifyAuthenticationChanged').length!=0)
                 {
-                    /**
-                     * Notify authentication handler about login changes
-                     */
-                    if($('#notifyAuthenticationChanged').length!=0)
-                    {
-                        $('#notifyAuthenticationChanged').click();
-                    }
-                },
-                base_url,
-                Constants.AUTHENTICATION_CLIENT_ID,
-                Constants.AUTHENTICATION_RESOURCE_ROLE
-            );
-            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
-                Authentication.internalValidationOauthApiURL=base_url;
-        });
+                    $('#notifyAuthenticationChanged').click();
+                }
+            },
+            base_url,
+            Constants.AUTHENTICATION_CLIENT_ID,
+            Constants.AUTHENTICATION_RESOURCE_ROLE
+        );
+        if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+            Authentication.internalValidationOauthApiURL=base_url;
+        
         
     }
 
@@ -782,11 +776,10 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         return Promise.all(promises)
     }
 
-    processLegendForLayer(layer: any): Promise<any> {
+    processLegendForLayer(layer: any): Layer {
         this.showLegendLoading(layer);
-        return this.terrabrasilisApi.getLegend(layer, false).then(()=>{
-            return layer;
-        });       
+        this.terrabrasilisApi.getLegend(layer, false);
+        return layer;
     }
     
     ///////////////////////////////////////////////////

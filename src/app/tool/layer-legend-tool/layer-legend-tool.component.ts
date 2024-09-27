@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, Input, ViewChild, ElementRef } from '@angular/core';
-import { ToolComponent } from '../tool-component-interface';
-import { OnMount } from '../../core-modules/dynamic-html';
-import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import { OnMount } from '../../core-modules/dynamic-html';
 import { Layer } from '../../entity/layer';
+import { TerrabrasilisApiComponent } from '../terrabrasilis-api/terrabrasilis-api.component';
+import { ToolComponent } from '../tool-component-interface';
 
 /**
  * LayerLegendToolComponent
@@ -42,8 +42,8 @@ export class LayerLegendToolComponent extends ToolComponent implements OnInit, O
   }
 
   showDialog(layer:Layer): void {
-    this.terrabrasilisApi.getLegend(layer, true).then((imgTag)=> {
-      this.terrabrasilisApi.showDialog(imgTag)
-    })
+    this.terrabrasilisApi.getLegend(layer, true);
+    this.terrabrasilisApi.showDialog("");
+    
   }
 }
