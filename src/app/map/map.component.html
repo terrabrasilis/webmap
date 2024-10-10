@@ -91,8 +91,8 @@
     <!-- Overlayers -->
     <div *ngFor="let project of overlayers">
         
-        <div *ngIf="project.layers.length > 0" class="project-group-closed" id="{{ (project.id | cleanWhiteSpace) + '_group' }}">
-            <div *ngIf="project.hasTranslate; else templateTitle" class="group-title-closed" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
+        <div *ngIf="project.layers.length > 0" [ngClass]="project.isOpened ? 'project-group-opened' : 'project-group-closed'" class="" id="{{ (project.id | cleanWhiteSpace) + '_group' }}">
+            <div *ngIf="project.hasTranslate; else templateTitle" [ngClass]="project.isOpened ? 'group-title-opened' : 'group-title-closed'" id="{{ (project.id | cleanWhiteSpace) + '_titlegroup' }}" (click)="swapGroupLayer(project);">
                 <span class="badge badge-light badge-pill">{{ project.layers.length }}</span>
                 <span>{{ 'layerControl.' + project.id + '.name' | translate }}</span>
 

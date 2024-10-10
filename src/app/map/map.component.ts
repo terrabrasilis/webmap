@@ -188,7 +188,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                             }, this.baselayers, layersToMap);
                     });
                     this.updateOverlayerLegends();
-                    this.swapGroupLayer(this.overlayers[0]);
+                    this.swapGroupLayer(this.overlayers[0], true);
                     this.terrabrasilisApi.disableLoading();
 
                     if (this.language != null) { this.changeLanguage(this.language); }
@@ -572,41 +572,19 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * Change the Group Layer UI to display or hide the layers into the group component.
      * @param groupName The vision name from configurations defined in layer.service.ts
+     * @param forceOpenCurrentVision This boolean variable forces to open the requested swap vision (This is used for the first vision rendering)
      */
-    swapGroupLayer(vision: Vision) {
+    swapGroupLayer(vision: Vision, forceOpenCurrentVision: boolean = false) {
 
-        // let groupName = vision.name.replace(/\s/g, "");
         const groupName = vision.id;
-
-        let grpLayers = $('.project-group-opened');
-        grpLayers.each(function(i, t) {
-            if (t.id != groupName + '_group') {
-                t.className = 'project-group-closed';
-            }
-        });
-        grpLayers = $('.group-title-opened');
-        grpLayers.each(function(i, t) {
-            if (t.id != groupName + '_titlegroup') {
-                t.className = 'group-title-closed';
-            }
-        });
-
         this.overlayers.forEach(prj => {
             prj.isOpened = false;
         });
 
-        if ($('#' + groupName + '_group').hasClass('project-group-closed')) {
-            ($('#' + groupName + '_group') as any).switchClass('project-group-closed', 'project-group-opened');
+        if ($('#' + groupName + '_group').hasClass('project-group-closed') || forceOpenCurrentVision) {
             vision.isOpened = true;
         } else {
-            ($('#' + groupName + '_group') as any).switchClass('project-group-opened', 'project-group-closed');
             vision.isOpened = false;
-        }
-        // The style of the title group is different for the opened and closed states.
-        if ($('#' + groupName + '_titlegroup').hasClass('group-title-closed')) {
-            ($('#' + groupName + '_titlegroup') as any).switchClass('group-title-closed', 'group-title-opened');
-        } else {
-            ($('#' + groupName + '_titlegroup') as any).switchClass('group-title-opened', 'group-title-closed');
         }
 
         this.updateOverlayerLegends();
