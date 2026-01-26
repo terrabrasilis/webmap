@@ -21,7 +21,7 @@
         }
     },
     "dialog": {
-        "text": "Informações Gerais",
+        "text": "Informações para acesso aos dados da camada via API de geosserviço",
         "accessDataBtn" : "Acesso aos Dados",
         "downloadBtn" : "Download",
         "metadataBtn" : "Metadado",
@@ -163,7 +163,7 @@
         "showCoordinates": "Coordenadas",
         "fullscreen": "Tela ampliada",
         "download": "Downloads",
-        "addLayer": "Adicionar Outras Camadas",
+        "addLayer": "Pesquisar e acessar dados via serviço WMS",
         "undo": "Desfazer zoom",
         "redo": "Refazer zoom",
         "notice": "Não mostrar novamente",

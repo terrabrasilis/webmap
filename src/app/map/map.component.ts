@@ -767,6 +767,11 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.showDialog(this.getDownloadHtmlOptions());
     }
 
+    goToDownloadPage() {
+        let downloadPageURL = "https://terrabrasilis.dpi.inpe.br/downloads/";
+        window.open(downloadPageURL, '_blank'); 
+    }
+
     processLegendForLayers(layers: any): Promise<any> {
         const promises = layers.map((layer) => {
           return this.processLegendForLayer(layer);
