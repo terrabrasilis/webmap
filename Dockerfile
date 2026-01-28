@@ -1,6 +1,6 @@
 # Run to test image
 # docker run --rm --name terrabrasilis_webmap terrabrasilis/webmap:<version>
-FROM node:12.8.1 as node
+FROM node:12.8.1 AS node
 
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list 
 RUN echo "deb-src http://archive.debian.org/debian stretch main" >> /etc/apt/sources.list 
