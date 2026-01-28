@@ -1,24 +1,22 @@
-import { Component, OnInit, ChangeDetectorRef, Inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 /**
  *  import terrabrasilis api from node_modules
  */
 // the AuthenticationService component is imported here and used inside terrabrasilis-api
-import { AuthenticationService } from '../../services/authentication.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 import * as Terrabrasilis from 'terrabrasilis-api';
 import { DialogComponent } from '../../dialog/dialog.component';
-import { MatDialog } from '@angular/material';
-import { MatSnackBar } from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Layer } from '../../entity/layer';
-import { Utils } from '../../util/utils';
+import { AuthenticationService } from '../../services/authentication.service';
 import { LocalStorageService } from '../../services/local-storage.service';
-import { TranslateService } from '@ngx-translate/core';
-import { get } from 'lodash'
+import { Utils } from '../../util/utils';
 
-import { Store, select } from "@ngrx/store";
-import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 import { Observable } from "rxjs";
+import { LanguageService } from 'src/app/services/language.service';
+import * as fromLayerFilterReducer from "../../redux/reducers/layer-filter-reducer";
 
 @Component({
   selector: 'app-terrabrasilis-api',
@@ -39,6 +37,7 @@ export class TerrabrasilisApiComponent implements OnInit {
     , private _translate: TranslateService = null
     , private _snackBar: MatSnackBar = null
     , private mapStateChanged: Function = null
+    
   ) {
 
   }
@@ -154,35 +153,29 @@ export class TerrabrasilisApiComponent implements OnInit {
 
 
 
-  getLegend(layer: any, urlOrCompleteSrcImgElement: boolean, applyStyle: boolean = true): Promise<any> {
+  getLegend(layer: any, urlOrCompleteSrcImgElement: boolean, applyStyle: boolean = true) {
 
-    return this.localStorageService.getValue('translate').toPromise()
-      .then((item: any) => {
-        let language = 'pt-br';
-        if(JSON.parse(item)!=null)
-        {
-          language = get(JSON.parse(item), 'value')
-        }
-        let bounds = this.getCurentMapBox();
-
-        let crs = this.getCRS();
-
-        let bboxString: string;
-        if(bounds)
-        {
-          bboxString = bounds.toBBoxString();
-        }
-
-        let crsCode: string;
-        if(crs)
-        {
-          crsCode = crs.code;
-        }
-        crsCode='EPSG:4674';
-
-        this.processLegend(layer, urlOrCompleteSrcImgElement, language, bboxString, crsCode, applyStyle);       
+      let lang = LanguageService.getCurrentLang();        
         
-      });
+      let bounds = this.getCurentMapBox();
+
+      let crs = this.getCRS();
+
+      let bboxString: string;
+      if(bounds)
+      {
+        bboxString = bounds.toBBoxString();
+      }
+
+      let crsCode: string;
+      if(crs)
+      {
+        crsCode = crs.code;
+      }
+      crsCode='EPSG:4674';
+
+      this.processLegend(layer, urlOrCompleteSrcImgElement, lang, bboxString, crsCode, applyStyle);       
+        
   }
   /**
    * Fetch legend from geoserver, testing if style exists. If not uses de default style.

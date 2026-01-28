@@ -15,4 +15,9 @@ export class AuthenticationService {
     return ((typeof Authentication != 'undefined')?(Authentication.getToken()):(false));
   }
 
+  public static getOAuthProxyUrl(url, clientId, role)
+  {
+    return ((typeof Authentication != 'undefined')?(Authentication.getOAuthProxyUrl(url, clientId, role)):(false));
+  }
+
 }

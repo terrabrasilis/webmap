@@ -2,9 +2,9 @@
  * This class is responsible to store all global variables to use in entire application and not duplicate code
  */
 
-import { environment } from '../../environments/environment';
-import { Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 export class Constants {
     constructor(@Inject(DOCUMENT) private document: Document) { }
@@ -13,8 +13,8 @@ export class Constants {
         return document.location.protocol+'//'+document.location.hostname;
     };
 
-    public static get PROXY_OGC(): string {
-        return Constants.BASE_URL+environment.PROXY_OGC;
+    public static get PUBLIC_PROXY(): string {
+        return Constants.BASE_URL+environment.PUBLIC_PROXY;
     };
 
     public static get TERRABRASILIS_API_HOST(): string {
@@ -50,16 +50,18 @@ export class Constants {
         throw new Error(`Invalid project BUILD_TYPE configuration: ${environment.BUILD_TYPE}`); 
 
     };
-    public static get AUTHENTICATION_PROXY_HOST(): string 
+    public static get AUTHENTICATION_RESOURCE_ROLE(): string 
     {
-        return environment.AUTHENTICATION_PROXY_HOST;         
+        return environment.AUTHENTICATION_RESOURCE_ROLE;         
+    };
+
+    public static get AUTHENTICATION_CLIENT_ID(): string 
+    {
+        return environment.AUTHENTICATION_CLIENT_ID;         
     };
     /**
      *  Defines an enum to store types of time dimension granularity
      */
     public static Granularity = { Daily: 'Daily', Monthly: 'Montly', Yearly: 'Yearly' }; 
-
-
-
 
 }

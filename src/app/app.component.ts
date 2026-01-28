@@ -1,8 +1,9 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from './services/local-storage.service';
 import { version } from '../../package.json';
+import { LanguageService } from './services/language.service';
+import { LocalStorageService } from './services/local-storage.service';
 
 /**
  * To use localStorage with angular:
@@ -25,11 +26,11 @@ export class AppComponent implements OnInit {
   public version: string = version;// the project version loaded from package.json
   public title:string = '';
   public type:string = '';
-  private languageKey: string = "translate";
+  private languageKey: string = "language";
 
   constructor(private router: Router    
     , private _translate: TranslateService
-    , private localStorageService: LocalStorageService ) {
+    , private localStorageService: LocalStorageService) {
 
     this.loadDefaultLanguage();
   }
@@ -47,21 +48,20 @@ export class AppComponent implements OnInit {
     this.router.navigate(["login"]);
   }
   
-  private loadDefaultLanguage(): void {        
-    this.localStorageService.getValue(this.languageKey).subscribe((item:any) => {      
-      let toUse = JSON.parse(item);
-      //console.log(toUse);
-      
-      if(toUse === null) {      
-        this._translate.setDefaultLang('pt-br');
-        this._translate.use('pt-br');
-        this.localStorageService.setValue(this.languageKey, 'pt-br');
-        return;
-      } 
-      
-      this._translate.setDefaultLang(toUse.value);
-      this._translate.use(toUse.value);
-      this.localStorageService.setValue(this.languageKey, toUse.value);
-    });              
+  private loadDefaultLanguage(): void 
+  { 
+    let lang = LanguageService.getCurrentLang();
+    
+    if(lang === null) {      
+      this._translate.setDefaultLang('pt-br');
+      this._translate.use('pt-br');
+      this.localStorageService.setValue(this.languageKey, 'pt-br');
+      LanguageService.setCurrentLang('pt-br');  
+      return;
+    } 
+    
+    this._translate.setDefaultLang(lang);
+    this._translate.use(lang);
+    LanguageService.setCurrentLang(lang);           
   }
 }

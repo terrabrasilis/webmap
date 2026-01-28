@@ -1,21 +1,21 @@
 import {
-    Component
-    , OnInit
-    , Inject
-    , NgZone
-    , ChangeDetectorRef
-    , OnDestroy
-    , HostBinding
-    , DoCheck
+    ChangeDetectorRef,
+    Component,
+    DoCheck,
+    HostBinding,
+    Inject,
+    NgZone,
+    OnDestroy,
+    OnInit
 } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 /**
  * components
  */
+import { ContactComponent } from '../contact/contact.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { WmsSearchComponent } from '../wms/wms-search/wms-search.component';
-import { ContactComponent } from '../contact/contact.component';
 
 /**
  * services
@@ -32,22 +32,20 @@ import { Vision } from '../entity/vision';
 /**
  * general
  */
-import { SubscriptionLike as ISubscription, combineLatest } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from '../services/local-storage.service';
-import { AuthenticationService } from '../services/authentication.service';
-import { Download, Datasource } from '../entity/datasource';
-import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
-import { Tool } from '../entity/tool';
-import { OpenUrl } from '../util/open-url';
 import * as _ from 'lodash'; // using the _.uniqueId() method
-import { Store, select } from "@ngrx/store";
-import * as fromLayerFilterReducer from "../redux/reducers/layer-filter-reducer";
+import { SubscriptionLike as ISubscription, combineLatest } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Constants } from '../util/constants';
+import { Datasource, Download } from '../entity/datasource';
+import { Tool } from '../entity/tool';
 import { GenericService } from '../services/generic.service';
+import { LanguageService } from '../services/language.service';
+import { LocalStorageService } from '../services/local-storage.service';
+import { TerrabrasilisApiComponent } from '../tool/terrabrasilis-api/terrabrasilis-api.component';
+import { Constants } from '../util/constants';
+import { OpenUrl } from '../util/open-url';
 
 
 //Declaring a JS function to be invoked after changed the language. This is authentication api requirement
@@ -108,7 +106,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * privates
      */
-    public languageKey = 'translate';
+    public languageKey = 'language';
     public baselayers: Array<Layer> = new Array();
     public overlayers: Array<Vision> = new Array();
     public downloads: Array<Download> = new Array();
@@ -190,17 +188,16 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                             }, this.baselayers, layersToMap);
                     });
                     this.updateOverlayerLegends();
-                    this.swapGroupLayer(this.overlayers[0]);
+                    this.swapGroupLayer(this.overlayers[0], true);
                     this.terrabrasilisApi.disableLoading();
 
                     if (this.language != null) { this.changeLanguage(this.language); }
                 });
 
-            this.localStorageService.getValue(this.languageKey)
-                .subscribe((item:any) => {
-                    let toUse = JSON.parse(item);
-                    this.changeAboutURL((toUse === null)?('pt-br'):(toUse.value));
-                });
+            let lang = LanguageService.getCurrentLang()
+            
+            this.changeAboutURL((lang === null)?('pt-br'):(lang));
+            
         });
 
         /**
@@ -575,41 +572,19 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     /**
      * Change the Group Layer UI to display or hide the layers into the group component.
      * @param groupName The vision name from configurations defined in layer.service.ts
+     * @param forceOpenCurrentVision This boolean variable forces to open the requested swap vision (This is used for the first vision rendering)
      */
-    swapGroupLayer(vision: Vision) {
+    swapGroupLayer(vision: Vision, forceOpenCurrentVision: boolean = false) {
 
-        // let groupName = vision.name.replace(/\s/g, "");
         const groupName = vision.id;
-
-        let grpLayers = $('.project-group-opened');
-        grpLayers.each(function(i, t) {
-            if (t.id != groupName + '_group') {
-                t.className = 'project-group-closed';
-            }
-        });
-        grpLayers = $('.group-title-opened');
-        grpLayers.each(function(i, t) {
-            if (t.id != groupName + '_titlegroup') {
-                t.className = 'group-title-closed';
-            }
-        });
-
         this.overlayers.forEach(prj => {
             prj.isOpened = false;
         });
 
-        if ($('#' + groupName + '_group').hasClass('project-group-closed')) {
-            ($('#' + groupName + '_group') as any).switchClass('project-group-closed', 'project-group-opened');
+        if ($('#' + groupName + '_group').hasClass('project-group-closed') || forceOpenCurrentVision) {
             vision.isOpened = true;
         } else {
-            ($('#' + groupName + '_group') as any).switchClass('project-group-opened', 'project-group-closed');
             vision.isOpened = false;
-        }
-        // The style of the title group is different for the opened and closed states.
-        if ($('#' + groupName + '_titlegroup').hasClass('group-title-closed')) {
-            ($('#' + groupName + '_titlegroup') as any).switchClass('group-title-closed', 'group-title-opened');
-        } else {
-            ($('#' + groupName + '_titlegroup') as any).switchClass('group-title-opened', 'group-title-closed');
         }
 
         this.updateOverlayerLegends();
@@ -706,8 +681,9 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         this.dialog.open(ContactComponent, { width : '450px' });
     }
 
-    changeLanguage(value: string) {
-        this.localStorageService.setValue(this.languageKey, value);
+    changeLanguage(value: string) 
+    {
+        LanguageService.setCurrentLang(value);
         this._translate.use(value);
         this.changeAboutURL(value);
         this.updateOverlayerLegends();
@@ -718,40 +694,35 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     initAuthentication()
     {
 
-        this.localStorageService.getValue(this.languageKey)
-        .subscribe((item:any) => {
-            let toUse = JSON.parse(item);
-            var lang='pt-br';
-            if(toUse!=null)
+        let lang = LanguageService.getCurrentLang();
+        
+        // to force the URL when in devel environment
+        let base_url='';
+        if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+            base_url='http://terrabrasilis.dpi.inpe.br/oauth-api/';
+                    
+        /**
+         * Setting up authentication api
+         */
+        if(typeof Authentication != 'undefined')
+            Authentication.init(lang,
+            function()
             {
-                lang = toUse.value;
-            }
-
-            // to force the URL when in devel environment
-            let base_url='';
-            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
-                base_url='http://terrabrasilis.dpi.inpe.br/oauth-api/';
-                        
-            /**
-             * Setting up authentication api
-             */
-            if(typeof Authentication != 'undefined')
-                Authentication.init(lang,
-                function()
+                /**
+                 * Notify authentication handler about login changes
+                 */
+                if($('#notifyAuthenticationChanged').length!=0)
                 {
-                    /**
-                     * Notify authentication handler about login changes
-                     */
-                    if($('#notifyAuthenticationChanged').length!=0)
-                    {
-                        $('#notifyAuthenticationChanged').click();
-                    }
-                },
-                base_url
-            );
-            if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
-                Authentication.internalValidationOauthApiURL=base_url;
-        });
+                    $('#notifyAuthenticationChanged').click();
+                }
+            },
+            base_url,
+            Constants.AUTHENTICATION_CLIENT_ID,
+            Constants.AUTHENTICATION_RESOURCE_ROLE
+        );
+        if(environment.BUILD_TYPE == 'development' && environment.FORCE_API && environment.FORCE_API == 'yes')
+            Authentication.internalValidationOauthApiURL=base_url;
+        
         
     }
 
@@ -773,18 +744,25 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
     }
 
     processLegendForLayers(layers: any): Promise<any> {
-        const promises = layers.map((layer) => {
-          return this.processLegendForLayer(layer);
+        const promises = layers.map((layer) => 
+        {
+            if(layer && layer.active==true)
+            {
+                return this.processLegendForLayer(layer);
+            }
+            else
+            {
+                return layer;
+            }          
         });
 
         return Promise.all(promises)
     }
 
-    processLegendForLayer(layer: any): Promise<any> {
+    processLegendForLayer(layer: any): Layer {
         this.showLegendLoading(layer);
-        return this.terrabrasilisApi.getLegend(layer, false).then(()=>{
-            return layer;
-        });       
+        this.terrabrasilisApi.getLegend(layer, false);
+        return layer;
     }
     
     ///////////////////////////////////////////////////
@@ -808,29 +786,47 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
         return hasElement;
     }
 
+    public isLegendVisible() : boolean
+    {
+        return $('#legend').hasClass('toggled')==false;
+    }
+
     /**
      * Used to update state of legend...
      */
     public updateOverlayerLegends() 
     {
-        //this.showLegendsLoading();
-        let self = this
-        this.cdRef.detectChanges();
-        this.layersToLegend = [];
+        if(this.isLegendVisible())
+        {
+            //this.showLegendsLoading();
+            let self = this
+            this.cdRef.detectChanges();
+            this.layersToLegend = [];
 
-        this.overlayers.forEach(vision => {
-          const l = vision.layers.slice();
-          const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
+            this.overlayers.forEach(vision => {
+            const l = vision.layers.slice();
+            const p = new Vision(vision.id, vision.name, '', vision.enabled, '', [], l, vision.downloads, true, vision.stackOrder, vision.isOpened);
 
-          self.processLegendForLayers(p.layers)
-            .then((layers) => {
-              p.layers = layers.sort(function(a, b) {
-                if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
-              });
-            })
+            self.processLegendForLayers(p.layers)
+                .then((layers) => 
+                {
+                    p.layers = layers.sort(function(a, b) {
+                        if (a.uiOrder > b.uiOrder) { return 1; } else { return -1; }
+                    });
+                })
 
-          self.layersToLegend.push(p);
-        });
+            self.layersToLegend.push(p);
+            });
+        }       
+    }
+
+    public updateLegend()
+    {
+        if(this.isLegendVisible())
+        {
+            console.log("Updating legend");
+            this.updateOverlayerLegends();
+        }
     }
 
     private removeFromArray(listToRemoveObject: any, elementWillBeRemoved: any): void {
@@ -932,14 +928,6 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                 .isBaselayer(l.baselayer)
                 .isActive(l.active)
                 .isEnable(l.enabled);
-            
-            if(Constants.AUTHENTICATION_PROXY_HOST)
-            {
-                let baseURL = Constants.BASE_URL;
-                let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
-
-                layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
-            }    
 
             this.baselayers.push(layer);
         });
@@ -993,14 +981,7 @@ export class MapComponent implements OnInit, OnDestroy, DoCheck, OpenUrl {
                         .setStyleNameAuthenticated(l.styleNameAuthenticated)
                         .setType(type)
                         .setExternal(l.external);
-
-                    if(Constants.AUTHENTICATION_PROXY_HOST)
-                    {
-                        let baseURL = Constants.BASE_URL;
-                        let authProxyURL = Constants.AUTHENTICATION_PROXY_HOST;
-
-                        layer.datasource.authenticationProxyUrl = new URL(authProxyURL, baseURL).href;
-                    }                
+          
 
                     layers.push(layer);
                 }

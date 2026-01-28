@@ -56,7 +56,7 @@
         "5c40fdce0e9b2a14264e03a6" : {
             "name": " Amazônia Legal",
             "5c49f5901a21020001cd66375c40fdce0e9b2a14264e03a6": "Floresta desde 2016",
-            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Incrementos no Desmatamento desde 2008",
+            "5c49f5bc1a21020001cd66385c40fdce0e9b2a14264e03a6": "Desmatamento desde 2008",
             "5c49f5df1a21020001cd66395c40fdce0e9b2a14264e03a6": "Máscara de Desmatamento até 2007",
             "5c49f61b1a21020001cd663a5c40fdce0e9b2a14264e03a6": "Hidrografia",
             "5c49f6761a21020001cd663b5c40fdce0e9b2a14264e03a6": "Não Floresta",
@@ -68,7 +68,7 @@
             "name": " Amazônia",
             "5c9bce7b6d9f9d00010068c35c9bd04ae2e106099a3fd5ee": "Floresta desde 2016",
             "5c9bcc136d9f9d00010068c05c9bd04ae2e106099a3fd5ee": "Máscara de Desmatamento até 2007",
-            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Incrementos no Desmatamento desde 2008",
+            "5c9bcf646d9f9d00010068c65c9bd04ae2e106099a3fd5ee": "Desmatamento desde 2008",
             "5c9bceb06d9f9d00010068c45c9bd04ae2e106099a3fd5ee": "Hidrografia",
             "5c9bcef16d9f9d00010068c55c9bd04ae2e106099a3fd5ee": "Não Floresta",
             "5c9bcdfb6d9f9d00010068c25c9bd04ae2e106099a3fd5ee": "Nuvem desde 2016",
@@ -84,7 +84,7 @@
             "5c49f7791a21020001cd66405c40fe3a0e9b2a14264e03a7": "Limite do Bioma",
             "5edfdc0dd30cf51d5ab75e445c40fe3a0e9b2a14264e03a7": "Máscara de Desmatamento até 2000",
             "5edfdc0dd30cf51d5ab75e455c40fe3a0e9b2a14264e03a7": "Hidrografia",
-            "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Incrementos no Desmatamento desde 2002",
+            "5edfdc0dd30cf51d5ab75e435c40fe3a0e9b2a14264e03a7": "Desmatamento desde 2002",
             "5c5dc500c4267d00012843245c40fe3a0e9b2a14264e03a7": "Mosaico de Imagens desde 2000"
         },
         "5cd46155aa127a00017de863" : {
@@ -94,7 +94,7 @@
             "5cd4602daa127a00017de8605cd46155aa127a00017de863": "Limite do Bioma",
             "5cd46016aa127a00017de85f5cd46155aa127a00017de863": "Máscara de Desmatamento até 2000",
             "5cd4602daa127a00017de8615cd46155aa127a00017de863": "Hidrografia",
-            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Incrementos no Desmatamento desde 2004",
+            "5cd4602daa127a00017de8635cd46155aa127a00017de863": "Desmatamento desde 2004",
             "5d6d65b9eaee2e0001436f665cd46155aa127a00017de863": "Mosaico de Imagens desde 2000"
         },
         "5cd460faaa127a00017de861" : {
@@ -104,7 +104,7 @@
             "5cd45fffaa127a00017de85e5cd460faaa127a00017de861": "Limite do Bioma",
             "5cd46876aa127a00017de8655cd460faaa127a00017de861": "Máscara de Desmatamento até 2000",
             "5d6d6661eaee2e0001436f665cd460faaa127a00017de861": "Hidrografia",
-            "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Incrementos no Desmatamento desde 2004",
+            "5d6d6661eaee2e0001436f645cd460faaa127a00017de861": "Desmatamento desde 2004",
             "5d6d6661eaee2e0001436f675cd460faaa127a00017de861": "Mosaico de Imagens desde 2000"
         },
         "5dfa348ffc7ea6096c1bce18" : {
@@ -114,7 +114,7 @@
             "5dfa3729fc7ea6096c1bce215dfa348ffc7ea6096c1bce18": "Limite do Bioma",
             "5f218dde4882c228007413c35dfa348ffc7ea6096c1bce18": "Máscara de Desmatamento até 2000",
             "5f218e0e4882c228007413c45dfa348ffc7ea6096c1bce18": "Hidrografia",
-            "63a3881f937065c19af619f45dfa348ffc7ea6096c1bce18": "Incrementos no Desmatamento desde 2004",
+            "63a3881f937065c19af619f45dfa348ffc7ea6096c1bce18": "Desmatamento desde 2004",
             "5f218e8f4882c228007413c65dfa348ffc7ea6096c1bce18": "Mosaico de Imagens desde 2000"
         },
         "5dfa348ffc7ea6096c1bce19" : {
@@ -124,7 +124,7 @@
             "5dfa3729fc7ea6096c1bce225dfa348ffc7ea6096c1bce19": "Limite do Bioma",
             "5f218ffb4882c228007413c75dfa348ffc7ea6096c1bce19": "Máscara de Desmatamento até 2000",
             "5f2190194882c228007413c85dfa348ffc7ea6096c1bce19": "Hidrografia",
-            "63a38b6b937065c19af619f75dfa348ffc7ea6096c1bce19": "Incrementos no Desmatamento desde 2004",
+            "63a38b6b937065c19af619f75dfa348ffc7ea6096c1bce19": "Desmatamento desde 2004",
             "5f21907c4882c228007413ca5dfa348ffc7ea6096c1bce19": "Mosaico de Imagens desde 2000"
         },
         "63a46341dab105809e3060c6": {
